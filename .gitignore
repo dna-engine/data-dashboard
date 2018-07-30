@@ -1,0 +1,9 @@
+# DataDashboard
+
+# Downloaded and generated files
+/node_modules/
+/package-lock.json
+/web-target/
+
+# Extraneous system files
+.DS_Store
