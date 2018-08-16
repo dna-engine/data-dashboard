@@ -1,7 +1,7 @@
 # DataDashboard
 <img src=https://dnajs.org/graphics/dnajs-logo.png align=right width=160 alt=logo>
 
-*A data-driven dashboard console for report widgets*
+_A data-driven dashboard console for report widgets_
 
 [![Build Status](https://travis-ci.org/dnajs/data-dashboard.svg)](https://travis-ci.org/dnajs/data-dashboard)
 

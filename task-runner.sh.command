@@ -4,12 +4,14 @@
 # To make this file runnable:
 #     $ chmod +x *.sh.command
 
+banner="DataDashboard"
 projectHome=$(cd $(dirname $0); pwd)
-webPage=web-target/dist/index.html
 
 setupTools() {
-   # Check for Node.js installation and download project dependencies
    cd $projectHome
+   echo
+   echo $banner
+   echo $(echo $banner | sed -e "s/./=/g")
    pwd
    echo
    echo "Node.js:"
@@ -28,17 +30,29 @@ runSpecs() {
    echo
    }
 
-openWebPage() {
-   echo "Opening:"
-   echo "file://$projectHome/$webPage"
-   sleep 2
-   open $webPage
+setupWebServer() {
+   cd $projectHome
+   port=$(grep web-server package.json | sed -e "s/[^0-9]//g")
+   # Requires package.json script: "web-server": "http-server -p 8080 &"
+   echo "Web Server (indexzero/http-server on node):"
+   test -z $(pgrep -f $projectHome) && npm run web-server
+   pgrep -fl http-server
+   echo "To stop web server:"
+   echo "   $ pgrep -fl http-server"
+   echo "   $ pkill -f $projectHome"
    echo
    }
 
-echo
-echo "DataDashboard"
-echo "============="
+openWebPage() {
+   echo "Opening:"
+   url=http://localhost:$port/web-target/dist
+   echo $url
+   sleep 2
+   open $url
+   echo
+   }
+
 setupTools
 runSpecs
+setupWebServer  #port: DataDashboard -> DD -> 68 68 -> 6868
 openWebPage

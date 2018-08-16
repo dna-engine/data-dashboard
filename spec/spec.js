@@ -1,26 +1,43 @@
 // Mocha Specification Cases
 
 const assert =    require('assert');
+const express =   require('express');
+const http =      require('http');
 const { JSDOM } = require('jsdom');
 
-const url  = 'http://localhost:7777/';
+const port = 6868 + 1;  //+1 to prevent conflict
+const url  = 'http://localhost:' + port + '/web-target/dist/';
+const webServer = http.createServer(express().use(express.static('.')));
 let window, $;
+
+function startWebServer(callback) {
+   function handleServerReady() {
+      console.log('   running on port #' + webServer.address().port);
+      callback();
+      }
+   console.log('Starting web server for mocha...');
+   webServer.listen(port, handleServerReady);
+   }
 function loadWebPage(done) {
    function handleWebPage(dom) {
       function waitForScripts() {
          window = dom.window;
          $ = window.jQuery;
-         console.log();
+         console.log('   done\n');
          done();
          }
       dom.window.onload = waitForScripts;
       }
-   const options = { resources: 'usable', runScripts: 'dangerously' };
-   console.log('Loading web page into jsdom...');
-   JSDOM.fromURL(url, options).then(handleWebPage);
+   function load() {
+      const options = { resources: 'usable', runScripts: 'dangerously' };
+      console.log('Loading web page into jsdom...');
+      JSDOM.fromURL(url, options).then(handleWebPage);
+      }
+   startWebServer(load);
    }
 function closeWebPage() {
    window.close();
+   webServer.close();
    }
 before(loadWebPage);
 after(closeWebPage);
