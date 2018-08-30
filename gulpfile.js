@@ -1,23 +1,23 @@
 // DataDashboard
 // Gulp tasks
 
-// Imported libraries
-const babel =        require('gulp-babel');
-const concat =       require('gulp-concat');
-const cssNano =      require('cssnano');
-const cssNext =      require('postcss-cssnext');
-const del =          require('del');
-const fileInclude =  require('gulp-file-include');
-const fontMagician = require('postcss-font-magician');
-const gulp =         require('gulp');
-const header =       require('gulp-header');
-const htmlHint =     require('gulp-htmlhint');
-const less =         require('gulp-less');
-const mergeStream =  require('merge-stream');
-const postCss =      require('gulp-postcss');
-const RevAll =       require('gulp-rev-all');
-const size =         require('gulp-size');
-const w3cJs =        require('gulp-w3cjs');
+// Imports
+const babel =           require('gulp-babel');
+const concat =          require('gulp-concat');
+const css =             require('gulp-postcss');
+const cssFontMagician = require('postcss-font-magician');
+const cssNano =         require('cssnano');
+const cssPresetEnv =    require('postcss-preset-env');
+const del =             require('del');
+const fileInclude =     require('gulp-file-include');
+const gulp =            require('gulp');
+const header =          require('gulp-header');
+const htmlHint =        require('gulp-htmlhint');
+const less =            require('gulp-less');
+const mergeStream =     require('merge-stream');
+const RevAll =          require('gulp-rev-all');
+const size =            require('gulp-size');
+const w3cJs =           require('gulp-w3cjs');
 
 // Folders
 const folder = {
@@ -26,7 +26,7 @@ const folder = {
    dist:     'web-target/dist'
    };
 
-// Setup values
+// Setup
 const pkg = require('./package.json');
 const banner = `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const srcFiles = {
@@ -42,6 +42,7 @@ const libraryFiles = {
       'node_modules/vanilla-datatables/src/vanilla-dataTables.css'
       ],
    js: [
+      'node_modules/browser-fetch-json/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
       'node_modules/moment/moment.js',
       'node_modules/chart.js/dist/Chart.js',
@@ -51,9 +52,9 @@ const libraryFiles = {
       ]
    };
 const htmlHintConfig = { 'attr-value-double-quotes': false };
-const postCssPlugins = [
-   fontMagician({ protocol: 'https:' }),
-   cssNext(),
+const cssPlugins = [
+   cssFontMagician({ protocol: 'https:' }),
+   cssPresetEnv(),
    cssNano({ autoprefixer: false })
    ];
 
@@ -115,14 +116,14 @@ const task = {
          gulp.src(folder.staging + '/*.html')
             .pipe(gulp.dest(folder.minified)),
          gulp.src(folder.staging + '/libraries.css')
-            .pipe(postCss(postCssPlugins))
+            .pipe(css(cssPlugins))
             .pipe(gulp.dest(folder.minified)),
          gulp.src(folder.staging + '/libraries.js')
             .pipe(babel({ presets: ['minify'] }))
             .pipe(header('// 3rd party libraries\n'))
             .pipe(gulp.dest(folder.minified)),
          gulp.src(folder.staging + '/data-dashboard.css')
-            .pipe(postCss(postCssPlugins))
+            .pipe(css(cssPlugins))
             .pipe(header('/*! ' + banner + ' */\n'))
             .pipe(gulp.dest(folder.minified)),
          gulp.src(folder.staging + '/data-dashboard.js')
