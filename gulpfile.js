@@ -2,22 +2,22 @@
 // Gulp tasks
 
 // Imports
-const babel =           require('gulp-babel');
-const concat =          require('gulp-concat');
-const css =             require('gulp-postcss');
-const cssFontMagician = require('postcss-font-magician');
-const cssNano =         require('cssnano');
-const cssPresetEnv =    require('postcss-preset-env');
-const del =             require('del');
-const fileInclude =     require('gulp-file-include');
-const gulp =            require('gulp');
-const header =          require('gulp-header');
-const htmlHint =        require('gulp-htmlhint');
-const less =            require('gulp-less');
-const mergeStream =     require('merge-stream');
-const RevAll =          require('gulp-rev-all');
-const size =            require('gulp-size');
-const w3cJs =           require('gulp-w3cjs');
+const babel =            require('gulp-babel');
+const concat =           require('gulp-concat');
+const css =              require('gulp-postcss');
+const cssFontMagician =  require('postcss-font-magician');
+const cssNano =          require('cssnano');
+const cssPresetEnv =     require('postcss-preset-env');
+const del =              require('del');
+const fileInclude =      require('gulp-file-include');
+const gulp =             require('gulp');
+const header =           require('gulp-header');
+const htmlHint =         require('gulp-htmlhint');
+const less =             require('gulp-less');
+const mergeStream =      require('merge-stream');
+const RevAll =           require('gulp-rev-all');
+const size =             require('gulp-size');
+const w3cHtmlValidator = require('gulp-w3cjs');
 
 // Folders
 const folder = {
@@ -77,8 +77,8 @@ const task = {
       function buildHtml() {
          return gulp.src(srcFiles.html)
             .pipe(fileInclude({ basepath: '@root', indent: true }))
-            .pipe(w3cJs())
-            .pipe(w3cJs.reporter())
+            .pipe(w3cHtmlValidator())
+            .pipe(w3cHtmlValidator.reporter())
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
             .pipe(gulp.dest(folder.staging));
