@@ -110,6 +110,7 @@ const task = {
          );
       },
    minifyWebApp: function() {
+      const transpileES6 = ['@babel/env', { modules: false }];
       return mergeStream(
          gulp.src(folder.staging + '/images/**/*')
             .pipe(gulp.dest(folder.minified + '/images')),
@@ -127,7 +128,7 @@ const task = {
             .pipe(header('/*! ' + banner + ' */\n'))
             .pipe(gulp.dest(folder.minified)),
          gulp.src(folder.staging + '/data-dashboard.js')
-            .pipe(babel({ presets: ['env', 'minify'] }))
+            .pipe(babel({ presets: [transpileES6, 'minify'] }))
             .pipe(header('//! ' + banner + '\n'))
             .pipe(gulp.dest(folder.minified))
          );
