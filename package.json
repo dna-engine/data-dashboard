@@ -48,17 +48,17 @@
       "test": "mocha spec/spec.js"
    },
    "dependencies": {
-      "browser-fetch-json": "~0.2",
       "chart.js": "~2.7",
       "dna.js": "~1.4",
+      "fetch-json2": "~0.3",
       "jquery": "~3.3",
       "moment": "~2.22",
       "selectize": "~0.12",
       "vanilla-datatables": "~1.6"
    },
    "devDependencies": {
-      "@babel/core": "~7.0",
-      "@babel/preset-env": "~7.0",
+      "@babel/core": "~7.1",
+      "@babel/preset-env": "~7.1",
       "ajv": "~6.5",
       "cssnano": "~4.1",
       "del": "~3.0",
