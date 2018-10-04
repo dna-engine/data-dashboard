@@ -42,7 +42,7 @@ const libraryFiles = {
       'node_modules/vanilla-datatables/src/vanilla-dataTables.css'
       ],
    js: [
-      'node_modules/fetch-json2/fetch-json.js',
+      'node_modules/fetch-json/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
       'node_modules/moment/moment.js',
       'node_modules/chart.js/dist/Chart.js',
