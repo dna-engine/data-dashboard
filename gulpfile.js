@@ -2,22 +2,22 @@
 // Gulp tasks
 
 // Imports
-const babel =            require('gulp-babel');
-const concat =           require('gulp-concat');
-const css =              require('gulp-postcss');
-const cssFontMagician =  require('postcss-font-magician');
-const cssNano =          require('cssnano');
-const cssPresetEnv =     require('postcss-preset-env');
-const del =              require('del');
-const fileInclude =      require('gulp-file-include');
-const gulp =             require('gulp');
-const header =           require('gulp-header');
-const htmlHint =         require('gulp-htmlhint');
-const less =             require('gulp-less');
-const mergeStream =      require('merge-stream');
-const RevAll =           require('gulp-rev-all');
-const size =             require('gulp-size');
-const w3cHtmlValidator = require('gulp-w3cjs');
+const babel =           require('gulp-babel');
+const concat =          require('gulp-concat');
+const css =             require('gulp-postcss');
+const cssFontMagician = require('postcss-font-magician');
+const cssNano =         require('cssnano');
+const cssPresetEnv =    require('postcss-preset-env');
+const del =             require('del');
+const fileInclude =     require('gulp-file-include');
+const gulp =            require('gulp');
+const header =          require('gulp-header');
+const htmlHint =        require('gulp-htmlhint');
+const htmlValidator =   require('gulp-w3c-html-validator');
+const less =            require('gulp-less');
+const mergeStream =     require('merge-stream');
+const RevAll =          require('gulp-rev-all');
+const size =            require('gulp-size');
 
 // Folders
 const folder = {
@@ -42,6 +42,7 @@ const libraryFiles = {
       'node_modules/vanilla-datatables/src/vanilla-dataTables.css'
       ],
    js: [
+      'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
       'node_modules/fetch-json/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
       'node_modules/moment/moment.js',
@@ -77,10 +78,10 @@ const task = {
       function buildHtml() {
          return gulp.src(srcFiles.html)
             .pipe(fileInclude({ basepath: '@root', indent: true }))
-            .pipe(w3cHtmlValidator())
-            .pipe(w3cHtmlValidator.reporter())
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
+            .pipe(htmlValidator())
+            .pipe(htmlValidator.reporter())
             .pipe(gulp.dest(folder.staging));
           }
       function buildJs() {
