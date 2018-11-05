@@ -1,6 +1,6 @@
 // Mocha Specification Cases
 
-const assert =    require('assert');
+const assert =    require('assert').strict;
 const express =   require('express');
 const http =      require('http');
 const { JSDOM } = require('jsdom');
@@ -46,7 +46,9 @@ after(closeWebPage);
 describe('The web page', () => {
 
    it('has the correct URL: ' + url, () => {
-      assert.equal(window.location.href, url);
+      const actual =   { url: window.location.href };
+      const expected = { url: url };
+      assert.deepEqual(actual, expected);
       });
 
    it('has exactly one header, main, and footer', () => {
