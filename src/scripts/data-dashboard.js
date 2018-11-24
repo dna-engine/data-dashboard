@@ -1,6 +1,16 @@
 // DataDashboard
-// Core
+// Web Application
 
-const dataDashboard = {};
+const dataDashboard = {
+   setup: function() {
+      library.ui.autoDisableButtons();
+      function onLoadSetup() {
+         }
+      $(onLoadSetup);
+      }
+   };
 
-dataDashboard.controller = {};
+dataDashboard.controller = {
+   };
+
+dataDashboard.setup();

@@ -37,6 +37,7 @@ const srcFiles = {
    };
 const libraryFiles = {
    css: [
+      'node_modules/web-ignition/dist/reset.min.css',
       'node_modules/dna.js/dna.css',
       'node_modules/selectize/dist/css/selectize.default.css',
       'node_modules/vanilla-datatables/src/vanilla-dataTables.css'
@@ -49,7 +50,8 @@ const libraryFiles = {
       'node_modules/chart.js/dist/Chart.js',
       'node_modules/dna.js/dna.js',
       'node_modules/selectize/dist/js/standalone/selectize.js',
-      'node_modules/vanilla-datatables/src/vanilla-dataTables.js'
+      'node_modules/vanilla-datatables/src/vanilla-dataTables.js',
+      'node_modules/web-ignition/dist/library.min.js'
       ]
    };
 const htmlHintConfig = { 'attr-value-double-quotes': false };
@@ -129,7 +131,7 @@ const task = {
             .pipe(header('/*! ' + banner + ' */\n'))
             .pipe(gulp.dest(folder.minified)),
          gulp.src(folder.staging + '/data-dashboard.js')
-            .pipe(babel({ presets: [transpileES6, 'minify'] }))
+            .pipe(babel({ presets: [transpileES6, 'minify'], comments: false }))
             .pipe(header('//! ' + banner + '\n'))
             .pipe(gulp.dest(folder.minified))
          );

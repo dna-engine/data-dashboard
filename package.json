@@ -27,7 +27,8 @@
       },
       "globals": {
          "dataDashboard": false,
-         "dna": false
+         "dna": false,
+         "library": false
       },
       "rules": {
          "no-console": "off",
@@ -54,9 +55,10 @@
       "fetch-json": "~2.1",
       "jquery": "~3.3",
       "moment": "~2.22",
-      "node-fetch": "~2.2",
+      "node-fetch": "~2.3",
       "selectize": "~0.12",
       "vanilla-datatables": "~1.6",
+      "web-ignition": "~0.0",
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
@@ -65,7 +67,7 @@
       "ajv": "~6.5",
       "cssnano": "~4.1",
       "del": "~3.0",
-      "eslint": "~5.8",
+      "eslint": "~5.9",
       "express": "~4.16",
       "gulp": "~4.0",
       "gulp-babel": "~8.0",
@@ -86,6 +88,6 @@
       "mocha": "~5.2",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.2",
-      "postcss-preset-env": "~6.3"
+      "postcss-preset-env": "~6.4"
    }
 }
