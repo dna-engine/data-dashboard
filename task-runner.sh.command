@@ -18,7 +18,7 @@ setupTools() {
    which node || { echo "Need to install Node.js: https://nodejs.org"; exit; }
    node --version
    npm install
-   npm update
+   npm update --no-save
    npm outdated
    echo
    }
@@ -30,6 +30,7 @@ releaseInstructions() {
    version=v$(grep '"version"' package.json | awk -F'"' '{print $4}')
    pushed=v$(curl --silent $package | grep '"version":' | awk -F'"' '{print $4}')
    released=$(git tag | tail -1)
+   minorVersion=$(echo ${pushed:1} | awk -F"." '{ print $1 "." $2 }')
    echo "Local changes:"
    git status --short
    echo

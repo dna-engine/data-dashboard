@@ -57,13 +57,15 @@
       "moment": "~2.22",
       "node-fetch": "~2.3",
       "selectize": "~0.12",
+      "simple-datatables": "~1.7",
       "vanilla-datatables": "~1.6",
-      "web-ignition": "~0.0",
+      "web-ignition": "~1.0",
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
       "@babel/core": "~7.1",
       "@babel/preset-env": "~7.1",
+      "@fortawesome/fontawesome-free": "~5.5",
       "ajv": "~6.5",
       "cssnano": "~4.1",
       "del": "~3.0",
