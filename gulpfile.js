@@ -10,12 +10,14 @@ const cssNano =         require('cssnano');
 const cssPresetEnv =    require('postcss-preset-env');
 const del =             require('del');
 const fileInclude =     require('gulp-file-include');
+const gap =             require('gulp-append-prepend');
 const gulp =            require('gulp');
 const header =          require('gulp-header');
 const htmlHint =        require('gulp-htmlhint');
 const htmlValidator =   require('gulp-w3c-html-validator');
 const less =            require('gulp-less');
 const mergeStream =     require('merge-stream');
+const replace =         require('gulp-replace');
 const RevAll =          require('gulp-rev-all');
 const size =            require('gulp-size');
 
@@ -39,19 +41,17 @@ const libraryFiles = {
    css: [
       'node_modules/web-ignition/dist/reset.min.css',
       'node_modules/dna.js/dna.css',
-      'node_modules/selectize/dist/css/selectize.default.css',
-      'node_modules/vanilla-datatables/src/vanilla-dataTables.css'
+      'node_modules/selectize/dist/css/selectize.default.css'
       ],
    js: [
+      'node_modules/moment/moment.js',
       'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
       'node_modules/fetch-json/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
-      'node_modules/moment/moment.js',
+      'node_modules/selectize/dist/js/standalone/selectize.js',
       'node_modules/chart.js/dist/Chart.js',
       'node_modules/dna.js/dna.js',
-      'node_modules/selectize/dist/js/standalone/selectize.js',
-      'node_modules/vanilla-datatables/src/vanilla-dataTables.js',
-      'node_modules/web-ignition/dist/library.min.js'
+      'node_modules/web-ignition/dist/library.js'
       ]
    };
 const htmlHintConfig = { 'attr-value-double-quotes': false };
@@ -60,49 +60,48 @@ const cssPlugins = [
    cssPresetEnv(),
    cssNano({ autoprefixer: false })
    ];
+const transpileES6 = ['@babel/env', { modules: false }];
+const preserveImportant = comment => /licen[sc]e|copyright|@preserve|^!/i.test(comment);
+const babelMinifyJs = { presets: [transpileES6, 'minify'], shouldPrintComment: preserveImportant };
+babelMinifyJs.presets[1] = ['minify', { builtIns: false }];  //HACK: workaround "Couldn't find intersection" error, https://github.com/babel/minify/issues/904
 
 // Tasks
 const task = {
-   cleanTarget: function() {
+   cleanTarget: () => {
       return del(['web-target/', '**/.DS_Store']);
       },
-   buildWebApp: function() {
-      function buildGraphics() {
-         return gulp.src(srcFiles.images)
+   buildWebApp: () => {
+      const buildGraphics = () =>
+         gulp.src(srcFiles.images)
             .pipe(gulp.dest(folder.staging + '/images'));
-         }
-      function buildCss() {
-         return gulp.src(srcFiles.less)
+      const buildCss = () =>
+         gulp.src(srcFiles.less)
             .pipe(less())
             .pipe(concat('data-dashboard.css'))
             .pipe(gulp.dest(folder.staging));
-         }
-      function buildHtml() {
-         return gulp.src(srcFiles.html)
+      const buildHtml = () =>
+         gulp.src(srcFiles.html)
             .pipe(fileInclude({ basepath: '@root', indent: true }))
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
             .pipe(htmlValidator())
             .pipe(htmlValidator.reporter())
             .pipe(gulp.dest(folder.staging));
-          }
-      function buildJs() {
-         return gulp.src(srcFiles.js)
+      const buildJs = () =>
+         gulp.src(srcFiles.js)
+            .pipe(concat('libraries.js'))
             .pipe(concat('data-dashboard.js'))
             .pipe(gulp.dest(folder.staging));
-         }
-      function packageCssLibraries() {
-         return gulp.src(libraryFiles.css)
+      const packageCssLibraries = () =>
+         gulp.src(libraryFiles.css)
             .pipe(header('/*! 3rd party style */\n'))
             .pipe(concat('libraries.css'))
             .pipe(gulp.dest(folder.staging));
-         }
-      function packageJsLibraries() {
-         return gulp.src(libraryFiles.js)
-            .pipe(header('/*! 3rd party script */\n'))
+      const packageJsLibraries = () =>
+         gulp.src(libraryFiles.js)
+            .pipe(header('//! 3rd party library\n'))
             .pipe(concat('libraries.js'))
             .pipe(gulp.dest(folder.staging));
-         }
       return mergeStream(
          buildGraphics(),
          buildCss(),
@@ -112,31 +111,49 @@ const task = {
          packageJsLibraries()
          );
       },
-   minifyWebApp: function() {
-      const transpileES6 = ['@babel/env', { modules: false }];
-      return mergeStream(
+   minifyWebApp: () => {
+      const embeddedComment = /([^\n])([/][/*]! )/g;
+      const copyImages = () =>
          gulp.src(folder.staging + '/images/**/*')
-            .pipe(gulp.dest(folder.minified + '/images')),
+            .pipe(gulp.dest(folder.minified + '/images'));
+      const copyHtml = () =>
          gulp.src(folder.staging + '/*.html')
-            .pipe(gulp.dest(folder.minified)),
+            .pipe(gulp.dest(folder.minified));
+      const minifyLibCss = () =>
          gulp.src(folder.staging + '/libraries.css')
             .pipe(css(cssPlugins))
-            .pipe(gulp.dest(folder.minified)),
-         gulp.src(folder.staging + '/libraries.js')
-            .pipe(babel({ presets: ['minify'] }))
-            .pipe(header('// 3rd party libraries\n'))
-            .pipe(gulp.dest(folder.minified)),
+            .pipe(header('/*! Bundle: 3rd party styles */\n\n'))
+            .pipe(gap.appendText('\n'))
+            .pipe(gulp.dest(folder.minified));
+      const minifyLibJs = () =>
+         gulp.src(libraryFiles.js)
+            .pipe(babel(babelMinifyJs))
+            .pipe(replace(embeddedComment, '$1\n$2'))
+            .pipe(header('\n//! 3rd party library\n'))
+            .pipe(concat('libraries.js'))
+            .pipe(header('//! Bundle: 3rd party libraries\n'))
+            .pipe(gap.appendText('\n'))
+            .pipe(gulp.dest(folder.minified));
+      const minifyCss = () =>
          gulp.src(folder.staging + '/data-dashboard.css')
             .pipe(css(cssPlugins))
             .pipe(header('/*! ' + banner + ' */\n'))
-            .pipe(gulp.dest(folder.minified)),
+            .pipe(gulp.dest(folder.minified));
+      const minifyJs = () =>
          gulp.src(folder.staging + '/data-dashboard.js')
-            .pipe(babel({ presets: [transpileES6, 'minify'], comments: false }))
+            .pipe(babel(babelMinifyJs))
             .pipe(header('//! ' + banner + '\n'))
-            .pipe(gulp.dest(folder.minified))
-         );
+            .pipe(gap.appendText('\n'))
+            .pipe(gulp.dest(folder.minified));
+      return mergeStream(
+         copyImages(),
+         copyHtml(),
+         minifyLibCss(),
+         minifyLibJs(),
+         minifyCss(),
+         minifyJs());
       },
-   resourcifyWebApp: function() {
+   resourcifyWebApp: () => {
       return gulp.src(folder.minified + '/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
          .pipe(gulp.dest(folder.dist))
