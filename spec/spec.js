@@ -1,44 +1,45 @@
 // Mocha Specification Cases
 
+// Imports
 const assert =    require('assert').strict;
 const express =   require('express');
 const http =      require('http');
 const { JSDOM } = require('jsdom');
 
-const port = 6868 + 1;  //+1 to prevent conflict
-const url  = 'http://localhost:' + port + '/web-target/dist/';
+// Setup
+const port =      6868 + 1;  //+1 to prevent conflict
+const url  =      'http://localhost:' + port + '/web-target/dist/';
 const webServer = http.createServer(express().use(express.static('.')));
 let window, $;  //jshint ignore:line
-
-function startWebServer(callback) {
-   function handleServerReady() {
+const startWebServer = (callback) => {
+   const handleServerReady = () => {
       console.log('   running on port #' + webServer.address().port);
       callback();
-      }
+      };
    console.log('Starting web server for mocha...');
    webServer.listen(port, handleServerReady);
-   }
-function loadWebPage(done) {
-   function handleWebPage(dom) {
-      function waitForScripts() {
+   };
+const loadWebPage = (done) => {
+   const handleWebPage = (dom) => {
+      const waitForScripts = () => {
          window = dom.window;
          $ = window.jQuery;
          console.log('   done\n');
          done();
-         }
+         };
       dom.window.onload = waitForScripts;
-      }
-   function load() {
+      };
+   const load = () => {
       const options = { resources: 'usable', runScripts: 'dangerously' };
       console.log('Loading web page into jsdom...');
       JSDOM.fromURL(url, options).then(handleWebPage);
-      }
+      };
    startWebServer(load);
-   }
-function closeWebPage() {
+   };
+const closeWebPage = () => {
    window.close();
    webServer.close();
-   }
+   };
 before(loadWebPage);
 after(closeWebPage);
 
