@@ -8,7 +8,7 @@ const { JSDOM } = require('jsdom');
 const port = 6868 + 1;  //+1 to prevent conflict
 const url  = 'http://localhost:' + port + '/web-target/dist/';
 const webServer = http.createServer(express().use(express.static('.')));
-let window, $;
+let window, $;  //jshint ignore:line
 
 function startWebServer(callback) {
    function handleServerReady() {

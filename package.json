@@ -16,43 +16,30 @@
       "report",
       "widgets"
    ],
-   "eslintConfig": {
-      "extends": "eslint:recommended",
-      "env": {
-         "es6": true,
-         "browser": true,
-         "node": true,
-         "mocha": true,
-         "jquery": true
-      },
+   "jshintConfig": {
+      "esversion": 6,
+      "strict": "implied",
+      "undef": true,
+      "unused": true,
+      "browser": true,
+      "jquery": true,
+      "mocha": true,
+      "node": true,
       "globals": {
-         "dataDashboard": false,
-         "dna": false,
          "library": false
-      },
-      "rules": {
-         "no-console": "off",
-         "quotes": [
-            "warn",
-            "single"
-         ],
-         "semi": [
-            "warn",
-            "always"
-         ]
       }
    },
    "scripts": {
       "web-server": "http-server -p 6868 &",
-      "lint": "eslint gulpfile.js src/**/*.js spec/*.js",
+      "lint": "jshint gulpfile.js src/**/*.js spec/*.js",
       "build": "gulp clean && gulp build && gulp minify && gulp resourcify",
       "pretest": "npm run lint && npm run build",
-      "test": "mocha spec/spec.js"
+      "test": "mocha spec/*.js"
    },
    "dependencies": {
       "chart.js": "~2.7",
-      "dna.js": "~1.4",
-      "fetch-json": "~2.1",
+      "dna.js": "~1.5",
+      "fetch-json": "~2.2",
       "jquery": "~3.3",
       "moment": "~2.22",
       "node-fetch": "~2.3",
@@ -62,13 +49,11 @@
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
-      "@babel/core": "~7.1",
-      "@babel/preset-env": "~7.1",
+      "@babel/core": "~7.2",
+      "@babel/preset-env": "~7.2",
       "@fortawesome/fontawesome-free": "~5.5",
-      "ajv": "~6.6",
       "cssnano": "~4.1",
       "del": "~3.0",
-      "eslint": "~5.9",
       "express": "~4.16",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",
@@ -87,6 +72,7 @@
       "http": "~0.0",
       "http-server": "~0.11",
       "jsdom": "~13.0",
+      "jshint": "~2.9",
       "merge-stream": "~1.0",
       "mocha": "~5.2",
       "postcss": "~7.0",
