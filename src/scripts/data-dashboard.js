@@ -2,15 +2,16 @@
 // Web Application
 
 const dataDashboard = {
-   setup: function() {
+   setup: () => {
       library.ui.autoDisableButtons();
-      function onLoadSetup() {
-         }
+      const onLoadSetup = () => {
+         };
       $(onLoadSetup);
       }
    };
 
 dataDashboard.controller = {
+   // Controller
    };
 
 dataDashboard.setup();
