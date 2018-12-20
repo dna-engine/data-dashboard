@@ -52,6 +52,12 @@ describe('The web page', () => {
       assert.deepEqual(actual, expected);
       });
 
+   it('has the correct title', () => {
+      const actual =   { title: window.document.title };
+      const expected = { title: 'DataDashboard' };
+      assert.deepEqual(actual, expected);
+      });
+
    it('has exactly one header, main, and footer', () => {
       const actual =   {
          header: $('body >header').length,
