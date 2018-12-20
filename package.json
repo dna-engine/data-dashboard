@@ -41,7 +41,7 @@
       "dna.js": "~1.5",
       "fetch-json": "~2.2",
       "jquery": "~3.3",
-      "moment": "~2.22",
+      "moment": "~2.23",
       "node-fetch": "~2.3",
       "selectize": "~0.12",
       "simple-datatables": "~1.7",
@@ -71,12 +71,12 @@
       "gulp-w3c-html-validator": "~1.4",
       "http": "~0.0",
       "http-server": "~0.11",
-      "jsdom": "~13.0",
+      "jsdom": "~13.1",
       "jshint": "~2.9",
       "merge-stream": "~1.0",
       "mocha": "~5.2",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.2",
-      "postcss-preset-env": "~6.4"
+      "postcss-preset-env": "~6.5"
    }
 }
