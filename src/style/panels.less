@@ -1,0 +1,54 @@
+// DataDashboard
+// Panels -- Main section styling
+
+// Structure:
+//    main
+//       dashboard-panels
+//          dashboard-panel
+//             header
+//                h2
+//             dashboard-widgets
+//                dashboard-widget
+//                   header
+//                      h2
+
+@import "library/constants";
+@import "library/utils";
+
+dashboard-panel {
+   display: block;
+   >header {
+      h2 {
+         font-size: 1.6rem;
+         text-align: center;
+         color: white;
+         }
+      }
+   >dashboard-widgets {
+      display: block;
+      dashboard-widget {
+         display: block;
+         text-align: left;
+         background-color: white;
+         margin-bottom: 30px;
+         header {
+            color: white;
+            background-color: cornflowerblue;
+            padding: 5px 10px;
+            margin: 0px;
+            h2 {
+               font-size: 1.2rem;
+               margin: 0px;
+               }
+            }
+         widget-body {
+            display: block;
+            padding: 20px 40px;
+            figure {
+               text-align: left;
+               margin: 0px;
+               }
+            }
+         }
+      }
+   }

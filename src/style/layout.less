@@ -1,0 +1,97 @@
+// DataDashboard
+// Dashboard -- Page layout for dashboard
+
+@import "library/constants";
+@import "library/utils";
+
+html {
+   background-color: dimgray;
+   }
+body {
+   max-width: none;
+   padding: 0px;
+   margin: 0px;
+   >header {
+      .TopHeaderBar();
+      }
+   >main {
+      max-width: @dashboardW;
+      min-height: calc(100vh - 80px);
+      padding: 100px 8px 20px @mobileGutter;
+      margin: 0px auto;
+      >dashboard-panels {
+         }
+      }
+   >footer {
+      display: block;
+      color: dimgray;
+      background-color: gainsboro;
+      i.font-icon {
+         font-size: 2rem;
+         padding: 0px 8px;
+         }
+      }
+   >widget-tempaltes {
+      display: none;
+      }
+   }
+
+.TopHeaderBar() {
+   position: fixed;
+   width: 100%;
+   border-bottom: 1px solid dimgray;
+   background-color: white;
+   padding: 5px 0px;
+   margin: 0px;
+   z-index: 5000;
+   >div {
+      >figure {
+         display: inline-block;
+         width: 40px;
+         padding-right: 4px;
+         margin: 0px;
+         }
+      >h1 {
+         display: inline-block;
+         vertical-align: top;
+         font-size: 1.8rem;
+         // margin-top: -5px;
+         }
+      }
+   >nav {
+      display: flex;
+      justify-content: space-between;
+      max-width: @dashboardW;
+      padding: 0px @mobileGutter;
+      margin: 0px auto;
+      >ul {
+         .PanelMenuItems();
+         }
+      >div {
+         i.font-icon {
+            font-size: 1.6rem;
+            vertical-align: bottom;
+            margin-left: 15px;
+            }
+         }
+      }
+   }
+
+.PanelMenuItems() {
+   li {
+      display: inline-block;
+      font-size: 1.0rem;
+      border-bottom: 5px solid;
+      padding: 2px 0px;
+      margin-right: 20px;
+      transition: all 0.4s;
+      }
+   li.selected,
+   li:hover {
+      color: black;
+      border-color: darkorange;
+      }
+   li.selected {
+      cursor: default;
+      }
+   }

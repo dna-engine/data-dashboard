@@ -32,25 +32,26 @@ const folder = {
 const pkg = require('./package.json');
 const banner = `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const srcFiles = {
-   images: ['src/images/**/*'],
-   less:   ['src/style/base.less', 'src/**/*.less'],
-   html:   ['src/web/**/*.html'],
-   js:     ['src/scripts/data-dashboard.js', 'src/**/*.js']
+   graphics: ['src/assets/graphics/**/*'],
+   less:     ['src/style/base.less', 'src/**/*.less'],
+   html:     ['src/web/**/*.html'],
+   widgets:  ['src/widgets/**/*.html'],
+   js:       ['src/scripts/config.js', 'src/**/*.js']
    };
 const libraryFiles = {
    css: [
       'node_modules/web-ignition/dist/reset.min.css',
-      'node_modules/dna.js/dna.css',
+      'node_modules/dna.js/dist/dna.css',
       'node_modules/selectize/dist/css/selectize.default.css'
       ],
    js: [
       'node_modules/moment/moment.js',
       'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
-      'node_modules/fetch-json/fetch-json.js',
+      'node_modules/fetch-json/dist/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
       'node_modules/selectize/dist/js/standalone/selectize.js',
       'node_modules/chart.js/dist/Chart.js',
-      'node_modules/dna.js/dna.js',
+      'node_modules/dna.js/dist/dna.js',
       'node_modules/web-ignition/dist/library.js'
       ]
    };
@@ -70,10 +71,16 @@ const task = {
    cleanTarget: () => {
       return del(['web-target/', '**/.DS_Store']);
       },
+   buildWidgetTemplates: () => {
+      return gulp.src(srcFiles.widgets)
+         .pipe(size({ showFiles: true }))
+         .pipe(concat('widget-templates.html'))
+         .pipe(gulp.dest('src/web-includes'));
+      },
    buildWebApp: () => {
       const buildGraphics = () =>
-         gulp.src(srcFiles.images)
-            .pipe(gulp.dest(folder.staging + '/images'));
+         gulp.src(srcFiles.graphics)
+            .pipe(gulp.dest(folder.staging + '/graphics'));
       const buildCss = () =>
          gulp.src(srcFiles.less)
             .pipe(less())
@@ -113,9 +120,9 @@ const task = {
       },
    minifyWebApp: () => {
       const embeddedComment = /([^\n])([/][/*]! )/g;
-      const copyImages = () =>
-         gulp.src(folder.staging + '/images/**/*')
-            .pipe(gulp.dest(folder.minified + '/images'));
+      const copyGraphics = () =>
+         gulp.src(folder.staging + '/graphics/**/*')
+            .pipe(gulp.dest(folder.minified + '/graphics'));
       const copyHtml = () =>
          gulp.src(folder.staging + '/*.html')
             .pipe(gulp.dest(folder.minified));
@@ -146,7 +153,7 @@ const task = {
             .pipe(gap.appendText('\n'))
             .pipe(gulp.dest(folder.minified));
       return mergeStream(
-         copyImages(),
+         copyGraphics(),
          copyHtml(),
          minifyLibCss(),
          minifyLibJs(),
@@ -163,6 +170,7 @@ const task = {
 
 // Gulp
 gulp.task('clean',      task.cleanTarget);
+gulp.task('widgets',    task.buildWidgetTemplates);
 gulp.task('build',      task.buildWebApp);
 gulp.task('minify',     task.minifyWebApp);
 gulp.task('resourcify', task.resourcifyWebApp);

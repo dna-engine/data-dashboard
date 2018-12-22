@@ -1,34 +1,49 @@
 @@include("src/web-includes/html-commence.html")
 
 <header>
-   <figure>
-      <img src=@@webRoot/images/logo.png alt=logo>
-   </figure>
-   <div class=external-site>
-      <a href=https://github.com/dnajs/data-dashboard><i data-brand=github></i></a>
+   <div>
+      <figure>
+         <img src=@@webRoot/graphics/logo.png alt=logo>
+      </figure>
+      <h1>DataDashboard</h1>
    </div>
+   <nav>
+      <ul id=dashboard-menu class=dna-menu data-callback=dataDashboard.controller.showPanel>
+         <li id=dashboard-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
+      </ul>
+      <div class=external-site>
+         <a href=https://github.com/dnajs/data-dashboard#readme><i data-icon=book></i></a>
+         <a href=https://travis-ci.org/dnajs/data-dashboard><i data-icon=tachometer-alt></i></a>
+      </div>
+   </nav>
 </header>
 
 <main>
-   <section>
-      <h2>DataDashboard</h2>
-      <p>
-         <i data-icon=chart-pie></i>
-         <i data-icon=chart-line></i>
-         <i data-icon=chart-bar></i>
-         <i data-icon=chart-area></i>
-         <i data-icon=tachometer-alt></i>
-      </p>
-      <button>A DataDashboard Button</button>
-   </section>
+   <dashboard-panels id=dashboard-panels class=dna-panels>
+      <dashboard-panel id=dashboard-panel class=dna-template data-hash=~~code~~>
+         <header>
+            <h2>~~header~~</h2>
+         </header>
+         <dashboard-widgets>
+            <dashboard-widget data-array=~~widgetList~~>
+               <header>
+                  <h2>~~header~~</h2>
+               </header>
+            </dashboard-widget>
+         </dashboard-widgets>
+      </dashboard-panel>
+   </dashboard-panels>
 </main>
 
 <footer>
-   <span>
-      <i data-icon=chevron-left></i>
-      Copyright &copy; 2018 individual contributors to DataDashboard
-      <i data-icon=chevron-right></i>
+   <span class=external-site>
+      <a href=https://github.com/dnajs/data-dashboard/blob/master/LICENSE.txt><i data-icon=gavel></i></a>
+      <a href=https://github.com/dnajs/data-dashboard><i data-brand=github-alt></i></a>
    </span>
 </footer>
+
+<widget-templates>
+   @@include("src/web-includes/widget-templates.html")
+</widget-templates>
 
 @@include("src/web-includes/html-terminate.html")

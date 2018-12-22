@@ -3,6 +3,7 @@
 # Downloaded and generated files
 /node_modules/
 /package-lock.json
+/src/web-includes/widget-templates.html
 /web-target/
 
 # Extraneous system files
