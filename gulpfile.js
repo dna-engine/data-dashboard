@@ -10,6 +10,7 @@ const cssNano =         require('cssnano');
 const cssPresetEnv =    require('postcss-preset-env');
 const del =             require('del');
 const fileInclude =     require('gulp-file-include');
+const fs =              require('fs');
 const gap =             require('gulp-append-prepend');
 const gulp =            require('gulp');
 const header =          require('gulp-header');
@@ -36,13 +37,14 @@ const srcFiles = {
    less:     ['src/style/base.less', 'src/**/*.less'],
    html:     ['src/web/**/*.html'],
    widgets:  ['src/widgets/**/*.html'],
-   js:       ['src/scripts/config.js', 'src/**/*.js']
+   js:       ['src/scripts/config.js', 'src/scripts/util.js', 'src/**/*.js']
    };
 const libraryFiles = {
    css: [
       'node_modules/web-ignition/dist/reset.min.css',
       'node_modules/dna.js/dist/dna.css',
-      'node_modules/selectize/dist/css/selectize.default.css'
+      'node_modules/selectize/dist/css/selectize.default.css',
+      'node_modules/vanilla-datatables/src/vanilla-dataTables.css'
       ],
    js: [
       'node_modules/moment/moment.js',
@@ -50,6 +52,7 @@ const libraryFiles = {
       'node_modules/fetch-json/dist/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
       'node_modules/selectize/dist/js/standalone/selectize.js',
+      'node_modules/vanilla-datatables/src/vanilla-dataTables.js',
       'node_modules/chart.js/dist/Chart.js',
       'node_modules/dna.js/dist/dna.js',
       'node_modules/web-ignition/dist/library.js'
@@ -165,6 +168,13 @@ const task = {
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
          .pipe(gulp.dest(folder.dist))
          .pipe(size({ showFiles: true }));
+      },
+   publishWebsite: () => {
+      fs.mkdirSync('docs');
+      fs.writeFileSync('docs/CNAME', 'data-dashboard.js.org\n');
+      return gulp.src(folder.dist + '/**/*')
+         .pipe(gulp.dest('docs'))
+         .pipe(size({ showFiles: true }));
       }
    };
 
@@ -174,3 +184,4 @@ gulp.task('widgets',    task.buildWidgetTemplates);
 gulp.task('build',      task.buildWebApp);
 gulp.task('minify',     task.minifyWebApp);
 gulp.task('resourcify', task.resourcifyWebApp);
+gulp.task('publish',    task.publishWebsite);

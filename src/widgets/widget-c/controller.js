@@ -3,6 +3,8 @@
 
 dataDashboard.widget.widgetC = {
    show: (widgetElem) => {
-      console.log('Show widget:', dna.getModel(widgetElem));
+      dataDashboard.util.spinnerStart(widgetElem);
+      const x = () => dataDashboard.util.spinnerStop(widgetElem);
+      window.setTimeout(x, 5000);
       }
    };

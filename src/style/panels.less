@@ -28,6 +28,7 @@ dashboard-panel {
       display: block;
       dashboard-widget {
          display: block;
+         position: relative;
          text-align: left;
          background-color: white;
          margin-bottom: 30px;
@@ -44,10 +45,30 @@ dashboard-panel {
          widget-body {
             display: block;
             padding: 20px 40px;
+            opacity: 1;
+            transition: opacity 0.4s;
+            overflow: scroll;
             figure {
                text-align: left;
                margin: 0px;
                }
+            }
+         widget-spinner {
+            .Bullseye();
+            position: absolute;
+            top: 0px; left: 0px; bottom: 0px; right: 0px;
+            i.fa-spin {
+               font-size: 5rem;
+               color: black;
+               margin-top: -40px;
+               opacity: 0.6;
+               }
+            }
+         }
+      dashboard-widget.waiting {
+         widget-body {
+            opacity: 0;
+            transition: opacity 0s;
             }
          }
       }

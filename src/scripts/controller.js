@@ -16,6 +16,9 @@ dataDashboard.controller = {
       panelElem.find('>dashboard-widgets').children().each(showWidget);
       },
    setup: () => {
+      fetchJson.enableLogger(dataDashboard.network.logEvent);
+      const getColorValue = (color) => dataDashboard.chartColor[color];
+      dataDashboard.chartColors = Object.keys(dataDashboard.chartColor).map(getColorValue);
       dataDashboard.widgetsMap = dna.array.toMap(dataDashboard.widgets);
       const makeWidgetList = (codes) => codes.map(code => dataDashboard.widgetsMap[code]);
       dataDashboard.panels.forEach(panel => panel.widgetList = makeWidgetList(panel.widgets));
