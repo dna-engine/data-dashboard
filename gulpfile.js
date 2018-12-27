@@ -96,6 +96,7 @@ const task = {
             .pipe(htmlHint.reporter())
             .pipe(htmlValidator())
             .pipe(htmlValidator.reporter())
+            .pipe(replace(' src=#', ''))
             .pipe(gulp.dest(folder.staging));
       const buildJs = () =>
          gulp.src(srcFiles.js)
@@ -167,7 +168,8 @@ const task = {
       return gulp.src(folder.minified + '/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
          .pipe(gulp.dest(folder.dist))
-         .pipe(size({ showFiles: true }));
+         .pipe(size({ showFiles: true }))
+         .pipe(size({ showFiles: true, gzip: true }));
       },
    publishWebsite: () => {
       fs.mkdirSync('docs');
