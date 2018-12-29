@@ -5,12 +5,12 @@ const dataDashboard = {
    widgets: [
       { code: 'fin-rate-intraday',   header: 'Exchange rate intraday' },
       { code: 'fin-rate-moving-avg', header: 'Exchange rate moving average' },
-      { code: 'widget-a',            header: 'Widget A' },
       { code: 'widget-c',            header: 'Widget C' },
-      { code: 'network-log',         header: 'Network log' }
+      { code: 'network-log',         header: 'Network log' },
+      { code: 'spacex-books',        header: 'SpaceX Books' }
       ],
    panels: [
-      { code: 'space',   header: 'Space',       widgets: ['widget-a', 'widget-c'] },
+      { code: 'space',   header: 'Space',       widgets: ['spacex-books'] },
       { code: 'finance', header: 'Finance',     widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
       { code: 'panel-z', header: 'The Z Panel', widgets: ['fin-rate-intraday', 'widget-c'] },
       { code: 'network', header: 'Network',     widgets: ['network-log'] }

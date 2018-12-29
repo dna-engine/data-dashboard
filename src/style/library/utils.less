@@ -1,6 +1,18 @@
 // DataDashboard
 // Utils -- Reusable mixins
 
+.PlainLink() {
+   border-bottom: none;
+   &:visited {
+      color: inherit;
+      }
+   &:hover {
+      color: inherit;
+      background-color: transparent;
+      outline: none;
+      }
+   }
+
 .Bullseye() {
    display: flex;
    justify-content: center;

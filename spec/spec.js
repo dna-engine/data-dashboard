@@ -11,27 +11,30 @@ const port =      6868 + 1;  //+1 to prevent conflict
 const url  =      'http://localhost:' + port + '/web-target/dist/';
 const webServer = http.createServer(express().use(express.static('.')));
 let window, $;  //jshint ignore:line
+const start = Date.now();
+const log = (msg) => console.log((Date.now() - start + '').padStart(4, '0'), msg);
 const startWebServer = (callback) => {
    const handleServerReady = () => {
-      console.log('   running on port #' + webServer.address().port);
+      log('Running on port #' + webServer.address().port);
       callback();
       };
-   console.log('Starting web server for mocha...');
+   log('Starting web server for mocha');
    webServer.listen(port, handleServerReady);
    };
 const loadWebPage = (done) => {
    const handleWebPage = (dom) => {
       const waitForScripts = () => {
+         log('Scripts loaded\n');
          window = dom.window;
          $ = window.jQuery;
-         console.log('   done\n');
          done();
          };
       dom.window.onload = waitForScripts;
       };
    const load = () => {
       const options = { resources: 'usable', runScripts: 'dangerously' };
-      console.log('Loading web page into jsdom...');
+      log('Loading web page into jsdom');
+      log(url);
       JSDOM.fromURL(url, options).then(handleWebPage);
       };
    startWebServer(load);

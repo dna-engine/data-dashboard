@@ -1,0 +1,97 @@
+// DataDashboard
+// External libraries -- Styling
+
+@import "library/constants";
+@import "library/utils";
+
+// vanilla-datatables
+.dataTable-wrapper {
+   .dataTable-top {
+      padding: 0px;
+      margin-bottom: 5px;
+      .dataTable-dropdown {
+         label {
+            select {
+               margin-bottom: 4px;
+               }
+            }
+         }
+      .dataTable-search {
+         }
+      }
+   .dataTable-container {
+      table.dataTable-table {
+         thead {
+            tr {
+               .TableHeaderRow();
+               }
+            }
+         tbody {
+            tr {
+               .TableBodyRow();
+               }
+            }
+         }
+      }
+   .dataTable-bottom {
+      padding: 0px;
+      .dataTable-info {
+         }
+      .dataTable-pagination {
+         }
+      }
+   &.no-footer {
+      .dataTable-container {
+         border-bottom: none;
+         }
+      }
+   }
+.FixSortArrows() {
+   a.dataTable-sorter {
+      padding-right: 15px;  //space for sort arrows
+      transition: all 1.4s;
+      &::before, &::after {
+         right: 10px;
+         font-size: 0.6rem;
+         border: none;
+         opacity: 0.4;
+         transition: all 1.4s;
+         }
+      &::before {
+         content: "\25BC";
+         }
+      &::after {
+         content: "\25B2";
+         }
+      }
+   &.asc a.dataTable-sorter::after,
+   &.desc a.dataTable-sorter::before {
+      color: black;
+      opacity: 1;
+      }
+    }
+.TableHeaderRow() {
+   th {
+      .FixSortArrows();
+      font-size: 1.1rem;
+      padding: 8px 20px 8px 0px;
+      &:last-child {
+         padding-right: 0px;
+         }
+      a.dataTable-sorter {
+         .PlainLink();
+         }
+      }
+   }
+.TableBodyRow() {
+   td {
+      text-align: left;
+      padding: 8px 20px 8px 0px;
+      &:last-child {
+         padding-right: 0px;
+         }
+      &:first-child {
+         white-space: nowrap;
+         }
+      }
+   }

@@ -1,0 +1,42 @@
+// DataDashboard
+// Widget style
+
+@import "../../style/library/constants";
+@import "../../style/library/utils";
+
+widget-body.spacex-books {
+   book-list {
+      @gap: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: -@gap/2;
+      book-element {
+         display: flex;
+         align-items: flex-start;
+         width: 345px;
+         color: white;
+         background-color: mediumseagreen;
+         padding: 15px;
+         margin: @gap/2;
+         >img {
+            width: 100px;
+            border: 1px solid dimgray;
+            margin-right: 15px;
+            }
+         >div {
+            h2 {
+               }
+            cite {
+               display: block;
+               margin-bottom: 12px;
+               }
+            p {
+               font-size: 1.1rem;
+               font-weight: bold;
+               }
+            nav {
+               }
+            }
+         }
+      }
+   }

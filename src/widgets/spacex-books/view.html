@@ -1,0 +1,16 @@
+<widget-body id=spacex-books class=dna-template>
+   <book-list class=external-site>
+      <book-element data-array=~~books~~>
+         <img src=# data-attr-src=~~volumeInfo.imageLinks.thumbnail~~
+            data-href=~~volumeInfo.previewLink~~ alt=cover>
+         <div>
+            <h2>~~volumeInfo.title~~</h2>
+            <cite>~~volumeInfo.publisher~~</cite>
+            <p>~~saleInfo.listPrice.amount~~</p>
+            <nav data-href=~~volumeInfo.previewLink~~>
+               <img src=https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif alt=preview>
+            </nav>
+         </div>
+      </book-element>
+   </book-list>
+</widget-body>
