@@ -21,6 +21,14 @@ dataDashboard.util = {
       },
    spinnerStop: (widgetElem) => {
       return widgetElem.removeClass('waiting').find('>widget-spinner').fadeOut().parent();
+      },
+   fetchJsonp: (url, params, jsonpName, callback) => {
+      const logDomain = url.replace(/.*:[/][/]/, '').replace(/[:/].*/, '');  //extract hostname
+      dataDashboard.network.logEvent(new Date().toISOString(), 'request', 'GET', logDomain, url);
+      const toPair = (key) => key + '=' + encodeURIComponent(params[key]);
+      if (params)
+         url = url + '?' + Object.keys(params).map(toPair).join('&');
+      return $.ajax({ url: url, dataType: 'jsonp', jsonpCallback: jsonpName }).done(callback);
       }
    };
 

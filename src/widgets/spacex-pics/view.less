@@ -1,0 +1,33 @@
+// DataDashboard
+// Widget style
+
+@import "../../style/library/constants";
+@import "../../style/library/utils";
+
+widget-body.spacex-pics {
+   photo-list {
+      @gap: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: -@gap/2;
+      photo-element {
+         text-align: center;
+         max-width: 220px;
+         margin: @gap/2;
+         cite {
+            font-weight: bold;
+            font-style: normal;
+            }
+         figure {
+            text-align: center;
+            img {
+               height: 100px;
+               border: 5px solid dimgray;
+               }
+            figcaption {
+               font-weight: normal;
+               }
+            }
+         }
+      }
+   }
