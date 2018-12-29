@@ -39,7 +39,7 @@
       "pretest": "npm run lint && npm run build",
       "test": "mocha spec/*.js",
       "publish": "rimraf docs && gulp publish",
-      "stage": "npm run lint && gulp clean && gulp widgets && gulp build"
+      "staging-only": "npm run lint && gulp clean && gulp widgets && gulp build"
    },
    "dependencies": {
       "chart.js": "~2.7",
