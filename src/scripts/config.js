@@ -10,11 +10,12 @@ const dataDashboard = {
       { code: 'spacex-books',        header: 'SpaceX books' },
       { code: 'spacex-pics',         header: 'SpaceX pictures' },
       { code: 'space-starships',     header: 'Starship data' },
+      { code: 'space-vehicles',      header: 'Vehicle data' },
       ],
    panels: [
       { code: 'finance',   header: 'Finance',   widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
       { code: 'space',     header: 'Space',     widgets: ['spacex-books', 'spacex-pics'] },
-      { code: 'starships', header: 'Starships', widgets: ['space-starships', 'widget-c'] },
+      { code: 'starships', header: 'Starships', widgets: ['space-starships', 'space-vehicles'] },
       { code: 'network',   header: 'Network',   widgets: ['network-log'] }
       ],
    chartColor: {
