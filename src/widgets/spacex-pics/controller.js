@@ -11,7 +11,6 @@ dataDashboard.widget.spacexPics = {
          const model = dna.getModel(widgetElem);
          model.photos = data.items;
          dna.refresh(widgetElem);
-         console.log(data);
          };
       dataDashboard.util.spinnerStart(widgetElem);
       dataDashboard.util.fetchJsonp(url, params, 'jsonFlickrFeed', handleData);

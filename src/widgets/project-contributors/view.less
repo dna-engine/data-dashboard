@@ -1,0 +1,28 @@
+// DataDashboard
+// Widget style
+
+@import "../../style/library/constants";
+@import "../../style/library/utils";
+
+widget-body.project-contributors {
+   contributor-list {
+      @gap: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: -@gap/2;
+      contributor-element {
+         color: white;
+         background-color: blueviolet;
+         padding: 10px 15px 5px 15px;
+         margin: @gap/2;
+         figure {
+            text-align: center;
+            img {
+               height: 80px;
+               }
+            figcaption {
+               }
+            }
+         }
+      }
+   }

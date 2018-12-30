@@ -3,19 +3,21 @@
 
 const dataDashboard = {
    widgets: [
-      { code: 'fin-rate-intraday',   header: 'Exchange rate intraday' },
-      { code: 'fin-rate-moving-avg', header: 'Exchange rate moving average' },
-      { code: 'widget-c',            header: 'Widget C' },
-      { code: 'network-log',         header: 'Network log' },
-      { code: 'spacex-books',        header: 'SpaceX books' },
-      { code: 'spacex-pics',         header: 'SpaceX pictures' },
-      { code: 'space-starships',     header: 'Starship data' },
-      { code: 'space-vehicles',      header: 'Vehicle data' },
+      { code: 'fin-rate-intraday',    header: 'Exchange rate intraday' },
+      { code: 'fin-rate-moving-avg',  header: 'Exchange rate moving average' },
+      { code: 'widget-c',             header: 'Widget C' },
+      { code: 'network-log',          header: 'Network log' },
+      { code: 'project-contributors', header: 'dna.js contributors' },
+      { code: 'spacex-books',         header: 'SpaceX books' },
+      { code: 'spacex-pics',          header: 'SpaceX pictures' },
+      { code: 'space-starships',      header: 'Starship data' },
+      { code: 'space-vehicles',       header: 'Vehicle data' },
       ],
    panels: [
       { code: 'finance',   header: 'Finance',   widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
       { code: 'space',     header: 'Space',     widgets: ['spacex-books', 'spacex-pics'] },
       { code: 'starships', header: 'Starships', widgets: ['space-starships', 'space-vehicles'] },
+      { code: 'project',   header: 'Project',   widgets: ['project-contributors'] },
       { code: 'network',   header: 'Network',   widgets: ['network-log'] }
       ],
    chartColor: {
