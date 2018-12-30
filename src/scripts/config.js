@@ -7,14 +7,15 @@ const dataDashboard = {
       { code: 'fin-rate-moving-avg', header: 'Exchange rate moving average' },
       { code: 'widget-c',            header: 'Widget C' },
       { code: 'network-log',         header: 'Network log' },
-      { code: 'spacex-pics',         header: 'SpaceX Pictures' },
-      { code: 'spacex-books',        header: 'SpaceX Books' }
+      { code: 'spacex-books',        header: 'SpaceX books' },
+      { code: 'spacex-pics',         header: 'SpaceX pictures' },
+      { code: 'space-starships',     header: 'Starship data' },
       ],
    panels: [
-      { code: 'finance', header: 'Finance',     widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
-      { code: 'space',   header: 'Space',       widgets: ['spacex-pics', 'spacex-books'] },
-      { code: 'panel-z', header: 'The Z Panel', widgets: ['fin-rate-intraday', 'widget-c'] },
-      { code: 'network', header: 'Network',     widgets: ['network-log'] }
+      { code: 'finance',   header: 'Finance',   widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
+      { code: 'space',     header: 'Space',     widgets: ['spacex-books', 'spacex-pics'] },
+      { code: 'starships', header: 'Starships', widgets: ['space-starships', 'widget-c'] },
+      { code: 'network',   header: 'Network',   widgets: ['network-log'] }
       ],
    chartColor: {
       red:    'rgba(255,  99, 132, 0.5)',
