@@ -15,8 +15,15 @@ dataDashboard.controller = {
          };
       panelElem.find('>dashboard-widgets').children().each(showWidget);
       },
+   jsdomWorkarounds: () => {
+      fetchJson.enableLogger(true);  //prevent localStorage race condition
+      class StubOutChart {}
+      window.Chart = StubOutChart;  //prevent UnhandledPromiseRejectionWarning
+      },
    setup: () => {
       fetchJson.enableLogger(dataDashboard.network.logEvent);
+      if (navigator.userAgent.includes('jsdom'))
+         dataDashboard.controller.jsdomWorkarounds();
       const getColorValue = (color) => dataDashboard.chartColor[color];
       dataDashboard.chartColors = Object.keys(dataDashboard.chartColor).map(getColorValue);
       dataDashboard.widgetsMap = dna.array.toMap(dataDashboard.widgets);

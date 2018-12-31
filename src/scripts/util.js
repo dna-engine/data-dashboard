@@ -35,7 +35,7 @@ dataDashboard.util = {
 dataDashboard.network = {
    logName: 'network-log',
    logEvent: (...event) => {
-      console.log(event);
+      console.log(event.join(' - '));
       const maxLogEvents = 250;
       const log = dataDashboard.network.getLog();
       log.push(event);
