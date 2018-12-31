@@ -6,8 +6,8 @@ dataDashboard.widget.spacexPics = {
       const url = 'https://api.flickr.com/services/feeds/photos_public.gne';
       const params = { format: 'json', tags: 'spacex' };
       const handleData = (data) => {
-         data.items.forEach(item => item.date = item.date_taken.substring(0, 10));
          dataDashboard.util.spinnerStop(widgetElem);
+         data.items.forEach(item => item.date = item.date_taken.substring(0, 10));
          const model = dna.getModel(widgetElem);
          model.photos = data.items;
          dna.refresh(widgetElem);

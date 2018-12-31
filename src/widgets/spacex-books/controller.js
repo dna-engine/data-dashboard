@@ -6,8 +6,8 @@ dataDashboard.widget.spacexBooks = {
       const url = 'https://www.googleapis.com/books/v1/volumes';
       const params = { q: 'spacex' };
       const handleData = (data) => {
-         data.items = data.items.filter(book => book.volumeInfo.imageLinks);
          dataDashboard.util.spinnerStop(widgetElem);
+         data.items = data.items.filter(book => book.volumeInfo.imageLinks);
          const model = dna.getModel(widgetElem);
          model.books = data.items;
          dna.refresh(widgetElem);

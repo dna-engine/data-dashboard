@@ -24,7 +24,7 @@
 //       ...
 
 dataDashboard.widget.finRateIntraday = {
-   show: (widgetElem) => {
+   displayDataChart: (widgetElem, rawData) => {
       const transform = (rawData) => {
          const metadata = rawData['Meta Data'];
          const timeSeries = rawData['Time Series FX (5min)'];
@@ -37,25 +37,28 @@ dataDashboard.widget.finRateIntraday = {
             highs:    timestamps.map(timestamp => parseFloat(timeSeries[timestamp]['2. high']))
             };
          };
+      const data = transform(rawData);
+      const datasets = [
+         { label: 'Low',  data: data.lows },
+         { label: 'High', data: data.highs }
+         ];
+      const chartInfo = {
+         type: 'line',
+         data: {
+            labels:   data.labels,
+            datasets: dataDashboard.util.addChartColors(datasets)
+            },
+         options: {
+            maintainAspectRatio: false,
+            title: { display: true, text: [data.title, data.subtitle] }
+            }
+         };
+      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
+      },
+   show: (widgetElem) => {
       const handleData = (rawData) => {
-         const data = transform(rawData);
-         const datasets = [
-            { label: 'Low',  data: data.lows },
-            { label: 'High', data: data.highs }
-            ];
-         const chartInfo = {
-            type: 'line',
-            data: {
-               labels:   data.labels,
-               datasets: dataDashboard.util.addChartColors(datasets)
-               },
-            options: {
-               maintainAspectRatio: false,
-               title: { display: true, text: [data.title, data.subtitle] }
-               }
-            };
-         widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
          dataDashboard.util.spinnerStop(widgetElem);
+         dataDashboard.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = { function: 'FX_INTRADAY', from_symbol: 'EUR', to_symbol: 'USD',

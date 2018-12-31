@@ -7,6 +7,7 @@ const dataDashboard = {
       { code: 'fin-rate-moving-avg',  header: 'Exchange rate moving average' },
       { code: 'widget-c',             header: 'Widget C' },
       { code: 'network-log',          header: 'Network log' },
+      { code: 'network-endpoints',    header: 'Network endpoints' },
       { code: 'project-contributors', header: 'dna.js contributors' },
       { code: 'spacex-books',         header: 'SpaceX books' },
       { code: 'spacex-pics',          header: 'SpaceX pictures' },
@@ -18,7 +19,7 @@ const dataDashboard = {
       { code: 'space',     header: 'Space',     widgets: ['spacex-books', 'spacex-pics'] },
       { code: 'starships', header: 'Starships', widgets: ['space-starships', 'space-vehicles'] },
       { code: 'project',   header: 'Project',   widgets: ['project-contributors'] },
-      { code: 'network',   header: 'Network',   widgets: ['network-log'] }
+      { code: 'network',   header: 'Network',   widgets: ['network-log', 'network-endpoints'] }
       ],
    chartColor: {
       red:    'rgba(255,  99, 132, 0.5)',

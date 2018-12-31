@@ -17,7 +17,7 @@
 //       ...
 
 dataDashboard.widget.finRateMovingAvg = {
-   show: (widgetElem) => {
+   displayDataChart: (widgetElem, rawData) => {
       const transform = (rawData) => {
          const metadata = rawData['Meta Data'];
          const timeSeries = rawData['Technical Analysis: SMA'];
@@ -30,27 +30,30 @@ dataDashboard.widget.finRateMovingAvg = {
             values:   timestamps.map(timestamp => parseFloat(timeSeries[timestamp].SMA))
             };
          };
+      const data = transform(rawData);
+      const dataset = {
+         label:           data.set,
+         data:            data.values,
+         borderColor:     dataDashboard.chartColor.purple,
+         backgroundColor: dataDashboard.chartColor.purple
+         };
+      const chartInfo = {
+         type: 'line',
+         data: {
+            labels:   data.labels,
+            datasets: [dataset]
+            },
+         options: {
+            maintainAspectRatio: false,
+            title: { display: true, text: [data.title, data.subtitle] }
+            }
+         };
+      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
+      },
+   show: (widgetElem) => {
       const handleData = (rawData) => {
-         const data = transform(rawData);
-         const dataset = {
-            label:           data.set,
-            data:            data.values,
-            borderColor:     dataDashboard.chartColor.purple,
-            backgroundColor: dataDashboard.chartColor.purple
-            };
-         const chartInfo = {
-            type: 'line',
-            data: {
-               labels:   data.labels,
-               datasets: [dataset]
-               },
-            options: {
-               maintainAspectRatio: false,
-               title: { display: true, text: [data.title, data.subtitle] }
-               }
-            };
-         widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
          dataDashboard.util.spinnerStop(widgetElem);
+         dataDashboard.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = { function: 'SMA', symbol: 'USDEUR',
