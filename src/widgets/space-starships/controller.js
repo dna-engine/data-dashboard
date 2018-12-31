@@ -69,7 +69,7 @@ dataDashboard.widget.spaceStarships = {
    displayDataTable: (widgetElem, starships) => {
       const tableElem = widgetElem.find('figure table');
       const dataTable = new window.DataTable(tableElem[0]);
-      const headers =   [
+      const headers = [
          'Name',
          'Model',
          'Length',

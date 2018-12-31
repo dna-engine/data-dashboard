@@ -6,6 +6,7 @@ dataDashboard.widget.networkEndpoints = {
       const model = dna.getModel(widgetElem);
       model.endpoints = [
          { name: 'Alpha Vantage API', base: 'https://www.alphavantage.co/query', docs: 'https://www.alphavantage.co/documentation' },
+         { name: 'BART API',          base: 'https://api.bart.gov/api',          docs: 'https://api.bart.gov/docs/overview/examples.aspx' },
          { name: 'GitHub REST API',   base: 'https://api.github.com',            docs: 'https://developer.github.com/v3' },
          { name: 'Google Books APIs', base: 'https://www.googleapis.com/books',  docs: 'https://developers.google.com/books' },
          { name: 'Flickr API',        base: 'https://api.flickr.com/services',   docs: 'https://www.flickr.com/services/feeds/docs/photos_public' },
