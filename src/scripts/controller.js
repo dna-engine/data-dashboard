@@ -24,8 +24,6 @@ dataDashboard.controller = {
       fetchJson.enableLogger(dataDashboard.network.logEvent);
       if (navigator.userAgent.includes('jsdom'))
          dataDashboard.controller.jsdomWorkarounds();
-      const getColorValue = (color) => dataDashboard.chartColor[color];
-      dataDashboard.chartColors = Object.keys(dataDashboard.chartColor).map(getColorValue);
       dataDashboard.widgetsMap = dna.array.toMap(dataDashboard.widgets);
       const makeWidgetList = (codes) => codes.map(code => dataDashboard.widgetsMap[code]);
       dataDashboard.panels.forEach(panel => panel.widgetList = makeWidgetList(panel.widgets));
