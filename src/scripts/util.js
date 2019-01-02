@@ -4,11 +4,12 @@
 dataDashboard.util = {
    chartColors: Object.keys(dataDashboard.chartColor).map(color => dataDashboard.chartColor[color]),
    getChartColor: (i) => dataDashboard.util.chartColors[i % dataDashboard.util.chartColors.length],
-   addChartColors: (datasets) => {
+   addChartColors: (datasets, startIndex) => {
+      const increment = startIndex ? startIndex : 0;
       const colorize = (dataset, i) => {
          dataset.fill =            false;
-         dataset.borderColor =     dataDashboard.util.getChartColor(i);
-         dataset.backgroundColor = dataDashboard.util.getChartColor(i);
+         dataset.borderColor =     dataDashboard.util.getChartColor(i + increment);
+         dataset.backgroundColor = dataDashboard.util.getChartColor(i + increment);
          };
       datasets.forEach(colorize);
       return datasets;

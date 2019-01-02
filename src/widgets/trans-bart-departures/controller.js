@@ -63,7 +63,6 @@ dataDashboard.widget.transBartDepartures = {
             labels: directionEstimates.map(estimates => estimates[datasets.length].label),
             data:   directionEstimates.map(estimates => estimates[datasets.length].delta)
             });
-      dataDashboard.util.addChartColors(datasets);
       const scales = {
          xAxes: [{ stacked: true, scaleLabel: { display: true, labelString: 'Estimated minutes until departure' } }],
          yAxes: [{ stacked: true, scaleLabel: { display: true, labelString: 'Direction' } }]
@@ -73,7 +72,7 @@ dataDashboard.widget.transBartDepartures = {
          type: 'horizontalBar',
          data: {
             labels:   directions,
-            datasets: datasets
+            datasets: dataDashboard.util.addChartColors(datasets)
             },
          options: {
             maintainAspectRatio: false,
