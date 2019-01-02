@@ -48,7 +48,6 @@ dataDashboard.widget.transNycBikeStations = {
             scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
             }
          };
-      console.log(chartInfo);
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
    show: (widgetElem) => {

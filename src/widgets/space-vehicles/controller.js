@@ -39,22 +39,14 @@ dataDashboard.widget.spaceVehicles = {
       vehicles.sort((itemA, itemB) => itemA.chart.total - itemB.chart.total);
       const chartVehicles = vehicles.slice(-12, -4);  //8 relatively large vehicles
       const datasets = [
-         {
-            label:           'Passengers',
-            data:            chartVehicles.map(item => item.chart.passengers),
-            backgroundColor: dataDashboard.chartColor.yellow
-            },
-         {
-            label:           'Crew',
-            data:            chartVehicles.map(item => item.chart.crew),
-            backgroundColor: dataDashboard.chartColor.blue
-            }
+         { label: 'Passengers', data: chartVehicles.map(item => item.chart.passengers) },
+         { label: 'Crew',       data: chartVehicles.map(item => item.chart.crew) }
          ];
       const chartInfo = {
          type: 'bar',
          data: {
             labels:   chartVehicles.map(item => item.name),
-            datasets: datasets
+            datasets: dataDashboard.util.addChartColors(datasets, 1)
             },
          options: {
             maintainAspectRatio: false,

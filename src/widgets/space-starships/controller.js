@@ -41,22 +41,14 @@ dataDashboard.widget.spaceStarships = {
       starships.sort((itemA, itemB) => itemA.chart.total - itemB.chart.total);
       const chartStarships = starships.slice(-11, -3);  //8 relatively large starships
       const datasets = [
-         {
-            label:           'Passengers',
-            data:            chartStarships.map(item => item.chart.passengers),
-            backgroundColor: dataDashboard.chartColor.orange
-            },
-         {
-            label:           'Crew',
-            data:            chartStarships.map(item => item.chart.crew),
-            backgroundColor: dataDashboard.chartColor.purple
-            }
+         { label: 'Passengers', data: chartStarships.map(item => item.chart.passengers) },
+         { label: 'Crew',       data: chartStarships.map(item => item.chart.crew) }
          ];
       const chartInfo = {
          type: 'bar',
          data: {
             labels:   chartStarships.map(item => item.name),
-            datasets: datasets
+            datasets: dataDashboard.util.addChartColors(datasets, 4)
             },
          options: {
             maintainAspectRatio: false,

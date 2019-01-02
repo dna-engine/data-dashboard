@@ -5,6 +5,7 @@ const dataDashboard = {
    widgets: [
       { code: 'fin-rate-intraday',       header: 'Exchange rate intraday' },
       { code: 'fin-rate-moving-avg',     header: 'Exchange rate moving average' },
+      { code: 'geo-area',                header: 'Geographic area' },
       { code: 'widget-c',                header: 'Widget C' },
       { code: 'network-log',             header: 'Network log' },
       { code: 'network-endpoints',       header: 'REST endpoints' },
@@ -22,7 +23,7 @@ const dataDashboard = {
       { code: 'finance',   header: 'Finance',        widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
       { code: 'space',     header: 'Space',          widgets: ['spacex-books', 'spacex-pics'] },
       { code: 'starships', header: 'Starships',      widgets: ['space-starships', 'space-vehicles'] },
-      { code: 'trans',     header: 'Transportation', widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures'] },
+      { code: 'trans',     header: 'Transportation', widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'geo-area'] },
       { code: 'project',   header: 'Project',        widgets: ['project-contributors', 'project-json-questions'] },
       { code: 'network',   header: 'Network',        widgets: ['network-log', 'network-endpoints'] }
       ],

@@ -52,7 +52,6 @@ dataDashboard.widget.projectJsonQuestions = {
             title: { display: true, text: [title, subtitle] }
             }
          };
-      console.log(chartInfo.type, chartInfo);
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       library.ui.normalize(widgetElem);
       },

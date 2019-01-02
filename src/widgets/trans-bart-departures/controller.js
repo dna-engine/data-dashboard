@@ -35,7 +35,7 @@ dataDashboard.widget.transBartDepartures = {
          data.station[0].abbr + ' -- Upcoming departures from ' + data.station[0].name,
          data.date + ' ' + data.time
          ];
-      const etd = data.station[0].etd;
+      const etd = data.station[0].etd || [];
       etd.forEach(dest => dest.estimate.forEach(est => est.destination = dest.destination));
       const flatten = (a, b) => a.concat(b);
       const toChartData = (item) => ({
@@ -44,7 +44,7 @@ dataDashboard.widget.transBartDepartures = {
          label:     'Platform #' + item.platform + ' to ' + item.destination
          });
       const compareMinutes = (a, b) => a.minutes - b.minutes;
-      const estimates = etd.map(destination => destination.estimate).reduce(flatten).map(toChartData).sort(compareMinutes);
+      const estimates = etd.map(destination => destination.estimate).reduce(flatten, []).map(toChartData).sort(compareMinutes);
       const onlyUnique = (value, i, array) => array.indexOf(value) === i;
       const directions = estimates.map(item => item.direction).filter(onlyUnique);
       const directionEstimates = directions.map(direction => estimates.filter(item => item.direction === direction));
