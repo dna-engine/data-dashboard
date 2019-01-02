@@ -9,6 +9,7 @@ const dataDashboard = {
       { code: 'network-log',             header: 'Network log' },
       { code: 'network-endpoints',       header: 'REST endpoints' },
       { code: 'project-contributors',    header: 'dna.js contributors' },
+      { code: 'project-json-questions',  header: 'JSON questions' },
       { code: 'spacex-books',            header: 'SpaceX books' },
       { code: 'spacex-pics',             header: 'SpaceX pictures' },
       { code: 'space-starships',         header: 'Starship data' },
@@ -22,7 +23,7 @@ const dataDashboard = {
       { code: 'space',     header: 'Space',          widgets: ['spacex-books', 'spacex-pics'] },
       { code: 'starships', header: 'Starships',      widgets: ['space-starships', 'space-vehicles'] },
       { code: 'trans',     header: 'Transportation', widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures'] },
-      { code: 'project',   header: 'Project',        widgets: ['project-contributors'] },
+      { code: 'project',   header: 'Project',        widgets: ['project-contributors', 'project-json-questions'] },
       { code: 'network',   header: 'Network',        widgets: ['network-log', 'network-endpoints'] }
       ],
    chartColor: {
@@ -31,7 +32,8 @@ const dataDashboard = {
       yellow: 'rgba(255, 206,  86, 0.7)',
       green:  'rgba( 75, 192, 192, 0.7)',
       purple: 'rgba(153, 102, 255, 0.7)',
-      orange: 'rgba(255, 159,  64, 0.7)'
+      orange: 'rgba(255, 159,  64, 0.7)',
+      teal:   'rgba(  0, 200, 230, 0.7)'
       }
    };
 

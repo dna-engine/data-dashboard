@@ -14,6 +14,9 @@ dataDashboard.util = {
       datasets.forEach(colorize);
       return datasets;
       },
+   secsToStr: (epocSeconds) => {  //example: "2019-01-02 05:34:15"
+      return new Date(epocSeconds * 1000).toISOString().replace('T', ' ').substring(0, 19);
+      },
    spinnerStart: (widgetElem) => {
       const create = () =>
          library.ui.makeIcons($('<widget-spinner><i data-icon=yin-yang class=fa-spin>'))
@@ -53,6 +56,7 @@ dataDashboard.network = {
 
 dataDashboard.transformer = {
    dataTablesNormalizer: (rows, numColumns, indexRemoveColumn) => {
+      const size = numColumns ? numColumns : rows.length ? rows[0].length : 0;
       const normalize = (row) => {
          const toStr = (value, i) => {
             if (typeof value !== 'string')
@@ -61,9 +65,9 @@ dataDashboard.transformer = {
          row.forEach(toStr);
          if (indexRemoveColumn !== undefined)
             row.splice(indexRemoveColumn, 1);
-         while (row.length < numColumns)
+         while (row.length < size)
             row.push('');
-         while (row.length > numColumns)
+         while (row.length > size)
             row.pop();
          };
       rows.forEach(normalize);

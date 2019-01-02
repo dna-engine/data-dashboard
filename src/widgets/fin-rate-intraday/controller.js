@@ -32,7 +32,7 @@ dataDashboard.widget.finRateIntraday = {
          return {
             title:    metadata['1. Information'],
             subtitle: metadata['2. From Symbol'] + '/' + metadata['3. To Symbol'] + ' ' + metadata['4. Last Refreshed'],
-            labels:   timestamps.map(timestamp => timestamp.substr(11, 5)),
+            labels:   timestamps.map(timestamp => timestamp.substring(11, 16)),
             lows:     timestamps.map(timestamp => parseFloat(timeSeries[timestamp]['3. low'])),
             highs:    timestamps.map(timestamp => parseFloat(timeSeries[timestamp]['2. high']))
             };
