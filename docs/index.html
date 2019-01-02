@@ -14,8 +14,8 @@
 <link rel=icon             href=./graphics/bookmark.2c089831.png>
 <link rel=apple-touch-icon href=./graphics/mobile-home-screen.5ef8934e.png>
 <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6/css/all.min.css>
-<link rel=stylesheet       href=./libraries.75f27c0b.css>
-<link rel=stylesheet       href=./data-dashboard.973aaec7.css>
+<link rel=stylesheet       href=./libraries.8d153f47.css>
+<link rel=stylesheet       href=./data-dashboard.6c484901.css>
 </head>
 <body>
 
@@ -76,9 +76,120 @@
       </figure>
    </widget-body>
 
+   <widget-body id=network-endpoints class=dna-template>
+      <figure>
+         <table>
+            <thead>
+               <tr><th>Name</th><th>REST base</th><th>Documentation</th></tr>
+            </thead>
+            <tbody>
+               <tr data-array=~~endpoints~~>
+                  <td>~~name~~</td>
+                  <td><code>~~base~~</code></td>
+                  <td><a href=~~docs~~ class=external-site>~~docs~~</a></td>
+               </tr>
+            </tbody>
+         </table>
+      </figure>
+   </widget-body>
+
    <widget-body id=network-log class=dna-template>
       <figure>
          <table></table>
+      </figure>
+   </widget-body>
+
+   <widget-body id=project-contributors class=dna-template>
+      <contributor-list class=external-site >
+         <contributor-element data-array=~~contributors~~>
+            <figure>
+               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=" data-attr-src=~~avatar_url~~ data-href=~~html_url~~ alt=avatar>
+               <figcaption>~~login~~</figcaption>
+            </figure>
+         </contributor-element>
+      </contributor-list>
+   </widget-body>
+
+   <widget-body id=project-json-questions class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+      <figure class=external-site>
+         <table></table>
+      </figure>
+   </widget-body>
+
+   <widget-body id=space-starships class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+      <figure>
+         <table></table>
+      </figure>
+   </widget-body>
+
+   <widget-body id=space-vehicles class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+      <figure>
+         <table></table>
+      </figure>
+   </widget-body>
+
+   <widget-body id=spacex-books class=dna-template>
+      <book-list class=external-site>
+         <book-element data-array=~~books~~>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=" data-attr-src=~~volumeInfo.imageLinks.thumbnail~~
+               data-href=~~volumeInfo.previewLink~~ alt=cover>
+            <div>
+               <h2>~~volumeInfo.title~~</h2>
+               <cite>~~volumeInfo.publisher~~</cite>
+               <p>~~saleInfo.listPrice.amount~~</p>
+               <nav data-href=~~volumeInfo.previewLink~~>
+                  <img src=https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif alt=preview>
+               </nav>
+            </div>
+         </book-element>
+      </book-list>
+   </widget-body>
+
+   <widget-body id=geo-area class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+   </widget-body>
+
+   <widget-body id=spacex-pics class=dna-template>
+      <photo-list>
+         <photo-element data-array=~~photos~~>
+            <cite>~~date~~</cite>
+            <figure>
+               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=" data-attr-src=~~media.m~~ data-href=~~link~~ class=external-site alt=photo>
+               <figcaption>~~title~~</figcaption>
+            </figure>
+         </photo-element>
+      </photo-list>
+   </widget-body>
+
+   <widget-body id=trans-bart-departures class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+   </widget-body>
+
+   <widget-body id=trans-bart-stations class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+      <figure>
+         <table></table>
+      </figure>
+   </widget-body>
+
+   <widget-body id=trans-nyc-bike-stations class=dna-template>
+      <figure>
+         <canvas></canvas>
       </figure>
    </widget-body>
 
@@ -89,16 +200,10 @@
       </figure>
    </widget-body>
 
-   <widget-body id=widget-a class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-   </widget-body>
-
 </widget-templates>
 
-<script src=libraries.b87b5365.js></script>
-<script src=data-dashboard.92e8d77e.js></script>
+<script src=libraries.6525a12a.js></script>
+<script src=data-dashboard.4d5f53e5.js></script>
 </body>
 </html>
 
