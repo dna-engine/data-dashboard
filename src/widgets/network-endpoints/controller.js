@@ -8,6 +8,7 @@ dataDashboard.widget.networkEndpoints = {
          { name: 'Alpha Vantage API',    base: 'https://www.alphavantage.co/query', docs: 'https://www.alphavantage.co/documentation' },
          { name: 'BART API',             base: 'https://api.bart.gov/api',          docs: 'https://api.bart.gov/docs/overview/examples.aspx' },
          { name: 'Citi Bike',            base: 'https://gbfs.citibikenyc.com',      docs: 'https://www.citibikenyc.com/system-data' },
+         { name: 'Ergast Developer API', base: 'https://ergast.com/api/f1',         docs: 'https://ergast.com/mrd/' },
          { name: 'GitHub REST API',      base: 'https://api.github.com',            docs: 'https://developer.github.com/v3' },
          { name: 'Google Books APIs',    base: 'https://www.googleapis.com/books',  docs: 'https://developers.google.com/books' },
          { name: 'GroupKT Web Services', base: 'http://services.groupkt.com ',      docs: 'http://www.groupkt.com/services/home.htm' },

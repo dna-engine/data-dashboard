@@ -17,13 +17,14 @@ const dataDashboard = {
       { code: 'space-vehicles',          header: 'Vehicle data' },
       { code: 'trans-bart-stations',     header: 'BART stations' },
       { code: 'trans-bart-departures',   header: 'BART departures' },
+      { code: 'trans-f1-top-countries',  header: 'F1 top countries'},
       { code: 'trans-nyc-bike-stations', header: 'NYC bike stations' }
       ],
    panels: [
       { code: 'finance',   header: 'Finance',        widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
       { code: 'space',     header: 'Space',          widgets: ['spacex-books', 'spacex-pics'] },
       { code: 'starships', header: 'Starships',      widgets: ['space-starships', 'space-vehicles'] },
-      { code: 'trans',     header: 'Transportation', widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'geo-area'] },
+      { code: 'trans',     header: 'Transportation', widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'trans-f1-top-countries', 'geo-area'] },
       { code: 'project',   header: 'Project',        widgets: ['project-contributors', 'project-json-questions'] },
       { code: 'network',   header: 'Network',        widgets: ['network-log', 'network-endpoints'] }
       ],
