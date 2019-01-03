@@ -12,8 +12,8 @@ _A data-driven dashboard console for report widgets_
 https://data-dashboard.js.org
 
 ## Reference architecture
-**DataDashboard** show examples of creating charts and tables from REST calls, and it aims to be a
-reference architecture for building data-driven dashboard consoles composed of report widgets.
+**DataDashboard** provides examples of creating charts and tables from REST calls, and it aims to
+be a reference architecture for building data-driven dashboard consoles composed of report widgets.
 
 The list of report widgets and dashboard panels is defined in
 [`src/scripts/config.js`](https://github.com/dnajs/data-dashboard/blob/master/src/scripts/config.js),
