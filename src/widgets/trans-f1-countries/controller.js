@@ -97,13 +97,10 @@ dataDashboard.widget.transF1TopCountries = {
          totalsMap[result.Constructor.nationality].numConstructors++;
          return totalsMap;
          };
-      console.log(subtitle);
-      console.log(race.Results);
       const totals = race.Results.slice(0, topFinishes).reduce(addResult, {});
       const data = Object.keys(totals).map(nationality => totals[nationality]);
       data.sort((a, b) => a.numDrivers + a.numConstructors - b.numDrivers - b.numConstructors ||
          a.nationality.localeCompare(b.nationality));
-      console.log(totals, data);
       const datasets = [
          { label: 'Driver',      data: data.map(item => item.numDrivers) },
          { label: 'Constructor', data: data.map(item => item.numConstructors) }

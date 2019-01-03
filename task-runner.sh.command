@@ -60,7 +60,6 @@ releaseInstructions() {
       echo "   git tag --annotate --message 'Release' $version"
       echo "   git remote --verbose"
       echo "   git push origin --tags"
-      echo "   npm publish"
       }
    nextAction() { test "$version" ">" "$released" && nextActionTag || nextActionBump; }
    test "$version" ">" "$pushed" && test -d dist && nextActionCommit || nextAction

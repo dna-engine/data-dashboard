@@ -89,7 +89,6 @@ dataDashboard.widget.projectJsonQuestions = {
          dataDashboard.widget.projectJsonQuestions.displayDataTable(widgetElem, data.items);
          };
       dataDashboard.util.spinnerStart(widgetElem);
-      // fetchJson.get(url, params).then(handleData);
-      $.get(url, params).done(handleData);
+      fetchJson.get(url, params).then(handleData);
       }
    };

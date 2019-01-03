@@ -75,7 +75,6 @@ dataDashboard.widget.transBartStations = {
       const url = 'https://api.bart.gov/api/stn.aspx';
       const params = { cmd: 'stns', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
       dataDashboard.util.spinnerStart(widgetElem);
-      // fetchJson.get(url, params).then(handleData);
-      $.get(url, params).done(handleData);  //TODO: solve not allowed by Access-Control-Allow-Origin, Fetch API cannot load due to access control checks.
+      fetchJson.get(url, params).then(handleData);
       }
    };
