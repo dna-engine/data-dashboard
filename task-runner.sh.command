@@ -70,7 +70,7 @@ runSpecs() {
    cd $projectHome
    echo "Run specifications:"
    npm test
-   npm run publish
+   npm run docs
    echo
    }
 

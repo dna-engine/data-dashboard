@@ -1,5 +1,5 @@
 {
-   "name": "DataDashboard",
+   "name": "data-dashboard",
    "description": "A data-driven dashboard console for report widgets",
    "version": "0.0.1",
    "license": "MIT",
@@ -37,8 +37,8 @@
       "lint": "jshint gulpfile.js src spec",
       "build": "gulp clean && gulp widgets && gulp build && gulp minify && gulp resourcify",
       "pretest": "npm run lint && npm run build",
-      "test": "mocha spec/*.js",
-      "publish": "rimraf docs && gulp publish",
+      "test": "mocha spec",
+      "docs": "rimraf docs && gulp docs",
       "staging-only": "npm run lint && gulp clean && gulp widgets && gulp build"
    },
    "dependencies": {
@@ -75,6 +75,7 @@
       "gulp-replace": "~1.0",
       "gulp-rev-all": "~1.0",
       "gulp-size": "~3.0",
+      "gulp-sort": "~2.0",
       "gulp-w3c-html-validator": "~1.4",
       "http": "~0.0",
       "http-server": "~0.11",

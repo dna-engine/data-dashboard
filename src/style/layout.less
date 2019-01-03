@@ -50,12 +50,13 @@ body {
          width: 40px;
          padding-right: 4px;
          margin: 0px;
+         .MobileMode({ width: 30px; });
          }
       >h1 {
          display: inline-block;
          vertical-align: top;
          font-size: 1.8rem;
-         // margin-top: -5px;
+         .MobileMode({ font-size: 1.4rem; });
          }
       }
    >nav {
@@ -86,6 +87,7 @@ body {
       padding: 2px 0px;
       margin-right: 20px;
       transition: all 0.4s;
+      .MobileMode({ font-size: 0.8rem; });
       }
    li.selected,
    li:hover {

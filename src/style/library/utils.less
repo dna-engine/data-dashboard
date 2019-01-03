@@ -18,3 +18,9 @@
    justify-content: center;
    align-items: center;
    }
+
+.MobileMode(@lessRules) {
+   @media (max-width: 667px) {  /* selects iPhone 6/6s/7/8 landscape and anything narrower */
+      @lessRules();
+      }
+   }

@@ -15,7 +15,7 @@
 <link rel=apple-touch-icon href=./graphics/mobile-home-screen.5ef8934e.png>
 <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6/css/all.min.css>
 <link rel=stylesheet       href=./libraries.8d153f47.css>
-<link rel=stylesheet       href=./data-dashboard.1f82e193.css>
+<link rel=stylesheet       href=./data-dashboard.4914b0a1.css>
 </head>
 <body>
 
@@ -79,6 +79,23 @@
    <widget-body id=geo-area class=dna-template>
       <figure>
          <canvas></canvas>
+      </figure>
+   </widget-body>
+
+   <widget-body id=network-endpoints class=dna-template>
+      <figure>
+         <table>
+            <thead>
+               <tr><th>Name</th><th>REST base</th><th>Documentation</th></tr>
+            </thead>
+            <tbody>
+               <tr data-array=~~endpoints~~>
+                  <td>~~name~~</td>
+                  <td><code>~~base~~</code></td>
+                  <td><a href=~~docs~~ class=external-site>~~docs~~</a></td>
+               </tr>
+            </tbody>
+         </table>
       </figure>
    </widget-body>
 
@@ -195,27 +212,10 @@
       </figure>
    </widget-body>
 
-   <widget-body id=network-endpoints class=dna-template>
-      <figure>
-         <table>
-            <thead>
-               <tr><th>Name</th><th>REST base</th><th>Documentation</th></tr>
-            </thead>
-            <tbody>
-               <tr data-array=~~endpoints~~>
-                  <td>~~name~~</td>
-                  <td><code>~~base~~</code></td>
-                  <td><a href=~~docs~~ class=external-site>~~docs~~</a></td>
-               </tr>
-            </tbody>
-         </table>
-      </figure>
-   </widget-body>
-
 </widget-templates>
 
 <script src=libraries.228324a9.js></script>
-<script src=data-dashboard.e5d47f0d.js></script>
+<script src=data-dashboard.3ee254c8.js></script>
 </body>
 </html>
 

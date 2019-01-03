@@ -21,6 +21,7 @@ const mergeStream =     require('merge-stream');
 const replace =         require('gulp-replace');
 const RevAll =          require('gulp-rev-all');
 const size =            require('gulp-size');
+const sort =            require('gulp-sort');
 
 // Folders
 const folder = {
@@ -77,6 +78,7 @@ const task = {
       },
    buildWidgetTemplates: () => {
       return gulp.src(srcFiles.widgets)
+         .pipe(sort())
          .pipe(size({ showFiles: true }))
          .pipe(concat('widget-templates.html'))
          .pipe(gulp.dest('src/web-includes'));
@@ -176,7 +178,7 @@ const task = {
          .pipe(gulp.dest(folder.dist))
          .pipe(size({ showFiles: true, gzip: true }));
       },
-   publishWebsite: () => {
+   publishDocsWebsite: () => {
       fs.mkdirSync('docs');
       fs.writeFileSync('docs/CNAME', 'data-dashboard.js.org\n');
       return gulp.src(folder.dist + '/**/*')
@@ -191,4 +193,4 @@ gulp.task('widgets',    task.buildWidgetTemplates);
 gulp.task('build',      task.buildWebApp);
 gulp.task('minify',     task.minifyWebApp);
 gulp.task('resourcify', task.resourcifyWebApp);
-gulp.task('publish',    task.publishWebsite);
+gulp.task('docs',       task.publishDocsWebsite);
