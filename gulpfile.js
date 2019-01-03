@@ -89,6 +89,7 @@ const task = {
          gulp.src(srcFiles.less)
             .pipe(less())
             .pipe(concat('data-dashboard.css'))
+            .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       const buildHtml = () =>
          gulp.src(srcFiles.html)
@@ -98,21 +99,25 @@ const task = {
             .pipe(htmlValidator())
             .pipe(htmlValidator.reporter())
             .pipe(replace('src=#', 'src=' + placeholderDataUriPng))
+            .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       const buildJs = () =>
          gulp.src(srcFiles.js)
             .pipe(concat('libraries.js'))
             .pipe(concat('data-dashboard.js'))
+            .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       const packageCssLibraries = () =>
          gulp.src(libraryFiles.css)
             .pipe(header('/*! 3rd party style */\n'))
             .pipe(concat('libraries.css'))
+            .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       const packageJsLibraries = () =>
          gulp.src(libraryFiles.js)
             .pipe(header('//! 3rd party library\n'))
             .pipe(concat('libraries.js'))
+            .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       return mergeStream(
          buildGraphics(),
@@ -169,7 +174,6 @@ const task = {
       return gulp.src(folder.minified + '/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
          .pipe(gulp.dest(folder.dist))
-         .pipe(size({ showFiles: true }))
          .pipe(size({ showFiles: true, gzip: true }));
       },
    publishWebsite: () => {

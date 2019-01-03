@@ -18,8 +18,9 @@ dataDashboard.util = {
       return new Date(epocSeconds * 1000).toISOString().replace('T', ' ').substring(0, 19);
       },
    spinnerStart: (widgetElem) => {
+      const spinnerHtml = '<widget-spinner><i data-icon=yin-yang class=fa-spin>';
       const create = () =>
-         library.ui.makeIcons($('<widget-spinner><i data-icon=yin-yang class=fa-spin>'))
+         library.ui.makeIcons($(spinnerHtml).css({ paddingTop: widgetElem.height() / 2 - 50 }))
             .appendTo(widgetElem);
       const current = widgetElem.addClass('waiting').find('>widget-spinner');
       const spinnerElem = current.length ? current : create();
