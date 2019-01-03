@@ -15,7 +15,7 @@
 <link rel=apple-touch-icon href=./graphics/mobile-home-screen.5ef8934e.png>
 <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6/css/all.min.css>
 <link rel=stylesheet       href=./libraries.8d153f47.css>
-<link rel=stylesheet       href=./data-dashboard.6c484901.css>
+<link rel=stylesheet       href=./data-dashboard.12ae04f4.css>
 </head>
 <body>
 
@@ -73,23 +73,6 @@
    <widget-body id=fin-rate-moving-avg class=dna-template>
       <figure>
          <canvas></canvas>
-      </figure>
-   </widget-body>
-
-   <widget-body id=network-endpoints class=dna-template>
-      <figure>
-         <table>
-            <thead>
-               <tr><th>Name</th><th>REST base</th><th>Documentation</th></tr>
-            </thead>
-            <tbody>
-               <tr data-array=~~endpoints~~>
-                  <td>~~name~~</td>
-                  <td><code>~~base~~</code></td>
-                  <td><a href=~~docs~~ class=external-site>~~docs~~</a></td>
-               </tr>
-            </tbody>
-         </table>
       </figure>
    </widget-body>
 
@@ -154,12 +137,6 @@
       </book-list>
    </widget-body>
 
-   <widget-body id=geo-area class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-   </widget-body>
-
    <widget-body id=spacex-pics class=dna-template>
       <photo-list>
          <photo-element data-array=~~photos~~>
@@ -187,6 +164,18 @@
       </figure>
    </widget-body>
 
+   <widget-body id=trans-f1-top-countries class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+      <figure>
+         <canvas></canvas>
+      </figure>
+      <figure>
+         <canvas></canvas>
+      </figure>
+   </widget-body>
+
    <widget-body id=trans-nyc-bike-stations class=dna-template>
       <figure>
          <canvas></canvas>
@@ -200,10 +189,33 @@
       </figure>
    </widget-body>
 
+   <widget-body id=network-endpoints class=dna-template>
+      <figure>
+         <table>
+            <thead>
+               <tr><th>Name</th><th>REST base</th><th>Documentation</th></tr>
+            </thead>
+            <tbody>
+               <tr data-array=~~endpoints~~>
+                  <td>~~name~~</td>
+                  <td><code>~~base~~</code></td>
+                  <td><a href=~~docs~~ class=external-site>~~docs~~</a></td>
+               </tr>
+            </tbody>
+         </table>
+      </figure>
+   </widget-body>
+
+   <widget-body id=geo-area class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+   </widget-body>
+
 </widget-templates>
 
-<script src=libraries.6525a12a.js></script>
-<script src=data-dashboard.4d5f53e5.js></script>
+<script src=libraries.228324a9.js></script>
+<script src=data-dashboard.b673e625.js></script>
 </body>
 </html>
 
