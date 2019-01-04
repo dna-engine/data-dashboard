@@ -6,7 +6,6 @@ const dataDashboard = {
       { code: 'fin-rate-intraday',       header: 'Exchange rate intraday' },
       { code: 'fin-rate-moving-avg',     header: 'Exchange rate moving average' },
       { code: 'geo-area',                header: 'Geographic area' },
-      { code: 'widget-c',                header: 'Widget C' },
       { code: 'network-log',             header: 'Network log' },
       { code: 'network-endpoints',       header: 'REST endpoints' },
       { code: 'project-contributors',    header: 'dna.js contributors' },

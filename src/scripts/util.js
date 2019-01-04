@@ -14,6 +14,18 @@ dataDashboard.util = {
       datasets.forEach(colorize);
       return datasets;
       },
+   narrowScreenSaver: (chartInfo, options) => {
+      const settings = Object.assign({ maxPoints: 250, screenWidth: 700 }, options);
+      const shrinkRatio = Math.ceil(chartInfo.data.labels.length / settings.maxPoints);
+      const shrinkNow = () => {
+         const shrink = (points) => points.filter((point, i) => i % shrinkRatio === 0);
+         chartInfo.data.labels = shrink(chartInfo.data.labels);
+         chartInfo.data.datasets.forEach(dataset => dataset.data = shrink(dataset.data));
+         };
+      if (shrinkRatio > 1 && $(window.document).width() < settings.screenWidth)
+         shrinkNow();
+      return chartInfo;
+      },
    secsToStr: (epocSeconds) => {  //example: "2019-01-02 05:34:15"
       return new Date(epocSeconds * 1000).toISOString().replace('T', ' ').substring(0, 19);
       },
@@ -27,7 +39,7 @@ dataDashboard.util = {
       return spinnerElem.hide().fadeIn().parent();
       },
    spinnerStop: (widgetElem) => {
-      return widgetElem.removeClass('waiting').find('>widget-spinner').fadeOut().parent();
+      return widgetElem.removeClass('waiting').find('>widget-spinner').fadeOut(1500).parent();
       },
    fetchJsonp: (url, params, jsonpName, callback) => {
       const logDomain = url.replace(/.*:[/][/]/, '').replace(/[:/].*/, '');  //extract hostname

@@ -95,7 +95,7 @@ const task = {
             .pipe(gulp.dest(folder.staging));
       const buildHtml = () =>
          gulp.src(srcFiles.html)
-            .pipe(fileInclude({ basepath: '@root', indent: true }))
+            .pipe(fileInclude({ basepath: '@root', indent: true, context: pkg }))
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
             .pipe(htmlValidator())
