@@ -32,7 +32,7 @@ dashboard-panel {
          text-align: left;
          background-color: white;
          margin-bottom: 30px;
-         header {
+         >header {
             color: white;
             background-color: cornflowerblue;
             padding: 5px 10px;
@@ -42,20 +42,10 @@ dashboard-panel {
                margin: 0px;
                }
             }
-         widget-body {
-            display: block;
-            min-height: 300px;
-            padding: 20px 40px;
-            opacity: 1;
-            transition: opacity 1s;
-            overflow: scroll;
-            .MobileMode({ padding: 5px 10px; });
-            figure {
-               text-align: left;
-               margin: 0px;
-               }
+         >widget-body {
+            .WidgetBody();
             }
-         widget-spinner {
+         >widget-spinner {
             position: absolute;
             top: 0px; left: 0px; bottom: 0px; right: 0px;
             text-align: center;
@@ -72,5 +62,22 @@ dashboard-panel {
             transition: opacity 0s;
             }
          }
+      }
+   }
+
+.WidgetBody() {
+   display: block;
+   min-height: 300px;
+   padding: 20px 40px;
+   opacity: 1;
+   transition: opacity 1s;
+   overflow: scroll;
+   .MobileMode({ padding: 5px 10px; });
+   figure {
+      text-align: left;
+      margin: 0px;
+      }
+   >figure {
+      overflow: scroll;
       }
    }
