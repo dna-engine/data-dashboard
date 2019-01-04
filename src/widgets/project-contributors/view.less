@@ -11,11 +11,13 @@ widget-body.project-contributors {
       flex-wrap: wrap;
       justify-content: center;
       margin: -@gap/2;
+      .MobileMode({ margin: 0px -@gap/3/2; });
       contributor-element {
          color: white;
          background-color: blueviolet;
          padding: 10px 15px 5px 15px;
          margin: @gap/2;
+         .MobileMode({ margin: @gap/3/2; });
          figure {
             text-align: center;
             img {
