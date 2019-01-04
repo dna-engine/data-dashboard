@@ -34,11 +34,11 @@ const folder = {
 const pkg = require('./package.json');
 const banner = `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const srcFiles = {
-   graphics: ['src/assets/graphics/**/*'],
-   less:     ['src/style/base.less', 'src/**/*.less'],
-   html:     ['src/web/**/*.html'],
-   widgets:  ['src/widgets/**/*.html'],
-   js:       ['src/scripts/config.js', 'src/scripts/util.js', 'src/**/*.js']
+   graphics: { glob: 'src/assets/graphics/**/*' },
+   less:     { glob: 'src/**/*.less', order: ['src/style/base.less'] },
+   html:     { glob: 'src/web/**/*.html' },
+   widgets:  { glob: 'src/widgets/**/*.html' },
+   js:       { glob: 'src/**/*.js', order: ['src/scripts/config.js', 'src/scripts/util.js'] }
    };
 const libraryFiles = {
    css: [
@@ -71,13 +71,23 @@ const babelMinifyJs = { presets: [transpileES6, 'minify'], shouldPrintComment: p
 babelMinifyJs.presets[1] = ['minify', { builtIns: false }];  //HACK: workaround "Couldn't find intersection" error, https://github.com/babel/minify/issues/904
 const placeholderDataUriPng = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="';
 
+// Sort utility
+const orderFiles = (topFiles) =>
+   (file1, file2) => {
+      const calcScore = (file) => topFiles.findIndex((top) => file.path.endsWith(top)) + 1;
+      const score1 = calcScore(file1);
+      const score2 = calcScore(file2);
+      const score = score1 && score2 ? score1 * topFiles.length - score2 : score2 - score1;
+      return score || file1.path.localeCompare(file2.path);
+      };
+
 // Tasks
 const task = {
    cleanTarget: () => {
       return del(['web-target/', '**/.DS_Store']);
       },
    buildWidgetTemplates: () => {
-      return gulp.src(srcFiles.widgets)
+      return gulp.src(srcFiles.widgets.glob)
          .pipe(sort())
          .pipe(size({ showFiles: true }))
          .pipe(concat('widget-templates.html'))
@@ -85,16 +95,17 @@ const task = {
       },
    buildWebApp: () => {
       const buildGraphics = () =>
-         gulp.src(srcFiles.graphics)
+         gulp.src(srcFiles.graphics.glob)
             .pipe(gulp.dest(folder.staging + '/graphics'));
       const buildCss = () =>
-         gulp.src(srcFiles.less)
+         gulp.src(srcFiles.less.glob)
+            .pipe(sort(orderFiles(srcFiles.less.order)))
             .pipe(less())
             .pipe(concat('data-dashboard.css'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       const buildHtml = () =>
-         gulp.src(srcFiles.html)
+         gulp.src(srcFiles.html.glob)
             .pipe(fileInclude({ basepath: '@root', indent: true, context: pkg }))
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
@@ -104,8 +115,8 @@ const task = {
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       const buildJs = () =>
-         gulp.src(srcFiles.js)
-            .pipe(concat('libraries.js'))
+         gulp.src(srcFiles.js.glob)
+            .pipe(sort(orderFiles(srcFiles.js.order)))
             .pipe(concat('data-dashboard.js'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
