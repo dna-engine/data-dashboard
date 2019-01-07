@@ -8,7 +8,7 @@
       <h1>DataDashboard</h1>
    </div>
    <nav>
-      <ul id=dashboard-menu class=dna-menu data-callback=dataDashboard.controller.showPanel>
+      <ul class=dna-menu data-nav=dashboard data-callback=dataDashboard.controller.showPanel>
          <li id=dashboard-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
@@ -19,7 +19,7 @@
 </header>
 
 <main>
-   <dashboard-panels id=dashboard-panels class=dna-panels>
+   <dashboard-panels class=dna-panels data-nav=dashboard>
       <dashboard-panel id=dashboard-panel class=dna-template data-hash=~~code~~>
          <header>
             <h2>~~header~~</h2>
