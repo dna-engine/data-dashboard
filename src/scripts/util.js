@@ -43,7 +43,7 @@ dataDashboard.util = {
       return widgetElem.removeClass('waiting').find('>widget-spinner').fadeOut(1500).parent();
       },
    fetchJsonp: (url, params, jsonpName, callback) => {
-      const logDomain = url.replace(/.*:[/][/]/, '').replace(/[:/].*/, '');  //extract hostname
+      const logDomain = url.replace(/.*:\/\//, '').replace(/[:\/].*/, '');  //extract hostname
       dataDashboard.network.logEvent(new Date().toISOString(), 'request', 'GET', logDomain, url);
       const toPair = (key) => key + '=' + encodeURIComponent(params[key]);
       if (params)

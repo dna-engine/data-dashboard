@@ -26,7 +26,7 @@ that contains the widget's view and controller.
 ## Libraries
 Powered by:
 * [Chart.js](https://www.chartjs.org)
-* [vanilla-datatables](https://github.com/Mobius1/Vanilla-DataTables)
+* [Simple-DataTables](https://github.com/fiduswriter/Simple-DataTables)
 * [fetch-json](https://www.npmjs.com/package/fetch-json)
 * [dna.js](https://dnajs.org)
 

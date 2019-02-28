@@ -33,6 +33,7 @@
       }
    },
    "scripts": {
+      "prepare": "cd node_modules/simple-datatables && npm install rollup-plugin-commonjs rollup-plugin-node-globals rollup-plugin-node-builtins rollup-plugin-node-resolve rollup-plugin-buble rollup-plugin-terser rollup && node_modules/rollup/bin/rollup src/index.js --config --format umd --output.name simpleDataTables --output.file dist/simple-datatables.min.js",
       "web-server": "http-server -p 6868 &",
       "lint": "jshint gulpfile.js src spec",
       "build": "gulp clean && gulp widgets && gulp build && gulp minify && gulp resourcify",
@@ -50,12 +51,11 @@
       "node-fetch": "~2.3",
       "selectize": "~0.12",
       "simple-datatables": "~1.7",
-      "vanilla-datatables": "~1.6",
       "web-ignition": "~1.1",
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
-      "@babel/core": "~7.2",
+      "@babel/core": "~7.3",
       "@babel/preset-env": "~7.3",
       "@fortawesome/fontawesome-free": "~5.7",
       "babel-minify": "~0.5",
@@ -80,9 +80,9 @@
       "http": "~0.0",
       "http-server": "~0.11",
       "jsdom": "~13.2",
-      "jshint": "~2.9",
+      "jshint": "~2.10",
       "merge-stream": "~1.0",
-      "mocha": "~5.2",
+      "mocha": "~6.0",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.2",
       "postcss-preset-env": "~6.5"

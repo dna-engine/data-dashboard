@@ -45,7 +45,7 @@ const libraryFiles = {
       'node_modules/web-ignition/dist/reset.min.css',
       'node_modules/dna.js/dist/dna.css',
       'node_modules/selectize/dist/css/selectize.default.css',
-      'node_modules/vanilla-datatables/src/vanilla-dataTables.css'
+      'node_modules/simple-datatables/dist/style.css'
       ],
    js: [
       'node_modules/moment/moment.js',
@@ -53,7 +53,7 @@ const libraryFiles = {
       'node_modules/fetch-json/dist/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
       'node_modules/selectize/dist/js/standalone/selectize.js',
-      'node_modules/vanilla-datatables/src/vanilla-dataTables.js',
+      'node_modules/simple-datatables/dist/simple-datatables.min.js',  //see: https://github.com/fiduswriter/Simple-DataTables/pull/15
       'node_modules/chart.js/dist/Chart.js',
       'node_modules/dna.js/dist/dna.js',
       'node_modules/web-ignition/dist/library.js'
@@ -142,7 +142,7 @@ const task = {
          );
       },
    minifyWebApp: () => {
-      const embeddedComment = /([^\n])([/][/*]! )/g;
+      const embeddedComment = /([^\n])(\/\/[*]! )/g;
       const copyGraphics = () =>
          gulp.src(folder.staging + '/graphics/**/*')
             .pipe(gulp.dest(folder.minified + '/graphics'));

@@ -4,13 +4,14 @@
 @import "library/constants";
 @import "library/utils";
 
-// vanilla-datatables
+// Simple-DataTables
 .dataTable-wrapper {
    .dataTable-top {
       padding: 0px;
       margin-bottom: 5px;
       .dataTable-dropdown {
          label {
+            padding-left: 1px;
             select {
                margin-bottom: 4px;
                }
@@ -21,6 +22,7 @@
       }
    .dataTable-container {
       table.dataTable-table {
+         border-collapse: collapse;
          thead {
             tr {
                .TableHeaderRow();
@@ -38,6 +40,11 @@
       .dataTable-info {
          }
       .dataTable-pagination {
+         li {
+            a {
+               outline: none;
+               }
+            }
          }
       }
    &.no-footer {
