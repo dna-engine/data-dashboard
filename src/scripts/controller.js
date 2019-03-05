@@ -2,7 +2,7 @@
 // Controller
 
 dataDashboard.controller = {
-   showPanel: (panelElem) => {
+   showPanel(panelElem) {
       const showWidget = (i, elem) => {
          const widgetElem = $(elem);
          const widget = dna.getModel(widgetElem);
@@ -15,12 +15,12 @@ dataDashboard.controller = {
          };
       panelElem.find('>dashboard-widgets').children().each(showWidget);
       },
-   jsdomWorkarounds: () => {
+   jsdomWorkarounds() {
       fetchJson.enableLogger(true);  //prevent localStorage race condition
       class StubOutChart {}
       window.Chart = StubOutChart;  //prevent UnhandledPromiseRejectionWarning
       },
-   setup: () => {
+   setup() {
       fetchJson.enableLogger(dataDashboard.network.logEvent);
       if (navigator.userAgent.includes('jsdom'))
          dataDashboard.controller.jsdomWorkarounds();
