@@ -40,7 +40,8 @@ releaseInstructions() {
    echo "Release progress:"
    echo "   $version (local) --> $pushed (pushed) --> $released (released)"
    echo
-   echo "Next release action:"
+   test -d dist && echo "Next release action:" || echo "When ready to release:"
+   checkin=$(test -d dist && echo "dist files" || echo "package.json")
    nextActionBump() {
       echo "   === Increment version ==="
       echo "   Edit pacakge.json to bump $version to next version number"
@@ -48,18 +49,19 @@ releaseInstructions() {
       }
    nextActionCommit() {
       echo "   === Commit and push ==="
-      echo "   Check in changed source files for $version with the message:"
+      echo "   Check in package.json for $version with the message:"
       echo "   Next release"
       }
    nextActionTag() {
       echo "   === Release checkin ==="
-      echo "   Check in remaining changed files with the message:"
+      echo "   Check in $checkin with the message:"
       echo "   Release $version"
       echo "   === Tag and publish ==="
       echo "   cd $projectHome"
       echo "   git tag --annotate --message 'Release' $version"
       echo "   git remote --verbose"
       echo "   git push origin --tags"
+      echo "   npm publish"
       }
    nextAction() { test "$version" ">" "$released" && nextActionTag || nextActionBump; }
    test "$version" ">" "$pushed" && test -d dist && nextActionCommit || nextAction

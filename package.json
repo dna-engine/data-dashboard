@@ -43,7 +43,7 @@
       "staging-only": "npm run lint && gulp clean && gulp widgets && gulp build"
    },
    "dependencies": {
-      "chart.js": "~2.7",
+      "chart.js": "~2.8",
       "dna.js": "~1.5",
       "fetch-json": "~2.2",
       "jquery": "~3.3",
@@ -61,7 +61,7 @@
       "babel-minify": "~0.5",
       "canvas": "~2.3",
       "cssnano": "~4.1",
-      "del": "~3.0",
+      "del": "~4.0",
       "express": "~4.16",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",
@@ -79,12 +79,12 @@
       "gulp-w3c-html-validator": "~1.4",
       "http": "~0.0",
       "http-server": "~0.11",
-      "jsdom": "~13.2",
+      "jsdom": "~14.0",
       "jshint": "~2.10",
       "merge-stream": "~1.0",
       "mocha": "~6.0",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.2",
-      "postcss-preset-env": "~6.5"
+      "postcss-preset-env": "~6.6"
    }
 }
