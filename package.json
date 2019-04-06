@@ -17,8 +17,9 @@
       "widgets"
    ],
    "jshintConfig": {
-      "esversion": 6,
+      "esversion": 9,
       "strict": "implied",
+      "eqeqeq": true,
       "undef": true,
       "unused": true,
       "browser": true,
@@ -55,13 +56,13 @@
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
-      "@babel/core": "~7.3",
-      "@babel/preset-env": "~7.3",
-      "@fortawesome/fontawesome-free": "~5.7",
+      "@babel/core": "~7.4",
+      "@babel/preset-env": "~7.4",
+      "@fortawesome/fontawesome-free": "~5.8",
       "babel-minify": "~0.5",
-      "canvas": "~2.3",
+      "canvas": "~2.4",
       "cssnano": "~4.1",
-      "del": "~4.0",
+      "del": "~4.1",
       "express": "~4.16",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",
