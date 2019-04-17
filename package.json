@@ -47,7 +47,7 @@
       "chart.js": "~2.8",
       "dna.js": "~1.5",
       "fetch-json": "~2.2",
-      "jquery": "~3.3",
+      "jquery": "~3.4",
       "moment": "~2.24",
       "node-fetch": "~2.3",
       "selectize": "~0.12",
@@ -83,7 +83,7 @@
       "jsdom": "~14.0",
       "jshint": "~2.10",
       "merge-stream": "~1.0",
-      "mocha": "~6.0",
+      "mocha": "~6.1",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.2",
       "postcss-preset-env": "~6.6"
