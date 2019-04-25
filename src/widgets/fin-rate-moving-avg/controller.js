@@ -53,7 +53,8 @@ dataDashboard.widget.finRateMovingAvg = {
    show: (widgetElem) => {
       const handleData = (rawData) => {
          dataDashboard.util.spinnerStop(widgetElem);
-         dataDashboard.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
+         if (!rawData['Error Message'])
+            dataDashboard.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = { function: 'SMA', symbol: 'USDEUR',

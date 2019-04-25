@@ -58,7 +58,8 @@ dataDashboard.widget.finRateIntraday = {
    show: (widgetElem) => {
       const handleData = (rawData) => {
          dataDashboard.util.spinnerStop(widgetElem);
-         dataDashboard.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
+         if (!rawData['Error Message'])
+            dataDashboard.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = { function: 'FX_INTRADAY', from_symbol: 'EUR', to_symbol: 'USD',
