@@ -2,15 +2,13 @@
 
 // Imports
 const assert =          require('assert').strict;
-const express =         require('express');
 const { JSDOM } =       require('jsdom');
 const serverListening = require('server-listening');
 
 // Setup
-const target = process.env.target || 'web-target/staging';
-const disableKeepAlive = { setHeaders: (response) => response.setHeader('Connection', 'close') };
-const server = express().use(express.static(target, disableKeepAlive)).listen(0);
-server.on('listening', () => console.log('--- Server listening on port:', server.address().port, target));
+process.env.target = process.env.target || 'web-target/staging';
+serverListening.setPort({ flush: require.resolve('../server') });
+const server = require('../server');
 const url = 'http://localhost:' + server.address().port + '/';
 before(() => serverListening.ready(server)
    .then(() => JSDOM.fromURL(url, { resources: 'usable', runScripts: 'dangerously' }))
