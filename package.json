@@ -36,13 +36,11 @@
    },
    "scripts": {
       "prepare": "cd node_modules/simple-datatables && npm install rollup-plugin-commonjs rollup-plugin-node-globals rollup-plugin-node-builtins rollup-plugin-node-resolve rollup-plugin-buble rollup-plugin-terser rollup && node_modules/rollup/bin/rollup src/index.js --config --format umd --output.name simpleDataTables --output.file dist/simple-datatables.min.js",
-      "web-server": "http-server -p 6868 &",
       "build": "gulp clean && gulp widgets && gulp build",
       "pretest": "jshint gulpfile.js src spec && npm run build",
       "test": "mocha spec",
-      "docs": "rimraf docs && gulp docs",
-      "build:prod": "npm run build && gulp minify && gulp resourcify && npm run docs",
-      "postbuild:prod": "target=web-target/dist mocha spec"
+      "build:prod": "npm run build && gulp minify && gulp resourcify",
+      "postbuild:prod": "rimraf docs && gulp docs && target=docs mocha spec"
    },
    "dependencies": {
       "chart.js": "~2.8",
@@ -50,7 +48,7 @@
       "fetch-json": "~2.2",
       "jquery": "~3.4",
       "moment": "~2.24",
-      "node-fetch": "~2.3",
+      "node-fetch": "~2.4",
       "selectize": "~0.12",
       "simple-datatables": "~1.7",
       "web-ignition": "~1.1",
@@ -80,7 +78,6 @@
       "gulp-sort": "~2.0",
       "gulp-w3c-html-validator": "~1.4",
       "http": "~0.0",
-      "http-server": "~0.11",
       "jsdom": "~15.0",
       "jshint": "~2.10",
       "merge-stream": "~1.0",
