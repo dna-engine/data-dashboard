@@ -1,50 +1,22 @@
 // Mocha Specification Cases
 
 // Imports
-const assert =    require('assert').strict;
-const express =   require('express');
-const http =      require('http');
-const { JSDOM } = require('jsdom');
+const assert =          require('assert').strict;
+const express =         require('express');
+const { JSDOM } =       require('jsdom');
+const serverListening = require('server-listening');
 
 // Setup
-const port =      6868 + 1;  //+1 to prevent conflict
-const url  =      'http://localhost:' + port + '/web-target/dist/';
-const webServer = http.createServer(express().use(express.static('.')));
-let window, $;  //jshint ignore:line
-const start = Date.now();
-const log = (msg) => console.log((Date.now() - start + '').padStart(4, '0'), msg);
-const startWebServer = (callback) => {
-   const handleServerReady = () => {
-      log('Running on port #' + webServer.address().port);
-      callback();
-      };
-   log('Starting web server for mocha');
-   webServer.listen(port, handleServerReady);
-   };
-const loadWebPage = (done) => {
-   const handleWebPage = (dom) => {
-      const waitForScripts = () => {
-         log('Scripts loaded\n');
-         window = dom.window;
-         $ = window.jQuery;
-         done();
-         };
-      dom.window.onload = waitForScripts;
-      };
-   const load = () => {
-      const options = { resources: 'usable', runScripts: 'dangerously' };
-      log('Loading web page into jsdom');
-      log(url);
-      JSDOM.fromURL(url, options).then(handleWebPage);
-      };
-   startWebServer(load);
-   };
-const closeWebPage = () => {
-   window.close();
-   webServer.close();
-   };
-before(loadWebPage);
-after(closeWebPage);
+const target = process.env.target || 'web-target/staging';
+const disableKeepAlive = { setHeaders: (response) => response.setHeader('Connection', 'close') };
+const server = express().use(express.static(target, disableKeepAlive)).listen(0);
+server.on('listening', () => console.log('--- Server listening on port:', server.address().port, target));
+const url = 'http://localhost:' + server.address().port + '/';
+before(() => serverListening.ready(server)
+   .then(() => JSDOM.fromURL(url, { resources: 'usable', runScripts: 'dangerously' }))
+   .then(serverListening.handleDom)  //set window and $ for use in specification cases
+   );
+after(() => serverListening.close(server).then(serverListening.deleteDom));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('The web page', () => {
