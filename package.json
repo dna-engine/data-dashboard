@@ -35,7 +35,6 @@
       }
    },
    "scripts": {
-      "prepare": "cd node_modules/simple-datatables && npm install rollup-plugin-commonjs rollup-plugin-node-globals rollup-plugin-node-builtins rollup-plugin-node-resolve rollup-plugin-buble rollup-plugin-terser rollup && node_modules/rollup/bin/rollup src/index.js --config --format umd --output.name simpleDataTables --output.file dist/simple-datatables.min.js",
       "build": "gulp clean && gulp widgets && gulp build",
       "pretest": "jshint gulpfile.js src spec && npm run build",
       "test": "mocha spec",
@@ -48,9 +47,9 @@
       "fetch-json": "~2.2",
       "jquery": "~3.4",
       "moment": "~2.24",
-      "node-fetch": "~2.4",
+      "node-fetch": "~2.6",
       "selectize": "~0.12",
-      "simple-datatables": "~1.7",
+      "vanilla-datatables": "~1.6",
       "web-ignition": "~1.1",
       "whatwg-fetch": "~3.0"
    },
@@ -59,10 +58,10 @@
       "@babel/preset-env": "~7.4",
       "@fortawesome/fontawesome-free": "~5.8",
       "babel-minify": "~0.5",
-      "canvas": "~2.4",
+      "canvas": "~2.5",
       "cssnano": "~4.1",
       "del": "~4.1",
-      "express": "~4.16",
+      "express": "~4.17",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",
       "gulp-babel": "~8.0",
@@ -78,13 +77,13 @@
       "gulp-sort": "~2.0",
       "gulp-w3c-html-validator": "~1.4",
       "http": "~0.0",
-      "jsdom": "~15.0",
+      "jsdom": "~15.1",
       "jshint": "~2.10",
       "merge-stream": "~1.0",
       "mocha": "~6.1",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.2",
       "postcss-preset-env": "~6.6",
-      "server-listening": "~0.0"
+      "server-listening": "~0.1"
    }
 }

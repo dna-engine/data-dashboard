@@ -23,10 +23,24 @@ Each widget has a folder under
 [`src/widgets`](https://github.com/dnajs/data-dashboard/tree/master/src/widgets)
 that contains the widget's view and controller.
 
+## Run locally
+Install:
+* **git** from https://git-scm.com
+* **Node.js** from https://nodejs.org
+
+Then enter the terminal commands:
+```
+$ git clone https://github.com/dnajs/data-dashboard
+$ cd data-dashboard
+$ npm install
+$ npm start
+```
+Now view the **DataDashboard** at: http://localhost:6868
+
 ## Libraries
 Powered by:
 * [Chart.js](https://www.chartjs.org)
-* [Simple-DataTables](https://github.com/fiduswriter/Simple-DataTables)
+* [vanilla-datatables](https://github.com/Mobius1/Vanilla-DataTables)  <!-- * [Simple-DataTables](https://github.com/fiduswriter/Simple-DataTables) -->
 * [fetch-json](https://www.npmjs.com/package/fetch-json)
 * [dna.js](https://dnajs.org)
 
