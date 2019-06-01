@@ -57,7 +57,7 @@ dataDashboard.widget.projectJsonQuestions = {
       },
    displayDataTable: (widgetElem, data) => {
       const tableElem = widgetElem.find('figure table');
-      const dataTable = new window.DataTable(tableElem[0]);
+      const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
       data.forEach(item => item.timestamp = dataDashboard.util.secsToStr(item.last_activity_date));
       data.forEach(item => item.link = '<span data-href=' + item.link + '>' + item.title + '</span>');
       const headers = [

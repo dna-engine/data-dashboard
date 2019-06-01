@@ -58,7 +58,7 @@ dataDashboard.widget.spaceVehicles = {
       },
    displayDataTable: (widgetElem, vehicles) => {
       const tableElem = widgetElem.find('figure table');
-      const dataTable = new window.DataTable(tableElem[0]);
+      const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
       const headers = [
          'Name',
          'Model',

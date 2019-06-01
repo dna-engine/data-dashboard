@@ -40,9 +40,10 @@ Now view the **DataDashboard** at: http://localhost:6868
 ## Libraries
 Powered by:
 * [Chart.js](https://www.chartjs.org)
-* [vanilla-datatables](https://github.com/Mobius1/Vanilla-DataTables)  <!-- * [Simple-DataTables](https://github.com/fiduswriter/Simple-DataTables) -->
-* [fetch-json](https://www.npmjs.com/package/fetch-json)
 * [dna.js](https://dnajs.org)
+* [fetch-json](https://www.npmjs.com/package/fetch-json)
+* [gulp-rev-all](https://github.com/smysnk/gulp-rev-all)
+* [Simple-DataTables](https://github.com/fiduswriter/Simple-DataTables)
 
 ---
 [MIT License](LICENSE.txt)

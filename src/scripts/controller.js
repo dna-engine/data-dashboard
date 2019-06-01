@@ -24,7 +24,6 @@ dataDashboard.controller = {
       fetchJson.enableLogger(dataDashboard.network.logEvent);
       if (navigator.userAgent.includes('jsdom'))
          dataDashboard.controller.jsdomWorkarounds();
-      //window.DataTable = window.simpleDataTables.DataTable;
       dataDashboard.widgetsMap = dna.array.toMap(dataDashboard.widgets);
       const makeWidgetList = (codes) => codes.map(code => dataDashboard.widgetsMap[code]);
       dataDashboard.panels.forEach(panel => panel.widgetList = makeWidgetList(panel.widgets));
