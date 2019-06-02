@@ -6,7 +6,7 @@ const { JSDOM } =       require('jsdom');
 const serverListening = require('server-listening');
 
 // Setup
-process.env.target = process.env.target || 'web-target/staging';
+process.env.webRoot = process.env.webRoot || 'build/1-staging';
 serverListening.setPort({ flush: require.resolve('../server') });
 const server = require('../server');
 const url = 'http://localhost:' + server.address().port + '/';

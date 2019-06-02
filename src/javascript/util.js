@@ -1,5 +1,5 @@
 // DataDashboard
-// Chart Utilities
+// Utilities
 
 dataDashboard.util = {
    chartColors: Object.keys(dataDashboard.chartColor).map(color => dataDashboard.chartColor[color]),

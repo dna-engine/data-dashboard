@@ -35,5 +35,3 @@ dataDashboard.controller = {
       $(onLoadSetup);
       }
    };
-
-dataDashboard.controller.setup();

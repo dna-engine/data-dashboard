@@ -3,8 +3,8 @@
 # Downloaded and generated files
 /node_modules/
 /package-lock.json
-/src/web-includes/widget-templates.html
-/web-target/
+/src/html-includes/widget-templates.html
+/build/
 
 # Extraneous system files
 .DS_Store

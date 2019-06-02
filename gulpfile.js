@@ -18,16 +18,16 @@ const htmlHint =        require('gulp-htmlhint');
 const htmlValidator =   require('gulp-w3c-html-validator');
 const less =            require('gulp-less');
 const mergeStream =     require('merge-stream');
+const order =           require('gulp-order');
 const replace =         require('gulp-replace');
 const RevAll =          require('gulp-rev-all');
 const size =            require('gulp-size');
-const sort =            require('gulp-sort');
 
 // Folders
 const folder = {
-   staging:  'web-target/staging',
-   minified: 'web-target/minified',
-   dist:     'web-target/dist'
+   staging:  'build/1-staging',
+   minified: 'build/2-minified',
+   prod:     'build/3-production'
    };
 
 // Setup
@@ -35,10 +35,10 @@ const pkg = require('./package.json');
 const banner = `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const srcFiles = {
    graphics: { glob: 'src/assets/graphics/**/*' },
-   less:     { glob: 'src/**/*.less', order: ['src/style/base.less'] },
-   html:     { glob: 'src/web/**/*.html' },
+   less:     { glob: 'src/**/*.less', order: ['src/css/base.less'] },
+   html:     { glob: 'src/html/**/*.html' },
    widgets:  { glob: 'src/widgets/**/*.html' },
-   js:       { glob: 'src/**/*.js', order: ['src/scripts/config.js', 'src/scripts/util.js'] }
+   js:       { glob: 'src/**/*.js', order: ['javascript/config.js', '!javascript/setup.js'] }
    };
 const libraryFiles = {
    css: [
@@ -71,27 +71,17 @@ const babelMinifyJs = { presets: [transpileES6, 'minify'], shouldPrintComment: p
 babelMinifyJs.presets[1] = ['minify', { builtIns: false }];  //HACK: workaround "Couldn't find intersection" error, https://github.com/babel/minify/issues/904
 const placeholderDataUriPng = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="';
 
-// Sort utility
-const orderFiles = (topFiles) =>
-   (file1, file2) => {
-      const calcScore = (file) => topFiles.findIndex((top) => file.path.endsWith(top)) + 1;
-      const score1 = calcScore(file1);
-      const score2 = calcScore(file2);
-      const score = score1 && score2 ? score1 * topFiles.length - score2 : score2 - score1;
-      return score || file1.path.localeCompare(file2.path);
-      };
-
 // Tasks
 const task = {
    cleanTarget: () => {
-      return del(['web-target/', '**/.DS_Store']);
+      return del(['build/', '**/.DS_Store']);
       },
    buildWidgetTemplates: () => {
       return gulp.src(srcFiles.widgets.glob)
-         .pipe(sort())
+         .pipe(order())
          .pipe(size({ showFiles: true }))
          .pipe(concat('widget-templates.html'))
-         .pipe(gulp.dest('src/web-includes'));
+         .pipe(gulp.dest('src/html-includes'));
       },
    buildWebApp: () => {
       const buildGraphics = () =>
@@ -99,7 +89,7 @@ const task = {
             .pipe(gulp.dest(folder.staging + '/graphics'));
       const buildCss = () =>
          gulp.src(srcFiles.less.glob)
-            .pipe(sort(orderFiles(srcFiles.less.order)))
+            .pipe(order(srcFiles.less.order))
             .pipe(less())
             .pipe(concat('data-dashboard.css'))
             .pipe(size({ showFiles: true }))
@@ -116,7 +106,7 @@ const task = {
             .pipe(gulp.dest(folder.staging));
       const buildJs = () =>
          gulp.src(srcFiles.js.glob)
-            .pipe(sort(orderFiles(srcFiles.js.order)))
+            .pipe(order(srcFiles.js.order))
             .pipe(concat('data-dashboard.js'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
@@ -186,13 +176,13 @@ const task = {
    resourcifyWebApp: () => {
       return gulp.src(folder.minified + '/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
-         .pipe(gulp.dest(folder.dist))
+         .pipe(gulp.dest(folder.prod))
          .pipe(size({ showFiles: true, gzip: true }));
       },
    publishDocsWebsite: () => {
       fs.mkdirSync('docs');
       fs.writeFileSync('docs/CNAME', 'data-dashboard.js.org\n');
-      return gulp.src(folder.dist + '/**/*')
+      return gulp.src(folder.prod + '/**/*')
          .pipe(gulp.dest('docs'))
          .pipe(size({ showFiles: true }));
       }
