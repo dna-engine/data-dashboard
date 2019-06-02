@@ -35,11 +35,12 @@
       }
    },
    "scripts": {
-      "build": "gulp clean && gulp widgets && gulp build",
+      "build": "gulp widgets && gulp build",
       "pretest": "jshint *.js src spec && npm run build",
       "test": "mocha spec",
-      "build:prod": "npm run build && gulp minify && gulp resourcify",
-      "postbuild:prod": "rimraf docs && gulp docs && target=docs mocha spec"
+      "build:prod": "rimraf build && gulp widgets && gulp build && gulp minify && gulp resourcify",
+      "postbuild:prod": "rimraf docs && gulp docs && mocha spec",
+      "dev": "npm test && gulp watch && webRoot=build/1-staging npm start"
    },
    "dependencies": {
       "chart.js": "~2.8",
@@ -60,7 +61,6 @@
       "babel-minify": "~0.5",
       "canvas": "~2.5",
       "cssnano": "~4.1",
-      "del": "~4.1",
       "express": "~4.17",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",

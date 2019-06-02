@@ -1,4 +1,5 @@
-// DataDashboard Web Server
+// DataDashboard
+// Web Server
 
 // Imports
 const express = require('express');
@@ -8,8 +9,12 @@ const webRoot = process.env.webRoot || 'docs';
 const port =    process.env.port || 6868;  //DataDashboard -> DD -> 68 68 -> 6868
 
 // Server
-const disableKeepAlive = { setHeaders: (response) => response.setHeader('Connection', 'close') };
-const server = express().use(express.static(webRoot, disableKeepAlive)).listen(port);
+const devMode = {
+   setHeaders: (response) => response.setHeader('Connection', 'close'),  //disable Keep-Alive for jsdom
+   etag: false  //always server fresh files (avoids 304 Not Modified for html files)
+   };
+const server = express().use(express.static(webRoot, devMode)).listen(port);
+
 server.on('listening', () => console.log('  --- server listening on port:', server.address().port, webRoot));
 server.on('close',     () => console.log('  --- sever shutdown'));
 

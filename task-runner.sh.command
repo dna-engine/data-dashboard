@@ -78,8 +78,7 @@ runSpecs() {
 openWebPage() {
    cd $projectHome
    echo "Opening:"
-   port=$(grep "const port" server.js | sed -e "s/;.*//" -e "s/[^0-9]//g")
-   url=http://localhost:$port/
+   url=http://localhost:6868/
    echo $url
    sleep 3 && open $url &
    npm start

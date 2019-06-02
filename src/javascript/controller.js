@@ -6,6 +6,8 @@ dataDashboard.controller = {
       const showWidget = (i, elem) => {
          const widgetElem = $(elem);
          const widget = dna.getModel(widgetElem);
+         if (!widget)
+            throw Error('DataDashboard - Missing widget, index: ' + i + ', panel: ' + panelElem.data().hash);
          widgetElem.find('>widget-body').remove();
          widgetElem.append(dna.clone(widget.code, {}));
          const widgetController = dataDashboard.widget[dna.util.toCamel(widget.code)];
@@ -26,11 +28,12 @@ dataDashboard.controller = {
          dataDashboard.controller.jsdomWorkarounds();
       dataDashboard.widgetsMap = dna.array.toMap(dataDashboard.widgets);
       const makeWidgetList = (codes) => codes.map(code => dataDashboard.widgetsMap[code]);
-      dataDashboard.panels.forEach(panel => panel.widgetList = makeWidgetList(panel.widgets));
+      const displayedPanels = dataDashboard.panels.filter(panel => panel.display);
+      displayedPanels.forEach(panel => panel.widgetList = makeWidgetList(panel.widgets));
       library.ui.autoDisableButtons();
       const onLoadSetup = () => {
-         dna.clone('dashboard-menu-item', dataDashboard.panels);
-         dna.clone('dashboard-panel',     dataDashboard.panels);
+         dna.clone('dashboard-menu-item', displayedPanels);
+         dna.clone('dashboard-panel',     displayedPanels);
          };
       $(onLoadSetup);
       }

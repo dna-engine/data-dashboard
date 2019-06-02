@@ -8,7 +8,6 @@ const css =             require('gulp-postcss');
 const cssFontMagician = require('postcss-font-magician');
 const cssNano =         require('cssnano');
 const cssPresetEnv =    require('postcss-preset-env');
-const del =             require('del');
 const fileInclude =     require('gulp-file-include');
 const fs =              require('fs');
 const gap =             require('gulp-append-prepend');
@@ -73,9 +72,6 @@ const placeholderDataUriPng = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA
 
 // Tasks
 const task = {
-   cleanTarget: () => {
-      return del(['build/', '**/.DS_Store']);
-      },
    buildWidgetTemplates: () => {
       return gulp.src(srcFiles.widgets.glob)
          .pipe(order())
@@ -185,13 +181,18 @@ const task = {
       return gulp.src(folder.prod + '/**/*')
          .pipe(gulp.dest('docs'))
          .pipe(size({ showFiles: true }));
+      },
+   watch: () => {
+      console.log('TODO: Implement watch... workaround: npm run build');
+      return gulp.src(srcFiles.js.glob)
+         .pipe(size({ showFiles: true }));
       }
    };
 
 // Gulp
-gulp.task('clean',      task.cleanTarget);
 gulp.task('widgets',    task.buildWidgetTemplates);
 gulp.task('build',      task.buildWebApp);
 gulp.task('minify',     task.minifyWebApp);
 gulp.task('resourcify', task.resourcifyWebApp);
 gulp.task('docs',       task.publishDocsWebsite);
+gulp.task('watch',      task.watch);

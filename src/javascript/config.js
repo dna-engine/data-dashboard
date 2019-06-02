@@ -20,12 +20,13 @@ const dataDashboard = {
       { code: 'trans-nyc-bike-stations', header: 'NYC bike stations' }
       ],
    panels: [
-      { code: 'finance',   header: 'Finance',        widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
-      { code: 'space',     header: 'Space',          widgets: ['spacex-books', 'spacex-pics'] },
-      { code: 'starships', header: 'Starships',      widgets: ['space-starships', 'space-vehicles'] },
-      { code: 'trans',     header: 'Transportation', widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'trans-f1-top-countries', 'geo-area'] },
-      { code: 'project',   header: 'Project',        widgets: ['project-contributors', 'project-json-questions'] },
-      { code: 'network',   header: 'Network',        widgets: ['network-log', 'network-endpoints'] }
+      { code: 'finance',   header: 'Finance',        display: true,  widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
+      { code: 'space',     header: 'Space',          display: true,  widgets: ['spacex-books', 'spacex-pics'] },
+      { code: 'starships', header: 'Starships',      display: true,  widgets: ['space-starships', 'space-vehicles'] },
+      { code: 'trans',     header: 'Transportation', display: true,  widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'trans-f1-top-countries', 'geo-area'] },
+      { code: 'project',   header: 'Project',        display: true,  widgets: ['project-contributors', 'project-json-questions'] },
+      { code: 'tbd',       header: 'TBD',            display: false, widgets: ['wip-widget'] },
+      { code: 'network',   header: 'Network',        display: true,  widgets: ['network-log', 'network-endpoints'] }
       ],
    chartColor: {
       red:    'rgba(255,  99, 132, 0.7)',
