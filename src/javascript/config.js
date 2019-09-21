@@ -5,7 +5,6 @@ const dataDashboard = {
    widgets: [
       { code: 'fin-rate-intraday',       header: 'Exchange rate intraday' },
       { code: 'fin-rate-moving-avg',     header: 'Exchange rate moving average' },
-      { code: 'geo-area',                header: 'Geographic area' },
       { code: 'network-log',             header: 'Network log' },
       { code: 'network-endpoints',       header: 'REST endpoints' },
       { code: 'project-contributors',    header: 'dna.js contributors' },
@@ -23,7 +22,7 @@ const dataDashboard = {
       { code: 'finance',   header: 'Finance',        display: true,  widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
       { code: 'space',     header: 'Space',          display: true,  widgets: ['spacex-books', 'spacex-pics'] },
       { code: 'starships', header: 'Starships',      display: true,  widgets: ['space-starships', 'space-vehicles'] },
-      { code: 'trans',     header: 'Transportation', display: true,  widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'trans-f1-top-countries', 'geo-area'] },
+      { code: 'trans',     header: 'Transportation', display: true,  widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'trans-f1-top-countries'] },
       { code: 'project',   header: 'Project',        display: true,  widgets: ['project-contributors', 'project-json-questions'] },
       { code: 'tbd',       header: 'TBD',            display: false, widgets: ['wip-widget'] },
       { code: 'network',   header: 'Network',        display: true,  widgets: ['network-log', 'network-endpoints'] }

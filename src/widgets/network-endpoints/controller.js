@@ -11,7 +11,6 @@ dataDashboard.widget.networkEndpoints = {
          { name: 'Ergast Developer API', base: 'https://ergast.com/api/f1',         docs: 'https://ergast.com/mrd/' },
          { name: 'GitHub REST API',      base: 'https://api.github.com',            docs: 'https://developer.github.com/v3' },
          { name: 'Google Books APIs',    base: 'https://www.googleapis.com/books',  docs: 'https://developers.google.com/books' },
-         { name: 'GroupKT Web Services', base: 'http://services.groupkt.com ',      docs: 'http://www.groupkt.com/services/home.htm' },
          { name: 'Flickr API',           base: 'https://api.flickr.com/services',   docs: 'https://www.flickr.com/services/feeds/docs/photos_public' },
          { name: 'Stack Exchange API',   base: 'https://api.stackexchange.com',     docs: 'https://api.stackexchange.com/docs' },
          { name: 'The Star Wars API',    base: 'https://swapi.co/api',              docs: 'https://swapi.co/documentation' }
