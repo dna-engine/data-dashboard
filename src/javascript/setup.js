@@ -1,4 +1,4 @@
 // DataDashboard
 // Setup
 
-dataDashboard.controller.setup();
+app.controller.setup();

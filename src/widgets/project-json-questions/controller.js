@@ -31,14 +31,14 @@
 //       },
 //       ...
 
-dataDashboard.widget.projectJsonQuestions = {
+app.widget.projectJsonQuestions = {
    displayDataChart: (widgetElem, data) => {
-      const numItems = dataDashboard.util.chartColors.length;
+      const numItems = app.util.chartColors.length;
       const title =    'Active JSON Questions';
       const subtitle = 'Page views of ' + numItems + ' most recently active JSON questions';
       const mostRecent = data.slice(0, numItems).sort((a, b) => b.view_count - a.view_count);
       const dataset = {
-         backgroundColor: dataDashboard.util.chartColors,
+         backgroundColor: app.util.chartColors,
          data:            mostRecent.map(item => item.view_count)
          };
       const chartInfo = {
@@ -58,7 +58,7 @@ dataDashboard.widget.projectJsonQuestions = {
    displayDataTable: (widgetElem, data) => {
       const tableElem = widgetElem.find('figure table');
       const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
-      data.forEach(item => item.timestamp = dataDashboard.util.secsToStr(item.last_activity_date));
+      data.forEach(item => item.timestamp = app.util.secsToStr(item.last_activity_date));
       data.forEach(item => item.link = '<span data-href=' + item.link + '>' + item.title + '</span>');
       const headers = [
          'Last activity',
@@ -76,7 +76,7 @@ dataDashboard.widget.projectJsonQuestions = {
          item.score || 0,
          item.link
          ]);
-      dataDashboard.transformer.dataTablesNormalizer(rows);
+      app.transformer.dataTablesNormalizer(rows);
       dataTable.insert({ headings: headers, data: rows });
       widgetElem.data().table = dataTable;
       },
@@ -84,11 +84,11 @@ dataDashboard.widget.projectJsonQuestions = {
       const url = 'https://api.stackexchange.com/2.2/search';
       const params = { order: 'desc', sort: 'activity', intitle: 'json', site: 'stackoverflow' };
       const handleData = (data) => {
-         dataDashboard.util.spinnerStop(widgetElem);
-         dataDashboard.widget.projectJsonQuestions.displayDataChart(widgetElem, data.items);
-         dataDashboard.widget.projectJsonQuestions.displayDataTable(widgetElem, data.items);
+         app.util.spinnerStop(widgetElem);
+         app.widget.projectJsonQuestions.displayDataChart(widgetElem, data.items);
+         app.widget.projectJsonQuestions.displayDataTable(widgetElem, data.items);
          };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }
    };

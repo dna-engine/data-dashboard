@@ -81,7 +81,7 @@
 //    { Driver: { nationality: 'German' }, Constructor: { nationality: 'French' } }
 // ];
 
-dataDashboard.widget.transF1TopCountries = {
+app.widget.transF1TopCountries = {
    displayDataChart: (widgetElem, race) => {
       const topFinishes = 10;
       const title =    'Nationalities of Top F1 Drivers and Constructors';
@@ -109,7 +109,7 @@ dataDashboard.widget.transF1TopCountries = {
          type: 'bar',
          data: {
             labels:   data.map(item => item.nationality),
-            datasets: dataDashboard.util.addChartColors(datasets)
+            datasets: app.util.addChartColors(datasets)
             },
          options: {
             maintainAspectRatio: false,
@@ -123,11 +123,11 @@ dataDashboard.widget.transF1TopCountries = {
    show: (widgetElem) => {
       const raceYear = new Date().getFullYear() - 1;
       const handleData = (data) => {
-         dataDashboard.util.spinnerStop(widgetElem);
+         app.util.spinnerStop(widgetElem);
          const race = data.MRData.RaceTable.Races[0];
-         dataDashboard.widget.transF1TopCountries.displayDataChart(widgetElem, race);
+         app.widget.transF1TopCountries.displayDataChart(widgetElem, race);
          };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       const display = (round) => {
          const url = 'https://ergast.com/api/f1/' + raceYear + '/' + round + '/results.json';
          fetchJson.get(url).then(handleData);

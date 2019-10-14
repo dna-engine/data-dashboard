@@ -8,8 +8,8 @@
       <h1>DataDashboard</h1>
    </div>
    <nav>
-      <ul class=dna-menu data-nav=dashboard data-callback=dataDashboard.controller.showPanel>
-         <li id=dashboard-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
+      <ul class=dna-menu data-nav=dashboard data-callback=app.controller.showPanel>
+         <li id=app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
          <a href=https://github.com/dnajs/data-dashboard#readme><i data-icon=book></i></a>
@@ -19,20 +19,20 @@
 </header>
 
 <main>
-   <dashboard-panels class=dna-panels data-nav=dashboard>
-      <dashboard-panel id=dashboard-panel class=dna-template data-hash=~~code~~>
+   <app-panels class=dna-panels data-nav=dashboard>
+      <app-panel id=app-panel class=dna-template data-hash=~~code~~>
          <header>
             <h2>~~header~~</h2>
          </header>
-         <dashboard-widgets>
-            <dashboard-widget data-array=~~widgetList~~>
+         <app-widgets>
+            <app-widget data-array=~~widgetList~~>
                <header>
                   <h2>~~header~~</h2>
                </header>
-            </dashboard-widget>
-         </dashboard-widgets>
-      </dashboard-panel>
-   </dashboard-panels>
+            </app-widget>
+         </app-widgets>
+      </app-panel>
+   </app-panels>
 </main>
 
 <footer>

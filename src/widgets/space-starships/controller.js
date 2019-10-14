@@ -31,7 +31,7 @@
 //       },
 //       ...
 
-dataDashboard.widget.spaceStarships = {
+app.widget.spaceStarships = {
    displayDataChart: (widgetElem, starships) => {
       starships.forEach(item => item.chart = {
          passengers: parseInt(item.passengers) || 0,
@@ -48,7 +48,7 @@ dataDashboard.widget.spaceStarships = {
          type: 'bar',
          data: {
             labels:   chartStarships.map(item => item.name),
-            datasets: dataDashboard.util.addChartColors(datasets, 4)
+            datasets: app.util.addChartColors(datasets, 4)
             },
          options: {
             maintainAspectRatio: false,
@@ -85,9 +85,9 @@ dataDashboard.widget.spaceStarships = {
    show: (widgetElem) => {
       const starships = [];
       const displayData = () => {
-         dataDashboard.util.spinnerStop(widgetElem);
-         dataDashboard.widget.spaceStarships.displayDataChart(widgetElem, starships);
-         dataDashboard.widget.spaceStarships.displayDataTable(widgetElem, starships);
+         app.util.spinnerStop(widgetElem);
+         app.widget.spaceStarships.displayDataChart(widgetElem, starships);
+         app.widget.spaceStarships.displayDataTable(widgetElem, starships);
          };
       const handleData = (data) => {
          starships.push(...data.results);
@@ -98,7 +98,7 @@ dataDashboard.widget.spaceStarships = {
          };
       const url = 'https://swapi.co/api/starships';
       const params = { format: 'json' };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }
    };

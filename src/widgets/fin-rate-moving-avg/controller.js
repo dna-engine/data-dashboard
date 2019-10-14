@@ -16,7 +16,7 @@
 //       },
 //       ...
 
-dataDashboard.widget.finRateMovingAvg = {
+app.widget.finRateMovingAvg = {
    displayDataChart: (widgetElem, rawData) => {
       const transform = (rawData) => {
          const metadata = rawData['Meta Data'];
@@ -34,8 +34,8 @@ dataDashboard.widget.finRateMovingAvg = {
       const dataset = {
          label:           data.set,
          data:            data.values,
-         borderColor:     dataDashboard.chartColor.purple,
-         backgroundColor: dataDashboard.chartColor.purple
+         borderColor:     app.chartColor.purple,
+         backgroundColor: app.chartColor.purple
          };
       const chartInfo = {
          type: 'line',
@@ -52,14 +52,14 @@ dataDashboard.widget.finRateMovingAvg = {
       },
    show: (widgetElem) => {
       const handleData = (rawData) => {
-         dataDashboard.util.spinnerStop(widgetElem);
+         app.util.spinnerStop(widgetElem);
          if (!rawData['Error Message'])
-            dataDashboard.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
+            app.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = { function: 'SMA', symbol: 'USDEUR',
          interval: 'weekly', time_period: 10, series_type: 'open', apikey: 'demo' };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }
    };

@@ -1,7 +1,7 @@
 // DataDashboard
 // Widget controller
 
-dataDashboard.widget.networkEndpoints = {
+app.widget.networkEndpoints = {
    show: (widgetElem) => {
       const model = dna.getModel(widgetElem);
       model.endpoints = [

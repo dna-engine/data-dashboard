@@ -21,7 +21,7 @@
 //          },
 //          ...
 
-dataDashboard.widget.transNycBikeStations = {
+app.widget.transNycBikeStations = {
    displayDataChart: (widgetElem, data) => {
       const title =    'NYC Bike Stations';
       const subtitle = 'Capacity on ' + new Date(data.last_updated * 1000).toLocaleString();
@@ -40,7 +40,7 @@ dataDashboard.widget.transNycBikeStations = {
          type: 'bar',
          data: {
             labels:   Array.from({ length: stations.length }, (value, i) => i + 1),
-            datasets: dataDashboard.util.addChartColors(datasets, 3)
+            datasets: app.util.addChartColors(datasets, 3)
             },
          options: {
             maintainAspectRatio: false,
@@ -48,16 +48,16 @@ dataDashboard.widget.transNycBikeStations = {
             scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
             }
          };
-      dataDashboard.util.narrowScreenSaver(chartInfo);
+      app.util.narrowScreenSaver(chartInfo);
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
    show: (widgetElem) => {
       const url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json';
       const handleData = (data) => {
-         dataDashboard.util.spinnerStop(widgetElem);
-         dataDashboard.widget.transNycBikeStations.displayDataChart(widgetElem, data);
+         app.util.spinnerStop(widgetElem);
+         app.widget.transNycBikeStations.displayDataChart(widgetElem, data);
          };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
       }
    };

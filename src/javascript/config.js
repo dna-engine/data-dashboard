@@ -1,7 +1,7 @@
 // DataDashboard
 // Configuration
 
-const dataDashboard = {
+const app = {
    widgets: [
       { code: 'fin-rate-intraday',       header: 'Exchange rate intraday' },
       { code: 'fin-rate-moving-avg',     header: 'Exchange rate moving average' },
@@ -38,4 +38,4 @@ const dataDashboard = {
       }
    };
 
-dataDashboard.widget = {};  //container map for widget controllers
+app.widget = {};  //container map for widget controllers

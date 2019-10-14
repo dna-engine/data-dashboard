@@ -1,15 +1,15 @@
 // DataDashboard
 // Utilities
 
-dataDashboard.util = {
-   chartColors: Object.keys(dataDashboard.chartColor).map(color => dataDashboard.chartColor[color]),
-   getChartColor: (i) => dataDashboard.util.chartColors[i % dataDashboard.util.chartColors.length],
+app.util = {
+   chartColors: Object.keys(app.chartColor).map(color => app.chartColor[color]),
+   getChartColor: (i) => app.util.chartColors[i % app.util.chartColors.length],
    addChartColors: (datasets, startIndex) => {
       const increment = startIndex ? startIndex : 0;
       const colorize = (dataset, i) => {
          dataset.fill =            false;
-         dataset.borderColor =     dataDashboard.util.getChartColor(i + increment);
-         dataset.backgroundColor = dataDashboard.util.getChartColor(i + increment);
+         dataset.borderColor =     app.util.getChartColor(i + increment);
+         dataset.backgroundColor = app.util.getChartColor(i + increment);
          };
       datasets.forEach(colorize);
       return datasets;
@@ -44,7 +44,7 @@ dataDashboard.util = {
       },
    fetchJsonp: (url, params, jsonpName, callback) => {
       const logDomain = url.replace(/.*:\/\//, '').replace(/[:\/].*/, '');  //extract hostname
-      dataDashboard.network.logEvent(new Date().toISOString(), 'request', 'GET', logDomain, url);
+      app.network.logEvent(new Date().toISOString(), 'request', 'GET', logDomain, url);
       const toPair = (key) => key + '=' + encodeURIComponent(params[key]);
       if (params)
          url = url + '?' + Object.keys(params).map(toPair).join('&');
@@ -52,23 +52,23 @@ dataDashboard.util = {
       }
    };
 
-dataDashboard.network = {
+app.network = {
    logName: 'network-log',
    logEvent: (...event) => {
       console.log(event.join(' - '));
       const maxLogEvents = 250;
-      const log = dataDashboard.network.getLog();
+      const log = app.network.getLog();
       log.push(event);
       while (log.length > maxLogEvents)
          log.shift();
-      localStorage.setItem(dataDashboard.network.logName, JSON.stringify(log));
+      localStorage.setItem(app.network.logName, JSON.stringify(log));
       },
    getLog: () => {
-      return JSON.parse(localStorage.getItem(dataDashboard.network.logName) || '[]');
+      return JSON.parse(localStorage.getItem(app.network.logName) || '[]');
       }
    };
 
-dataDashboard.transformer = {
+app.transformer = {
    dataTablesNormalizer: (rows, numColumns, indexRemoveColumn) => {
       const size = numColumns ? numColumns : rows.length ? rows[0].length : 0;
       const normalize = (row) => {

@@ -28,7 +28,7 @@
       "mocha": true,
       "node": true,
       "globals": {
-         "dataDashboard": true,
+         "app": true,
          "dna": false,
          "fetchJson": false,
          "library": false

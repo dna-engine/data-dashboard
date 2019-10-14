@@ -25,16 +25,16 @@
 //    },
 //    ...
 
-dataDashboard.widget.projectContributors = {
+app.widget.projectContributors = {
    show: (widgetElem) => {
       const url = 'https://api.github.com/repos/dnajs/dna.js/contributors';
       const handleData = (data) => {
-         dataDashboard.util.spinnerStop(widgetElem);
+         app.util.spinnerStop(widgetElem);
          const model = dna.getModel(widgetElem);
          model.contributors = data;
          dna.refresh(widgetElem);
          };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
       }
    };

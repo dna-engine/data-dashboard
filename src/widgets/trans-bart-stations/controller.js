@@ -18,11 +18,11 @@
 //             },
 //             ...
 
-dataDashboard.widget.transBartStations = {
+app.widget.transBartStations = {
    displayDataChart: (widgetElem, data) => {
       const dataset = {
          label: 'Geolocation',
-         backgroundColor: dataDashboard.chartColor.green,
+         backgroundColor: app.chartColor.green,
          data: data.map(item => ({
             x:     parseFloat(item.gtfs_longitude),
             y:     parseFloat(item.gtfs_latitude),
@@ -67,14 +67,14 @@ dataDashboard.widget.transBartStations = {
       },
    show: (widgetElem) => {
       const handleData = (data) => {
-         dataDashboard.util.spinnerStop(widgetElem);
+         app.util.spinnerStop(widgetElem);
          const stations = data.root.stations.station;
-         dataDashboard.widget.transBartStations.displayDataChart(widgetElem, stations);
-         dataDashboard.widget.transBartStations.displayDataTable(widgetElem, stations);
+         app.widget.transBartStations.displayDataChart(widgetElem, stations);
+         app.widget.transBartStations.displayDataTable(widgetElem, stations);
          };
       const url = 'https://api.bart.gov/api/stn.aspx';
       const params = { cmd: 'stns', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }
    };

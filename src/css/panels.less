@@ -3,19 +3,19 @@
 
 // Structure:
 //    main
-//       dashboard-panels
-//          dashboard-panel
+//       app-panels
+//          app-panel
 //             header
 //                h2
-//             dashboard-widgets
-//                dashboard-widget
+//             app-widgets
+//                app-widget
 //                   header
 //                      h2
 
 @import "library/constants";
 @import "library/utils";
 
-dashboard-panel {
+app-panel {
    display: block;
    >header {
       h2 {
@@ -24,9 +24,9 @@ dashboard-panel {
          color: white;
          }
       }
-   >dashboard-widgets {
+   >app-widgets {
       display: block;
-      dashboard-widget {
+      app-widget {
          display: block;
          position: relative;
          text-align: left;
@@ -56,7 +56,7 @@ dashboard-panel {
                }
             }
          }
-      dashboard-widget.waiting {
+      app-widget.waiting {
          widget-body {
             opacity: 0;
             transition: opacity 0s;

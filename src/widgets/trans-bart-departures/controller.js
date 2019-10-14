@@ -29,7 +29,7 @@
 //                },
 //                ...
 
-dataDashboard.widget.transBartDepartures = {
+app.widget.transBartDepartures = {
    displayDataChart: (widgetElem, data) => {
       const title =      data.station[0].abbr + ' -- Upcoming departures from ' + data.station[0].name;
       const subtitle =   data.date + ' ' + data.time;
@@ -73,7 +73,7 @@ dataDashboard.widget.transBartDepartures = {
          type: 'horizontalBar',
          data: {
             labels:   directions,
-            datasets: dataDashboard.util.addChartColors(datasets)
+            datasets: app.util.addChartColors(datasets)
             },
          options: {
             maintainAspectRatio: false,
@@ -86,12 +86,12 @@ dataDashboard.widget.transBartDepartures = {
       },
    show: (widgetElem) => {
       const handleData = (data) => {
-         dataDashboard.util.spinnerStop(widgetElem);
-         dataDashboard.widget.transBartDepartures.displayDataChart(widgetElem, data.root);
+         app.util.spinnerStop(widgetElem);
+         app.widget.transBartDepartures.displayDataChart(widgetElem, data.root);
          };
       const url = 'https://api.bart.gov/api/etd.aspx';
       const params = { cmd: 'etd', orig: 'embr', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }
    };

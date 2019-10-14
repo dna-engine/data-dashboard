@@ -29,7 +29,7 @@
 //       },
 //       ...
 
-dataDashboard.widget.spaceVehicles = {
+app.widget.spaceVehicles = {
    displayDataChart: (widgetElem, vehicles) => {
       vehicles.forEach(item => item.chart = {
          passengers: parseInt(item.passengers) || 0,
@@ -46,7 +46,7 @@ dataDashboard.widget.spaceVehicles = {
          type: 'bar',
          data: {
             labels:   chartVehicles.map(item => item.name),
-            datasets: dataDashboard.util.addChartColors(datasets, 1)
+            datasets: app.util.addChartColors(datasets, 1)
             },
          options: {
             maintainAspectRatio: false,
@@ -81,9 +81,9 @@ dataDashboard.widget.spaceVehicles = {
    show: (widgetElem) => {
       const vehicles = [];
       const displayData = () => {
-         dataDashboard.util.spinnerStop(widgetElem);
-         dataDashboard.widget.spaceVehicles.displayDataChart(widgetElem, vehicles);
-         dataDashboard.widget.spaceVehicles.displayDataTable(widgetElem, vehicles);
+         app.util.spinnerStop(widgetElem);
+         app.widget.spaceVehicles.displayDataChart(widgetElem, vehicles);
+         app.widget.spaceVehicles.displayDataTable(widgetElem, vehicles);
          };
       const handleData = (data) => {
          vehicles.push(...data.results);
@@ -94,7 +94,7 @@ dataDashboard.widget.spaceVehicles = {
          };
       const url = 'https://swapi.co/api/vehicles';
       const params = { format: 'json' };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }
    };

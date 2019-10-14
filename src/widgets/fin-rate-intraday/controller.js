@@ -23,7 +23,7 @@
 //          },
 //       ...
 
-dataDashboard.widget.finRateIntraday = {
+app.widget.finRateIntraday = {
    displayDataChart: (widgetElem, rawData) => {
       const transform = (rawData) => {
          const metadata = rawData['Meta Data'];
@@ -46,7 +46,7 @@ dataDashboard.widget.finRateIntraday = {
          type: 'line',
          data: {
             labels:   data.labels,
-            datasets: dataDashboard.util.addChartColors(datasets)
+            datasets: app.util.addChartColors(datasets)
             },
          options: {
             maintainAspectRatio: false,
@@ -57,14 +57,14 @@ dataDashboard.widget.finRateIntraday = {
       },
    show: (widgetElem) => {
       const handleData = (rawData) => {
-         dataDashboard.util.spinnerStop(widgetElem);
+         app.util.spinnerStop(widgetElem);
          if (!rawData['Error Message'])
-            dataDashboard.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
+            app.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = { function: 'FX_INTRADAY', from_symbol: 'EUR', to_symbol: 'USD',
          interval: '5min', outputsize: 'full', apikey: 'demo' };
-      dataDashboard.util.spinnerStart(widgetElem);
+      app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }
    };
