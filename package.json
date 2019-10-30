@@ -43,7 +43,7 @@
       "dev": "npm test && gulp watch && webRoot=build/1-staging npm start"
    },
    "dependencies": {
-      "chart.js": "~2.8",
+      "chart.js": "~2.9",
       "dna.js": "~1.5",
       "fetch-json": "~2.2",
       "jquery": "~3.4",
@@ -77,7 +77,7 @@
       "gulp-size": "~3.0",
       "gulp-w3c-html-validator": "~1.4",
       "http": "~0.0",
-      "jsdom": "~15.1",
+      "jsdom": "~15.2",
       "jshint": "~2.10",
       "merge-stream": "~2.0",
       "mocha": "~6.2",
