@@ -68,7 +68,8 @@ const transpileES6 = ['@babel/env', { modules: false }];
 const preserveImportant = comment => /licen[sc]e|copyright|@preserve|^!/i.test(comment);
 const babelMinifyJs = { presets: [transpileES6, 'minify'], shouldPrintComment: preserveImportant };
 babelMinifyJs.presets[1] = ['minify', { builtIns: false }];  //HACK: workaround "Couldn't find intersection" error, https://github.com/babel/minify/issues/904
-const placeholderDataUriPng = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII="';
+const onePixelSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>';
+const placeholderSvg = `"data:image/svg+xml;base64,${Buffer.from(onePixelSvg).toString('base64')}"`;
 
 // Tasks
 const task = {
@@ -97,7 +98,7 @@ const task = {
             .pipe(htmlHint.reporter())
             .pipe(htmlValidator())
             .pipe(htmlValidator.reporter())
-            .pipe(replace('src=#', 'src=' + placeholderDataUriPng))
+            .pipe(replace('src=#', 'src=' + placeholderSvg))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
       const buildJs = () =>
