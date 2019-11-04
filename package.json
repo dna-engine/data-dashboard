@@ -35,12 +35,10 @@
       }
    },
    "scripts": {
-      "build": "gulp widgets && gulp build",
-      "pretest": "jshint *.js src spec && npm run build",
+      "pretest": "jshint *.js src spec && rimraf build && gulp build",
       "test": "mocha spec",
-      "build:prod": "rimraf build && gulp widgets && gulp build && gulp minify && gulp resourcify",
-      "postbuild:prod": "rimraf docs && gulp docs && mocha spec",
-      "dev": "npm test && gulp watch && webRoot=build/1-staging npm start"
+      "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
+      "dev": "npm test && concurrently 'gulp watch' 'webRoot=build/1-staging npm start'"
    },
    "dependencies": {
       "chart.js": "~2.9",
@@ -60,6 +58,7 @@
       "@fortawesome/fontawesome-free": "~5.11",
       "babel-minify": "~0.5",
       "canvas": "~2.6",
+      "concurrently": "~5.0",
       "cssnano": "~4.1",
       "express": "~4.17",
       "gulp": "~4.0",

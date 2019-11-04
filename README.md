@@ -37,6 +37,14 @@ $ npm start
 ```
 Now view the **DataDashboard** at: http://localhost:6868
 
+## Development mode
+Run the application in development mode with the command:
+```
+$ npm run dev
+```
+The web server will use the un-minified version of the application, and file watchers will
+automatically rebuild the appropriate parts of the application when source files change.
+
 ## Libraries
 Powered by:
 * [Chart.js](https://www.chartjs.org)
