@@ -71,7 +71,7 @@ releaseInstructions() {
 runSpecs() {
    cd $projectHome
    echo "Run specifications:"
-   npm run build:prod
+   npm test
    echo
    }
 

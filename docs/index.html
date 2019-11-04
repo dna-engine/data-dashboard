@@ -15,7 +15,7 @@
 <link rel=apple-touch-icon href=./graphics/mobile-home-screen.5ef8934e.png>
 <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11/css/all.min.css>
 <link rel=stylesheet       href=./libraries.7bb2b5e1.css>
-<link rel=stylesheet       href=./data-dashboard.4934309a.css>
+<link rel=stylesheet       href=./data-dashboard.a6448fee.css>
 </head>
 <body>
 
@@ -28,8 +28,8 @@
       <h1>DataDashboard</h1>
    </div>
    <nav>
-      <ul class=dna-menu data-nav=dashboard data-callback=dataDashboard.controller.showPanel>
-         <li id=dashboard-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
+      <ul class=dna-menu data-nav=dashboard data-callback=app.controller.showPanel>
+         <li id=app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
          <a href=https://github.com/dnajs/data-dashboard#readme><i data-icon=book></i></a>
@@ -39,20 +39,20 @@
 </header>
 
 <main>
-   <dashboard-panels class=dna-panels data-nav=dashboard>
-      <dashboard-panel id=dashboard-panel class=dna-template data-hash=~~code~~>
+   <app-panels class=dna-panels data-nav=dashboard>
+      <app-panel id=app-panel class=dna-template data-hash=~~code~~>
          <header>
             <h2>~~header~~</h2>
          </header>
-         <dashboard-widgets>
-            <dashboard-widget data-array=~~widgetList~~>
+         <app-widgets>
+            <app-widget data-array=~~widgetList~~>
                <header>
                   <h2>~~header~~</h2>
                </header>
-            </dashboard-widget>
-         </dashboard-widgets>
-      </dashboard-panel>
-   </dashboard-panels>
+            </app-widget>
+         </app-widgets>
+      </app-panel>
+   </app-panels>
 </main>
 
 <footer>
@@ -103,7 +103,7 @@
       <contributor-list class=external-site >
          <contributor-element data-array=~~contributors~~>
             <figure>
-               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=" data-attr-src=~~avatar_url~~ data-href=~~html_url~~ alt=avatar>
+               <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~avatar_url~~ data-href=~~html_url~~ alt=avatar>
                <figcaption>~~login~~</figcaption>
             </figure>
          </contributor-element>
@@ -140,7 +140,7 @@
    <widget-body id=spacex-books class=dna-template>
       <book-list class=external-site>
          <book-element data-array=~~books~~>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=" data-attr-src=~~volumeInfo.imageLinks.thumbnail~~
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~volumeInfo.imageLinks.thumbnail~~
                data-href=~~volumeInfo.previewLink~~ alt=cover>
             <div>
                <h2>~~volumeInfo.title~~</h2>
@@ -159,7 +159,7 @@
          <photo-element data-array=~~photos~~>
             <cite>~~date~~</cite>
             <figure>
-               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=" data-attr-src=~~media.m~~ data-href=~~link~~ class=external-site alt=photo>
+               <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~media.m~~ data-href=~~link~~ class=external-site alt=photo>
                <figcaption>~~title~~</figcaption>
             </figure>
          </photo-element>
@@ -201,8 +201,8 @@
 
 </widget-templates>
 
-<script src=libraries.e0dcc417.js></script>
-<script src=data-dashboard.b8ed6b62.js></script>
+<script src=libraries.8913aa91.js></script>
+<script src=data-dashboard.40611650.js></script>
 </body>
 </html>
 
