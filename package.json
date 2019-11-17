@@ -53,8 +53,8 @@
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
-      "@babel/core": "~7.6",
-      "@babel/preset-env": "~7.6",
+      "@babel/core": "~7.7",
+      "@babel/preset-env": "~7.7",
       "@fortawesome/fontawesome-free": "~5.11",
       "babel-minify": "~0.5",
       "canvas": "~2.6",
@@ -67,7 +67,7 @@
       "gulp-concat": "~2.6",
       "gulp-file-include": "~2.1",
       "gulp-header": "~2.0",
-      "gulp-htmlhint": "~2.2",
+      "gulp-htmlhint": "~3.0",
       "gulp-less": "~4.0",
       "gulp-order": "~1.2",
       "gulp-postcss": "~8.0",
@@ -81,7 +81,7 @@
       "merge-stream": "~2.0",
       "mocha": "~6.2",
       "postcss": "~7.0",
-      "postcss-font-magician": "~2.2",
+      "postcss-font-magician": "~2.3",
       "postcss-preset-env": "~6.7",
       "server-listening": "~0.1"
    }
