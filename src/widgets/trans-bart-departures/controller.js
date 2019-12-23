@@ -30,7 +30,7 @@
 //                ...
 
 app.widget.transBartDepartures = {
-   displayDataChart: (widgetElem, data) => {
+   displayDataChart(widgetElem, data) {
       const title =      data.station[0].abbr + ' -- Upcoming departures from ' + data.station[0].name;
       const subtitle =   data.date + ' ' + data.time;
       const yAxesLabel = 'Direction';
@@ -41,7 +41,7 @@ app.widget.transBartDepartures = {
       const toChartData = (item) => ({
          direction: item.direction,
          minutes:   parseInt(item.minutes) || 0,
-         label:     'Platform #' + item.platform + ' to ' + item.destination
+         label:     'Platform #' + item.platform + ' to ' + item.destination,
          });
       const compareMinutes = (a, b) => a.minutes - b.minutes;
       const estimates = etd.map(destination =>
@@ -62,7 +62,7 @@ app.widget.transBartDepartures = {
          datasets.push({
             label:  'Train ' + (datasets.length + 1),
             labels: directionEstimates.map(estimates => estimates[datasets.length].label),
-            data:   directionEstimates.map(estimates => estimates[datasets.length].delta)
+            data:   directionEstimates.map(estimates => estimates[datasets.length].delta),
             });
       const scales = {
          xAxes: [{ stacked: true, scaleLabel: { display: true, labelString: xAxesLabel } }],
@@ -73,18 +73,18 @@ app.widget.transBartDepartures = {
          type: 'horizontalBar',
          data: {
             labels:   directions,
-            datasets: app.util.addChartColors(datasets)
+            datasets: app.util.addChartColors(datasets),
             },
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: [title, subtitle] },
             scales: scales,
-            tooltips: { callbacks: { label: makeTooltip } }
+            tooltips: { callbacks: { label: makeTooltip } },
             }
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const handleData = (data) => {
          app.util.spinnerStop(widgetElem);
          app.widget.transBartDepartures.displayDataChart(widgetElem, data.root);
@@ -93,5 +93,5 @@ app.widget.transBartDepartures = {
       const params = { cmd: 'etd', orig: 'embr', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };

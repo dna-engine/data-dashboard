@@ -30,33 +30,33 @@
 //       ...
 
 app.widget.spaceVehicles = {
-   displayDataChart: (widgetElem, vehicles) => {
+   displayDataChart(widgetElem, vehicles) {
       vehicles.forEach(item => item.chart = {
          passengers: parseInt(item.passengers) || 0,
-         crew:       parseInt(item.crew) || 0
+         crew:       parseInt(item.crew) || 0,
          });
       vehicles.forEach(item => item.chart.total = item.chart.passengers + item.chart.crew);
       vehicles.sort((itemA, itemB) => itemA.chart.total - itemB.chart.total);
       const chartVehicles = vehicles.slice(-12, -4);  //8 relatively large vehicles
       const datasets = [
          { label: 'Passengers', data: chartVehicles.map(item => item.chart.passengers) },
-         { label: 'Crew',       data: chartVehicles.map(item => item.chart.crew) }
+         { label: 'Crew',       data: chartVehicles.map(item => item.chart.crew) },
          ];
       const chartInfo = {
          type: 'bar',
          data: {
             labels:   chartVehicles.map(item => item.name),
-            datasets: app.util.addChartColors(datasets, 1)
+            datasets: app.util.addChartColors(datasets, 1),
             },
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: ['Larger Vehicles', 'Passengers and crew capacity'] },
-            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
+            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] },
             }
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
-   displayDataTable: (widgetElem, vehicles) => {
+   displayDataTable(widgetElem, vehicles) {
       const tableElem = widgetElem.find('figure table');
       const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
       const headers = [
@@ -65,7 +65,7 @@ app.widget.spaceVehicles = {
          'Length',
          'Crew',
          'Passengers',
-         'Class'
+         'Class',
          ];
       const tableVehicles = vehicles.map(item => [
          item.name,
@@ -73,12 +73,12 @@ app.widget.spaceVehicles = {
          item.length,
          item.crew,
          item.passengers,
-         item.vehicle_class
+         item.vehicle_class,
          ]);
       dataTable.insert({ headings: headers, data: tableVehicles });
       widgetElem.data().table = dataTable;
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const vehicles = [];
       const displayData = () => {
          app.util.spinnerStop(widgetElem);
@@ -96,5 +96,5 @@ app.widget.spaceVehicles = {
       const params = { format: 'json' };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };

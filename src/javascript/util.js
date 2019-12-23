@@ -3,8 +3,10 @@
 
 app.util = {
    chartColors: Object.keys(app.chartColor).map(color => app.chartColor[color]),
-   getChartColor: (i) => app.util.chartColors[i % app.util.chartColors.length],
-   addChartColors: (datasets, startIndex) => {
+   getChartColor(i) {
+      return app.util.chartColors[i % app.util.chartColors.length];
+      },
+   addChartColors(datasets, startIndex) {
       const increment = startIndex ? startIndex : 0;
       const colorize = (dataset, i) => {
          dataset.fill =            false;
@@ -14,7 +16,7 @@ app.util = {
       datasets.forEach(colorize);
       return datasets;
       },
-   narrowScreenSaver: (chartInfo, options) => {
+   narrowScreenSaver(chartInfo, options) {
       const defaults = { maxPoints: 200, screenWidth: 700 };
       const settings = Object.assign(defaults, options);
       const shrinkRatio = Math.ceil(chartInfo.data.labels.length / settings.maxPoints);
@@ -27,10 +29,10 @@ app.util = {
          shrinkNow();
       return chartInfo;
       },
-   secsToStr: (epocSeconds) => {  //example: "2019-01-02 05:34:15"
+   secsToStr(epocSeconds) {  //example: "2019-01-02 05:34:15"
       return new Date(epocSeconds * 1000).toISOString().replace('T', ' ').substring(0, 19);
       },
-   spinnerStart: (widgetElem) => {
+   spinnerStart(widgetElem) {
       const spinnerHtml = '<widget-spinner><i data-icon=yin-yang class=fa-spin>';
       const create = () =>
          library.ui.makeIcons($(spinnerHtml).css({ paddingTop: widgetElem.height() / 2 - 50 }))
@@ -39,10 +41,10 @@ app.util = {
       const spinnerElem = current.length ? current : create();
       return spinnerElem.hide().fadeIn().parent();
       },
-   spinnerStop: (widgetElem) => {
+   spinnerStop(widgetElem) {
       return widgetElem.removeClass('waiting').find('>widget-spinner').fadeOut(1500).parent();
       },
-   fetchJsonp: (url, params, jsonpName, callback) => {
+   fetchJsonp(url, params, jsonpName, callback) {
       const logDomain = url.replace(/.*:\/\//, '').replace(/[:\/].*/, '');  //extract hostname
       app.network.logEvent(new Date().toISOString(), 'request', 'GET', logDomain, url);
       const toPair = (key) => key + '=' + encodeURIComponent(params[key]);
@@ -54,7 +56,7 @@ app.util = {
 
 app.network = {
    logName: 'network-log',
-   logEvent: (...event) => {
+   logEvent(...event) {
       console.log(event.join(' - '));
       const maxLogEvents = 250;
       const log = app.network.getLog();
@@ -63,13 +65,13 @@ app.network = {
          log.shift();
       localStorage.setItem(app.network.logName, JSON.stringify(log));
       },
-   getLog: () => {
+   getLog() {
       return JSON.parse(localStorage.getItem(app.network.logName) || '[]');
       }
    };
 
 app.transformer = {
-   dataTablesNormalizer: (rows, numColumns, indexRemoveColumn) => {
+   dataTablesNormalizer(rows, numColumns, indexRemoveColumn) {
       const size = numColumns ? numColumns : rows.length ? rows[0].length : 0;
       const normalize = (row) => {
          const toStr = (value, i) => {

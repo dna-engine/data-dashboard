@@ -19,7 +19,7 @@
 //             ...
 
 app.widget.transBartStations = {
-   displayDataChart: (widgetElem, data) => {
+   displayDataChart(widgetElem, data) {
       const dataset = {
          label: 'Geolocation',
          backgroundColor: app.chartColor.green,
@@ -43,7 +43,7 @@ app.widget.transBartStations = {
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
-   displayDataTable: (widgetElem, data) => {
+   displayDataTable(widgetElem, data) {
       const tableElem = widgetElem.find('figure table');
       const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
       const headers = [
@@ -52,7 +52,7 @@ app.widget.transBartStations = {
          'Latitude',
          'Longitude',
          'City',
-         'County'
+         'County',
          ];
       const stations = data.map(item => [
          item.name,
@@ -60,12 +60,12 @@ app.widget.transBartStations = {
          item.gtfs_latitude,
          item.gtfs_longitude,
          item.city,
-         item.county
+         item.county,
          ]);
       dataTable.insert({ headings: headers, data: stations });
       widgetElem.data().table = dataTable;
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const handleData = (data) => {
          app.util.spinnerStop(widgetElem);
          const stations = data.root.stations.station;
@@ -76,5 +76,5 @@ app.widget.transBartStations = {
       const params = { cmd: 'stns', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };

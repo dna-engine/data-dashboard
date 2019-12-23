@@ -17,9 +17,9 @@
 //       ...
 
 app.widget.finRateMovingAvg = {
-   displayDataChart: (widgetElem, rawData) => {
+   displayDataChart(widgetElem, rawData) {
       const transform = (rawData) => {
-         const metadata = rawData['Meta Data'];
+         const metadata =   rawData['Meta Data'];
          const timeSeries = rawData['Technical Analysis: SMA'];
          const timestamps = Object.keys(timeSeries).sort();
          return {
@@ -27,7 +27,7 @@ app.widget.finRateMovingAvg = {
             subtitle: metadata['3: Last Refreshed'],
             set:      metadata['1: Symbol'],
             labels:   timestamps,
-            values:   timestamps.map(timestamp => parseFloat(timeSeries[timestamp].SMA))
+            values:   timestamps.map(timestamp => parseFloat(timeSeries[timestamp].SMA)),
             };
          };
       const data = transform(rawData);
@@ -35,30 +35,36 @@ app.widget.finRateMovingAvg = {
          label:           data.set,
          data:            data.values,
          borderColor:     app.chartColor.purple,
-         backgroundColor: app.chartColor.purple
+         backgroundColor: app.chartColor.purple,
          };
       const chartInfo = {
          type: 'line',
          data: {
             labels:   data.labels,
-            datasets: [dataset]
+            datasets: [dataset],
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: [data.title, data.subtitle] }
-            }
+            title: { display: true, text: [data.title, data.subtitle] },
+            },
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const handleData = (rawData) => {
          app.util.spinnerStop(widgetElem);
          if (!rawData['Error Message'])
             app.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
-      const params = { function: 'SMA', symbol: 'USDEUR',
-         interval: 'weekly', time_period: 10, series_type: 'open', apikey: 'demo' };
+      const params = {
+         function:    'SMA',
+         symbol:      'USDEUR',
+         interval:    'weekly',
+         time_period: 10,
+         series_type: 'open',
+         apikey:      'demo' ,
+         };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }

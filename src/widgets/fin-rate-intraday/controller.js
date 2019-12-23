@@ -24,9 +24,9 @@
 //       ...
 
 app.widget.finRateIntraday = {
-   displayDataChart: (widgetElem, rawData) => {
+   displayDataChart(widgetElem, rawData) {
       const transform = (rawData) => {
-         const metadata = rawData['Meta Data'];
+         const metadata =   rawData['Meta Data'];
          const timeSeries = rawData['Time Series FX (5min)'];
          const timestamps = Object.keys(timeSeries).sort();
          return {
@@ -46,24 +46,30 @@ app.widget.finRateIntraday = {
          type: 'line',
          data: {
             labels:   data.labels,
-            datasets: app.util.addChartColors(datasets)
+            datasets: app.util.addChartColors(datasets),
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: [data.title, data.subtitle] }
-            }
+            title: { display: true, text: [data.title, data.subtitle] },
+            },
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const handleData = (rawData) => {
          app.util.spinnerStop(widgetElem);
          if (!rawData['Error Message'])
             app.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
-      const params = { function: 'FX_INTRADAY', from_symbol: 'EUR', to_symbol: 'USD',
-         interval: '5min', outputsize: 'full', apikey: 'demo' };
+      const params = {
+         function:    'FX_INTRADAY',
+         from_symbol: 'EUR',
+         to_symbol:   'USD',
+         interval:    '5min',
+         outputsize:  'full',
+         apikey:      'demo',
+         };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       }

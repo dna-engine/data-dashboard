@@ -25,7 +25,7 @@ const size =            require('gulp-size');
 const folder = {
    staging:  'build/1-staging',
    minified: 'build/2-minified',
-   prod:     'build/3-production'
+   prod:     'build/3-production',
    };
 
 // Setup
@@ -72,7 +72,7 @@ const placeholderSvg = `"data:image/svg+xml;base64,${Buffer.from(onePixelSvg).to
 
 // Tasks
 const task = {
-   buildTemplates: () => {
+   buildTemplates() {
       return gulp.src(srcFiles.widgets.glob)
          .pipe(order())
          .pipe(size({ showFiles: true }))
@@ -80,48 +80,62 @@ const task = {
          .pipe(gulp.dest('src/html-includes'));
       },
    buildWebApp: {
-      packageCssLibraries: () => gulp.src(libraryFiles.css)
-         .pipe(header('/*! 3rd party style */\n'))
-         .pipe(concat('libraries.css'))
-         .pipe(size({ showFiles: true }))
-         .pipe(gulp.dest(folder.staging)),
-      packageJsLibraries: () => gulp.src(libraryFiles.js)
-         .pipe(header('//! 3rd party library\n'))
-         .pipe(concat('libraries.js'))
-         .pipe(size({ showFiles: true }))
-         .pipe(gulp.dest(folder.staging)),
-      graphics: () => gulp.src(srcFiles.graphics.glob)
-         .pipe(gulp.dest(folder.staging + '/graphics')),
-      css: () => gulp.src(srcFiles.css.glob)
-         .pipe(order(srcFiles.css.order))
-         .pipe(less())
-         .pipe(concat(pkg.name + '.css'))
-         .pipe(size({ showFiles: true }))
-         .pipe(gulp.dest(folder.staging)),
-      html: () => gulp.src(srcFiles.html.glob)
-         .pipe(fileInclude({ basepath: '@root', indent: true, context: pkg }))
-         .pipe(htmlHint(htmlHintConfig))
-         .pipe(htmlHint.reporter())
-         .pipe(htmlValidator())
-         .pipe(htmlValidator.reporter())
-         .pipe(replace('src=#', 'src=' + placeholderSvg))
-         .pipe(size({ showFiles: true }))
-         .pipe(gulp.dest(folder.staging)),
-      js: () => gulp.src(srcFiles.js.glob)
-         .pipe(order(srcFiles.js.order))
-         .pipe(concat(pkg.name + '.js'))
-         .pipe(size({ showFiles: true }))
-         .pipe(gulp.dest(folder.staging)),
-      all: () => mergeStream(
-         task.buildWebApp.packageCssLibraries(),
-         task.buildWebApp.packageJsLibraries(),
-         task.buildWebApp.graphics(),
-         task.buildWebApp.css(),
-         task.buildWebApp.js(),
-         task.buildWebApp.html(),
-         )
+      packageCssLibraries() {
+         return gulp.src(libraryFiles.css)
+            .pipe(header('/*! 3rd party style */\n'))
+            .pipe(concat('libraries.css'))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging));
+         },
+      packageJsLibraries() {
+         return gulp.src(libraryFiles.js)
+            .pipe(header('//! 3rd party library\n'))
+            .pipe(concat('libraries.js'))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging));
+         },
+      graphics() {
+         return gulp.src(srcFiles.graphics.glob)
+            .pipe(gulp.dest(folder.staging + '/graphics'));
+         },
+      css() {
+         return gulp.src(srcFiles.css.glob)
+            .pipe(order(srcFiles.css.order))
+            .pipe(less())
+            .pipe(concat(pkg.name + '.css'))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging));
+         },
+      html() {
+         return gulp.src(srcFiles.html.glob)
+            .pipe(fileInclude({ basepath: '@root', indent: true, context: pkg }))
+            .pipe(htmlHint(htmlHintConfig))
+            .pipe(htmlHint.reporter())
+            .pipe(htmlValidator())
+            .pipe(htmlValidator.reporter())
+            .pipe(replace('src=#', 'src=' + placeholderSvg))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging));
+         },
+      js() {
+         return gulp.src(srcFiles.js.glob)
+            .pipe(order(srcFiles.js.order))
+            .pipe(concat(pkg.name + '.js'))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging));
+         },
+      all() {
+         return mergeStream(
+            task.buildWebApp.packageCssLibraries(),
+            task.buildWebApp.packageJsLibraries(),
+            task.buildWebApp.graphics(),
+            task.buildWebApp.css(),
+            task.buildWebApp.js(),
+            task.buildWebApp.html(),
+            );
+         },
       },
-   minifyWebApp: () => {
+   minifyWebApp() {
       const embeddedComment = /([^\n])(\/\/[*]! )/g;
       const copyGraphics = () => gulp.src(folder.staging + '/graphics/**/*')
          .pipe(gulp.dest(folder.minified + '/graphics'));
@@ -157,26 +171,26 @@ const task = {
          minifyCss(),
          minifyJs());
       },
-   hashWebApp: () => {
+   hashWebApp() {
       return gulp.src(folder.minified + '/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
          .pipe(gulp.dest(folder.prod))
          .pipe(size({ showFiles: true, gzip: true }));
       },
-   publishDocsWebsite: () => {
+   publishDocsWebsite() {
       fs.mkdirSync('docs');
       fs.writeFileSync('docs/CNAME', 'data-dashboard.js.org\n');
       return gulp.src(folder.prod + '/**/*')
          .pipe(gulp.dest('docs'))
          .pipe(size({ showFiles: true }));
       },
-   setupWatchers: () => {
+   setupWatchers() {
       gulp.watch(srcFiles.graphics.glob, task.buildWebApp.graphics);
       gulp.watch(srcFiles.css.glob,      task.buildWebApp.css);
       gulp.watch(srcFiles.js.glob,       task.buildWebApp.js);
       gulp.watch(srcFiles.widgets.glob,  gulp.series(task.buildTemplates, task.buildWebApp.html));
       gulp.watch(srcFiles.html.glob,     gulp.series(task.buildTemplates, task.buildWebApp.html));
-      }
+      },
    };
 
 // Gulp

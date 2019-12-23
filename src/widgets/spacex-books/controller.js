@@ -2,7 +2,7 @@
 // Widget controller
 
 app.widget.spacexBooks = {
-   show: (widgetElem) => {
+   show(widgetElem) {
       const url = 'https://www.googleapis.com/books/v1/volumes';
       const params = { q: 'spacex' };
       const handleData = (data) => {
@@ -14,5 +14,5 @@ app.widget.spacexBooks = {
          };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };

@@ -32,7 +32,7 @@
 //       ...
 
 app.widget.spaceStarships = {
-   displayDataChart: (widgetElem, starships) => {
+   displayDataChart(widgetElem, starships) {
       starships.forEach(item => item.chart = {
          passengers: parseInt(item.passengers) || 0,
          crew:       parseInt(item.crew) || 0
@@ -42,23 +42,23 @@ app.widget.spaceStarships = {
       const chartStarships = starships.slice(-11, -3);  //8 relatively large starships
       const datasets = [
          { label: 'Passengers', data: chartStarships.map(item => item.chart.passengers) },
-         { label: 'Crew',       data: chartStarships.map(item => item.chart.crew) }
+         { label: 'Crew',       data: chartStarships.map(item => item.chart.crew) },
          ];
       const chartInfo = {
          type: 'bar',
          data: {
             labels:   chartStarships.map(item => item.name),
-            datasets: app.util.addChartColors(datasets, 4)
+            datasets: app.util.addChartColors(datasets, 4),
             },
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: ['Larger Starships', 'Passengers and crew capacity'] },
-            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
-            }
+            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] },
+            },
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
-   displayDataTable: (widgetElem, starships) => {
+   displayDataTable(widgetElem, starships) {
       const tableElem = widgetElem.find('figure table');
       const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
       const headers = [
@@ -68,7 +68,7 @@ app.widget.spaceStarships = {
          'Crew',
          'Passengers',
          'MGLT',
-         'Class'
+         'Class',
          ];
       const tableStarships = starships.map(item => [
          item.name,
@@ -77,12 +77,12 @@ app.widget.spaceStarships = {
          item.crew,
          item.passengers,
          item.MGLT,
-         item.starship_class
+         item.starship_class,
          ]);
       dataTable.insert({ headings: headers, data: tableStarships });
       widgetElem.data().table = dataTable;
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const starships = [];
       const displayData = () => {
          app.util.spinnerStop(widgetElem);
@@ -100,5 +100,5 @@ app.widget.spaceStarships = {
       const params = { format: 'json' };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };

@@ -32,30 +32,30 @@
 //       ...
 
 app.widget.projectJsonQuestions = {
-   displayDataChart: (widgetElem, data) => {
+   displayDataChart(widgetElem, data) {
       const numItems = app.util.chartColors.length;
       const title =    'Active JSON Questions';
       const subtitle = 'Page views of ' + numItems + ' most recently active JSON questions';
       const mostRecent = data.slice(0, numItems).sort((a, b) => b.view_count - a.view_count);
       const dataset = {
          backgroundColor: app.util.chartColors,
-         data:            mostRecent.map(item => item.view_count)
+         data:            mostRecent.map(item => item.view_count),
          };
       const chartInfo = {
          type: 'pie',
          data: {
             labels:   mostRecent.map(item => item.owner.display_name),
-            datasets: [dataset]
+            datasets: [dataset],
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: [title, subtitle] }
-            }
+            title: { display: true, text: [title, subtitle] },
+            },
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       library.ui.normalize(widgetElem);
       },
-   displayDataTable: (widgetElem, data) => {
+   displayDataTable(widgetElem, data) {
       const tableElem = widgetElem.find('figure table');
       const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
       data.forEach(item => item.timestamp = app.util.secsToStr(item.last_activity_date));
@@ -66,7 +66,7 @@ app.widget.projectJsonQuestions = {
          'Answered',
          'Views',
          'Score',
-         'Title'
+         'Title',
          ];
       const rows = data.map(item => [
          item.timestamp,
@@ -74,13 +74,13 @@ app.widget.projectJsonQuestions = {
          item.is_answered,
          item.view_count,
          item.score || 0,
-         item.link
+         item.link,
          ]);
       app.transformer.dataTablesNormalizer(rows);
       dataTable.insert({ headings: headers, data: rows });
       widgetElem.data().table = dataTable;
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const url = 'https://api.stackexchange.com/2.2/search';
       const params = { order: 'desc', sort: 'activity', intitle: 'json', site: 'stackoverflow' };
       const handleData = (data) => {
@@ -90,5 +90,5 @@ app.widget.projectJsonQuestions = {
          };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };

@@ -26,7 +26,7 @@
 //    ...
 
 app.widget.projectContributors = {
-   show: (widgetElem) => {
+   show(widgetElem) {
       const url = 'https://api.github.com/repos/dnajs/dna.js/contributors';
       const handleData = (data) => {
          app.util.spinnerStop(widgetElem);
@@ -36,5 +36,5 @@ app.widget.projectContributors = {
          };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
-      }
+      },
    };

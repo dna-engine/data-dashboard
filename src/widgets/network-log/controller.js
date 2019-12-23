@@ -2,7 +2,7 @@
 // Widget controller
 
 app.widget.networkLog = {
-   show: (widgetElem) => {
+   show(widgetElem) {
       const tableElem = widgetElem.find('figure table');
       const dataTable = new window.simpleDatatables.DataTable(tableElem[0], { perPageSelect: [10, 25, 50, 100] });
       const headers =   fetchJson.getLogHeaders();
@@ -12,5 +12,5 @@ app.widget.networkLog = {
       app.transformer.dataTablesNormalizer(log, headers.length, delColumn);
       dataTable.insert({ headings: headers, data: log });
       widgetElem.data().table = dataTable;
-      }
+      },
    };

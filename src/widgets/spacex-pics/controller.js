@@ -24,7 +24,7 @@
 //       ...
 
 app.widget.spacexPics = {
-   show: (widgetElem) => {
+   show(widgetElem) {
       const url = 'https://api.flickr.com/services/feeds/photos_public.gne';
       const params = { format: 'json', tags: 'spacex' };
       const handleData = (data) => {
@@ -36,5 +36,5 @@ app.widget.spacexPics = {
          };
       app.util.spinnerStart(widgetElem);
       app.util.fetchJsonp(url, params, 'jsonFlickrFeed', handleData);
-      }
+      },
    };

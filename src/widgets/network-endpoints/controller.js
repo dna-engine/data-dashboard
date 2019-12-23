@@ -2,7 +2,7 @@
 // Widget controller
 
 app.widget.networkEndpoints = {
-   show: (widgetElem) => {
+   show(widgetElem) {
       const model = dna.getModel(widgetElem);
       model.endpoints = [
          { name: 'Alpha Vantage API',    base: 'https://www.alphavantage.co/query', docs: 'https://www.alphavantage.co/documentation' },
@@ -13,8 +13,8 @@ app.widget.networkEndpoints = {
          { name: 'Google Books APIs',    base: 'https://www.googleapis.com/books',  docs: 'https://developers.google.com/books' },
          { name: 'Flickr API',           base: 'https://api.flickr.com/services',   docs: 'https://www.flickr.com/services/feeds/docs/photos_public' },
          { name: 'Stack Exchange API',   base: 'https://api.stackexchange.com',     docs: 'https://api.stackexchange.com/docs' },
-         { name: 'The Star Wars API',    base: 'https://swapi.co/api',              docs: 'https://swapi.co/documentation' }
+         { name: 'The Star Wars API',    base: 'https://swapi.co/api',              docs: 'https://swapi.co/documentation' },
          ];
       dna.refresh(widgetElem);
-      }
+      },
    };

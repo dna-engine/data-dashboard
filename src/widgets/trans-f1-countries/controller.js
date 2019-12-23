@@ -82,7 +82,7 @@
 // ];
 
 app.widget.transF1TopCountries = {
-   displayDataChart: (widgetElem, race) => {
+   displayDataChart(widgetElem, race) {
       const topFinishes = 10;
       const title =    'Nationalities of Top F1 Drivers and Constructors';
       const subtitle = race.season + ' ' + race.raceName + ' top ' + topFinishes + ' finishes';
@@ -103,24 +103,24 @@ app.widget.transF1TopCountries = {
          a.nationality.localeCompare(b.nationality));
       const datasets = [
          { label: 'Driver',      data: data.map(item => item.numDrivers) },
-         { label: 'Constructor', data: data.map(item => item.numConstructors) }
+         { label: 'Constructor', data: data.map(item => item.numConstructors) },
          ];
       const chartInfo = {
          type: 'bar',
          data: {
             labels:   data.map(item => item.nationality),
-            datasets: app.util.addChartColors(datasets)
+            datasets: app.util.addChartColors(datasets),
             },
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: [title, subtitle] },
-            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
-            }
+            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] },
+            },
          };
       const canvas = widgetElem.find('canvas').eq(round - 1);
       widgetElem.data().chart = new window.Chart(canvas, chartInfo);
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const raceYear = new Date().getFullYear() - 1;
       const handleData = (data) => {
          app.util.spinnerStop(widgetElem);
@@ -133,5 +133,5 @@ app.widget.transF1TopCountries = {
          fetchJson.get(url).then(handleData);
          };
       widgetElem.find('widget-body >figure >canvas').each(i => display(i + 1));
-      }
+      },
    };

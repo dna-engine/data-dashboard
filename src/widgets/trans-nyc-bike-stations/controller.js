@@ -22,7 +22,7 @@
 //          ...
 
 app.widget.transNycBikeStations = {
-   displayDataChart: (widgetElem, data) => {
+   displayDataChart(widgetElem, data) {
       const title =    'NYC Bike Stations';
       const subtitle = 'Capacity on ' + new Date(data.last_updated * 1000).toLocaleString();
       const stations = data.data.stations;
@@ -51,7 +51,7 @@ app.widget.transNycBikeStations = {
       app.util.narrowScreenSaver(chartInfo);
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },
-   show: (widgetElem) => {
+   show(widgetElem) {
       const url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json';
       const handleData = (data) => {
          app.util.spinnerStop(widgetElem);
@@ -59,5 +59,5 @@ app.widget.transNycBikeStations = {
          };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
-      }
+      },
    };
