@@ -78,7 +78,7 @@ runSpecs() {
 openWebPage() {
    cd $projectHome
    echo "Opening:"
-   url=http://localhost:6868/
+   url=http://localhost:7531/
    echo $url
    sleep 3 && open $url &
    npm start

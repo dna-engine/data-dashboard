@@ -55,7 +55,7 @@
    "devDependencies": {
       "@babel/core": "~7.7",
       "@babel/preset-env": "~7.7",
-      "@fortawesome/fontawesome-free": "~5.11",
+      "@fortawesome/fontawesome-free": "~5.12",
       "babel-minify": "~0.5",
       "canvas": "~2.6",
       "concurrently": "~5.0",

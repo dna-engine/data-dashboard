@@ -35,7 +35,7 @@ $ cd data-dashboard
 $ npm install
 $ npm start
 ```
-Now view the **DataDashboard** at: http://localhost:6868
+Now view the **DataDashboard** at: http://localhost:7531
 
 ## Development mode
 Run the application in development mode with the command:
