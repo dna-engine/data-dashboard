@@ -174,6 +174,7 @@ const task = {
    hashWebApp() {
       return gulp.src(folder.minified + '/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
+         .pipe(replace('./graphics/logo-card', pkg.homepage + '/graphics/logo-card'))  //og:image
          .pipe(gulp.dest(folder.prod))
          .pipe(size({ showFiles: true, gzip: true }));
       },
