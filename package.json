@@ -49,7 +49,7 @@
       "node-fetch": "~2.6",
       "selectize": "~0.12",
       "simple-datatables": "~2.1",
-      "web-ignition": "~1.1",
+      "web-ignition": "~1.2",
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
