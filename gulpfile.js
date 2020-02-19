@@ -44,6 +44,7 @@ const libraryFiles = {
       'node_modules/dna.js/dist/dna.css',
       'node_modules/selectize/dist/css/selectize.default.css',
       'node_modules/simple-datatables/dist/style.css',
+      'node_modules/pretty-print-json/dist/pretty-print-json.css',
       ],
    js: [
       'node_modules/moment/moment.js',
@@ -55,6 +56,7 @@ const libraryFiles = {
       'node_modules/chart.js/dist/Chart.js',
       'node_modules/dna.js/dist/dna.js',
       'node_modules/web-ignition/dist/library.js',
+      'node_modules/pretty-print-json/dist/pretty-print-json.js',
       ]
    };
 const htmlHintConfig = { 'attr-value-double-quotes': false };
