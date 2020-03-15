@@ -17,7 +17,7 @@ setupTools() {
    echo "Node.js:"
    which node || { echo "Need to install Node.js: https://nodejs.org"; exit; }
    node --version
-   npm install
+   npm install --no-fund
    npm update
    npm outdated
    echo
@@ -75,16 +75,17 @@ runSpecs() {
    echo
    }
 
-openWebPage() {
+showInstructions() {
    cd $projectHome
-   echo "Opening:"
+   echo "Dev mode instructions:"
    url=http://localhost:7531/
-   echo $url
-   sleep 3 && open $url &
-   npm start
+   echo "   cd $projectHome"
+   echo "   open $url"
+   echo "   npm run dev"
+   echo
    }
 
 setupTools
 releaseInstructions
 runSpecs
-openWebPage
+showInstructions

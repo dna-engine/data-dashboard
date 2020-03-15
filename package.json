@@ -80,7 +80,7 @@
       "jsdom": "~16.2",
       "jshint": "~2.11",
       "merge-stream": "~2.0",
-      "mocha": "~7.0",
+      "mocha": "~7.1",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.3",
       "postcss-preset-env": "~6.7",

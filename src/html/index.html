@@ -25,7 +25,7 @@
             <h2>~~header~~</h2>
          </header>
          <app-widgets>
-            <app-widget data-array=~~widgetList~~>
+            <app-widget data-array=~~widgetList~~ data-class=~~code~~>
                <header>
                   <h2>~~header~~</h2>
                </header>
@@ -44,7 +44,7 @@
 </footer>
 
 <widget-templates>
-   @@include("src/html-includes/widget-templates.html")
+   @@include("src/html-includes/widget-templates.gen.html")
 </widget-templates>
 
 @@include("src/html-includes/doc-end.html")

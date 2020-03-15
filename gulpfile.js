@@ -78,20 +78,20 @@ const task = {
       return gulp.src(srcFiles.widgets.glob)
          .pipe(order())
          .pipe(size({ showFiles: true }))
-         .pipe(concat('widget-templates.html'))
+         .pipe(concat('widget-templates.gen.html'))
          .pipe(gulp.dest('src/html-includes'));
       },
    buildWebApp: {
       packageCssLibraries() {
          return gulp.src(libraryFiles.css)
-            .pipe(header('/*! 3rd party style */\n'))
+            .pipe(header('/*! 3rd party style: ${filename} */\n'))
             .pipe(concat('libraries.css'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
          },
       packageJsLibraries() {
          return gulp.src(libraryFiles.js)
-            .pipe(header('//! 3rd party library\n'))
+            .pipe(header('//! 3rd party library: ${filename}\n'))
             .pipe(concat('libraries.js'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
@@ -151,7 +151,7 @@ const task = {
       const minifyLibJs = () => gulp.src(libraryFiles.js)
          .pipe(babel(babelMinifyJs))
          .pipe(replace(embeddedComment, '$1\n$2'))
-         .pipe(header('\n//! 3rd party library\n'))
+         .pipe(header('\n//! 3rd party library: ${filename}\n'))
          .pipe(concat('libraries.js'))
          .pipe(header('//! Bundle: 3rd party libraries\n'))
          .pipe(gap.appendText('\n'))
