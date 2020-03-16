@@ -57,7 +57,7 @@ app.widget.projectJsonQuestions = {
       },
    displayDataTable(widgetElem, data) {
       const tableElem = widgetElem.find('figure table');
-      const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
+      const dataTable = new window.simpleDatatables.DataTable(tableElem[0], {});  //see: github.com/fiduswriter/Simple-DataTables/issues/56
       data.forEach(item => item.timestamp = app.util.secsToStr(item.last_activity_date));
       data.forEach(item => item.link = '<span data-href=' + item.link + '>' + item.title + '</span>');
       const headers = [
