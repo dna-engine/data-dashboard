@@ -13,7 +13,7 @@ app.controller = {
          const widgetController = app.widget[dna.util.toCamel(widget.code)];
          if (!widgetController)
             throw Error('DataDashboard - Widget controller missing: ' + widget.code);
-         widgetController.show(widgetElem);
+         widgetController.show(widgetElem.find('widget-body'));
          };
       panelElem.find('>app-widgets').children().each(showWidget);
       },
@@ -23,6 +23,8 @@ app.controller = {
       window.Chart = StubOutChart;  //prevent UnhandledPromiseRejectionWarning
       },
    setup() {
+      library.ui.autoDisableButtons();
+      dna.registerInitializer(library.bubbleHelp.setup);
       fetchJson.enableLogger(app.network.logEvent);
       if (navigator.userAgent.includes('jsdom'))
          app.controller.jsdomWorkarounds();
@@ -30,7 +32,6 @@ app.controller = {
       const makeWidgetList = (codes) => codes.map(code => app.widgetsMap[code]);
       const displayedPanels = app.panels.filter(panel => panel.display);
       displayedPanels.forEach(panel => panel.widgetList = makeWidgetList(panel.widgets));
-      library.ui.autoDisableButtons();
       const onLoadSetup = () => {
          dna.clone('app-menu-item', displayedPanels);
          dna.clone('app-panel',     displayedPanels);
