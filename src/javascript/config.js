@@ -7,6 +7,7 @@ const app = {
       { code: 'fin-rate-moving-avg',     header: 'Exchange rate moving average' },
       { code: 'network-log',             header: 'Network log' },
       { code: 'network-endpoints',       header: 'REST endpoints' },
+      { code: 'network-rest-tool',       header: 'REST tool' },
       { code: 'project-contributors',    header: 'dna.js contributors' },
       { code: 'project-json-questions',  header: 'JSON questions' },
       { code: 'spacex-books',            header: 'SpaceX books' },
@@ -16,7 +17,7 @@ const app = {
       { code: 'trans-bart-stations',     header: 'BART stations' },
       { code: 'trans-bart-departures',   header: 'BART departures' },
       { code: 'trans-f1-top-countries',  header: 'F1 top countries'},
-      { code: 'trans-nyc-bike-stations', header: 'NYC bike stations' }
+      { code: 'trans-nyc-bike-stations', header: 'NYC bike stations' },
       ],
    panels: [
       { code: 'finance',   header: 'Finance',        display: true,  widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
@@ -25,7 +26,7 @@ const app = {
       { code: 'trans',     header: 'Transportation', display: true,  widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'trans-f1-top-countries'] },
       { code: 'project',   header: 'Project',        display: true,  widgets: ['project-contributors', 'project-json-questions'] },
       { code: 'tbd',       header: 'TBD',            display: false, widgets: ['wip-widget'] },
-      { code: 'network',   header: 'Network',        display: true,  widgets: ['network-log', 'network-endpoints'] }
+      { code: 'network',   header: 'Network',        display: true,  widgets: ['network-log', 'network-endpoints', 'network-rest-tool'] },
       ],
    chartColor: {
       red:    'rgba(255,  99, 132, 0.7)',
@@ -34,8 +35,8 @@ const app = {
       green:  'rgba( 75, 192, 192, 0.7)',
       purple: 'rgba(153, 102, 255, 0.7)',
       orange: 'rgba(255, 159,  64, 0.7)',
-      teal:   'rgba(  0, 200, 230, 0.7)'
-      }
+      teal:   'rgba(  0, 200, 230, 0.7)',
+      },
    };
 
 app.widget = {};  //container map for widget controllers
