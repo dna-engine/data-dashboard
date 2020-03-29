@@ -1,7 +1,7 @@
 {
    "name": "data-dashboard",
    "description": "A data-driven dashboard console for report widgets",
-   "version": "0.0.4",
+   "version": "0.0.5",
    "license": "MIT",
    "main": "server.js",
    "browser": "docs/index.html",
@@ -54,9 +54,9 @@
       "whatwg-fetch": "~3.0"
    },
    "devDependencies": {
-      "@babel/core": "~7.8",
-      "@babel/preset-env": "~7.8",
-      "@fortawesome/fontawesome-free": "~5.12",
+      "@babel/core": "~7.9",
+      "@babel/preset-env": "~7.9",
+      "@fortawesome/fontawesome-free": "~5.13",
       "babel-minify": "~0.5",
       "canvas": "~2.6",
       "concurrently": "~5.1",
@@ -76,7 +76,6 @@
       "gulp-rev-all": "~2.0",
       "gulp-size": "~3.0",
       "gulp-w3c-html-validator": "~2.0",
-      "http": "~0.0",
       "jsdom": "~16.2",
       "jshint": "~2.11",
       "merge-stream": "~2.0",

@@ -8,14 +8,14 @@
 <meta property=og:title               content="DataDashboard">
 <meta property=og:description         content="A data-driven dashboard console for report widgets">
 <meta property=og:type                content="website">
-<meta property=og:image               content="https://dnajs.org/graphics/dnajs-logo-card.png">
+<meta property=og:image               content="https://data-dashboard.js.org/graphics/logo-card.b91f39a4.png">
 <meta property=og:image:alt           content="Logo">
 <title>DataDashboard</title>
 <link rel=icon             href=./graphics/bookmark.2c089831.png>
 <link rel=apple-touch-icon href=./graphics/mobile-home-screen.5ef8934e.png>
-<link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11/css/all.min.css>
-<link rel=stylesheet       href=./libraries.7bb2b5e1.css>
-<link rel=stylesheet       href=./data-dashboard.a6448fee.css>
+<link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css>
+<link rel=stylesheet       href=./libraries.c9a40347.css>
+<link rel=stylesheet       href=./data-dashboard.25978d24.css>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
       <h1>DataDashboard</h1>
    </div>
    <nav>
-      <ul class=dna-menu data-nav=dashboard data-callback=app.controller.showPanel>
+      <ul class=dna-menu data-nav=main-app-panels data-callback=app.controller.showPanel>
          <li id=app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
@@ -39,13 +39,13 @@
 </header>
 
 <main>
-   <app-panels class=dna-panels data-nav=dashboard>
+   <app-panels class=dna-panels data-nav=main-app-panels>
       <app-panel id=app-panel class=dna-template data-hash=~~code~~>
          <header>
             <h2>~~header~~</h2>
          </header>
          <app-widgets>
-            <app-widget data-array=~~widgetList~~>
+            <app-widget data-array=~~widgetList~~ data-class=~~code~~>
                <header>
                   <h2>~~header~~</h2>
                </header>
@@ -99,11 +99,24 @@
       </figure>
    </widget-body>
 
+   <widget-body id=network-rest-tool class=dna-template data-class=~~restError,error-mode~~>
+      <label>
+         <span>URL:</span>
+         <input placeholder="Enter REST endpoint" data-enter-key=app.widget.networkRestTool.get>
+      </label>
+      <button data-click=app.widget.networkRestTool.get>GET</button>
+      <section>
+         <h2>HTTP Response</h2>
+         <code>~~url~~</code>
+         <pre>~~jsonHtml~~</pre>
+      </section>
+   </widget-body>
+
    <widget-body id=project-contributors class=dna-template>
       <contributor-list class=external-site >
          <contributor-element data-array=~~contributors~~>
-            <figure>
-               <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~avatar_url~~ data-href=~~html_url~~ alt=avatar>
+            <figure data-href=~~html_url~~>
+               <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~avatar_url~~ alt=avatar>
                <figcaption>~~login~~</figcaption>
             </figure>
          </contributor-element>
@@ -201,8 +214,8 @@
 
 </widget-templates>
 
-<script src=libraries.8913aa91.js></script>
-<script src=data-dashboard.40611650.js></script>
+<script src=libraries.83b2bc66.js></script>
+<script src=data-dashboard.7af579d5.js></script>
 </body>
 </html>
 
