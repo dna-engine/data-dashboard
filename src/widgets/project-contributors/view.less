@@ -14,10 +14,14 @@ widget-body.project-contributors {
       .MobileMode({ margin: 0px -@gap/3/2; });
       contributor-element {
          color: white;
-         background-color: blueviolet;
+         background-color: mediumpurple;
          padding: 10px 15px 5px 15px;
          margin: @gap/2;
          .MobileMode({ margin: @gap/3/2; });
+         transition: background-color 0.4s;
+         &:hover {
+            background-color: Orchid;
+            }
          figure {
             text-align: center;
             img {
