@@ -13,7 +13,7 @@ app.controller = {
          const widgetController = app.widget[dna.util.toCamel(widget.code)];
          if (!widgetController)
             throw Error('DataDashboard - Widget controller missing: ' + widget.code);
-         widgetController.show(widgetElem.find('widget-body'));
+         widgetController.show(widgetElem);
          };
       panelElem.find('>app-widgets').children().each(showWidget);
       },
@@ -37,5 +37,5 @@ app.controller = {
          dna.clone('app-panel',     displayedPanels);
          };
       $(onLoadSetup);
-      }
+      },
    };
