@@ -57,7 +57,7 @@ app.util = {
       if (params)
          url = url + '?' + Object.keys(params).map(toPair).join('&');
       return $.ajax({ url: url, dataType: 'jsonp', jsonpCallback: jsonpName }).done(callback);
-      }
+      },
    };
 
 app.network = {
@@ -73,7 +73,7 @@ app.network = {
       },
    getLog() {
       return JSON.parse(localStorage.getItem(app.network.logName) || '[]');
-      }
+      },
    };
 
 app.transformer = {
@@ -94,5 +94,5 @@ app.transformer = {
          };
       rows.forEach(normalize);
       return rows;
-      }
+      },
    };

@@ -26,20 +26,20 @@ app.widget.transBartStations = {
          data: data.map(item => ({
             x:     parseFloat(item.gtfs_longitude),
             y:     parseFloat(item.gtfs_latitude),
-            label: item.abbr + ' (' + item.name + ')'
-            }))
+            label: item.abbr + ' (' + item.name + ')',
+            })),
          };
       const makeTooltip = (item, data) => data.datasets[item.datasetIndex].data[item.index].label;
       const chartInfo = {
          type: 'scatter',
          data: {
-            datasets: [dataset]
+            datasets: [dataset],
             },
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: ['BART Stations', 'San Francisco Bay Area'] },
-            tooltips: { callbacks: { label: makeTooltip } }
-            }
+            tooltips: { callbacks: { label: makeTooltip } },
+            },
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },

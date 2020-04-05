@@ -67,5 +67,5 @@ app.widget.finRateMovingAvg = {
          };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };

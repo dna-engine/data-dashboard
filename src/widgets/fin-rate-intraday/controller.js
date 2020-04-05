@@ -40,7 +40,7 @@ app.widget.finRateIntraday = {
       const data = transform(rawData);
       const datasets = [
          { label: 'Low',  data: data.lows },
-         { label: 'High', data: data.highs }
+         { label: 'High', data: data.highs },
          ];
       const chartInfo = {
          type: 'line',
@@ -72,5 +72,5 @@ app.widget.finRateIntraday = {
          };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
-      }
+      },
    };
