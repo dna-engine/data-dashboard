@@ -53,7 +53,7 @@ app.widget.spaceStarships = {
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: ['Larger Starships', 'Passengers and crew capacity'] },
-            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] },
+            scales: { x: { stacked: true }, y: { stacked: true } },
             },
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);

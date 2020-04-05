@@ -65,8 +65,8 @@ app.widget.transBartDepartures = {
             data:   directionEstimates.map(estimates => estimates[datasets.length].delta),
             });
       const scales = {
-         xAxes: [{ stacked: true, scaleLabel: { display: true, labelString: xAxesLabel } }],
-         yAxes: [{ stacked: true, scaleLabel: { display: true, labelString: yAxesLabel } }]
+         x: { stacked: true, scaleLabel: { display: true, labelString: xAxesLabel } },
+         y: { stacked: true, scaleLabel: { display: true, labelString: yAxesLabel } },
          };
       const makeTooltip = (item, data) => data.datasets[item.datasetIndex].labels[item.index];
       const chartInfo = {
@@ -80,7 +80,7 @@ app.widget.transBartDepartures = {
             title: { display: true, text: [title, subtitle] },
             scales: scales,
             tooltips: { callbacks: { label: makeTooltip } },
-            }
+            },
          };
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
       },

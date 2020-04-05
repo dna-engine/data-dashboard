@@ -41,7 +41,7 @@
       "dev": "npm test && concurrently 'gulp watch' 'webRoot=build/1-staging npm start'"
    },
    "dependencies": {
-      "chart.js": "~2.9",
+      "chart.js": "3.0.0-alpha",
       "dna.js": "~1.6",
       "fetch-json": "~2.2",
       "jquery": "~3.4",

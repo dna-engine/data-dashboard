@@ -45,8 +45,8 @@ app.widget.transNycBikeStations = {
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: [title, subtitle] },
-            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
-            }
+            scales: { x: { stacked: true }, y: { stacked: true } },
+            },
          };
       app.util.narrowScreenSaver(chartInfo);
       widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);

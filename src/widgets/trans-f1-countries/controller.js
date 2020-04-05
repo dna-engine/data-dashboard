@@ -75,10 +75,9 @@
 //                   ...
 //       ...
 
-
 // const results = [
 //    { Driver: { nationality: 'German' }, Constructor: { nationality: 'Italian' } },
-//    { Driver: { nationality: 'German' }, Constructor: { nationality: 'French' } }
+//    { Driver: { nationality: 'German' }, Constructor: { nationality: 'French' } },
 // ];
 
 app.widget.transF1TopCountries = {
@@ -114,7 +113,7 @@ app.widget.transF1TopCountries = {
          options: {
             maintainAspectRatio: false,
             title: { display: true, text: [title, subtitle] },
-            scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] },
+            scales: { x: { stacked: true }, y: { stacked: true } },
             },
          };
       const canvas = widgetElem.find('canvas').eq(round - 1);
