@@ -149,7 +149,9 @@ const task = {
          .pipe(gap.appendText('\n'))
          .pipe(gulp.dest(folder.minified));
       const minifyLibJs = () => gulp.src(libraryFiles.js)
-         .pipe(babel(babelMinifyJs))
+         // Workaround minification error with chart.js 3.0.0-alpha:
+         //    Unhandled Promise Rejection: TypeError: undefined is not an object (evaluating 'e.chart.options[e._type].datasets')
+         // .pipe(babel(babelMinifyJs))
          .pipe(replace(embeddedComment, '$1\n$2'))
          .pipe(header('\n//! 3rd party library: ${filename}\n'))
          .pipe(concat('libraries.js'))
