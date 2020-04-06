@@ -38,7 +38,8 @@
       "pretest": "jshint *.js src spec && rimraf build && gulp build",
       "test": "mocha spec",
       "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
-      "dev": "npm test && concurrently 'gulp watch' 'webRoot=build/1-staging npm start'"
+      "dev": "npm test && concurrently 'gulp watch' 'webRoot=build/1-staging npm start'",
+      "prod": "npm test && open http://localhost:8080/docs && http-server --port 8080"
    },
    "dependencies": {
       "chart.js": "3.0.0-alpha",
@@ -75,7 +76,9 @@
       "gulp-replace": "~1.0",
       "gulp-rev-all": "~2.0",
       "gulp-size": "~3.0",
+      "gulp-touch-cmd": "~0.0",
       "gulp-w3c-html-validator": "~2.0",
+      "http-server": "~0.12",
       "jsdom": "~16.2",
       "jshint": "~2.11",
       "merge-stream": "~2.0",

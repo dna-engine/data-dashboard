@@ -20,6 +20,7 @@ const order =           require('gulp-order');
 const replace =         require('gulp-replace');
 const RevAll =          require('gulp-rev-all');
 const size =            require('gulp-size');
+const touch =           require('gulp-touch-cmd');
 
 // Folders
 const folder = {
@@ -87,14 +88,16 @@ const task = {
             .pipe(header('/*! 3rd party style: ${filename} */\n'))
             .pipe(concat('libraries.css'))
             .pipe(size({ showFiles: true }))
-            .pipe(gulp.dest(folder.staging));
+            .pipe(gulp.dest(folder.staging))
+            .pipe(touch());
          },
       packageJsLibraries() {
          return gulp.src(libraryFiles.js)
             .pipe(header('//! 3rd party library: ${filename}\n'))
             .pipe(concat('libraries.js'))
             .pipe(size({ showFiles: true }))
-            .pipe(gulp.dest(folder.staging));
+            .pipe(gulp.dest(folder.staging))
+            .pipe(touch());
          },
       graphics() {
          return gulp.src(srcFiles.graphics.glob)
@@ -117,7 +120,8 @@ const task = {
             .pipe(htmlValidator.reporter())
             .pipe(replace('src=#', 'src=' + placeholderSvg))
             .pipe(size({ showFiles: true }))
-            .pipe(gulp.dest(folder.staging));
+            .pipe(gulp.dest(folder.staging))
+            .pipe(touch());
          },
       js() {
          return gulp.src(srcFiles.js.glob)
@@ -157,7 +161,8 @@ const task = {
          .pipe(concat('libraries.js'))
          .pipe(header('//! Bundle: 3rd party libraries\n'))
          .pipe(gap.appendText('\n'))
-         .pipe(gulp.dest(folder.minified));
+         .pipe(gulp.dest(folder.minified))
+         .pipe(touch());
       const minifyCss = () => gulp.src(folder.staging + '/' + pkg.name + '.css')
          .pipe(css(cssPlugins))
          .pipe(header('/*! ' + banner + ' */\n'))
