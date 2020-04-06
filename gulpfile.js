@@ -37,7 +37,7 @@ const srcFiles = {
    css:      { glob: 'src/**/*.less', order: ['src/css/base.less'] },
    html:     { glob: 'src/html/**/*.html' },
    widgets:  { glob: 'src/widgets/**/*.html' },
-   js:       { glob: 'src/**/*.js', order: ['javascript/config.js', '!javascript/setup.js'] },
+   js:       { glob: 'src/**/*.js', order: ['js/config.js', '!js/setup.js'] },
    };
 const libraryFiles = {
    css: [
