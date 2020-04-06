@@ -3,6 +3,7 @@
 
 app.controller = {
    showPanel(panelElem) {
+      window.scrollTo({ top: 0 });
       const showWidget = (i, elem) => {
          const widgetElem = $(elem);
          const widget = dna.getModel(widgetElem);
@@ -21,6 +22,7 @@ app.controller = {
       fetchJson.enableLogger(true);  //prevent localStorage race condition
       class StubOutChart {}
       window.Chart = StubOutChart;  //prevent UnhandledPromiseRejectionWarning
+      window.scrollTo = () => {};  //prevent Error: Not implemented: window.scrollTo
       },
    setup() {
       library.ui.autoDisableButtons();
