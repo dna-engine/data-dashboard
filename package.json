@@ -1,7 +1,7 @@
 {
    "name": "data-dashboard",
    "description": "A data-driven dashboard console for report widgets",
-   "version": "0.0.7",
+   "version": "0.0.8",
    "license": "MIT",
    "main": "server.js",
    "browser": "docs/index.html",
@@ -45,7 +45,7 @@
       "chart.js": "3.0.0-alpha",
       "dna.js": "~1.6",
       "fetch-json": "~2.2",
-      "jquery": "~3.4",
+      "jquery": "~3.5",
       "moment": "~2.24",
       "node-fetch": "~2.6",
       "pretty-print-json": "~0.2",
