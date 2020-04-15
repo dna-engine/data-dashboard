@@ -13,7 +13,7 @@ app.widget.networkEndpoints = {
          { name: 'Google Books APIs',    base: 'https://www.googleapis.com/books',  docs: 'https://developers.google.com/books' },
          { name: 'Flickr API',           base: 'https://api.flickr.com/services',   docs: 'https://www.flickr.com/services/feeds/docs/photos_public' },
          { name: 'Stack Exchange API',   base: 'https://api.stackexchange.com',     docs: 'https://api.stackexchange.com/docs' },
-         { name: 'The Star Wars API',    base: 'https://swapi.co/api',              docs: 'https://swapi.co/documentation' },
+         { name: 'The Star Wars API',    base: 'https://swapi.dev/api',             docs: 'https://swapi.dev/documentation' },
          ];
       dna.refresh(widgetElem);
       },

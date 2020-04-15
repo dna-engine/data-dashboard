@@ -3,7 +3,7 @@
 
 // {
 //    count: 39,
-//    next: 'https://swapi.co/api/vehicles/?page=2&format=json',
+//    next: 'https://swapi.dev/api/vehicles/?page=2&format=json',
 //    previous: null,
 //    results: [
 //       {
@@ -20,12 +20,12 @@
 //          vehicle_class: 'wheeled',
 //          pilots: [],
 //          films: [
-//             'https://swapi.co/api/films/5/',
-//             'https://swapi.co/api/films/1/'
+//             'https://swapi.dev/api/films/5/',
+//             'https://swapi.dev/api/films/1/'
 //          ],
 //          created: '2014-12-10T15:36:25.724000Z',
 //          edited: '2014-12-22T18:21:15.523587Z',
-//          url: 'https://swapi.co/api/vehicles/4/'
+//          url: 'https://swapi.dev/api/vehicles/4/'
 //       },
 //       ...
 
@@ -92,7 +92,7 @@ app.widget.spaceVehicles = {
          else
             displayData();
          };
-      const url = 'https://swapi.co/api/vehicles';
+      const url = 'https://swapi.dev/api/vehicles/';
       const params = { format: 'json' };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
