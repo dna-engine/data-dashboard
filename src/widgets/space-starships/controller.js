@@ -92,7 +92,7 @@ app.widget.spaceStarships = {
       const handleData = (data) => {
          starships.push(...data.results);
          if (data.next)
-            fetchJson.get(data.next).then(handleData);
+            fetchJson.get(data.next.replace('http://', 'https://')).then(handleData);
          else
             displayData();
          };

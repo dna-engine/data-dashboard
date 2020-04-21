@@ -88,7 +88,7 @@ app.widget.spaceVehicles = {
       const handleData = (data) => {
          vehicles.push(...data.results);
          if (data.next)
-            fetchJson.get(data.next).then(handleData);
+            fetchJson.get(data.next.replace('http://', 'https://')).then(handleData);
          else
             displayData();
          };
