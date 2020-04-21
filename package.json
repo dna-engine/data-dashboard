@@ -1,7 +1,7 @@
 {
    "name": "data-dashboard",
    "description": "A data-driven dashboard console for report widgets",
-   "version": "0.0.8",
+   "version": "0.0.9",
    "license": "MIT",
    "main": "server.js",
    "browser": "docs/index.html",
