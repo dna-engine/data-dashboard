@@ -35,7 +35,7 @@ const banner = `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license}
 const srcFiles = {
    graphics: { glob: 'src/assets/graphics/**/*' },
    css:      { glob: 'src/**/*.less', order: ['src/css/base.less'] },
-   html:     { glob: 'src/html/**/*.html' },
+   html:     { glob: 'src/html/**/*.html' },  //root?
    widgets:  { glob: 'src/widgets/**/*.html' },
    js:       { glob: 'src/**/*.js', order: ['js/config.js', '!js/setup.js'] },
    };

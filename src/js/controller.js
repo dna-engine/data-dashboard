@@ -19,7 +19,7 @@ app.controller = {
       panelElem.find('>app-widgets').children().each(showWidget);
       },
    jsdomWorkarounds() {
-      fetchJson.enableLogger(true);  //prevent localStorage race condition
+      fetchJson.enableLogger();  //prevent localStorage race condition
       class StubOutChart {}
       window.Chart = StubOutChart;  //prevent UnhandledPromiseRejectionWarning
       window.scrollTo = () => {};  //prevent Error: Not implemented: window.scrollTo
