@@ -24,9 +24,9 @@ const touch =           require('gulp-touch-cmd');
 
 // Folders
 const folder = {
-   staging:  'build/1-staging',
-   minified: 'build/2-minified',
-   prod:     'build/3-production',
+   staging:  'build/step1-staging',
+   minified: 'build/step2-minified',
+   prod:     'build/step3-production',
    };
 
 // Setup
@@ -43,7 +43,7 @@ const libraryFiles = {
    css: [
       'node_modules/web-ignition/dist/reset.min.css',
       'node_modules/dna.js/dist/dna.css',
-      'node_modules/selectize/dist/css/selectize.default.css',
+      'node_modules/select2/dist/css/select2.min.css',
       'node_modules/simple-datatables/dist/style.css',
       'node_modules/pretty-print-json/dist/pretty-print-json.css',
       ],
@@ -52,7 +52,7 @@ const libraryFiles = {
       'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
       'node_modules/fetch-json/dist/fetch-json.js',
       'node_modules/jquery/dist/jquery.js',
-      'node_modules/selectize/dist/js/standalone/selectize.js',
+      'node_modules/select2/dist/js/select2.js',
       'node_modules/simple-datatables/dist/umd/simple-datatables.js',
       'node_modules/chart.js/dist/Chart.js',
       'node_modules/dna.js/dist/dna.js',

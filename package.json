@@ -38,29 +38,29 @@
       "pretest": "jshint *.js src spec && rimraf build **/.DS_Store && gulp build",
       "test": "mocha spec",
       "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
-      "dev": "npm test && concurrently 'gulp watch' 'webRoot=build/1-staging npm start'",
+      "dev": "npm test && concurrently 'gulp watch' 'webRoot=build/step1-staging npm start'",
       "prod": "npm test && open http://localhost:8080/docs && http-server --port 8080"
    },
    "cdnVersion": {
-      "fontAwesome": "5.13"
+      "fontAwesome": "5.14"
    },
    "dependencies": {
-      "chart.js": "3.0.0-alpha",
+      "chart.js": "3.0.0-alpha.2",
       "dna.js": "~1.6",
       "fetch-json": "~2.2",
       "jquery": "~3.5",
-      "moment": "~2.26",
+      "moment": "~2.27",
       "node-fetch": "~2.6",
       "pretty-print-json": "~0.2",
-      "selectize": "~0.12",
+      "select2": "~4.0",
       "simple-datatables": "~2.1",
       "web-ignition": "~1.2",
-      "whatwg-fetch": "~3.0"
+      "whatwg-fetch": "~3.2"
    },
    "devDependencies": {
       "@babel/core": "~7.10",
       "@babel/preset-env": "~7.10",
-      "@fortawesome/fontawesome-free": "~5.13",
+      "@fortawesome/fontawesome-free": "~5.14",
       "babel-minify": "~0.5",
       "canvas": "~2.6",
       "concurrently": "~5.2",
@@ -82,10 +82,10 @@
       "gulp-touch-cmd": "~0.0",
       "gulp-w3c-html-validator": "~2.0",
       "http-server": "~0.12",
-      "jsdom": "~16.2",
+      "jsdom": "~16.3",
       "jshint": "~2.11",
       "merge-stream": "~2.0",
-      "mocha": "~7.2",
+      "mocha": "~8.0",
       "postcss": "~7.0",
       "postcss-font-magician": "~2.3",
       "postcss-preset-env": "~6.7",
