@@ -48,17 +48,19 @@ const libraryFiles = {
       'node_modules/pretty-print-json/dist/pretty-print-json.css',
       ],
    js: [
-      'node_modules/moment/moment.js',
       'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
-      'node_modules/fetch-json/dist/fetch-json.js',
-      'node_modules/jquery/dist/jquery.js',
-      'node_modules/select2/dist/js/select2.js',
+      'node_modules/moment/moment.js',  //avoid sourceMappingURL in min/moment.min.js
+      ],
+   jsMinified: [
+      'node_modules/fetch-json/dist/fetch-json.min.js',
+      'node_modules/jquery/dist/jquery.min.js',
+      'node_modules/select2/dist/js/select2.min.js',
+      'node_modules/chart.js/dist/chart.min.js',
+      'node_modules/dna.js/dist/dna.min.js',
       'node_modules/simple-datatables/dist/umd/simple-datatables.js',
-      'node_modules/chart.js/dist/Chart.js',
-      'node_modules/dna.js/dist/dna.js',
-      'node_modules/web-ignition/dist/library.js',
-      'node_modules/pretty-print-json/dist/pretty-print-json.js',
-      ]
+      'node_modules/web-ignition/dist/library.min.js',
+      'node_modules/pretty-print-json/dist/pretty-print-json.min.js',
+      ],
    };
 const htmlHintConfig = { 'attr-value-double-quotes': false };
 const cssPlugins = [
@@ -75,15 +77,8 @@ const placeholderSvg = `"data:image/svg+xml;base64,${Buffer.from(onePixelSvg).to
 
 // Tasks
 const task = {
-   buildTemplates() {
-      return gulp.src(srcFiles.widgets.glob)
-         .pipe(order())
-         .pipe(size({ showFiles: true }))
-         .pipe(concat('widget-templates.gen.html'))
-         .pipe(gulp.dest('src/html/generated'));
-      },
-   buildWebApp: {
-      packageCssLibraries() {
+   packageLibraries: {
+      css() {
          return gulp.src(libraryFiles.css)
             .pipe(header('/*! 3rd party style: ${filename} */\n'))
             .pipe(concat('libraries.css'))
@@ -91,7 +86,7 @@ const task = {
             .pipe(gulp.dest(folder.staging))
             .pipe(touch());
          },
-      packageJsLibraries() {
+      js() {
          return gulp.src(libraryFiles.js)
             .pipe(header('//! 3rd party library: ${filename}\n'))
             .pipe(concat('libraries.js'))
@@ -99,6 +94,33 @@ const task = {
             .pipe(gulp.dest(folder.staging))
             .pipe(touch());
          },
+      jsMinified() {
+         return gulp.src(libraryFiles.jsMinified)
+            .pipe(header('//! 3rd party library (minified): ${filename}\n'))
+            .pipe(gap.appendText('\n'))
+            .pipe(concat('libraries.dist.js'))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging))
+            .pipe(touch());
+         },
+      all() {
+         return mergeStream(
+            task.packageLibraries.css(),
+            task.packageLibraries.js(),
+            task.packageLibraries.jsMinified(),
+            );
+         },
+      },
+   buildTemplates: {
+      html() {
+         return gulp.src(srcFiles.widgets.glob)
+            .pipe(order())
+            .pipe(size({ showFiles: true }))
+            .pipe(concat('widget-templates.gen.html'))
+            .pipe(gulp.dest('src/html/generated'));
+         },
+      },
+   buildWebApp: {
       graphics() {
          return gulp.src(srcFiles.graphics.glob)
             .pipe(gulp.dest(folder.staging + '/graphics'));
@@ -132,8 +154,6 @@ const task = {
          },
       all() {
          return mergeStream(
-            task.buildWebApp.packageCssLibraries(),
-            task.buildWebApp.packageJsLibraries(),
             task.buildWebApp.graphics(),
             task.buildWebApp.css(),
             task.buildWebApp.js(),
@@ -153,9 +173,7 @@ const task = {
          .pipe(gap.appendText('\n'))
          .pipe(gulp.dest(folder.minified));
       const minifyLibJs = () => gulp.src(libraryFiles.js)
-         // Workaround minification error with chart.js 3.0.0-alpha:
-         //    Unhandled Promise Rejection: TypeError: undefined is not an object (evaluating 'e.chart.options[e._type].datasets')
-         // .pipe(babel(babelMinifyJs))
+         .pipe(babel(babelMinifyJs))
          .pipe(replace(embeddedComment, '$1\n$2'))
          .pipe(header('\n//! 3rd party library: ${filename}\n'))
          .pipe(concat('libraries.js'))
@@ -163,6 +181,9 @@ const task = {
          .pipe(gap.appendText('\n'))
          .pipe(gulp.dest(folder.minified))
          .pipe(touch());
+      const copyLibDistJs = () => gulp.src(folder.staging + '/libraries.dist.js')
+         .pipe(header('//! Bundle: 3rd party libraries (minified)\n\n'))
+         .pipe(gulp.dest(folder.minified));
       const minifyCss = () => gulp.src(folder.staging + '/' + pkg.name + '.css')
          .pipe(css(cssPlugins))
          .pipe(header('/*! ' + banner + ' */\n'))
@@ -177,6 +198,7 @@ const task = {
          copyHtml(),
          minifyLibCss(),
          minifyLibJs(),
+         copyLibDistJs(),
          minifyCss(),
          minifyJs());
       },
@@ -198,13 +220,24 @@ const task = {
       gulp.watch(srcFiles.graphics.glob, task.buildWebApp.graphics);
       gulp.watch(srcFiles.css.glob,      task.buildWebApp.css);
       gulp.watch(srcFiles.js.glob,       task.buildWebApp.js);
-      gulp.watch(srcFiles.widgets.glob,  gulp.series(task.buildTemplates, task.buildWebApp.html));
-      gulp.watch(srcFiles.html.glob,     gulp.series(task.buildTemplates, task.buildWebApp.html));
+      gulp.watch(srcFiles.widgets.glob,  compoundTask.buildHtml);
+      gulp.watch(srcFiles.html.glob,     compoundTask.buildHtml);
       },
    };
 
 // Gulp
-gulp.task('build',  gulp.series(task.buildTemplates, task.buildWebApp.all));
+const compoundTask = {
+   build: gulp.series(
+      task.packageLibraries.all,
+      task.buildTemplates.html,
+      task.buildWebApp.all,
+      ),
+   builHtml: gulp.series(
+      task.buildTemplates.html,
+      task.buildWebApp.html,
+      ),
+   };
+gulp.task('build',  compoundTask.build);
 gulp.task('minify', task.minifyWebApp);
 gulp.task('hash',   task.hashWebApp);
 gulp.task('docs',   task.publishDocsWebsite);
