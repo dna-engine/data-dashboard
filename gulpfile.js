@@ -217,11 +217,10 @@ const task = {
          .pipe(size({ showFiles: true }));
       },
    setupWatchers() {
-      gulp.watch(srcFiles.graphics.glob, task.buildWebApp.graphics);
-      gulp.watch(srcFiles.css.glob,      task.buildWebApp.css);
-      gulp.watch(srcFiles.js.glob,       task.buildWebApp.js);
-      gulp.watch(srcFiles.widgets.glob,  compoundTask.buildHtml);
-      gulp.watch(srcFiles.html.glob,     compoundTask.buildHtml);
+      gulp.watch('src/**/*.+(jpg|png|svg)',           task.buildWebApp.graphics);
+      gulp.watch('src/**/*.less',                     task.buildWebApp.css);
+      gulp.watch('src/**/*.js',                       task.buildWebApp.js);
+      gulp.watch(['src/**/*.html', '!**/*.gen.html'], compoundTask.buildHtml);
       },
    };
 
