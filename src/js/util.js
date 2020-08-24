@@ -18,7 +18,7 @@ app.util = {
       },
    narrowScreenSaver(chartInfo, options) {
       const defaults = { maxPoints: 200, screenWidth: 700 };
-      const settings = Object.assign(defaults, options);
+      const settings = { ...defaults, ...options };
       const shrinkRatio = Math.ceil(chartInfo.data.labels.length / settings.maxPoints);
       const shrinkNow = () => {
          const shrink = (points) => points.filter((point, i) => i % shrinkRatio === 0);
