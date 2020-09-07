@@ -135,7 +135,7 @@ const task = {
          },
       html() {
          return gulp.src(srcFiles.html.glob)
-            .pipe(fileInclude({ basepath: '@root', indent: true, context: pkg }))
+            .pipe(fileInclude({ basepath: '@root', indent: true, context: { pkg } }))
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
             .pipe(htmlValidator())
