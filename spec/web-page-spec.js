@@ -6,7 +6,7 @@ const serverListening = require('server-listening');
 const { JSDOM } =       require('jsdom');
 
 // Setup
-process.env.webRoot = process.env.webRoot || 'build/step1-staging';
+process.env.webFolder = process.env.webFolder || 'build/step1-staging';
 serverListening.setPort({ flush: require.resolve('../server') });
 const server = require('../server');
 const url = 'http://localhost:' + server.address().port + '/';
@@ -14,7 +14,7 @@ const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
 let dom;
 const loadWebPage = () => JSDOM.fromURL(url, jsdomOptions)
    .then(serverListening.jsdomOnLoad)
-   .then((jsdom) => dom = jsdom);
+   .then(jsdom => dom = jsdom);
 const closeWebPage = () => serverListening.jsdomCloseWindow(dom);
 before(() => serverListening.ready(server));
 after(() =>  serverListening.close(server));

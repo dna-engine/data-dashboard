@@ -38,7 +38,7 @@
       "pretest": "jshint *.js src spec && rimraf build **/.DS_Store && gulp build",
       "test": "mocha spec",
       "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
-      "dev": "npm test && concurrently 'gulp watch' 'webRoot=build/step1-staging npm start'",
+      "dev": "npm test && concurrently 'gulp watch' 'webFolder=build/step1-staging npm start'",
       "prod": "npm test && open http://localhost:8080/docs && http-server --port 8080"
    },
    "cdnVersion": {
