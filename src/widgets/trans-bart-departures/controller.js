@@ -68,14 +68,15 @@ app.widget.transBartDepartures = {
          x: { stacked: true, scaleLabel: { display: true, labelString: xAxesLabel } },
          y: { stacked: true, scaleLabel: { display: true, labelString: yAxesLabel } },
          };
-      const makeTooltip = (item, data) => data.datasets[item.datasetIndex].labels[item.index];
+      const makeTooltip = (item) => item.dataset.label + ': ' + item.dataset.labels[item.dataIndex];
       const chartInfo = {
-         type: 'horizontalBar',
+         type: 'bar',
          data: {
             labels:   directions,
             datasets: app.util.addChartColors(datasets),
             },
          options: {
+            indexAxis: 'y',
             maintainAspectRatio: false,
             title: { display: true, text: [title, subtitle] },
             scales: scales,

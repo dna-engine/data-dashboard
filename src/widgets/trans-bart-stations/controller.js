@@ -29,7 +29,13 @@ app.widget.transBartStations = {
             label: item.abbr + ' (' + item.name + ')',
             })),
          };
-      const makeTooltip = (item, data) => data.datasets[item.datasetIndex].data[item.index].label;
+      const latLong = (item) => {
+         // Returns a string formatted like: "37.2°N 27.9°W"
+         const lat =  parseFloat(item.formattedValue);
+         const long = parseFloat(item.label);
+         return `${Math.abs(lat)}°${lat > 0 ? 'N' : 'S'} ${Math.abs(long)}°${long > 0 ? 'E' : 'W'}`;
+         };
+      const makeTooltip = (item) => item.dataset.data[item.dataIndex].label + ' ' + latLong(item);
       const chartInfo = {
          type: 'scatter',
          data: {
