@@ -111,12 +111,16 @@ const task = {
             );
          },
       },
-   buildTemplates: {
-      html() {
+   buildIncludes: {
+      widgets() {
          return gulp.src(srcFiles.widgets.glob)
             .pipe(order())
             .pipe(size({ showFiles: true }))
-            .pipe(concat('widget-templates.gen.html'))
+            .pipe(replace(/.*[\n]/gm, ''))
+            .pipe(header('@@include("../../widgets/${file.relative}")'))
+            .pipe(concat('widgets.gen.html'))
+            .pipe(gap.appendText('\n'))
+            .pipe(size({ showFiles: true }))
             .pipe(gulp.dest('src/html/generated'));
          },
       },
@@ -135,7 +139,7 @@ const task = {
          },
       html() {
          return gulp.src(srcFiles.html.glob)
-            .pipe(fileInclude({ basepath: '@root', indent: true, context: { pkg } }))
+            .pipe(fileInclude({ indent: true, context: { pkg } }))
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
             .pipe(htmlValidator())
@@ -228,11 +232,11 @@ const task = {
 const compoundTask = {
    build: gulp.series(
       task.packageLibraries.all,
-      task.buildTemplates.html,
+      task.buildIncludes.widgets,
       task.buildWebApp.all,
       ),
    builHtml: gulp.series(
-      task.buildTemplates.html,
+      task.buildIncludes.widgets,
       task.buildWebApp.html,
       ),
    };
