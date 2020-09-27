@@ -3,7 +3,6 @@
 # Downloaded and generated files
 /node_modules/
 /package-lock.json
-/src/html/generated/
 /build/
 
 # Extraneous system files
