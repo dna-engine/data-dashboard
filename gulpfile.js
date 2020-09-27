@@ -112,16 +112,19 @@ const task = {
          },
       },
    buildIncludes: {
-      widgets() {
-         return gulp.src(srcFiles.widgets.glob)
+      generate(name, glob, dest) {
+         return gulp.src(glob)
             .pipe(order())
             .pipe(size({ showFiles: true }))
             .pipe(replace(/.*[\n]/gm, ''))
-            .pipe(header('@@include("../../widgets/${file.relative}")'))
-            .pipe(concat('widgets.gen.html'))
+            .pipe(header('@@include("../../' + name + '/${file.relative}")'))
+            .pipe(concat(name + '.gen.html'))
             .pipe(gap.appendText('\n'))
             .pipe(size({ showFiles: true }))
-            .pipe(gulp.dest('src/html/generated'));
+            .pipe(gulp.dest(dest));
+         },
+      widgets() {
+         return task.buildIncludes.generate('widgets', srcFiles.widgets.glob, 'src/html/generated');
          },
       },
    buildWebApp: {
