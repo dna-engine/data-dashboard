@@ -115,7 +115,6 @@ const task = {
       generate(name, glob, dest) {
          return gulp.src(glob)
             .pipe(order())
-            .pipe(size({ showFiles: true }))
             .pipe(replace(/.*[\n]/gm, ''))
             .pipe(header('@@include("../../' + name + '/${file.relative}")'))
             .pipe(concat(name + '.gen.html'))
@@ -223,27 +222,27 @@ const task = {
          .pipe(gulp.dest('docs'))
          .pipe(size({ showFiles: true }));
       },
+   compound: {
+      build: () => gulp.series(
+         task.packageLibraries.all,
+         task.buildIncludes.widgets,
+         task.buildWebApp.all,
+         ),
+      buildHtml: () => gulp.series(
+         task.buildIncludes.widgets,
+         task.buildWebApp.html,
+         ),
+      },
    setupWatchers() {
-      gulp.watch('src/**/*.+(jpg|png|svg)',           task.buildWebApp.graphics);
-      gulp.watch('src/**/*.less',                     task.buildWebApp.css);
-      gulp.watch('src/**/*.js',                       task.buildWebApp.js);
-      gulp.watch(['src/**/*.html', '!**/*.gen.html'], compoundTask.buildHtml);
+      gulp.watch('src/**/*.+(jpg|png|svg)',               task.buildWebApp.graphics);
+      gulp.watch('src/**/*.less',                         task.buildWebApp.css);
+      gulp.watch('src/**/*.js',                           task.buildWebApp.js);
+      gulp.watch(['src/**/*.html', '!src/**/*.gen.html'], task.compound.buildHtml());
       },
    };
 
 // Gulp
-const compoundTask = {
-   build: gulp.series(
-      task.packageLibraries.all,
-      task.buildIncludes.widgets,
-      task.buildWebApp.all,
-      ),
-   builHtml: gulp.series(
-      task.buildIncludes.widgets,
-      task.buildWebApp.html,
-      ),
-   };
-gulp.task('build',  compoundTask.build);
+gulp.task('build',  task.compound.build());
 gulp.task('minify', task.minifyWebApp);
 gulp.task('hash',   task.hashWebApp);
 gulp.task('docs',   task.publishDocsWebsite);
