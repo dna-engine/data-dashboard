@@ -9,7 +9,7 @@ app.controller = {
          const widget = dna.getModel(widgetElem);
          if (!widget)
             throw Error('DataDashboard - Missing widget, index: ' + i + ', panel: ' + panelElem.data().hash);
-         widgetElem.find('>widget-body').remove();
+         widgetElem.find('>app-widget-body').remove();
          widgetElem.append(dna.clone(widget.code, {}));
          const widgetController = app.widget[dna.util.toCamel(widget.code)];
          if (!widgetController)

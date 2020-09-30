@@ -131,6 +131,6 @@ app.widget.transF1TopCountries = {
          const url = 'https://ergast.com/api/f1/' + raceYear + '/' + round + '/results.json';
          fetchJson.get(url).then(handleData);
          };
-      widgetElem.find('widget-body >figure >canvas').each(i => display(i + 1));
+      widgetElem.find('app-widget-body >figure >canvas').each(i => display(i + 1));
       },
    };

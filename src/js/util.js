@@ -36,19 +36,19 @@ app.util = {
       // DOM:
       //    <app-widget>
       //       <header><h2>Title</h2></header>
-      //       <widget-body>...</widget-body>
-      //       <widget-spinner><i data-icon=yin-yang></i></widget-spinner>
+      //       <app-widget-body>...</app-widget-body>
+      //       <app-widget-spinner><i data-icon=yin-yang></i></app-widget-spinner>
       //    </app-widget>
       widgetElem = widgetElem.closest('app-widget');
-      const spinnerHtml = '<widget-spinner><i data-icon=yin-yang class=fa-spin>';
+      const spinnerHtml = '<app-widget-spinner><i data-icon=yin-yang class=fa-spin>';
       const makeElem = () => $(spinnerHtml).css({ paddingTop: widgetElem.height() / 2 - 50 });
       const create = () => library.ui.makeIcons(makeElem()).appendTo(widgetElem);
-      const current = widgetElem.addClass('waiting').find('>widget-spinner');
+      const current = widgetElem.addClass('waiting').find('>app-widget-spinner');
       const spinnerElem = current.length ? current : create();
       return spinnerElem.hide().fadeIn().parent();
       },
    spinnerStop(widgetElem) {
-      return widgetElem.closest('app-widget').removeClass('waiting').find('>widget-spinner').fadeOut(1500).parent();
+      return widgetElem.closest('app-widget').removeClass('waiting').find('>app-widget-spinner').fadeOut(1500).parent();
       },
    fetchJsonp(url, params, jsonpName, callback) {
       const logDomain = url.replace(/.*:\/\//, '').replace(/[:\/].*/, '');  //extract hostname
