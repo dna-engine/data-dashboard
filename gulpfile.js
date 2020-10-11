@@ -118,6 +118,7 @@ const task = {
             .pipe(replace(/.*[\n]/gm, ''))
             .pipe(header('@@include("../../' + name + '/${file.relative}")'))
             .pipe(concat(name + '.gen.html'))
+            .pipe(gap.prependText('\n'))
             .pipe(gap.appendText('\n'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(dest));

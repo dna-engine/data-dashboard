@@ -14,8 +14,8 @@
 <link rel=icon             href=./graphics/bookmark.2c089831.png>
 <link rel=apple-touch-icon href=./graphics/mobile-home-screen.5ef8934e.png>
 <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css>
-<link rel=stylesheet       href=./libraries.35ebe49b.css>
-<link rel=stylesheet       href=./data-dashboard.bfd2be99.css>
+<link rel=stylesheet       href=./libraries.1fee4a87.css>
+<link rel=stylesheet       href=./data-dashboard.7341b74c.css>
 </head>
 <body>
 
@@ -63,20 +63,21 @@
    </span>
 </footer>
 
-<widget-templates>
-   <widget-body id=fin-rate-intraday class=dna-template>
-   <figure>
-      <canvas></canvas>
-   </figure>
-</widget-body>
-
-   <widget-body id=fin-rate-moving-avg class=dna-template>
+<app-widget-templates>
+   
+   <app-widget-body id=fin-rate-intraday class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=network-endpoints class=dna-template>
+   <app-widget-body id=fin-rate-moving-avg class=dna-template>
+      <figure>
+         <canvas></canvas>
+      </figure>
+   </app-widget-body>
+
+   <app-widget-body id=network-endpoints class=dna-template>
       <figure>
          <table>
             <thead>
@@ -91,15 +92,15 @@
             </tbody>
          </table>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=network-log class=dna-template>
+   <app-widget-body id=network-log class=dna-template>
       <figure>
          <table></table>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=network-rest-tool class=dna-template data-class=~~restError,error-mode~~>
+   <app-widget-body id=network-rest-tool class=dna-template data-class=~~restError,error-mode~~>
       <label>
          <span>URL:</span>
          <input placeholder="Enter REST endpoint" data-enter-key=app.widget.networkRestTool.get>
@@ -110,9 +111,9 @@
          <code>~~url~~</code>
          <pre>~~jsonHtml~~</pre>
       </section>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=project-contributors class=dna-template>
+   <app-widget-body id=project-contributors class=dna-template>
       <contributor-list class=external-site>
          <contributor-element data-array=~~contributors~~ data-href=~~html_url~~>
             <figure>
@@ -121,36 +122,36 @@
             </figure>
          </contributor-element>
       </contributor-list>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=project-json-questions class=dna-template>
+   <app-widget-body id=project-json-questions class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
       <figure class=external-site>
          <table></table>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=space-starships class=dna-template>
+   <app-widget-body id=space-starships class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
       <figure>
          <table></table>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=space-vehicles class=dna-template>
+   <app-widget-body id=space-vehicles class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
       <figure>
          <table></table>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=spacex-books class=dna-template>
+   <app-widget-body id=spacex-books class=dna-template>
       <book-list class=external-site>
          <book-element data-array=~~books~~>
             <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~volumeInfo.imageLinks.thumbnail~~
@@ -165,9 +166,9 @@
             </div>
          </book-element>
       </book-list>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=spacex-pics class=dna-template>
+   <app-widget-body id=spacex-pics class=dna-template>
       <photo-list>
          <photo-element data-array=~~photos~~>
             <cite>~~date~~</cite>
@@ -177,24 +178,24 @@
             </figure>
          </photo-element>
       </photo-list>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=trans-bart-departures class=dna-template>
+   <app-widget-body id=trans-bart-departures class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=trans-bart-stations class=dna-template>
+   <app-widget-body id=trans-bart-stations class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
       <figure>
          <table></table>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=trans-f1-top-countries class=dna-template>
+   <app-widget-body id=trans-f1-top-countries class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
@@ -204,20 +205,20 @@
       <figure>
          <canvas></canvas>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
-   <widget-body id=trans-nyc-bike-stations class=dna-template>
+   <app-widget-body id=trans-nyc-bike-stations class=dna-template>
       <figure>
          <canvas></canvas>
       </figure>
-   </widget-body>
+   </app-widget-body>
 
 
-</widget-templates>
+</app-widget-templates>
 
-<script src=libraries.70deac35.js></script>
-<script src=libraries.dist.555bfca2.js></script>
-<script src=data-dashboard.3e2f9e34.js></script>
+<script src=libraries.ffd11419.js></script>
+<script src=libraries.dist.4e2b9ee2.js></script>
+<script src=data-dashboard.b669e310.js></script>
 </body>
 </html>
 
