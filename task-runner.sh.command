@@ -78,11 +78,13 @@ runSpecs() {
 
 showInstructions() {
    cd $projectHome
-   echo "Dev mode instructions:"
-   url=http://localhost:7531/
+   echo "Developer mode:"
    echo "   cd $projectHome"
-   echo "   open $url"
    echo "   npm run dev"
+   echo
+   echo "Regular mode:"
+   echo "   cd $projectHome"
+   echo "   npm run prod"
    echo
    }
 

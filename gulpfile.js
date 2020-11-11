@@ -2,6 +2,7 @@
 
 // Imports
 const babel =           require('gulp-babel');
+const browserSync =     require('browser-sync');
 const concat =          require('gulp-concat');
 const css =             require('gulp-postcss');
 const cssFontMagician = require('postcss-font-magician');
@@ -239,6 +240,9 @@ const task = {
       gulp.watch('src/**/*.less',                         task.buildWebApp.css);
       gulp.watch('src/**/*.js',                           task.buildWebApp.js);
       gulp.watch(['src/**/*.html', '!src/**/*.gen.html'], task.compound.buildHtml());
+      const sync = browserSync.create();
+      sync.init({ server: { baseDir: folder.staging } });
+      gulp.watch(folder.staging + '/**/*').on('change', sync.reload);
       },
    };
 

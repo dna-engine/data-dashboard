@@ -38,14 +38,14 @@
       "pretest": "jshint *.js src spec && rimraf build **/.DS_Store && gulp build",
       "test": "mocha spec",
       "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
-      "dev": "npm test && concurrently 'gulp watch' 'webFolder=build/step1-staging npm start'",
-      "prod": "npm test && open http://localhost:8080/docs && http-server --port 8080"
+      "dev": "npm test && gulp watch",
+      "prod": "npm test && echo && echo 'Visit --> http://localhost:7531' && npm start"
    },
    "cdnVersion": {
       "fontAwesome": "5.14"
    },
    "dependencies": {
-      "chart.js": "3.0.0-beta.3",
+      "chart.js": "3.0.0-beta.6",
       "dna.js": "~1.6",
       "fetch-json": "~2.2",
       "jquery": "~3.5",
@@ -55,15 +55,15 @@
       "select2": "~4.0",
       "simple-datatables": "~2.1",
       "web-ignition": "~1.3",
-      "whatwg-fetch": "~3.4"
+      "whatwg-fetch": "~3.5"
    },
    "devDependencies": {
-      "@babel/core": "~7.11",
-      "@babel/preset-env": "~7.11",
+      "@babel/core": "~7.12",
+      "@babel/preset-env": "~7.12",
       "@fortawesome/fontawesome-free": "~5.15",
       "babel-minify": "~0.5",
+      "browser-sync": "~2.26",
       "canvas": "~2.6",
-      "concurrently": "~5.3",
       "cssnano": "~4.1",
       "express": "~4.17",
       "gulp": "~4.0",
@@ -81,13 +81,12 @@
       "gulp-size": "~3.0",
       "gulp-touch-cmd": "~0.0",
       "gulp-w3c-html-validator": "~2.0",
-      "http-server": "~0.12",
       "jsdom": "~16.4",
       "jshint": "~2.12",
       "merge-stream": "~2.0",
-      "mocha": "~8.1",
+      "mocha": "~8.2",
       "postcss": "~8.1",
-      "postcss-font-magician": "~2.3",
+      "postcss-font-magician": "~3.0",
       "postcss-preset-env": "~6.7",
       "server-listening": "~0.1"
    }
