@@ -42,10 +42,10 @@
       "prod": "npm test && echo && echo 'Visit --> http://localhost:7531' && npm start"
    },
    "cdnVersion": {
-      "fontAwesome": "5.14"
+      "fontAwesome": "5.15"
    },
    "dependencies": {
-      "chart.js": "3.0.0-beta.6",
+      "chart.js": "3.0.0-beta.7",
       "dna.js": "~1.6",
       "fetch-json": "~2.2",
       "jquery": "~3.5",
@@ -85,7 +85,7 @@
       "jshint": "~2.12",
       "merge-stream": "~2.0",
       "mocha": "~8.2",
-      "postcss": "~8.1",
+      "postcss": "~8.2",
       "postcss-font-magician": "~3.0",
       "postcss-preset-env": "~6.7",
       "server-listening": "~0.1"
