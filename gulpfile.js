@@ -1,27 +1,28 @@
 // Gulp tasks
 
 // Imports
-const babel =           require('gulp-babel');
-const browserSync =     require('browser-sync');
-const concat =          require('gulp-concat');
-const css =             require('gulp-postcss');
-const cssFontMagician = require('postcss-font-magician');
-const cssNano =         require('cssnano');
-const cssPresetEnv =    require('postcss-preset-env');
-const fileInclude =     require('gulp-file-include');
-const fs =              require('fs');
-const gap =             require('gulp-append-prepend');
-const gulp =            require('gulp');
-const header =          require('gulp-header');
-const htmlHint =        require('gulp-htmlhint');
-const htmlValidator =   require('gulp-w3c-html-validator');
-const less =            require('gulp-less');
-const mergeStream =     require('merge-stream');
-const order =           require('gulp-order');
-const replace =         require('gulp-replace');
-const RevAll =          require('gulp-rev-all');
-const size =            require('gulp-size');
-const touch =           require('gulp-touch-cmd');
+import babel           from 'gulp-babel';
+import browserSync     from 'browser-sync';
+import concat          from 'gulp-concat';
+import css             from 'gulp-postcss';
+import cssFontMagician from 'postcss-font-magician';
+import cssNano         from 'cssnano';
+import cssPresetEnv    from 'postcss-preset-env';
+import fileInclude     from 'gulp-file-include';
+import fs              from 'fs';
+import gap             from 'gulp-append-prepend';
+import gulp            from 'gulp';
+import header          from 'gulp-header';
+import htmlHint        from 'gulp-htmlhint';
+import htmlValidator   from 'gulp-w3c-html-validator';
+import less            from 'gulp-less';
+import mergeStream     from 'merge-stream';
+import order           from 'gulp-order';
+import replace         from 'gulp-replace';
+import RevAll          from 'gulp-rev-all';
+import size            from 'gulp-size';
+import touch           from 'gulp-touch-cmd';
+import { readFileSync } from  'fs';
 
 // Folders
 const folder = {
@@ -31,8 +32,8 @@ const folder = {
    };
 
 // Setup
-const pkg = require('./package.json');
-const banner = `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
+const pkg =      JSON.parse(readFileSync('./package.json'));
+const banner =   `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const srcFiles = {
    graphics: { glob: 'src/assets/graphics/**/*' },
    css:      { glob: 'src/**/*.less', order: ['src/css/base.less'] },

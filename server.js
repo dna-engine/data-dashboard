@@ -2,7 +2,7 @@
 // Web Server
 
 // Imports
-const express = require('express');
+import express from 'express';
 
 // Setup
 const webFolder = process.env.webFolder || 'docs';
@@ -19,4 +19,4 @@ server.on('listening', () => console.log('  --- server listening on port:', serv
 server.on('close',     () => console.log('  --- sever shutdown'));
 
 // Module
-module.exports = server;
+export { server };
