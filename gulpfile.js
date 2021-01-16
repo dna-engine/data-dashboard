@@ -22,7 +22,7 @@ import replace         from 'gulp-replace';
 import RevAll          from 'gulp-rev-all';
 import size            from 'gulp-size';
 import touch           from 'gulp-touch-cmd';
-import { readFileSync } from  'fs';
+import { readFileSync } from 'fs';
 
 // Folders
 const folder = {

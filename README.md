@@ -6,7 +6,7 @@ _A data-driven dashboard console for report widgets_
 [![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dnajs/data-dashboard/blob/master/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/data-dashboard.svg)](https://www.npmjs.com/package/data-dashboard)
 [![Vulnerabilities](https://snyk.io/test/github/dnajs/data-dashboard/badge.svg)](https://snyk.io/test/github/dnajs/data-dashboard)
-[![Build](https://travis-ci.com/dnajs/data-dashboard.svg)](https://travis-ci.com/dnajs/data-dashboard)
+[![Build](https://travis-ci.org/dnajs/data-dashboard.svg)](https://travis-ci.org/dnajs/data-dashboard)
 
 ## Try it out
 https://data-dashboard.js.org
