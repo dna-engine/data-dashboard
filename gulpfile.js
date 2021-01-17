@@ -14,7 +14,6 @@ import gap             from 'gulp-append-prepend';
 import gulp            from 'gulp';
 import header          from 'gulp-header';
 import htmlHint        from 'gulp-htmlhint';
-import htmlValidator   from 'gulp-w3c-html-validator';
 import less            from 'gulp-less';
 import mergeStream     from 'merge-stream';
 import order           from 'gulp-order';
@@ -22,6 +21,7 @@ import replace         from 'gulp-replace';
 import RevAll          from 'gulp-rev-all';
 import size            from 'gulp-size';
 import touch           from 'gulp-touch-cmd';
+import { htmlValidator } from 'gulp-w3c-html-validator';
 import { readFileSync } from 'fs';
 
 // Folders
@@ -147,7 +147,7 @@ const task = {
             .pipe(fileInclude({ indent: true, context: { pkg } }))
             .pipe(htmlHint(htmlHintConfig))
             .pipe(htmlHint.reporter())
-            .pipe(htmlValidator())
+            .pipe(htmlValidator.analyzer())
             .pipe(htmlValidator.reporter())
             .pipe(replace('src=#', 'src=' + placeholderSvg))
             .pipe(size({ showFiles: true }))

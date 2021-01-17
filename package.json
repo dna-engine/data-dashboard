@@ -3,8 +3,8 @@
    "description": "A data-driven dashboard console for report widgets",
    "version": "0.1.2",
    "license": "MIT",
-   "main": "server.js",
    "type": "module",
+   "main": "server.js",
    "browser": "docs/index.html",
    "repository": "github:dnajs/data-dashboard",
    "homepage": "https://data-dashboard.js.org",
@@ -46,7 +46,7 @@
       "fontAwesome": "5.15"
    },
    "dependencies": {
-      "chart.js": "3.0.0-beta.8",
+      "chart.js": "3.0.0-beta.9",
       "dna.js": "~1.7",
       "fetch-json": "~2.4",
       "jquery": "~3.5",
@@ -81,7 +81,7 @@
       "gulp-rev-all": "~2.0",
       "gulp-size": "~3.0",
       "gulp-touch-cmd": "~0.0",
-      "gulp-w3c-html-validator": "~2.0",
+      "gulp-w3c-html-validator": "~3.0",
       "jsdom": "~16.4",
       "jshint": "~2.12",
       "merge-stream": "~2.0",
