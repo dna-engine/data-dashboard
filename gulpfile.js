@@ -35,11 +35,11 @@ const folder = {
 const pkg =      JSON.parse(readFileSync('./package.json'));
 const banner =   `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const srcFiles = {
-   graphics: { glob: 'src/assets/graphics/**/*' },
-   css:      { glob: 'src/**/*.less', order: ['src/css/base.less'] },
-   html:     { glob: 'src/root/**/*.html' },
-   widgets:  { glob: 'src/widgets/**/*.html' },
-   js:       { glob: 'src/**/*.js', order: ['js/config.js', '!js/setup.js'] },
+   graphics: { glob: 'src/web/assets/graphics/**/*' },
+   css:      { glob: 'src/web/**/*.less', order: ['src/web/css/base.less'] },
+   html:     { glob: 'src/web/root/**/*.html' },
+   widgets:  { glob: 'src/web/widgets/**/*.html' },
+   js:       { glob: 'src/web/**/*.js', order: ['js/config.js', '!js/setup.js'] },
    };
 const libraryFiles = {
    css: [
@@ -126,7 +126,7 @@ const task = {
             .pipe(gulp.dest(dest));
          },
       widgets() {
-         return task.buildIncludes.generate('widgets', srcFiles.widgets.glob, 'src/html/generated');
+         return task.buildIncludes.generate('widgets', srcFiles.widgets.glob, 'src/web/html/generated');
          },
       },
    buildWebApp: {
@@ -237,10 +237,10 @@ const task = {
          ),
       },
    setupWatchers() {
-      gulp.watch('src/**/*.+(jpg|png|svg)',               task.buildWebApp.graphics);
-      gulp.watch('src/**/*.less',                         task.buildWebApp.css);
-      gulp.watch('src/**/*.js',                           task.buildWebApp.js);
-      gulp.watch(['src/**/*.html', '!src/**/*.gen.html'], task.compound.buildHtml());
+      gulp.watch('src/web/**/*.+(jpg|png|svg)',                   task.buildWebApp.graphics);
+      gulp.watch('src/web/**/*.less',                             task.buildWebApp.css);
+      gulp.watch('src/web/**/*.js',                               task.buildWebApp.js);
+      gulp.watch(['src/web/**/*.html', '!src/web/**/*.gen.html'], task.compound.buildHtml());
       const sync = browserSync.create();
       sync.init({ server: { baseDir: folder.staging } });
       gulp.watch(folder.staging + '/**/*').on('change', sync.reload);
