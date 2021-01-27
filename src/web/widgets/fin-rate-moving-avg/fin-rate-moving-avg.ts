@@ -1,6 +1,10 @@
 // DataDashboard
 // Widget controller
 
+import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
+import { fetchJson } from 'fetch-json';
+import { app, AppChartColor } from '../../ts/app.js';
+
 // {
 //    'Meta Data': {
 //       '1: Symbol': 'USDEUR',
@@ -16,9 +20,19 @@
 //       },
 //       ...
 
-app.widget.finRateMovingAvg = {
-   displayDataChart(widgetElem, rawData) {
-      const transform = (rawData) => {
+type RawDataSma = { SMA: string };
+type RawData = {
+   'Meta Data': {
+      '1: Symbol':         string,
+      '2: Indicator':      string,
+      '3: Last Refreshed': string,
+      },
+   'Technical Analysis: SMA': { [date: string]: RawDataSma },
+   };
+
+const appWidgetFinRateMovingAvg = {
+   displayDataChart(widgetElem: JQuery, rawData: RawData) {
+      const transform = (rawData: RawData) => {
          const metadata =   rawData['Meta Data'];
          const timeSeries = rawData['Technical Analysis: SMA'];
          const timestamps = Object.keys(timeSeries).sort();
@@ -27,17 +41,17 @@ app.widget.finRateMovingAvg = {
             subtitle: metadata['3: Last Refreshed'],
             set:      metadata['1: Symbol'],
             labels:   timestamps,
-            values:   timestamps.map(timestamp => parseFloat(timeSeries[timestamp].SMA)),
+            values:   timestamps.map(timestamp => parseFloat((<RawDataSma>timeSeries[timestamp]).SMA)),
             };
          };
       const data = transform(rawData);
-      const dataset = {
+      const dataset: ChartDataset = {
          label:           data.set,
          data:            data.values,
-         borderColor:     app.chartColor.purple,
-         backgroundColor: app.chartColor.purple,
+         borderColor:     (<AppChartColor>app.cfg.chartColor.purple).value,
+         backgroundColor: (<AppChartColor>app.cfg.chartColor.purple).value,
          };
-      const chartInfo = {
+      const chartInfo = <ChartConfiguration>{
          type: 'line',
          data: {
             labels:   data.labels,
@@ -48,10 +62,11 @@ app.widget.finRateMovingAvg = {
             title: { display: true, text: [data.title, data.subtitle] },
             },
          };
-      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
+      const canvas: ChartItem = widgetElem.find('canvas');
+      widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem) {
-      const handleData = (rawData) => {
+   show(widgetElem: JQuery) {
+      const handleData = (rawData: RawData) => {
          app.util.spinnerStop(widgetElem);
          if (!rawData['Error Message'])
             app.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
@@ -69,3 +84,5 @@ app.widget.finRateMovingAvg = {
       fetchJson.get(url, params).then(handleData);
       },
    };
+
+export { appWidgetFinRateMovingAvg };

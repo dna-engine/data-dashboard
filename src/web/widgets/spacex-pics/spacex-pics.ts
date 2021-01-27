@@ -1,6 +1,9 @@
 // DataDashboard
 // Widget controller
 
+import { dna } from 'dna.js';
+import { app, AppCallback } from '../../ts/app.js';
+
 // {
 //    title: "Recent Uploads tagged spacex",
 //    link: "https://www.flickr.com/photos/tags/spacex/",
@@ -23,18 +26,33 @@
 //       },
 //       ...
 
-app.widget.spacexPics = {
-   show(widgetElem) {
+type WidgetModel = {
+   photos: {
+      title:      string,
+      date:       string,
+      date_taken: string,
+      link:       string,
+      media:      { m: string },
+      }[],
+   };
+type RawData = {
+   items: WidgetModel['photos'],
+   };
+
+const appWidgetSpacexPics = {
+   show(widgetElem: JQuery) {
       const url = 'https://api.flickr.com/services/feeds/photos_public.gne';
       const params = { format: 'json', tags: 'spacex' };
-      const handleData = (data) => {
+      const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          data.items.forEach(item => item.date = item.date_taken.substring(0, 10));
-         const model = dna.getModel(widgetElem);
+         const model = <WidgetModel>dna.getModel(widgetElem);
          model.photos = data.items;
          dna.refresh(widgetElem);
          };
       app.util.spinnerStart(widgetElem);
-      app.util.fetchJsonp(url, params, 'jsonFlickrFeed', handleData);
+      app.util.fetchJsonp(url, params, 'jsonFlickrFeed', <AppCallback>handleData);
       },
    };
+
+export { appWidgetSpacexPics };

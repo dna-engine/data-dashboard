@@ -1,6 +1,10 @@
 // DataDashboard
 // Widget controller
 
+import { Chart, ChartConfiguration, ChartItem } from 'chart.js';
+import { fetchJson } from 'fetch-json';
+import { app } from '../../ts/app.js';
+
 // {
 //    last_updated: 1546391115,
 //    ttl: 10,
@@ -21,8 +25,23 @@
 //          },
 //          ...
 
-app.widget.transNycBikeStations = {
-   displayDataChart(widgetElem, data) {
+type Station = {
+   capacity:            number,
+   num_docks_available: number,
+   num_bikes_available: number,
+   num_bikes_disabled:  number,
+   availableDocks:      number,
+   totalDocks:          number,
+   availableBikes:      number,
+   reservedBikes:       number,
+   };
+type RawData = {
+   last_updated: number,
+   data:         { stations: Station[] },
+   };
+
+const appWidgetTransNycBikeStations = {
+   displayDataChart(widgetElem: JQuery, data: RawData) {
       const title =    'NYC Bike Stations';
       const subtitle = 'Capacity on ' + new Date(data.last_updated * 1000).toLocaleString();
       const stations = data.data.stations;
@@ -36,7 +55,7 @@ app.widget.transNycBikeStations = {
          { label: 'Available bikes', data: stations.map(station => station.num_bikes_available) },
          { label: 'Disabled bikes',  data: stations.map(station => station.num_bikes_disabled) },
          ];
-      const chartInfo = {
+      const chartInfo = <ChartConfiguration>{
          type: 'bar',
          data: {
             labels:   Array.from({ length: stations.length }, (value, i) => i + 1),
@@ -49,11 +68,12 @@ app.widget.transNycBikeStations = {
             },
          };
       app.util.narrowScreenSaver(chartInfo);
-      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
+      const canvas = <ChartItem>widgetElem.find('canvas');
+      widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem) {
+   show(widgetElem: JQuery) {
       const url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json';
-      const handleData = (data) => {
+      const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          app.widget.transNycBikeStations.displayDataChart(widgetElem, data);
          };
@@ -61,3 +81,5 @@ app.widget.transNycBikeStations = {
       fetchJson.get(url).then(handleData);
       },
    };
+
+export { appWidgetTransNycBikeStations };

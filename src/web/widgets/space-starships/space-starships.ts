@@ -1,6 +1,10 @@
 // DataDashboard
 // Widget controller
 
+import { Chart, ChartConfiguration, ChartItem } from 'chart.js';
+import { fetchJson } from 'fetch-json';
+import { app } from '../../ts/app.js';
+
 // {
 //    count: 37,
 //    next: 'https://swapi.dev/api/starships/?page=2&format=json',
@@ -31,20 +35,39 @@
 //       },
 //       ...
 
-app.widget.spaceStarships = {
-   displayDataChart(widgetElem, starships) {
+type Starship = {
+   name:           string,
+   model:          string,
+   length:         string,
+   crew:           string,
+   passengers:     string,
+   MGLT:           string,
+   starship_class: string,
+   chart: {
+      passengers: number,
+      crew:       number,
+      total?:     number,
+      },
+   };
+type RawData = {
+   next:    string,
+   results: Starship[],
+   };
+
+const appWidgetSpaceStarships = {
+   displayDataChart(widgetElem: JQuery, starships: Starship[]) {
       starships.forEach(item => item.chart = {
          passengers: parseInt(item.passengers) || 0,
          crew:       parseInt(item.crew) || 0
          });
       starships.forEach(item => item.chart.total = item.chart.passengers + item.chart.crew);
-      starships.sort((itemA, itemB) => itemA.chart.total - itemB.chart.total);
+      starships.sort((itemA, itemB) => <number>itemA.chart.total - <number>itemB.chart.total);
       const chartStarships = starships.slice(-11, -3);  //8 relatively large starships
       const datasets = [
          { label: 'Passengers', data: chartStarships.map(item => item.chart.passengers) },
          { label: 'Crew',       data: chartStarships.map(item => item.chart.crew) },
          ];
-      const chartInfo = {
+      const chartInfo = <ChartConfiguration>{
          type: 'bar',
          data: {
             labels:   chartStarships.map(item => item.name),
@@ -56,11 +79,13 @@ app.widget.spaceStarships = {
             scales: { x: { stacked: true }, y: { stacked: true } },
             },
          };
-      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
+      const canvas: ChartItem = widgetElem.find('canvas');
+      widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   displayDataTable(widgetElem, starships) {
+   displayDataTable(widgetElem: JQuery, starships: Starship[]) {
       const tableElem = widgetElem.find('figure table');
-      const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
+      const DataTable = globalThis['simpleDatatables'].DataTable;
+      const dataTable = new DataTable(tableElem[0]);
       const headers = [
          'Name',
          'Model',
@@ -70,26 +95,26 @@ app.widget.spaceStarships = {
          'MGLT',
          'Class',
          ];
-      const tableStarships = starships.map(item => [
-         item.name,
-         item.model,
-         item.length,
-         item.crew,
-         item.passengers,
-         item.MGLT,
-         item.starship_class,
+      const tableStarships = starships.map(starship => [
+         starship.name,
+         starship.model,
+         starship.length,
+         starship.crew,
+         starship.passengers,
+         starship.MGLT,
+         starship.starship_class,
          ]);
       dataTable.insert({ headings: headers, data: tableStarships });
       widgetElem.data().table = dataTable;
       },
-   show(widgetElem) {
-      const starships = [];
+   show(widgetElem: JQuery) {
+      const starships: Starship[] = [];
       const displayData = () => {
          app.util.spinnerStop(widgetElem);
          app.widget.spaceStarships.displayDataChart(widgetElem, starships);
          app.widget.spaceStarships.displayDataTable(widgetElem, starships);
          };
-      const handleData = (data) => {
+      const handleData = (data: RawData) => {
          starships.push(...data.results);
          if (data.next)
             fetchJson.get(data.next.replace('http://', 'https://')).then(handleData);
@@ -102,3 +127,5 @@ app.widget.spaceStarships = {
       fetchJson.get(url, params).then(handleData);
       },
    };
+
+export { appWidgetSpaceStarships };

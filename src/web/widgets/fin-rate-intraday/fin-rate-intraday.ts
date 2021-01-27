@@ -1,6 +1,10 @@
 // DataDashboard
 // Widget controller
 
+import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
+import { fetchJson } from 'fetch-json';
+import { app } from '../../ts/app.js';
+
 // {
 //    'Meta Data': {
 //       '1. Information':    'FX Intraday (5min) Time Series',
@@ -23,9 +27,9 @@
 //          },
 //       ...
 
-app.widget.finRateIntraday = {
-   displayDataChart(widgetElem, rawData) {
-      const transform = (rawData) => {
+const appWidgetFinRateIntraday = {
+   displayDataChart(widgetElem: JQuery, rawData: unknown) {
+      const transform = (rawData: any) => {
          const metadata =   rawData['Meta Data'];
          const timeSeries = rawData['Time Series FX (5min)'];
          const timestamps = Object.keys(timeSeries).sort();
@@ -38,11 +42,11 @@ app.widget.finRateIntraday = {
             };
          };
       const data = transform(rawData);
-      const datasets = [
+      const datasets: ChartDataset[] = [
          { label: 'Low',  data: data.lows },
          { label: 'High', data: data.highs },
          ];
-      const chartInfo = {
+      const chartInfo = <ChartConfiguration>{
          type: 'line',
          data: {
             labels:   data.labels,
@@ -53,12 +57,15 @@ app.widget.finRateIntraday = {
             title: { display: true, text: [data.title, data.subtitle] },
             },
          };
-      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
+      const canvas: ChartItem = widgetElem.find('canvas');
+      widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem) {
-      const handleData = (rawData) => {
+   show(widgetElem: JQuery) {
+      const handleData = (rawData: unknown) => {
          app.util.spinnerStop(widgetElem);
-         if (!rawData['Error Message'])
+         if (!rawData || (<any>rawData)['Error Message'])
+            console.error(rawData);
+         else
             app.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
@@ -74,3 +81,5 @@ app.widget.finRateIntraday = {
       fetchJson.get(url, params).then(handleData);
       },
    };
+
+export { appWidgetFinRateIntraday };

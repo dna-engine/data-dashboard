@@ -1,6 +1,10 @@
 // DataDashboard
 // Widget controller
 
+import { Chart, ChartConfiguration } from 'chart.js';
+import { fetchJson } from 'fetch-json';
+import { app } from '../../ts/app.js';
+
 // {
 //    MRData: {
 //       xmlns: "http://ergast.com/mrd/1.4",
@@ -80,14 +84,27 @@
 //    { Driver: { nationality: 'German' }, Constructor: { nationality: 'French' } },
 // ];
 
-app.widget.transF1TopCountries = {
-   displayDataChart(widgetElem, race) {
+type Race = {
+   season:   string,
+   raceName: string,
+   round:    string,
+   Results: {
+      Driver:      { nationality: string },
+      Constructor: { nationality: string },
+      }[],
+   };
+type RawData = {
+   MRData: { RaceTable: { Races: Race[] } },
+   };
+
+const appWidgetTransF1TopCountries = {
+   displayDataChart(widgetElem: JQuery, race: Race) {
       const topFinishes = 10;
       const title =    'Nationalities of Top F1 Drivers and Constructors';
       const subtitle = race.season + ' ' + race.raceName + ' top ' + topFinishes + ' finishes';
-      const round =    parseInt(race.round);
-      const addResult = (totalsMap, result) => {
-         const setupNationality = (nationality) => {
+      const round =    Number(race.round);
+      const addResult = (totalsMap: {}, result: Race['Results'][0]) => {
+         const setupNationality = (nationality: string) => {
             if (!totalsMap[nationality])
                totalsMap[nationality] = { nationality: nationality, numDrivers: 0, numConstructors: 0 };
             };
@@ -104,7 +121,7 @@ app.widget.transF1TopCountries = {
          { label: 'Driver',      data: data.map(item => item.numDrivers) },
          { label: 'Constructor', data: data.map(item => item.numConstructors) },
          ];
-      const chartInfo = {
+      const chartInfo = <ChartConfiguration>{
          type: 'bar',
          data: {
             labels:   data.map(item => item.nationality),
@@ -117,20 +134,22 @@ app.widget.transF1TopCountries = {
             },
          };
       const canvas = widgetElem.find('canvas').eq(round - 1);
-      widgetElem.data().chart = new window.Chart(canvas, chartInfo);
+      widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem) {
+   show(widgetElem: JQuery) {
       const raceYear = new Date().getFullYear() - 1;
-      const handleData = (data) => {
+      const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
-         const race = data.MRData.RaceTable.Races[0];
+         const race = data.MRData.RaceTable.Races[0]!;
          app.widget.transF1TopCountries.displayDataChart(widgetElem, race);
          };
       app.util.spinnerStart(widgetElem);
-      const display = (round) => {
+      const display = (round: number) => {
          const url = 'https://ergast.com/api/f1/' + raceYear + '/' + round + '/results.json';
          fetchJson.get(url).then(handleData);
          };
       widgetElem.find('app-widget-body >figure >canvas').each(i => display(i + 1));
       },
    };
+
+export { appWidgetTransF1TopCountries };

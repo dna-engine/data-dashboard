@@ -1,6 +1,10 @@
 // DataDashboard
 // Widget controller
 
+import { Chart, ChartConfiguration, ChartDataset, ChartItem, TooltipItem } from 'chart.js';
+import { fetchJson } from 'fetch-json';
+import { app } from '../../ts/app.js';
+
 // {
 //    root: {
 //       stations: {
@@ -18,25 +22,43 @@
 //             },
 //             ...
 
-app.widget.transBartStations = {
-   displayDataChart(widgetElem, data) {
-      const dataset = {
+type Station = {
+   name:           string,
+   abbr:           string,
+   gtfs_latitude:  string,
+   gtfs_longitude: string,
+   city:           string,
+   county:         string,
+   };
+type RawData = {
+   root: { stations: { station: Station[] } },
+   };
+type DataPoint = {
+   x:     number,
+   y:     number,
+   label: string,
+   };
+
+const appWidgetTransBartStations = {
+   displayDataChart(widgetElem: JQuery, stations: Station[]) {
+      const dataset: ChartDataset = {
          label: 'Geolocation',
-         backgroundColor: app.chartColor.green,
-         data: data.map(item => ({
+         backgroundColor: app.cfg.chartColor.green!.value,
+         data: stations.map((item: Station): DataPoint => ({
             x:     parseFloat(item.gtfs_longitude),
             y:     parseFloat(item.gtfs_latitude),
             label: item.abbr + ' (' + item.name + ')',
             })),
          };
-      const latLong = (item) => {
+      const latLong = (item: TooltipItem): string => {
          // Returns a string formatted like: "37.2°N 27.9°W"
          const lat =  parseFloat(item.formattedValue);
          const long = parseFloat(item.label);
          return `${Math.abs(lat)}°${lat > 0 ? 'N' : 'S'} ${Math.abs(long)}°${long > 0 ? 'E' : 'W'}`;
          };
-      const makeTooltip = (item) => item.dataset.data[item.dataIndex].label + ' ' + latLong(item);
-      const chartInfo = {
+      const makeTooltip = (item: TooltipItem) =>
+         (<DataPoint>item.dataset.data[item.dataIndex]).label + ' ' + latLong(item);
+      const chartInfo = <ChartConfiguration><unknown>{
          type: 'scatter',
          data: {
             datasets: [dataset],
@@ -47,11 +69,13 @@ app.widget.transBartStations = {
             tooltips: { callbacks: { label: makeTooltip } },
             },
          };
-      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
+      const canvas: ChartItem = widgetElem.find('canvas');
+      widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   displayDataTable(widgetElem, data) {
+   displayDataTable(widgetElem: JQuery, stations: Station[]) {
       const tableElem = widgetElem.find('figure table');
-      const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
+      const DataTable = globalThis['simpleDatatables'].DataTable;
+      const dataTable = new DataTable(tableElem[0]);
       const headers = [
          'Name',
          'Code',
@@ -60,19 +84,19 @@ app.widget.transBartStations = {
          'City',
          'County',
          ];
-      const stations = data.map(item => [
-         item.name,
-         item.abbr,
-         item.gtfs_latitude,
-         item.gtfs_longitude,
-         item.city,
-         item.county,
+      const rows = stations.map(station => [
+         station.name,
+         station.abbr,
+         station.gtfs_latitude,
+         station.gtfs_longitude,
+         station.city,
+         station.county,
          ]);
-      dataTable.insert({ headings: headers, data: stations });
+      dataTable.insert({ headings: headers, data: rows });
       widgetElem.data().table = dataTable;
       },
-   show(widgetElem) {
-      const handleData = (data) => {
+   show(widgetElem: JQuery) {
+      const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          const stations = data.root.stations.station;
          app.widget.transBartStations.displayDataChart(widgetElem, stations);
@@ -84,3 +108,5 @@ app.widget.transBartStations = {
       fetchJson.get(url, params).then(handleData);
       },
    };
+
+export { appWidgetTransBartStations };

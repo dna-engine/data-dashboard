@@ -1,9 +1,19 @@
 // DataDashboard
 // Widget controller
 
-app.widget.networkEndpoints = {
-   show(widgetElem) {
-      const model = dna.getModel(widgetElem);
+import { dna } from 'dna.js';
+
+type WidgetModel = {
+   endpoints: {
+      name: string,
+      base: string,
+      docs: string,
+      }[],
+   };
+
+const appWidgetNetworkEndpoints = {
+   show(widgetElem: JQuery) {
+      const model = <WidgetModel>dna.getModel(widgetElem);
       model.endpoints = [
          { name: 'Alpha Vantage API',    base: 'https://www.alphavantage.co/query', docs: 'https://www.alphavantage.co/documentation' },
          { name: 'BART API',             base: 'https://api.bart.gov/api',          docs: 'https://api.bart.gov/docs/overview/examples.aspx' },
@@ -18,3 +28,5 @@ app.widget.networkEndpoints = {
       dna.refresh(widgetElem);
       },
    };
+
+export { appWidgetNetworkEndpoints };

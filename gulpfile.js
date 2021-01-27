@@ -26,20 +26,23 @@ import { readFileSync } from 'fs';
 
 // Folders
 const folder = {
+   tsc:      'build/step0-tsc',
    staging:  'build/step1-staging',
    minified: 'build/step2-minified',
    prod:     'build/step3-production',
    };
 
 // Setup
-const pkg =      JSON.parse(readFileSync('./package.json'));
-const banner =   `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
+const pkg =       JSON.parse(readFileSync('./package.json'));
+const banner =    `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
+const bannerCss = '/*! ' + banner + ' */\n';
+const bannerJs =  '//! ' + banner + '\n';
 const srcFiles = {
    graphics: { glob: 'src/web/assets/graphics/**/*' },
    css:      { glob: 'src/web/**/*.less', order: ['src/web/css/base.less'] },
    html:     { glob: 'src/web/root/**/*.html' },
    widgets:  { glob: 'src/web/widgets/**/*.html' },
-   js:       { glob: 'src/web/**/*.js', order: ['js/config.js', '!js/setup.js'] },
+   js:       { glob: folder.tsc + '/**/*.js', order: ['!ts/app.js'] },
    };
 const libraryFiles = {
    css: [
@@ -51,7 +54,6 @@ const libraryFiles = {
       ],
    js: [
       'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
-      'node_modules/moment/moment.js',  //avoid sourceMappingURL in min/moment.min.js
       ],
    jsMinified: [
       'node_modules/fetch-json/dist/fetch-json.min.js',
@@ -60,7 +62,7 @@ const libraryFiles = {
       'node_modules/chart.js/dist/chart.min.js',
       'node_modules/dna.js/dist/dna.min.js',
       'node_modules/simple-datatables/dist/umd/simple-datatables.js',
-      'node_modules/web-ignition/dist/library.min.js',
+      'node_modules/web-ignition/dist/lib-x.min.js',
       'node_modules/pretty-print-json/dist/pretty-print-json.min.js',
       ],
    };
@@ -158,6 +160,7 @@ const task = {
          return gulp.src(srcFiles.js.glob)
             .pipe(order(srcFiles.js.order))
             .pipe(concat(pkg.name + '.js'))
+            .pipe(replace(/^[import|export].*\n/gm, ''))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
          },
@@ -195,11 +198,11 @@ const task = {
          .pipe(gulp.dest(folder.minified));
       const minifyCss = () => gulp.src(folder.staging + '/' + pkg.name + '.css')
          .pipe(css(cssPlugins))
-         .pipe(header('/*! ' + banner + ' */\n'))
+         .pipe(header(bannerCss))
          .pipe(gulp.dest(folder.minified));
       const minifyJs = () => gulp.src(folder.staging + '/' + pkg.name + '.js')
          .pipe(babel(babelMinifyJs))
-         .pipe(header('//! ' + banner + '\n'))
+         .pipe(header(bannerJs))
          .pipe(gap.appendText('\n'))
          .pipe(gulp.dest(folder.minified));
       return mergeStream(
@@ -239,7 +242,7 @@ const task = {
    setupWatchers() {
       gulp.watch('src/web/**/*.+(jpg|png|svg)',                   task.buildWebApp.graphics);
       gulp.watch('src/web/**/*.less',                             task.buildWebApp.css);
-      gulp.watch('src/web/**/*.js',                               task.buildWebApp.js);
+      gulp.watch(folder.tsc + '/**/*.js',                         task.buildWebApp.js);
       gulp.watch(['src/web/**/*.html', '!src/web/**/*.gen.html'], task.compound.buildHtml());
       const sync = browserSync.create();
       sync.init({ server: { baseDir: folder.staging } });

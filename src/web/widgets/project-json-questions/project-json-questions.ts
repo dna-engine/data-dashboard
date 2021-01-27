@@ -1,6 +1,11 @@
 // DataDashboard
 // Widget controller
 
+import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
+import { fetchJson } from 'fetch-json';
+import { libX } from 'web-ignition';
+import { app } from '../../ts/app.js';
+
 // {
 //    items: [
 //       {
@@ -31,17 +36,29 @@
 //       },
 //       ...
 
-app.widget.projectJsonQuestions = {
-   displayDataChart(widgetElem, data) {
-      const numItems = app.util.chartColors.length;
+type RawDataItem = {
+   is_answered:        boolean,
+   last_activity_date: number,
+   link:               string,
+   owner:              { display_name: string },
+   score?:             number,
+   timestamp?:         string,
+   title:              string,
+   view_count:         number,
+   };
+type RawData = { items: RawDataItem[] };
+
+const appWidgetProjectJsonQuestions = {
+   displayDataChart(widgetElem: JQuery, data: RawDataItem[]) {
+      const numItems = app.cfg.chartColors.length;
       const title =    'Active JSON Questions';
       const subtitle = 'Page views of ' + numItems + ' most recently active JSON questions';
       const mostRecent = data.slice(0, numItems).sort((a, b) => b.view_count - a.view_count);
-      const dataset = {
-         backgroundColor: app.util.chartColors,
+      const dataset: ChartDataset = {
+         backgroundColor: app.cfg.chartColors.map(color => color.value),
          data:            mostRecent.map(item => item.view_count),
          };
-      const chartInfo = {
+      const chartInfo = <ChartConfiguration>{
          type: 'pie',
          data: {
             labels:   mostRecent.map(item => item.owner.display_name),
@@ -52,12 +69,14 @@ app.widget.projectJsonQuestions = {
             title: { display: true, text: [title, subtitle] },
             },
          };
-      widgetElem.data().chart = new window.Chart(widgetElem.find('canvas'), chartInfo);
-      library.ui.normalize(widgetElem);
+      const canvas: ChartItem = widgetElem.find('canvas');
+      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      libX.ui.normalize(widgetElem);
       },
-   displayDataTable(widgetElem, data) {
+   displayDataTable(widgetElem: JQuery, data: RawDataItem[]) {
       const tableElem = widgetElem.find('figure table');
-      const dataTable = new window.simpleDatatables.DataTable(tableElem[0]);
+      const DataTable = globalThis['simpleDatatables'].DataTable;
+      const dataTable = new DataTable(tableElem[0]);
       data.forEach(item => item.timestamp = app.util.secsToStr(item.last_activity_date));
       data.forEach(item => item.link = '<span data-href=' + item.link + '>' + item.title + '</span>');
       const headers = [
@@ -80,10 +99,10 @@ app.widget.projectJsonQuestions = {
       dataTable.insert({ headings: headers, data: rows });
       widgetElem.data().table = dataTable;
       },
-   show(widgetElem) {
+   show(widgetElem: JQuery) {
       const url = 'https://api.stackexchange.com/2.2/search';
       const params = { order: 'desc', sort: 'activity', intitle: 'json', site: 'stackoverflow' };
-      const handleData = (data) => {
+      const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          app.widget.projectJsonQuestions.displayDataChart(widgetElem, data.items);
          app.widget.projectJsonQuestions.displayDataTable(widgetElem, data.items);
@@ -92,3 +111,5 @@ app.widget.projectJsonQuestions = {
       fetchJson.get(url, params).then(handleData);
       },
    };
+
+export { appWidgetProjectJsonQuestions };

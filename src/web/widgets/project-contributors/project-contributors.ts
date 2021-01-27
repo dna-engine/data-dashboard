@@ -1,6 +1,10 @@
 // DataDashboard
 // Widget controller
 
+import { dna } from 'dna.js';
+import { fetchJson } from 'fetch-json';
+import { app } from '../../ts/app.js';
+
 // [
 //    {
 //       login:               "dpilafian",
@@ -25,12 +29,21 @@
 //    },
 //    ...
 
-app.widget.projectContributors = {
-   show(widgetElem) {
+type WidgetModel = {
+   contributors: {
+      html_url: string,
+      avatar_url: string,
+      login: string,
+      }[],
+   };
+type RawData = WidgetModel['contributors'];
+
+const appWidgetProjectContributors = {
+   show(widgetElem: JQuery) {
       const url = 'https://api.github.com/repos/dnajs/dna.js/contributors';
-      const handleData = (data) => {
+      const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
-         const model = dna.getModel(widgetElem);
+         const model = <WidgetModel>dna.getModel(widgetElem);
          model.contributors = data;
          dna.refresh(widgetElem);
          };
@@ -38,3 +51,5 @@ app.widget.projectContributors = {
       fetchJson.get(url).then(handleData);
       },
    };
+
+export { appWidgetProjectContributors };
