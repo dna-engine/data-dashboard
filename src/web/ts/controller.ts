@@ -7,7 +7,7 @@ import { libX } from 'web-ignition';
 import { app, AppWidget } from './app.js';
 
 const appController = {
-   showPanel(panelElem: JQuery) {
+   showPanel(panelElem: JQuery): JQuery {
       window.scrollTo({ top: 0 });
       const showWidget = (node: HTMLElement, i: number) => {
          const widgetElem = $(node);
@@ -26,14 +26,16 @@ const appController = {
          widgetController.show(widgetElem);
          };
       panelElem.find('>app-widgets').children().toArray().forEach(showWidget);
+      return panelElem;
       },
-   jsdomWorkarounds() {
+   jsdomWorkarounds(): void {
       fetchJson.enableLogger();  //prevent localStorage race condition
       class StubOutChart {}
       window['Chart'] = StubOutChart;  //prevent UnhandledPromiseRejectionWarning
-      window.scrollTo = () => {};  //prevent Error: Not implemented: window.scrollTo
+      const stubFn = () => { /* noop */ };
+      window.scrollTo = stubFn;  //prevent Error: Not implemented: window.scrollTo
       },
-   setup() {
+   setup(): void {
       libX.ui.autoDisableButtons();
       dna.registerInitializer(<DnaCallback>libX.bubbleHelp.setup);
       fetchJson.enableLogger(<FetchJsonLogger>app.network.logEvent);

@@ -52,7 +52,7 @@ type RawData = {
    };
 
 const appWidgetSpaceVehicles = {
-   displayDataChart(widgetElem: JQuery, vehicles: Vehicle[]) {
+   displayDataChart(widgetElem: JQuery, vehicles: Vehicle[]): void {
       vehicles.forEach(item => item.chart = {
          passengers: parseInt(item.passengers) || 0,
          crew:       parseInt(item.crew) || 0,
@@ -79,7 +79,7 @@ const appWidgetSpaceVehicles = {
       const canvas: ChartItem = widgetElem.find('canvas');
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   displayDataTable(widgetElem: JQuery, vehicles: Vehicle[]) {
+   displayDataTable(widgetElem: JQuery, vehicles: Vehicle[]): void {
       const tableElem = widgetElem.find('figure table');
       const DataTable = globalThis['simpleDatatables'].DataTable;
       const dataTable = new DataTable(tableElem[0]);
@@ -102,7 +102,7 @@ const appWidgetSpaceVehicles = {
       dataTable.insert({ headings: headers, data: tableVehicles });
       widgetElem.data().table = dataTable;
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const vehicles: Vehicle[] = [];
       const displayData = () => {
          app.util.spinnerStop(widgetElem);

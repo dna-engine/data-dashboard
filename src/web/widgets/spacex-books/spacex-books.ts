@@ -23,7 +23,7 @@ type RawData = {
    };
 
 const appWidgetSpacexBooks = {
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const url = 'https://www.googleapis.com/books/v1/volumes';
       const params = { q: 'spacex' };
       const handleData = (data: RawData) => {

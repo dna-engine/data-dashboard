@@ -5,7 +5,7 @@ import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app.js';
 
 const appWidgetNetworkLog = {
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const tableElem = widgetElem.find('figure table');
       const DataTable = globalThis['simpleDatatables'].DataTable;
       const dataTable = new DataTable(tableElem[0], { perPageSelect: [10, 25, 50, 100] });

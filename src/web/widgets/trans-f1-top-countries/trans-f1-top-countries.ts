@@ -96,27 +96,38 @@ type Race = {
 type RawData = {
    MRData: { RaceTable: { Races: Race[] } },
    };
+type TotalsMap = {
+   [nationality: string]: {
+      nationality:     string,
+      numDrivers:      number,
+      numConstructors: number,
+      },
+   };
 
 const appWidgetTransF1TopCountries = {
-   displayDataChart(widgetElem: JQuery, race: Race) {
+   displayDataChart(widgetElem: JQuery, race: Race): void {
       const topFinishes = 10;
       const title =    'Nationalities of Top F1 Drivers and Constructors';
       const subtitle = race.season + ' ' + race.raceName + ' top ' + topFinishes + ' finishes';
       const round =    Number(race.round);
-      const addResult = (totalsMap: {}, result: Race['Results'][0]) => {
+      const addResult = (totalsMap: TotalsMap, result: Race['Results'][0]) => {
          const setupNationality = (nationality: string) => {
             if (!totalsMap[nationality])
-               totalsMap[nationality] = { nationality: nationality, numDrivers: 0, numConstructors: 0 };
+               totalsMap[nationality] = {
+                  nationality:     nationality,
+                  numDrivers:      0,
+                  numConstructors: 0,
+                  };
             };
          [result.Driver.nationality, result.Constructor.nationality].forEach(setupNationality);
-         totalsMap[result.Driver.nationality].numDrivers++;
-         totalsMap[result.Constructor.nationality].numConstructors++;
+         totalsMap[result.Driver.nationality]!.numDrivers++;
+         totalsMap[result.Constructor.nationality]!.numConstructors++;
          return totalsMap;
          };
       const totals = race.Results.slice(0, topFinishes).reduce(addResult, {});
-      const data = Object.keys(totals).map(nationality => totals[nationality]);
-      data.sort((a, b) => a.numDrivers + a.numConstructors - b.numDrivers - b.numConstructors ||
-         a.nationality.localeCompare(b.nationality));
+      const data = Object.keys(totals).map(nationality => totals[nationality]!);
+      data.sort((a, b) => a!.numDrivers + a!.numConstructors - b!.numDrivers - b!.numConstructors ||
+         a!.nationality.localeCompare(b!.nationality));
       const datasets = [
          { label: 'Driver',      data: data.map(item => item.numDrivers) },
          { label: 'Constructor', data: data.map(item => item.numConstructors) },
@@ -136,7 +147,7 @@ const appWidgetTransF1TopCountries = {
       const canvas = widgetElem.find('canvas').eq(round - 1);
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const raceYear = new Date().getFullYear() - 1;
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);

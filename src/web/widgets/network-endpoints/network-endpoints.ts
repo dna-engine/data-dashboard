@@ -12,7 +12,7 @@ type WidgetModel = {
    };
 
 const appWidgetNetworkEndpoints = {
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): JQuery {
       const model = <WidgetModel>dna.getModel(widgetElem);
       model.endpoints = [
          { name: 'Alpha Vantage API',    base: 'https://www.alphavantage.co/query', docs: 'https://www.alphavantage.co/documentation' },
@@ -25,7 +25,7 @@ const appWidgetNetworkEndpoints = {
          { name: 'Stack Exchange API',   base: 'https://api.stackexchange.com',     docs: 'https://api.stackexchange.com/docs' },
          { name: 'The Star Wars API',    base: 'https://swapi.py4e.com/api',        docs: 'https://swapi.py4e.com/documentation' },
          ];
-      dna.refresh(widgetElem);
+      return dna.refresh(widgetElem);
       },
    };
 

@@ -40,7 +40,7 @@ type RawData = {
    };
 
 const appWidgetSpacexPics = {
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const url = 'https://api.flickr.com/services/feeds/photos_public.gne';
       const params = { format: 'json', tags: 'spacex' };
       const handleData = (data: RawData) => {

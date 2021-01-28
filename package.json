@@ -37,8 +37,27 @@
          "libX": false
       }
    },
+   "eslintConfig": {
+      "ignorePatterns": [
+         "build",
+         "docs",
+         "node_modules"
+      ],
+      "root": true,
+      "parser": "@typescript-eslint/parser",
+      "plugins": [
+         "@typescript-eslint"
+      ],
+      "extends": [
+         "eslint:recommended",
+         "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+         "@typescript-eslint/no-non-null-assertion": "off"
+      }
+   },
    "scripts": {
-      "lint": "    jshint *.js spec",
+      "lint": "    jshint *.js spec && eslint --max-warnings 0 . --ext .ts",
       "tsc": "     tsc --version && tsc --project . --removeComments",
       "pretest": " npm run lint && rimraf build **/.DS_Store && npm run tsc && gulp build",
       "test": "    mocha spec",

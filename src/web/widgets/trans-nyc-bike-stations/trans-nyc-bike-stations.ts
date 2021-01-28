@@ -41,7 +41,7 @@ type RawData = {
    };
 
 const appWidgetTransNycBikeStations = {
-   displayDataChart(widgetElem: JQuery, data: RawData) {
+   displayDataChart(widgetElem: JQuery, data: RawData): void {
       const title =    'NYC Bike Stations';
       const subtitle = 'Capacity on ' + new Date(data.last_updated * 1000).toLocaleString();
       const stations = data.data.stations;
@@ -71,7 +71,7 @@ const appWidgetTransNycBikeStations = {
       const canvas = <ChartItem>widgetElem.find('canvas');
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json';
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);

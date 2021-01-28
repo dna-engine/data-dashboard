@@ -40,7 +40,7 @@ type DataPoint = {
    };
 
 const appWidgetTransBartStations = {
-   displayDataChart(widgetElem: JQuery, stations: Station[]) {
+   displayDataChart(widgetElem: JQuery, stations: Station[]): void {
       const dataset: ChartDataset = {
          label: 'Geolocation',
          backgroundColor: app.cfg.chartColor.green!.value,
@@ -72,7 +72,7 @@ const appWidgetTransBartStations = {
       const canvas: ChartItem = widgetElem.find('canvas');
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   displayDataTable(widgetElem: JQuery, stations: Station[]) {
+   displayDataTable(widgetElem: JQuery, stations: Station[]): void {
       const tableElem = widgetElem.find('figure table');
       const DataTable = globalThis['simpleDatatables'].DataTable;
       const dataTable = new DataTable(tableElem[0]);
@@ -95,7 +95,7 @@ const appWidgetTransBartStations = {
       dataTable.insert({ headings: headers, data: rows });
       widgetElem.data().table = dataTable;
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          const stations = data.root.stations.station;

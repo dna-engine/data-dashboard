@@ -20,7 +20,7 @@ type ElemLookup = {
 
 const appWidgetNetworkRestTool = {
    elem: <ElemLookup><unknown>null,
-   get(button?: JQuery) {
+   get(button?: JQuery): void {
       const elem = app.widget.networkRestTool.elem;
       const model = <WidgetModel>dna.getModel(elem.widget);
       const handleData = (data: RawData) => {
@@ -35,9 +35,9 @@ const appWidgetNetworkRestTool = {
       const handleError = (error: RawData) => handleData({ error: true, name: error.name, message: error.message });
       app.util.spinnerStart(elem.widget);
       model.url = <string>elem.input.val();
-      fetchJson.get(model.url).then(<any>handleData).catch(handleError);
+      fetchJson.get(model.url).then(handleData).catch(handleError);
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const defaultRestUrl = 'https://dnajs.org/rest/book/1/';
       const elem = {
          widget: widgetElem,

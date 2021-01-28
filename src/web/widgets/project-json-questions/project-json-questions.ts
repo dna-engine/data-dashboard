@@ -49,7 +49,7 @@ type RawDataItem = {
 type RawData = { items: RawDataItem[] };
 
 const appWidgetProjectJsonQuestions = {
-   displayDataChart(widgetElem: JQuery, data: RawDataItem[]) {
+   displayDataChart(widgetElem: JQuery, data: RawDataItem[]): void {
       const numItems = app.cfg.chartColors.length;
       const title =    'Active JSON Questions';
       const subtitle = 'Page views of ' + numItems + ' most recently active JSON questions';
@@ -73,7 +73,7 @@ const appWidgetProjectJsonQuestions = {
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       libX.ui.normalize(widgetElem);
       },
-   displayDataTable(widgetElem: JQuery, data: RawDataItem[]) {
+   displayDataTable(widgetElem: JQuery, data: RawDataItem[]): void {
       const tableElem = widgetElem.find('figure table');
       const DataTable = globalThis['simpleDatatables'].DataTable;
       const dataTable = new DataTable(tableElem[0]);
@@ -99,7 +99,7 @@ const appWidgetProjectJsonQuestions = {
       dataTable.insert({ headings: headers, data: rows });
       widgetElem.data().table = dataTable;
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const url = 'https://api.stackexchange.com/2.2/search';
       const params = { order: 'desc', sort: 'activity', intitle: 'json', site: 'stackoverflow' };
       const handleData = (data: RawData) => {

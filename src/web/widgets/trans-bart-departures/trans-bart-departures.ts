@@ -64,7 +64,7 @@ type DataPoint = {
    };
 
 const appWidgetTransBartDepartures = {
-   displayDataChart(widgetElem: JQuery, timestamp: string, station: Station) {
+   displayDataChart(widgetElem: JQuery, timestamp: string, station: Station): void {
       const title =      station.abbr + ' -- Upcoming departures from ' + station.name;
       const subtitle =   timestamp;
       const yAxesLabel = 'Direction';
@@ -124,7 +124,7 @@ const appWidgetTransBartDepartures = {
       const canvas: ChartItem = widgetElem.find('canvas');
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          const timestamp = data.root.date + ' ' + data.root.time;

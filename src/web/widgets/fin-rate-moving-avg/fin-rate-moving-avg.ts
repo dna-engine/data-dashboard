@@ -31,7 +31,7 @@ type RawData = {
    };
 
 const appWidgetFinRateMovingAvg = {
-   displayDataChart(widgetElem: JQuery, rawData: RawData) {
+   displayDataChart(widgetElem: JQuery, rawData: RawData): void {
       const transform = (rawData: RawData) => {
          const metadata =   rawData['Meta Data'];
          const timeSeries = rawData['Technical Analysis: SMA'];
@@ -65,7 +65,7 @@ const appWidgetFinRateMovingAvg = {
       const canvas: ChartItem = widgetElem.find('canvas');
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery) {
+   show(widgetElem: JQuery): void {
       const handleData = (rawData: RawData) => {
          app.util.spinnerStop(widgetElem);
          if (!rawData['Error Message'])

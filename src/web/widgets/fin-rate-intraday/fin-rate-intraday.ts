@@ -27,18 +27,43 @@ import { app } from '../../ts/app.js';
 //          },
 //       ...
 
+type RawDataTimeSeriesPoint = {
+   '1. open':  string,
+   '2. high':  string,
+   '3. low':   string,
+   '4. close': string,
+   };
+type RawData = {
+   'Error Message': string,
+   'Meta Data': {
+      '1. Information':    string,
+      '2. From Symbol':    string,
+      '3. To Symbol':      string,
+      '4. Last Refreshed': string,
+      },
+   'Time Series FX (5min)': { [date: string]: RawDataTimeSeriesPoint },
+   };
+type DisplayData = {
+   title:    string,
+   subtitle: string,
+   labels:   string[],
+   lows:     number[],
+   highs:    number[],
+   };
+
 const appWidgetFinRateIntraday = {
-   displayDataChart(widgetElem: JQuery, rawData: unknown) {
-      const transform = (rawData: any) => {
+   displayDataChart(widgetElem: JQuery, rawData: RawData): void {
+      const transform = (rawData: RawData): DisplayData => {
          const metadata =   rawData['Meta Data'];
          const timeSeries = rawData['Time Series FX (5min)'];
          const timestamps = Object.keys(timeSeries).sort();
+         const symbols =    metadata['2. From Symbol'] + '/' + metadata['3. To Symbol'];
          return {
             title:    metadata['1. Information'],
-            subtitle: metadata['2. From Symbol'] + '/' + metadata['3. To Symbol'] + ' ' + metadata['4. Last Refreshed'],
+            subtitle: symbols + ' ' + metadata['4. Last Refreshed'],
             labels:   timestamps.map(timestamp => timestamp.substring(11, 16)),
-            lows:     timestamps.map(timestamp => parseFloat(timeSeries[timestamp]['3. low'])),
-            highs:    timestamps.map(timestamp => parseFloat(timeSeries[timestamp]['2. high']))
+            lows:     timestamps.map(timestamp => parseFloat(timeSeries[timestamp]!['3. low'])),
+            highs:    timestamps.map(timestamp => parseFloat(timeSeries[timestamp]!['2. high']))
             };
          };
       const data = transform(rawData);
@@ -60,11 +85,11 @@ const appWidgetFinRateIntraday = {
       const canvas: ChartItem = widgetElem.find('canvas');
       widgetElem.data().chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery) {
-      const handleData = (rawData: unknown) => {
+   show(widgetElem: JQuery): void {
+      const handleData = (rawData: RawData) => {
          app.util.spinnerStop(widgetElem);
-         if (!rawData || (<any>rawData)['Error Message'])
-            console.error(rawData);
+         if (!rawData || rawData['Error Message'])
+            console.error(url, rawData);
          else
             app.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
          };

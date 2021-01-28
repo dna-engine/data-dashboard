@@ -34,7 +34,7 @@ const appUtil = {
    secsToStr(epocSeconds: number): string {  //example: "2019-01-02 05:34:15"
       return new Date(epocSeconds * 1000).toISOString().replace('T', ' ').substring(0, 19);
       },
-   spinnerStart(widgetElem: JQuery) {
+   spinnerStart(widgetElem: JQuery): JQuery {
       // DOM:
       //    <app-widget>
       //       <header><h2>Title</h2></header>
@@ -54,7 +54,7 @@ const appUtil = {
       elem.find('>app-widget-spinner').fadeOut(1500);
       return elem;
       },
-   fetchJsonp(url: string, params?: AppParams, jsonpName?: string, callback?: AppCallback) {
+   fetchJsonp(url: string, params?: AppParams, jsonpName?: string, callback?: AppCallback): JQueryXHR {
       const urlObj = new URL(url);
       const addParam = (param: [string, AppParamValue]) =>
          urlObj.searchParams.append(param[0], String(param[1]));
@@ -67,7 +67,7 @@ const appUtil = {
 
 const appNetwork = {
    logName: 'network-log',
-   logEvent(...eventItems: (string | number | boolean)[]) {
+   logEvent(...eventItems: (string | number | boolean)[]): void {
       console.log(eventItems.join(' - '));
       const maxLogEvents = 250;
       const log = app.network.getLog();
