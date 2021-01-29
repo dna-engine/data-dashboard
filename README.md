@@ -16,9 +16,9 @@ https://data-dashboard.js.org
 be a reference architecture for building data-driven dashboard consoles composed of report widgets.
 
 The list of report widgets and dashboard panels is defined in
-[`src/ts/app.js`](https://github.com/dnajs/data-dashboard/blob/master/src/ts/app.js),
+[`src/ts/config.js`](https://github.com/dnajs/data-dashboard/blob/master/src/web/ts/config.ts),
 and the routing is handled in
-[`src/ts/controller.js`](https://github.com/dnajs/data-dashboard/blob/master/src/ts/controller.js).
+[`src/ts/controller.js`](https://github.com/dnajs/data-dashboard/blob/master/src/web/ts/controller.ts).
 Each widget has a folder under
 [`src/widgets`](https://github.com/dnajs/data-dashboard/tree/master/src/widgets)
 that contains the widget's view and controller.

@@ -4,7 +4,8 @@
 import { dna, DnaCallback } from 'dna.js';
 import { fetchJson, FetchJsonLogger } from 'fetch-json';
 import { libX } from 'web-ignition';
-import { app, AppWidget } from './app.js';
+import { app } from './app.js';
+import { AppWidget } from './config.js';
 
 const appController = {
    showPanel(panelElem: JQuery): JQuery {
@@ -41,9 +42,9 @@ const appController = {
       fetchJson.enableLogger(<FetchJsonLogger>app.network.logEvent);
       if (navigator.userAgent.includes('jsdom'))
          app.controller.jsdomWorkarounds();
-      app.cfg.panels.forEach(panel =>
-         panel.widgetList = panel.widgets.map(code => <AppWidget>(app.cfg.widget[code])));
-      const displayedPanels = app.cfg.panels.filter(panel => panel.display);
+      app.lookup.panels.forEach(panel =>
+         panel.widgetList = panel.widgets.map(code => <AppWidget>(app.lookup.widget[code])));
+      const displayedPanels = app.lookup.panels.filter(panel => panel.display);
       const onLoadSetup = () => {
          dna.clone('app-menu-item', displayedPanels);
          dna.clone('app-panel',     displayedPanels);

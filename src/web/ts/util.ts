@@ -3,11 +3,12 @@
 
 import { ChartConfiguration, ChartDataset } from 'chart.js';
 import { libX } from 'web-ignition';
-import { app, AppCallback, AppChartColor, AppOptionsNarrowScreenSaver, AppParams, AppParamValue } from './app.js';
+import { app, AppCallback, AppOptionsNarrowScreenSaver, AppParams, AppParamValue } from './app.js';
+import { AppChartColor } from './config.js';
 
 const appUtil = {
    lookupChartColor(i: number): string {
-      return (<AppChartColor>app.cfg.chartColors[i % app.cfg.chartColors.length]).value;
+      return (<AppChartColor>app.lookup.chartColors[i % app.lookup.chartColors.length]).value;
       },
    addChartColors(datasets: ChartDataset[], startIndex = 0): ChartDataset[] {
       const colorize = (dataset: ChartDataset, i: number) => {

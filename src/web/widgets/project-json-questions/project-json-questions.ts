@@ -50,12 +50,12 @@ type RawData = { items: RawDataItem[] };
 
 const appWidgetProjectJsonQuestions = {
    displayDataChart(widgetElem: JQuery, data: RawDataItem[]): void {
-      const numItems = app.cfg.chartColors.length;
+      const numItems = app.lookup.chartColors.length;
       const title =    'Active JSON Questions';
       const subtitle = 'Page views of ' + numItems + ' most recently active JSON questions';
       const mostRecent = data.slice(0, numItems).sort((a, b) => b.view_count - a.view_count);
       const dataset: ChartDataset = {
-         backgroundColor: app.cfg.chartColors.map(color => color.value),
+         backgroundColor: app.lookup.chartColors.map(color => color.value),
          data:            mostRecent.map(item => item.view_count),
          };
       const chartInfo = <ChartConfiguration>{

@@ -3,7 +3,8 @@
 
 import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app, AppChartColor } from '../../ts/app.js';
+import { app } from '../../ts/app.js';
+import { AppChartColor } from '../../ts/config.js';
 
 // {
 //    'Meta Data': {
@@ -48,8 +49,8 @@ const appWidgetFinRateMovingAvg = {
       const dataset: ChartDataset = {
          label:           data.set,
          data:            data.values,
-         borderColor:     (<AppChartColor>app.cfg.chartColor.purple).value,
-         backgroundColor: (<AppChartColor>app.cfg.chartColor.purple).value,
+         borderColor:     (<AppChartColor>app.lookup.chartColor.purple).value,
+         backgroundColor: (<AppChartColor>app.lookup.chartColor.purple).value,
          };
       const chartInfo = <ChartConfiguration>{
          type: 'line',

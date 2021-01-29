@@ -43,7 +43,7 @@ const appWidgetTransBartStations = {
    displayDataChart(widgetElem: JQuery, stations: Station[]): void {
       const dataset: ChartDataset = {
          label: 'Geolocation',
-         backgroundColor: app.cfg.chartColor.green!.value,
+         backgroundColor: app.lookup.chartColor.green!.value,
          data: stations.map((item: Station): DataPoint => ({
             x:     parseFloat(item.gtfs_longitude),
             y:     parseFloat(item.gtfs_latitude),
