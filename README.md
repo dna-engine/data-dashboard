@@ -7,6 +7,7 @@ _A data-driven dashboard console for report widgets_
 [![npm](https://img.shields.io/npm/v/data-dashboard.svg)](https://www.npmjs.com/package/data-dashboard)
 [![Vulnerabilities](https://snyk.io/test/github/dnajs/data-dashboard/badge.svg)](https://snyk.io/test/github/dnajs/data-dashboard)
 [![Build](https://travis-ci.org/dnajs/data-dashboard.svg)](https://travis-ci.org/dnajs/data-dashboard)
+[![Build](https://github.com/dnajs/data-dashboard/workflows/build/badge.svg)](https://github.com/dnajs/data-dashboard/actions?query=workflow%3Abuild)
 
 ## Try it out
 https://data-dashboard.js.org
