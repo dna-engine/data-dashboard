@@ -26,16 +26,8 @@
       "eqeqeq": true,
       "undef": true,
       "unused": true,
-      "browser": true,
-      "jquery": true,
       "mocha": true,
-      "node": true,
-      "globals": {
-         "app": true,
-         "dna": false,
-         "fetchJson": false,
-         "libX": false
-      }
+      "node": true
    },
    "eslintConfig": {
       "ignorePatterns": [
@@ -69,7 +61,7 @@
       "fontAwesome": "5.15"
    },
    "dependencies": {
-      "chart.js": "3.0.0-beta.9",
+      "chart.js": "3.0.0-beta.10",
       "dna.js": "~1.7",
       "fetch-json": "~2.4",
       "jquery": "~3.5",
@@ -84,6 +76,7 @@
       "@babel/core": "~7.12",
       "@babel/preset-env": "~7.12",
       "@fortawesome/fontawesome-free": "~5.15",
+      "@types/express": "~4.17",
       "@types/jquery": "~3.5",
       "@typescript-eslint/eslint-plugin": "~4.14",
       "@typescript-eslint/parser": "~4.14",
@@ -92,7 +85,7 @@
       "canvas": "~2.6",
       "concurrently": "~5.3",
       "cssnano": "~4.1",
-      "eslint": "~7.18",
+      "eslint": "~7.19",
       "express": "~4.17",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",
@@ -116,6 +109,8 @@
       "postcss": "~8.2",
       "postcss-font-magician": "~3.0",
       "postcss-preset-env": "~6.7",
+      "puppeteer": "~7.0",
+      "puppeteer-browser-ready": "~0.1",
       "server-listening": "~0.2",
       "typescript": "~4.1"
    }

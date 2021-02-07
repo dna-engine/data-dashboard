@@ -4,20 +4,21 @@
 import assert from 'assert';
 import { serverListening } from 'server-listening';
 import { JSDOM } from 'jsdom';
+import { server } from '../server.js';
 
 // Setup
 process.env.webFolder = process.env.webFolder || 'build/step1-staging';
 serverListening.setPort();
-import { server } from '../server.js';
-const url = 'http://localhost:' + server.address().port + '/';
+const serverInst = server.start();
+const url = 'http://localhost:' + serverInst.address().port + '/';
 const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
 let dom;
 const loadWebPage = () => JSDOM.fromURL(url, jsdomOptions)
    .then(serverListening.jsdomOnLoad)
    .then(jsdom => dom = jsdom);
 const closeWebPage = () => serverListening.jsdomCloseWindow(dom);
-before(() => serverListening.ready(server));
-after(() =>  serverListening.close(server));
+before(() => serverListening.ready(serverInst));
+after(() =>  serverListening.close(serverInst));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 describe('The web page', () => {
@@ -30,7 +31,7 @@ describe('The web page', () => {
       assert.deepStrictEqual(actual, expected);
       });
 
-   it('has the correct title', () => {
+   it('has the correct title -> "DataDashboard"', () => {
       const actual =   { title: dom.window.document.title };
       const expected = { title: 'DataDashboard' };
       assert.deepStrictEqual(actual, expected);
