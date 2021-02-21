@@ -55,7 +55,7 @@ const libraryFiles = {
    js: [
       'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
       ],
-   jsMinified: [
+   jsOotbMinified: [
       'node_modules/fetch-json/dist/fetch-json.min.js',
       'node_modules/jquery/dist/jquery.min.js',
       'node_modules/select2/dist/js/select2.min.js',
@@ -90,29 +90,32 @@ const task = {
             .pipe(gulp.dest(folder.staging))
             .pipe(touch());
          },
-      js() {
+      jsRaw() {
+         const embeddedComment = /([^\n])(\/\/[*]?!)/g;
          return gulp.src(libraryFiles.js)
+            .pipe(babel(babelMinifyJs))
+            .pipe(replace(embeddedComment, '$1\n$2'))
             .pipe(header('//! 3rd party library: ${filename}\n'))
-            .pipe(concat('libraries.js'))
+            .pipe(gap.appendText('\n'))
+            .pipe(concat('libraries.min.js'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging))
             .pipe(touch());
          },
-      jsMinified() {
-         return gulp.src(libraryFiles.jsMinified)
+      jsOotb() {
+         return gulp.src(libraryFiles.jsOotbMinified)
             .pipe(header('//! 3rd party library (minified): ${filename}\n'))
             .pipe(gap.appendText('\n'))
-            .pipe(concat('libraries.dist.js'))
+            .pipe(concat('libraries.ootb.js'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging))
             .pipe(touch());
          },
-      all() {
-         return mergeStream(
-            task.packageLibraries.css(),
-            task.packageLibraries.js(),
-            task.packageLibraries.jsMinified(),
-            );
+      js() {
+         return gulp.src(folder.staging + '/libraries.*.js')
+            .pipe(concat('libraries.js'))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging));
          },
       },
    buildIncludes: {
@@ -144,6 +147,14 @@ const task = {
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
          },
+      js() {
+         return gulp.src(srcFiles.js.glob)
+            .pipe(order(srcFiles.js.order))
+            .pipe(concat(pkg.name + '.js'))
+            .pipe(replace(/^[import|export].*\n/gm, ''))
+            .pipe(size({ showFiles: true }))
+            .pipe(gulp.dest(folder.staging));
+         },
       html() {
          return gulp.src(srcFiles.html.glob)
             .pipe(fileInclude({ indent: true, context: { pkg } }))
@@ -156,14 +167,6 @@ const task = {
             .pipe(gulp.dest(folder.staging))
             .pipe(touch());
          },
-      js() {
-         return gulp.src(srcFiles.js.glob)
-            .pipe(order(srcFiles.js.order))
-            .pipe(concat(pkg.name + '.js'))
-            .pipe(replace(/^[import|export].*\n/gm, ''))
-            .pipe(size({ showFiles: true }))
-            .pipe(gulp.dest(folder.staging));
-         },
       all() {
          return mergeStream(
             task.buildWebApp.graphics(),
@@ -174,7 +177,6 @@ const task = {
          },
       },
    minifyWebApp() {
-      const embeddedComment = /([^\n])(\/\/[*]! )/g;
       const copyGraphics = () => gulp.src(folder.staging + '/graphics/**/*')
          .pipe(gulp.dest(folder.minified + '/graphics'));
       const copyHtml = () => gulp.src(folder.staging + '/*.html')
@@ -184,17 +186,8 @@ const task = {
          .pipe(header('/*! Bundle: 3rd party styles */\n\n'))
          .pipe(gap.appendText('\n'))
          .pipe(gulp.dest(folder.minified));
-      const minifyLibJs = () => gulp.src(libraryFiles.js)
-         .pipe(babel(babelMinifyJs))
-         .pipe(replace(embeddedComment, '$1\n$2'))
-         .pipe(header('\n//! 3rd party library: ${filename}\n'))
-         .pipe(concat('libraries.js'))
-         .pipe(header('//! Bundle: 3rd party libraries\n'))
-         .pipe(gap.appendText('\n'))
-         .pipe(gulp.dest(folder.minified))
-         .pipe(touch());
-      const copyLibDistJs = () => gulp.src(folder.staging + '/libraries.dist.js')
-         .pipe(header('//! Bundle: 3rd party libraries (minified)\n\n'))
+      const minifyLibJs = () => gulp.src(folder.staging + '/libraries.js')
+         .pipe(header('//! Bundle: 3rd party libraries\n\n'))
          .pipe(gulp.dest(folder.minified));
       const minifyCss = () => gulp.src(folder.staging + '/' + pkg.name + '.css')
          .pipe(css(cssPlugins))
@@ -210,7 +203,6 @@ const task = {
          copyHtml(),
          minifyLibCss(),
          minifyLibJs(),
-         copyLibDistJs(),
          minifyCss(),
          minifyJs());
       },
@@ -230,7 +222,10 @@ const task = {
       },
    compound: {
       build: () => gulp.series(
-         task.packageLibraries.all,
+         task.packageLibraries.css,
+         task.packageLibraries.jsRaw,
+         task.packageLibraries.jsOotb,
+         task.packageLibraries.js,
          task.buildIncludes.widgets,
          task.buildWebApp.all,
          ),
