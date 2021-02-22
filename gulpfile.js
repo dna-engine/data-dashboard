@@ -91,10 +91,10 @@ const task = {
             .pipe(touch());
          },
       jsRaw() {
-         const embeddedComment = /([^\n])(\/\/[*]?!)/g;
+         const embeddedJsComment = /([^\n])(\/\/[*]?!)/g;
          return gulp.src(libraryFiles.js)
             .pipe(babel(babelMinifyJs))
-            .pipe(replace(embeddedComment, '$1\n$2'))
+            .pipe(replace(embeddedJsComment, '$1\n$2'))
             .pipe(header('//! 3rd party library: ${filename}\n'))
             .pipe(gap.appendText('\n'))
             .pipe(concat('libraries.min.js'))
@@ -177,12 +177,14 @@ const task = {
          },
       },
    minifyWebApp() {
+      const prefixedCssComment = /(\/[*]!.*[*]\/)([^\n])/gm;
       const copyGraphics = () => gulp.src(folder.staging + '/graphics/**/*')
          .pipe(gulp.dest(folder.minified + '/graphics'));
       const copyHtml = () => gulp.src(folder.staging + '/*.html')
          .pipe(gulp.dest(folder.minified));
       const minifyLibCss = () => gulp.src(folder.staging + '/libraries.css')
          .pipe(css(cssPlugins))
+         .pipe(replace(prefixedCssComment, '$1\n$2'))
          .pipe(header('/*! Bundle: 3rd party styles */\n\n'))
          .pipe(gap.appendText('\n'))
          .pipe(gulp.dest(folder.minified));
