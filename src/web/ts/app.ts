@@ -24,10 +24,6 @@ import { appWidgetTransF1TopCountries } from '../widgets/trans-f1-top-countries/
 import { appWidgetTransNycBikeStations } from '../widgets/trans-nyc-bike-stations/trans-nyc-bike-stations';
 import { AppChartColor, appConfig, AppPanel, AppWidget } from './config';
 
-export type AppOptionsNarrowScreenSaver = Partial<{
-   maxPoints:   number,
-   screenWidth: number,
-   }>;
 export type AppWidgetMap =     { [code: string]: AppWidget };
 export type AppPanelMap =      { [code: string]: AppPanel };
 export type AppChartColorMap = { [code: string]: AppChartColor };
