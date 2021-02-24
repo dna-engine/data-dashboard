@@ -3,8 +3,8 @@
 
 import { ChartConfiguration, ChartDataset } from 'chart.js';
 import { libX } from 'web-ignition';
-import { app, AppCallback, AppOptionsNarrowScreenSaver, AppParams, AppParamValue } from './app.js';
-import { AppChartColor } from './config.js';
+import { app, AppCallback, AppOptionsNarrowScreenSaver, AppParams, AppParamValue } from './app';
+import { AppChartColor } from './config';
 
 const appUtil = {
    lookupChartColor(i: number): string {

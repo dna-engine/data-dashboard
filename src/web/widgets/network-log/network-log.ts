@@ -2,7 +2,7 @@
 // Widget controller
 
 import { fetchJson } from 'fetch-json';
-import { app } from '../../ts/app.js';
+import { app } from '../../ts/app';
 
 const appWidgetNetworkLog = {
    show(widgetElem: JQuery): void {

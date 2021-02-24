@@ -42,7 +42,7 @@ const srcFiles = {
    css:      { glob: 'src/web/**/*.less', order: ['src/web/css/base.less'] },
    html:     { glob: 'src/web/root/**/*.html' },
    widgets:  { glob: 'src/web/widgets/**/*.html' },
-   js:       { glob: folder.tsc + '/**/*.js', order: ['!ts/app.js'] },
+   js:       { glob: folder.tsc + '/**/*.js', order: ['!web/ts/app.js'] },
    };
 const libraryFiles = {
    css: [

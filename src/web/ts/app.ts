@@ -3,26 +3,26 @@
 
 // Imports
 import { dna } from 'dna.js';
-import { appController } from './controller.js';
-import { appNetwork, appTransformer, appUtil } from './util.js';
+import { appController } from './controller';
+import { appNetwork, appTransformer, appUtil } from './util';
 
 // Widgets
-import { appWidgetFinRateIntraday } from '../widgets/fin-rate-intraday/fin-rate-intraday.js';
-import { appWidgetFinRateMovingAvg } from '../widgets/fin-rate-moving-avg/fin-rate-moving-avg.js';
-import { appWidgetNetworkEndpoints } from '../widgets/network-endpoints/network-endpoints.js';
-import { appWidgetNetworkLog } from '../widgets/network-log/network-log.js';
-import { appWidgetNetworkRestTool } from '../widgets/network-rest-tool/network-rest-tool.js';
-import { appWidgetProjectContributors } from '../widgets/project-contributors/project-contributors.js';
-import { appWidgetProjectJsonQuestions } from '../widgets/project-json-questions/project-json-questions.js';
-import { appWidgetSpaceStarships } from '../widgets/space-starships/space-starships.js';
-import { appWidgetSpaceVehicles } from '../widgets/space-vehicles/space-vehicles.js';
-import { appWidgetSpacexBooks } from '../widgets/spacex-books/spacex-books.js';
-import { appWidgetSpacexPics } from '../widgets/spacex-pics/spacex-pics.js';
-import { appWidgetTransBartDepartures } from '../widgets/trans-bart-departures/trans-bart-departures.js';
-import { appWidgetTransBartStations } from '../widgets/trans-bart-stations/trans-bart-stations.js';
-import { appWidgetTransF1TopCountries } from '../widgets/trans-f1-top-countries/trans-f1-top-countries.js';
-import { appWidgetTransNycBikeStations } from '../widgets/trans-nyc-bike-stations/trans-nyc-bike-stations.js';
-import { AppChartColor, appConfig, AppPanel, AppWidget } from './config.js';
+import { appWidgetFinRateIntraday } from '../widgets/fin-rate-intraday/fin-rate-intraday';
+import { appWidgetFinRateMovingAvg } from '../widgets/fin-rate-moving-avg/fin-rate-moving-avg';
+import { appWidgetNetworkEndpoints } from '../widgets/network-endpoints/network-endpoints';
+import { appWidgetNetworkLog } from '../widgets/network-log/network-log';
+import { appWidgetNetworkRestTool } from '../widgets/network-rest-tool/network-rest-tool';
+import { appWidgetProjectContributors } from '../widgets/project-contributors/project-contributors';
+import { appWidgetProjectJsonQuestions } from '../widgets/project-json-questions/project-json-questions';
+import { appWidgetSpaceStarships } from '../widgets/space-starships/space-starships';
+import { appWidgetSpaceVehicles } from '../widgets/space-vehicles/space-vehicles';
+import { appWidgetSpacexBooks } from '../widgets/spacex-books/spacex-books';
+import { appWidgetSpacexPics } from '../widgets/spacex-pics/spacex-pics';
+import { appWidgetTransBartDepartures } from '../widgets/trans-bart-departures/trans-bart-departures';
+import { appWidgetTransBartStations } from '../widgets/trans-bart-stations/trans-bart-stations';
+import { appWidgetTransF1TopCountries } from '../widgets/trans-f1-top-countries/trans-f1-top-countries';
+import { appWidgetTransNycBikeStations } from '../widgets/trans-nyc-bike-stations/trans-nyc-bike-stations';
+import { AppChartColor, appConfig, AppPanel, AppWidget } from './config';
 
 export type AppOptionsNarrowScreenSaver = Partial<{
    maxPoints:   number,

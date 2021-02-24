@@ -4,7 +4,7 @@
 import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { libX } from 'web-ignition';
-import { app } from '../../ts/app.js';
+import { app } from '../../ts/app';
 
 // {
 //    items: [

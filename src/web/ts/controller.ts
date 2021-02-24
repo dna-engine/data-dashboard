@@ -4,8 +4,8 @@
 import { dna, DnaCallback } from 'dna.js';
 import { fetchJson, FetchJsonLogger } from 'fetch-json';
 import { libX } from 'web-ignition';
-import { app } from './app.js';
-import { AppWidget } from './config.js';
+import { app } from './app';
+import { AppWidget } from './config';
 
 const appController = {
    showPanel(panelElem: JQuery): JQuery {

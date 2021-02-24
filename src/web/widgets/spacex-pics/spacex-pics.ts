@@ -2,7 +2,7 @@
 // Widget controller
 
 import { dna } from 'dna.js';
-import { app, AppCallback } from '../../ts/app.js';
+import { app, AppCallback } from '../../ts/app';
 
 // {
 //    title: "Recent Uploads tagged spacex",
