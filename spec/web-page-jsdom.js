@@ -4,7 +4,7 @@
 import assert from 'assert';
 import { serverListening } from 'server-listening';
 import { JSDOM } from 'jsdom';
-import { webServer } from '../src/web-server/web-server.js';
+import { webServer } from '../build/step0-tsc/web-server/index.js';
 
 // Setup
 process.env.webFolder = process.env.webFolder || 'build/step1-staging';
