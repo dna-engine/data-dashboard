@@ -4,12 +4,12 @@
 import assert from 'assert';
 import { serverListening } from 'server-listening';
 import { JSDOM } from 'jsdom';
-import { server } from '../server.js';
+import { webServer } from '../src/web-server/web-server.js';
 
 // Setup
 process.env.webFolder = process.env.webFolder || 'build/step1-staging';
 serverListening.setPort();
-const serverInst = server.start();
+const serverInst = webServer.start();
 const url = 'http://localhost:' + serverInst.address().port + '/';
 const jsdomOptions = { resources: 'usable', runScripts: 'dangerously' };
 let dom;

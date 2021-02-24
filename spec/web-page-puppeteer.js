@@ -5,12 +5,12 @@ import assert from 'assert';
 import puppeteer from 'puppeteer';
 import { browserReady } from 'puppeteer-browser-ready';
 import { serverListening } from 'server-listening';
-import { server } from '../server.js';
+import { webServer } from '../src/web-server/web-server.js';
 
 // Setup
 process.env.webFolder = process.env.webFolder || 'build/step1-staging';
 serverListening.setPort();
-const serverInst = server.start();
+const serverInst = webServer.start();
 const url = 'http://localhost:' + serverInst.address().port + '/';
 const web = {};  //fields: browser, page, response, url, status, statusText, html, $
 let $;  //just for convenience... you could also use: web.$
