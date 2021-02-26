@@ -66,7 +66,9 @@ const appWidgetProjectJsonQuestions = {
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: [title, subtitle] },
+            plugins: {
+               title: { display: true, text: [title, subtitle] },
+               },
             },
          };
       const canvas: ChartItem = widgetElem.find('canvas');

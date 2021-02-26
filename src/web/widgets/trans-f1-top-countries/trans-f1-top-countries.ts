@@ -140,8 +140,10 @@ const appWidgetTransF1TopCountries = {
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: [title, subtitle] },
             scales: { x: { stacked: true }, y: { stacked: true } },
+            plugins: {
+               title: { display: true, text: [title, subtitle] },
+               },
             },
          };
       const canvas = widgetElem.find('canvas').eq(round - 1);

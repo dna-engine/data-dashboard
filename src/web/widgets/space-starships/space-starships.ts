@@ -75,8 +75,10 @@ const appWidgetSpaceStarships = {
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: ['Larger Starships', 'Passengers and crew capacity'] },
             scales: { x: { stacked: true }, y: { stacked: true } },
+            plugins: {
+               title: { display: true, text: ['Larger Starships', 'Passengers and crew capacity'] },
+               },
             },
          };
       const canvas: ChartItem = widgetElem.find('canvas');

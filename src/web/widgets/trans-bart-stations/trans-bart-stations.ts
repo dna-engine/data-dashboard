@@ -65,8 +65,10 @@ const appWidgetTransBartStations = {
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: ['BART Stations', 'San Francisco Bay Area'] },
-            tooltips: { callbacks: { label: makeTooltip } },
+            plugins: {
+               title: { display: true, text: ['BART Stations', 'San Francisco Bay Area'] },
+               tooltips: { callbacks: { label: makeTooltip } },
+               },
             },
          };
       const canvas: ChartItem = widgetElem.find('canvas');

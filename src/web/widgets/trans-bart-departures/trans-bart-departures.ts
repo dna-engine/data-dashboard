@@ -116,9 +116,11 @@ const appWidgetTransBartDepartures = {
          options: {
             indexAxis: 'y',
             maintainAspectRatio: false,
-            title: { display: true, text: [title, subtitle] },
             scales: scales,
-            tooltips: { callbacks: { label: makeTooltip } },
+            plugins: {
+               title: { display: true, text: [title, subtitle] },
+               tooltips: { callbacks: { label: makeTooltip } },
+               },
             },
          };
       const canvas: ChartItem = widgetElem.find('canvas');

@@ -79,7 +79,9 @@ const appWidgetFinRateIntraday = {
             },
          options: {
             maintainAspectRatio: false,
-            title: { display: true, text: [data.title, data.subtitle] },
+            plugins: {
+               title: { display: true, text: [data.title, data.subtitle] },
+               },
             },
          };
       const canvas: ChartItem = widgetElem.find('canvas');
