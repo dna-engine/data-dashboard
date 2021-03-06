@@ -1,7 +1,7 @@
 // DataDashboard
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartDataset, ChartItem, TooltipItem } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset, ChartItem, ChartTypeRegistry, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 
@@ -105,7 +105,7 @@ const appWidgetTransBartDepartures = {
          x: { stacked: true, scaleLabel: { display: true, labelString: xAxesLabel } },
          y: { stacked: true, scaleLabel: { display: true, labelString: yAxesLabel } },
          };
-      const makeTooltip = (item: TooltipItem) =>
+      const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
          item.dataset.label + ': ' + item.dataset['labels'][item.dataIndex];
       const chartInfo = <ChartConfiguration>{
          type: 'bar',
@@ -114,12 +114,12 @@ const appWidgetTransBartDepartures = {
             datasets: app.util.addChartColors(datasets),
             },
          options: {
-            indexAxis: 'y',
+            indexAxis:           'y',
             maintainAspectRatio: false,
-            scales: scales,
+            scales:              scales,
             plugins: {
-               title: { display: true, text: [title, subtitle] },
-               tooltips: { callbacks: { label: makeTooltip } },
+               title:   { display: true, text: [title, subtitle] },
+               tooltip: { callbacks: { label: makeTooltip } },
                },
             },
          };

@@ -1,7 +1,7 @@
 // DataDashboard
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartDataset, ChartItem, TooltipItem } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset, ChartItem, ChartTypeRegistry, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 
@@ -50,13 +50,13 @@ const appWidgetTransBartStations = {
             label: item.abbr + ' (' + item.name + ')',
             })),
          };
-      const latLong = (item: TooltipItem): string => {
+      const latLong = (item: TooltipItem<keyof ChartTypeRegistry>): string => {
          // Returns a string formatted like: "37.2°N 27.9°W"
          const lat =  parseFloat(item.formattedValue);
          const long = parseFloat(item.label);
          return `${Math.abs(lat)}°${lat > 0 ? 'N' : 'S'} ${Math.abs(long)}°${long > 0 ? 'E' : 'W'}`;
          };
-      const makeTooltip = (item: TooltipItem) =>
+      const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
          (<DataPoint>item.dataset.data[item.dataIndex]).label + ' ' + latLong(item);
       const chartInfo = <ChartConfiguration><unknown>{
          type: 'scatter',
@@ -66,8 +66,8 @@ const appWidgetTransBartStations = {
          options: {
             maintainAspectRatio: false,
             plugins: {
-               title: { display: true, text: ['BART Stations', 'San Francisco Bay Area'] },
-               tooltips: { callbacks: { label: makeTooltip } },
+               title:   { display: true, text: ['BART Stations', 'San Francisco Bay Area'] },
+               tooltip: { callbacks: { label: makeTooltip } },
                },
             },
          };

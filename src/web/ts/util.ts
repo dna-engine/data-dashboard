@@ -29,9 +29,9 @@ const appUtil = {
       const settings = { ...defaults, ...options };
       const shrinkRatio = Math.ceil(chartInfo.data.labels.length / settings.maxPoints);
       const shrinkNow = () => {
-         const shrink = (points: unknown[]) => points.filter((_point, i) => i % shrinkRatio === 0);
-         chartInfo.data.labels = shrink(chartInfo.data.labels);
-         chartInfo.data.datasets.forEach((dataset: ChartDataset) => dataset.data = shrink(dataset.data));
+         const shrink = (points: number[]) => points.filter((_point, i) => i % shrinkRatio === 0);
+         chartInfo.data.labels = shrink(<number[]>chartInfo.data.labels);
+         chartInfo.data.datasets.forEach((dataset: ChartDataset) => dataset.data = shrink(<number[]>dataset.data));
          };
       if (shrinkRatio > 1 && <number>$(document.body).width() < settings.screenWidth)
          shrinkNow();
