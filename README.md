@@ -3,28 +3,28 @@
 
 _A data-driven dashboard console for report widgets_
 
-[![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dnajs/data-dashboard/blob/master/LICENSE.txt)
+[![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dnajs/data-dashboard/blob/main/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/data-dashboard.svg)](https://www.npmjs.com/package/data-dashboard)
 [![Vulnerabilities](https://snyk.io/test/github/dnajs/data-dashboard/badge.svg)](https://snyk.io/test/github/dnajs/data-dashboard)
 [![Build](https://travis-ci.org/dnajs/data-dashboard.svg)](https://travis-ci.org/dnajs/data-dashboard)
 [![Build](https://github.com/dnajs/data-dashboard/workflows/build/badge.svg)](https://github.com/dnajs/data-dashboard/actions?query=workflow%3Abuild)
 
-## Try it out
+## Try It Out
 https://data-dashboard.js.org
 
-## Reference architecture
+## Reference Architecture
 **DataDashboard** provides examples of creating charts and tables from REST calls, and it aims to
 be a reference architecture for building data-driven dashboard consoles composed of report widgets.
 
 The list of report widgets and dashboard panels is defined in
-[`src/ts/config.js`](https://github.com/dnajs/data-dashboard/blob/master/src/web/ts/config.ts),
+[`src/ts/config.js`](https://github.com/dnajs/data-dashboard/blob/main/src/web/ts/config.ts),
 and the routing is handled in
-[`src/ts/controller.js`](https://github.com/dnajs/data-dashboard/blob/master/src/web/ts/controller.ts).
+[`src/ts/controller.js`](https://github.com/dnajs/data-dashboard/blob/main/src/web/ts/controller.ts).
 Each widget has a folder under
-[`src/widgets`](https://github.com/dnajs/data-dashboard/tree/master/src/widgets)
+[`src/widgets`](https://github.com/dnajs/data-dashboard/tree/main/src/widgets)
 that contains the widget's view and controller.
 
-## Run locally
+## Run Locally
 Install:
 * **git** from https://git-scm.com
 * **Node.js** from https://nodejs.org
@@ -38,7 +38,7 @@ $ npm start
 ```
 Now view the **DataDashboard** at: http://localhost:7531
 
-## Development mode
+## Development Mode
 Run the application in development mode with the command:
 ```
 $ npm run dev
