@@ -52,7 +52,7 @@
       "lint": "    jshint *.js spec && eslint --max-warnings 0 . --ext .ts",
       "tsc": "     tsc --version && tsc --project .",
       "pretest": " npm run lint && rimraf build **/.DS_Store && npm run tsc && gulp build",
-      "test": "    mocha spec",
+      "test": "    mocha spec/*.spec.js",
       "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
       "dev": "     npm test && concurrently 'tsc --project . --watch' 'gulp watch'",
       "prod": "    npm test && echo && echo 'Visit --> http://localhost:7531' && npm start"
@@ -61,7 +61,7 @@
       "fontAwesome": "5.15"
    },
    "dependencies": {
-      "chart.js": "~3.3",
+      "chart.js": "~3.4",
       "dna.js": "~1.8",
       "fetch-json": "~2.4",
       "jquery": "~3.6",
@@ -82,7 +82,7 @@
       "@typescript-eslint/parser": "~4.28",
       "assert-deep-strict-equal": "~0.0",
       "babel-minify": "~0.5",
-      "browser-sync": "~2.26",
+      "browser-sync": "~2.27",
       "canvas": "~2.8",
       "concurrently": "~6.2",
       "cssnano": "~5.0",
@@ -102,7 +102,7 @@
       "gulp-rev-all": "~3.0",
       "gulp-size": "~4.0",
       "gulp-touch-cmd": "~0.0",
-      "gulp-w3c-html-validator": "~3.2",
+      "gulp-w3c-html-validator": "~5.0",
       "jsdom": "~16.6",
       "jshint": "~2.13",
       "merge-stream": "~2.0",
