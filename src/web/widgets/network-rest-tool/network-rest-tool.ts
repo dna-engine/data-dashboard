@@ -38,7 +38,7 @@ const appWidgetNetworkRestTool = {
       fetchJson.get(model.url).then(handleData).catch(handleError);
       },
    show(widgetElem: JQuery): void {
-      const defaultRestUrl = 'https://dnajs.org/rest/book/1/';
+      const defaultRestUrl = 'https://dnajs.org/api/books/1/';
       const elem = {
          widget: widgetElem,
          input:  widgetElem.find('input'),
