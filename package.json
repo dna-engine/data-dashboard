@@ -52,7 +52,7 @@
       "lint": "    jshint *.js spec && eslint --max-warnings 0 . --ext .ts",
       "tsc": "     tsc --version && tsc --project .",
       "pretest": " npm run lint && rimraf build **/.DS_Store && npm run tsc && gulp build",
-      "test": "    mocha spec/*.spec.js",
+      "test": "    mocha spec/*.spec.js --timeout 5000",
       "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
       "dev": "     npm test && concurrently 'tsc --project . --watch' 'gulp watch'",
       "prod": "    npm test && echo && echo 'Visit --> http://localhost:7531' && npm start"
@@ -63,7 +63,7 @@
    "dependencies": {
       "chart.js": "~3.4",
       "dna.js": "~1.8",
-      "fetch-json": "~2.4",
+      "fetch-json": "~2.5",
       "jquery": "~3.6",
       "node-fetch": "~2.6",
       "pretty-print-json": "~1.0",
@@ -77,7 +77,7 @@
       "@fortawesome/fontawesome-free": "~5.15",
       "@types/express": "~4.17",
       "@types/jquery": "~3.5",
-      "@types/node": "~16.0",
+      "@types/node": "~16.3",
       "@typescript-eslint/eslint-plugin": "~4.28",
       "@typescript-eslint/parser": "~4.28",
       "assert-deep-strict-equal": "~0.0",
