@@ -38,10 +38,10 @@ const banner =    `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.licen
 const bannerCss = '/*! ' + banner + ' */\n';
 const bannerJs =  '//! ' + banner + '\n';
 const srcFiles = {
-   graphics: { glob: 'src/web/assets/graphics/**/*' },
-   css:      { glob: 'src/web/**/*.less', order: ['src/web/css/base.less'] },
-   html:     { glob: 'src/web/root/**/*.html' },
-   widgets:  { glob: 'src/web/widgets/**/*.html' },
+   graphics: { glob: 'src/web-app/assets/graphics/**/*' },
+   css:      { glob: 'src/web-app/**/*.less', order: ['src/web-app/css/base.less'] },
+   html:     { glob: 'src/web-app/root/**/*.html' },
+   widgets:  { glob: 'src/web-app/widgets/**/*.html' },
    js:       { glob: folder.tsc + '/**/*.js', order: ['!**/app.js'] },
    };
 const libraryFiles = {
@@ -131,7 +131,7 @@ const task = {
             .pipe(gulp.dest(dest));
          },
       widgets() {
-         return task.buildIncludes.generate('widgets', srcFiles.widgets.glob, 'src/web/html/generated');
+         return task.buildIncludes.generate('widgets', srcFiles.widgets.glob, 'src/web-app/html/generated');
          },
       },
    buildWebApp: {
@@ -237,10 +237,10 @@ const task = {
          ),
       },
    setupWatchers() {
-      gulp.watch('src/web/**/*.+(jpg|png|svg)',                   task.buildWebApp.graphics);
-      gulp.watch('src/web/**/*.less',                             task.buildWebApp.css);
+      gulp.watch('src/web-app/**/*.+(jpg|png|svg)',                   task.buildWebApp.graphics);
+      gulp.watch('src/web-app/**/*.less',                             task.buildWebApp.css);
       gulp.watch(folder.tsc + '/**/*.js',                         task.buildWebApp.js);
-      gulp.watch(['src/web/**/*.html', '!src/web/**/*.gen.html'], task.compound.buildHtml());
+      gulp.watch(['src/web-app/**/*.html', '!src/web-app/**/*.gen.html'], task.compound.buildHtml());
       const sync = browserSync.create();
       sync.init({ server: { baseDir: folder.staging } });
       gulp.watch(folder.staging + '/**/*').on('change', sync.reload);
