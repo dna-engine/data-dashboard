@@ -42,7 +42,7 @@ const srcFiles = {
    css:      { glob: 'src/web/**/*.less', order: ['src/web/css/base.less'] },
    html:     { glob: 'src/web/root/**/*.html' },
    widgets:  { glob: 'src/web/widgets/**/*.html' },
-   js:       { glob: folder.tsc + '/**/*.js', order: ['!web/ts/app.js'] },
+   js:       { glob: folder.tsc + '/**/*.js', order: ['!**/app.js'] },
    };
 const libraryFiles = {
    css: [
@@ -53,7 +53,7 @@ const libraryFiles = {
       'node_modules/pretty-print-json/dist/pretty-print-json.css',
       ],
    js: [
-      'node_modules/whatwg-fetch/dist/fetch.umd.js',  //needed for JSDOM when running mocha specifications
+      'node_modules/whatwg-fetch/dist/fetch.umd.js',  //polyfill
       ],
    jsOotbMinified: [
       'node_modules/fetch-json/dist/fetch-json.min.js',
