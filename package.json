@@ -55,7 +55,7 @@
       "test": "    mocha spec/*.spec.js --timeout 5000",
       "posttest": "gulp minify && gulp hash && rimraf docs && gulp docs",
       "dev": "     npm test && concurrently 'tsc --project . --watch' 'gulp watch'",
-      "prod": "    npm test && echo && echo 'Visit --> http://localhost:7531' && npm start"
+      "prod": "    npm test && npm start"
    },
    "cdnVersion": {
       "fontAwesome": "5.15"
@@ -66,6 +66,7 @@
       "fetch-json": "~2.5",
       "jquery": "~3.6",
       "node-fetch": "~2.6",
+      "open": "~8.2.1",
       "pretty-print-json": "~1.0",
       "simple-datatables": "~3.0",
       "web-ignition": "~1.4",
@@ -75,7 +76,6 @@
       "@babel/core": "~7.14",
       "@babel/preset-env": "~7.14",
       "@fortawesome/fontawesome-free": "~5.15",
-      "@types/express": "~4.17",
       "@types/jquery": "~3.5",
       "@types/node": "~16.3",
       "@typescript-eslint/eslint-plugin": "~4.28",
@@ -87,7 +87,6 @@
       "concurrently": "~6.2",
       "cssnano": "~5.0",
       "eslint": "~7.30",
-      "express": "~4.17",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",
       "gulp-babel": "~8.0",
@@ -103,7 +102,6 @@
       "gulp-size": "~4.0",
       "gulp-touch-cmd": "~0.0",
       "gulp-w3c-html-validator": "~5.0",
-      "jsdom": "~16.6",
       "jshint": "~2.13",
       "merge-stream": "~2.0",
       "mocha": "~9.0",
@@ -111,8 +109,7 @@
       "postcss-font-magician": "~3.0",
       "postcss-preset-env": "~6.7",
       "puppeteer": "~10.1",
-      "puppeteer-browser-ready": "~0.2",
-      "server-listening": "~0.2",
+      "puppeteer-browser-ready": "~0.3",
       "typescript": "~4.3"
    }
 }

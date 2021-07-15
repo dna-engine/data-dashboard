@@ -29,19 +29,10 @@ const appController = {
       panelElem.find('>app-widgets').children().toArray().forEach(showWidget);
       return panelElem;
       },
-   jsdomWorkarounds(): void {
-      fetchJson.enableLogger();  //prevent localStorage race condition
-      class StubOutChart {}
-      window['Chart'] = StubOutChart;  //prevent UnhandledPromiseRejectionWarning
-      const stubFn = () => { /* noop */ };
-      window.scrollTo = stubFn;  //prevent Error: Not implemented: window.scrollTo
-      },
    setup(): void {
       libX.ui.autoDisableButtons();
       dna.registerInitializer(<DnaCallback>libX.bubbleHelp.setup);
       fetchJson.enableLogger(<FetchJsonLogger>app.network.logEvent);
-      if (navigator.userAgent.includes('jsdom'))
-         app.controller.jsdomWorkarounds();
       app.lookup.panels.forEach(panel =>
          panel.widgetList = panel.widgets.map(code => <AppWidget>(app.lookup.widget[code])));
       const displayedPanels = app.lookup.panels.filter(panel => panel.display);
