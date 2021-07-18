@@ -8,7 +8,7 @@ import { browserReady } from 'puppeteer-browser-ready';
 // Setup
 const webFolder = process.env.webFolder || 'build/step1-staging/';
 let http;  //fields: server, terminator, folder, url, port, verbose
-let web;   //fields: browser, page, response, title, html, $
+let web;   //fields: browser, page, response, status, location, title, html, $
 before(async () => {
    http = await browserReady.startWebServer();
    web =  await puppeteer.launch().then(browserReady.goto(http.url + webFolder));
@@ -22,8 +22,8 @@ after(async () => {
 describe('The web page', () => {
 
    it('has the correct URL', () => {
-      const actual =   { url: web.location.href };
-      const expected = { url: http.url + webFolder };
+      const actual =   { status: web.status, url: web.location.href };
+      const expected = { status: 200,        url: http.url + webFolder };
       assertDeepStrictEqual(actual, expected);
       });
 
