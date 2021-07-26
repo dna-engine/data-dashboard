@@ -1,8 +1,9 @@
-// DataDashboard
+// DataDashboard ~~ MIT License
 // Application
 
 // Imports
 import { dna } from 'dna.js';
+import { AppChartColor, appConfig, AppPanel, AppWidget } from './config';
 import { appController } from './controller';
 import { appNetwork, appTransformer, appUtil } from './util';
 
@@ -22,7 +23,6 @@ import { appWidgetTransBartDepartures } from '../widgets/trans-bart-departures/t
 import { appWidgetTransBartStations } from '../widgets/trans-bart-stations/trans-bart-stations';
 import { appWidgetTransF1TopCountries } from '../widgets/trans-f1-top-countries/trans-f1-top-countries';
 import { appWidgetTransNycBikeStations } from '../widgets/trans-nyc-bike-stations/trans-nyc-bike-stations';
-import { AppChartColor, appConfig, AppPanel, AppWidget } from './config';
 
 export type AppWidgetMap =     { [code: string]: AppWidget };
 export type AppPanelMap =      { [code: string]: AppPanel };
@@ -63,8 +63,13 @@ const app = {
       transF1TopCountries:  appWidgetTransF1TopCountries,
       transNycBikeStations: appWidgetTransNycBikeStations,
       },
+   setup(): void {
+      console.log('DataDashboard', app.lookup.widgets.map(widget => widget.code));
+      dna.registerContext('app', app);  //enable dna to see app object even after module bundling
+      app.controller.setup();
+      },
    };
 
-app.controller.setup();
+app.setup();
 
 export { app };

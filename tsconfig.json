@@ -5,7 +5,7 @@
       "module": "ES2020",
       "moduleResolution": "node",
       "declaration": true,
-      "outDir": "build/step0-tsc",
+      "outDir": "build/step1-tsc",
       "strict": true,
       "alwaysStrict": true,
       "esModuleInterop": true,

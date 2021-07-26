@@ -26,17 +26,17 @@ import { readFileSync } from 'fs';
 
 // Folders
 const folder = {
-   tsc:      'build/step0-tsc',
-   staging:  'build/step1-staging',
-   minified: 'build/step2-minified',
-   prod:     'build/step3-production',
+   tsc:      'build/step1-tsc/web-app',
+   staging:  'build/step2-staging/web-app',
+   minified: 'build/step3-minified/web-app',
+   hashed:   'build/step4-hashed/web-app',
+   dist:     'dist//web-app',
    };
 
 // Setup
 const pkg =       JSON.parse(readFileSync('./package.json'));
 const banner =    `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const bannerCss = '/*! ' + banner + ' */\n';
-const bannerJs =  '//! ' + banner + '\n';
 const srcFiles = {
    graphics: { glob: 'src/web-app/assets/graphics/**/*' },
    css:      { glob: 'src/web-app/**/*.less', order: ['src/web-app/css/base.less'] },
@@ -143,15 +143,7 @@ const task = {
          return gulp.src(srcFiles.css.glob)
             .pipe(order(srcFiles.css.order))
             .pipe(less())
-            .pipe(concat(pkg.name + '.css'))
-            .pipe(size({ showFiles: true }))
-            .pipe(gulp.dest(folder.staging));
-         },
-      js() {
-         return gulp.src(srcFiles.js.glob)
-            .pipe(order(srcFiles.js.order))
-            .pipe(concat(pkg.name + '.js'))
-            .pipe(replace(/^[import|export].*\n/gm, ''))
+            .pipe(concat('app.bundle.css'))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging));
          },
@@ -171,7 +163,6 @@ const task = {
          return mergeStream(
             task.buildWebApp.graphics(),
             task.buildWebApp.css(),
-            task.buildWebApp.js(),
             task.buildWebApp.html(),
             );
          },
@@ -191,34 +182,28 @@ const task = {
       const minifyLibJs = () => gulp.src(folder.staging + '/libraries.js')
          .pipe(header('//! Bundle: 3rd party libraries\n\n'))
          .pipe(gulp.dest(folder.minified));
-      const minifyCss = () => gulp.src(folder.staging + '/' + pkg.name + '.css')
+      const minifyCss = () => gulp.src(folder.staging + '/app.bundle.css')
          .pipe(css(cssPlugins))
          .pipe(header(bannerCss))
-         .pipe(gulp.dest(folder.minified));
-      const minifyJs = () => gulp.src(folder.staging + '/' + pkg.name + '.js')
-         .pipe(babel(babelMinifyJs))
-         .pipe(header(bannerJs))
-         .pipe(gap.appendText('\n'))
          .pipe(gulp.dest(folder.minified));
       return mergeStream(
          copyGraphics(),
          copyHtml(),
          minifyLibCss(),
          minifyLibJs(),
-         minifyCss(),
-         minifyJs());
+         minifyCss());
       },
    hashWebApp() {
       return gulp.src(folder.minified + '/**/*')
          .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
          .pipe(replace('./graphics/logo-card', pkg.homepage + '/graphics/logo-card'))  //og:image
-         .pipe(gulp.dest(folder.prod))
-         .pipe(size({ showFiles: true, gzip: true }));
+         .pipe(gulp.dest(folder.hashed))
+         .pipe(size({ showFiles: true }));
       },
    publishDocsWebsite() {
       fs.mkdirSync('docs');
       fs.writeFileSync('docs/CNAME', 'data-dashboard.js.org\n');
-      return gulp.src(folder.prod + '/**/*')
+      return gulp.src(folder.hashed + '/**/*')
          .pipe(gulp.dest('docs'))
          .pipe(size({ showFiles: true }));
       },
@@ -237,9 +222,8 @@ const task = {
          ),
       },
    setupWatchers() {
-      gulp.watch('src/web-app/**/*.+(jpg|png|svg)',                   task.buildWebApp.graphics);
-      gulp.watch('src/web-app/**/*.less',                             task.buildWebApp.css);
-      gulp.watch(folder.tsc + '/**/*.js',                         task.buildWebApp.js);
+      gulp.watch('src/web-app/**/*.+(jpg|png|svg)',                       task.buildWebApp.graphics);
+      gulp.watch('src/web-app/**/*.less',                                 task.buildWebApp.css);
       gulp.watch(['src/web-app/**/*.html', '!src/web-app/**/*.gen.html'], task.compound.buildHtml());
       const sync = browserSync.create();
       sync.init({ server: { baseDir: folder.staging } });
