@@ -20,6 +20,7 @@ console.log('Mode:    ', process.env.NODE_ENV ?? 'development');
 console.log('Web root:', webFolder);
 const startWebServer = async () => {
    const http = await browserReady.startWebServer({ folder: webFolder, port: webPort });
-   open(http.url);
+   if (!prodMode)
+      open(http.url);
    };
 startWebServer();

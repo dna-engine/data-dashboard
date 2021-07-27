@@ -55,8 +55,9 @@
       "step04": "tsc --project .",
       "step05": "rollup --config",
       "step06": "gulp build && gulp minify && gulp hash && gulp docs",
-      "step07": "copyfiles --up 2 'build/step4-hashed/web-app/**/*' dist",
-      "step08": "mocha spec/*.spec.js --timeout 5000",
+      "step07": "w3c-html-validator build/step2-staging",
+      "step08": "copyfiles --up 2 'build/step4-hashed/web-app/**/*' dist",
+      "step09": "mocha spec/*.spec.js --timeout 5000",
       "test": "  npm-run-all step*",
       "dev1": "  concurrently 'tsc --project . --watch' 'gulp watch'",
       "dev2": "  webPort=8080 nodemon",
@@ -100,7 +101,6 @@
       "gulp-concat": "~2.6",
       "gulp-file-include": "~2.3",
       "gulp-header": "~2.0",
-      "gulp-htmlhint": "~4.0",
       "gulp-less": "~5.0",
       "gulp-order": "~1.2",
       "gulp-postcss": "~9.0",
@@ -108,7 +108,6 @@
       "gulp-rev-all": "~3.0",
       "gulp-size": "~4.0",
       "gulp-touch-cmd": "~0.0",
-      "gulp-w3c-html-validator": "~5.0",
       "jshint": "~2.13",
       "merge-stream": "~2.0",
       "mocha": "~9.0",
@@ -120,6 +119,7 @@
       "puppeteer-browser-ready": "~0.3",
       "rollup": "~2.54",
       "rollup-plugin-terser": "~7.0",
-      "typescript": "~4.3"
+      "typescript": "~4.3",
+      "w3c-html-validator": "~0.7"
    }
 }

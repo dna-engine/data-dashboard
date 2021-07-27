@@ -13,7 +13,6 @@ import fs              from 'fs';
 import gap             from 'gulp-append-prepend';
 import gulp            from 'gulp';
 import header          from 'gulp-header';
-import htmlHint        from 'gulp-htmlhint';
 import less            from 'gulp-less';
 import mergeStream     from 'merge-stream';
 import order           from 'gulp-order';
@@ -21,7 +20,6 @@ import replace         from 'gulp-replace';
 import RevAll          from 'gulp-rev-all';
 import size            from 'gulp-size';
 import touch           from 'gulp-touch-cmd';
-import { htmlValidator } from 'gulp-w3c-html-validator';
 import { readFileSync } from 'fs';
 
 // Folders
@@ -30,7 +28,6 @@ const folder = {
    staging:  'build/step2-staging/web-app',
    minified: 'build/step3-minified/web-app',
    hashed:   'build/step4-hashed/web-app',
-   dist:     'dist//web-app',
    };
 
 // Setup
@@ -66,7 +63,6 @@ const libraryFiles = {
       'node_modules/pretty-print-json/dist/pretty-print-json.min.js',
       ],
    };
-const htmlHintConfig = { 'attr-value-double-quotes': false };
 const cssPlugins = [
    cssFontMagician({ protocol: 'https:' }),
    cssPresetEnv(),
@@ -131,7 +127,8 @@ const task = {
             .pipe(gulp.dest(dest));
          },
       widgets() {
-         return task.buildIncludes.generate('widgets', srcFiles.widgets.glob, 'src/web-app/html/generated');
+         const dest = 'src/web-app/html/generated';
+         return task.buildIncludes.generate('widgets', srcFiles.widgets.glob, dest);
          },
       },
    buildWebApp: {
@@ -150,10 +147,6 @@ const task = {
       html() {
          return gulp.src(srcFiles.html.glob)
             .pipe(fileInclude({ indent: true, context: { pkg } }))
-            .pipe(htmlHint(htmlHintConfig))
-            .pipe(htmlHint.reporter())
-            .pipe(htmlValidator.analyzer())
-            .pipe(htmlValidator.reporter())
             .pipe(replace('src=#', 'src=' + placeholderSvg))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging))
