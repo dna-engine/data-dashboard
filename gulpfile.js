@@ -2,14 +2,12 @@
 
 // Imports
 import babel           from 'gulp-babel';
-import browserSync     from 'browser-sync';
 import concat          from 'gulp-concat';
 import css             from 'gulp-postcss';
 import cssFontMagician from 'postcss-font-magician';
 import cssNano         from 'cssnano';
 import cssPresetEnv    from 'postcss-preset-env';
 import fileInclude     from 'gulp-file-include';
-import fs              from 'fs';
 import gap             from 'gulp-append-prepend';
 import gulp            from 'gulp';
 import header          from 'gulp-header';
@@ -73,7 +71,15 @@ const preserveImportant = comment => /licen[sc]e|copyright|@preserve|^!/i.test(c
 const babelMinifyJs = { presets: [transpileES6, 'minify'], shouldPrintComment: preserveImportant };
 babelMinifyJs.presets[1] = ['minify', { builtIns: false }];  //HACK: workaround "Couldn't find intersection" error, https://github.com/babel/minify/issues/904
 const onePixelSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>';
-const placeholderSvg = `"data:image/svg+xml;base64,${Buffer.from(onePixelSvg).toString('base64')}"`;
+const dataImage =   'data:image/svg+xml;base64,' + Buffer.from(onePixelSvg).toString('base64');
+const imgSrcPlaceholder = {
+   hash:        'src=["\']?#["\']?',    //won't match: <p>Example HTML: &lt;img src="&num;" alt="Ok"&gt;"</p>
+   hashRegEx:   /src=["\']?#["\']?/gm,  //won't match: <p>Example HTML: &lt;img src="&num;" alt="Ok"&gt;"</p>
+   svg:         onePixelSvg,
+   dataImage:   dataImage,
+   replacement: `src="${dataImage}"`,
+   };
+
 
 // Tasks
 const task = {
@@ -147,7 +153,7 @@ const task = {
       html() {
          return gulp.src(srcFiles.html.glob)
             .pipe(fileInclude({ indent: true, context: { pkg } }))
-            .pipe(replace('src=#', 'src=' + placeholderSvg))
+            .pipe(replace(imgSrcPlaceholder.hashRegEx, imgSrcPlaceholder.replacement))
             .pipe(size({ showFiles: true }))
             .pipe(gulp.dest(folder.staging))
             .pipe(touch());
@@ -193,13 +199,6 @@ const task = {
          .pipe(gulp.dest(folder.hashed))
          .pipe(size({ showFiles: true }));
       },
-   publishDocsWebsite() {
-      fs.mkdirSync('docs');
-      fs.writeFileSync('docs/CNAME', 'data-dashboard.js.org\n');
-      return gulp.src(folder.hashed + '/**/*')
-         .pipe(gulp.dest('docs'))
-         .pipe(size({ showFiles: true }));
-      },
    compound: {
       build: () => gulp.series(
          task.packageLibraries.css,
@@ -218,9 +217,6 @@ const task = {
       gulp.watch('src/web-app/**/*.+(jpg|png|svg)',                       task.buildWebApp.graphics);
       gulp.watch('src/web-app/**/*.less',                                 task.buildWebApp.css);
       gulp.watch(['src/web-app/**/*.html', '!src/web-app/**/*.gen.html'], task.compound.buildHtml());
-      const sync = browserSync.create();
-      sync.init({ server: { baseDir: folder.staging } });
-      gulp.watch(folder.staging + '/**/*').on('change', sync.reload);
       },
    };
 
@@ -228,5 +224,4 @@ const task = {
 gulp.task('build',  task.compound.build());
 gulp.task('minify', task.minifyWebApp);
 gulp.task('hash',   task.hashWebApp);
-gulp.task('docs',   task.publishDocsWebsite);
 gulp.task('watch',  task.setupWatchers);
