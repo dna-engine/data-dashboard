@@ -1,4 +1,4 @@
-// DataDashboard
+// DataDashboard ~~ MIT License
 // Widget controller
 
 import { fetchJson } from 'fetch-json';

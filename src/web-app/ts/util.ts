@@ -1,4 +1,4 @@
-// DataDashboard
+// DataDashboard ~~ MIT License
 // Utilities
 
 import { ChartConfiguration, ChartDataset } from 'chart.js';

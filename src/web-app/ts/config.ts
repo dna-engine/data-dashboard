@@ -1,4 +1,4 @@
-// DataDashboard
+// DataDashboard ~~ MIT License
 // Configuration
 
 export type AppWidget =     typeof appConfig.widgets[0];

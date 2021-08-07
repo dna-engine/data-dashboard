@@ -1,4 +1,4 @@
-// DataDashboard
+// DataDashboard ~~ MIT License
 // Widget controller
 
 import { Chart, ChartConfiguration } from 'chart.js';

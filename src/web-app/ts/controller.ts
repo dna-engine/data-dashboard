@@ -1,4 +1,4 @@
-// DataDashboard
+// DataDashboard ~~ MIT License
 // Controller
 
 import { dna, DnaCallback } from 'dna.js';
