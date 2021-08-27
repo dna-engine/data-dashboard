@@ -32,7 +32,8 @@ const appWidgetNetworkRestTool = {
          if (button)
             elem.input.trigger('focus');
          };
-      const handleError = (error: RawData) => handleData({ error: true, name: error.name, message: error.message });
+      const handleError = (error: RawData) =>
+         handleData({ error: true, name: error.name!, message: error.message! });
       app.util.spinnerStart(elem.widget);
       model.url = <string>elem.input.val();
       fetchJson.get(model.url).then(handleData).catch(handleError);
