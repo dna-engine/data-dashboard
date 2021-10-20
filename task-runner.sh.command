@@ -73,6 +73,7 @@ releaseInstructions() {
 runSpecs() {
    cd $projectHome
    echo "Run specifications:"
+   npx browserslist@latest --update-db
    npm test
    echo
    }
