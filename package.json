@@ -72,12 +72,12 @@
       "fontAwesome": "5.15"
    },
    "dependencies": {
-      "chart.js": "~3.5",
+      "chart.js": "~3.6",
       "dna.js": "~1.9",
       "fetch-json": "~2.6",
       "jquery": "~3.6",
       "node-fetch": "~3.0",
-      "open": "~8.3",
+      "open": "~8.4",
       "pretty-print-json": "~1.1",
       "simple-datatables": "~3.1",
       "web-ignition": "~1.4",
@@ -99,7 +99,7 @@
       "chokidar-cli": "~3.0",
       "copyfiles": "~2.4",
       "cssnano": "~5.0",
-      "eslint": "~8.0",
+      "eslint": "~8.1",
       "gulp": "~4.0",
       "gulp-append-prepend": "~1.0",
       "gulp-babel": "~8.0",
