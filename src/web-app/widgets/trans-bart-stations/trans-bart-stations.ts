@@ -57,7 +57,7 @@ const appWidgetTransBartStations = {
          return `${Math.abs(lat)}°${lat > 0 ? 'N' : 'S'} ${Math.abs(long)}°${long > 0 ? 'E' : 'W'}`;
          };
       const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
-         (item.dataset['data'][item.dataIndex])['label'] + ' ' + latLong(item);
+         (item.dataset['data'][item.dataIndex])!['label'] + ' ' + latLong(item);
       const chartInfo = <ChartConfiguration><unknown>{
          type: 'scatter',
          data: {
