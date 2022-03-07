@@ -10,15 +10,15 @@ describe('The "docs" folder', () => {
 
    it('contains the correct files', () => {
       const removeHash = (filename) => filename.replace(/[.][0-9a-f]{8}[.]/, '.');
-      const actual = readdirSync('docs').sort().map(removeHash);
+      const actual = readdirSync('docs').map(removeHash).sort();
       const expected = [
          'CNAME',
          'app.bundle.css',
          'app.bundle.js',
          'graphics',
          'index.html',
-         'libraries.js',
          'libraries.css',
+         'libraries.js',
          ];
       assertDeepStrictEqual(actual, expected);
       });
