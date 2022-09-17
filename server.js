@@ -17,7 +17,7 @@ const config = {
 const mode =      process.env.NODE_ENV  ?? 'development';
 const webFolder = process.env.webFolder ?? config[mode].web;
 const webPort =   process.env.webPort   ?? config[mode].port ?? 0;
-const pkg =       JSON.parse(readFileSync('./package.json'));
+const pkg =       JSON.parse(readFileSync('./package.json', 'utf8'));
 const browser =   mode === 'development';
 
 // Start

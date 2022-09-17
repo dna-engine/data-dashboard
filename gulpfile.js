@@ -29,7 +29,7 @@ const folder = {
    };
 
 // Setup
-const pkg =       JSON.parse(readFileSync('./package.json'));
+const pkg =       JSON.parse(readFileSync('./package.json', 'utf8'));
 const banner =    `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const bannerCss = '/*! ' + banner + ' */\n';
 const srcFiles = {
