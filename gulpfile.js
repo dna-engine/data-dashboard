@@ -14,6 +14,7 @@ import header          from 'gulp-header';
 import less            from 'gulp-less';
 import mergeStream     from 'merge-stream';
 import order           from 'gulp-order';
+import path            from 'path';
 import replace         from 'gulp-replace';
 import RevAll          from 'gulp-rev-all';
 import size            from 'gulp-size';
@@ -124,8 +125,9 @@ const task = {
       generate(name, glob, dest) {
          return gulp.src(glob)
             .pipe(order())
-            .pipe(replace(/.*[\n]/gm, ''))
+            .pipe(replace(/.*/s, ''))  //replace text with @@include macro below
             .pipe(header('@@include("../../' + name + '/${file.relative}")'))
+            .pipe(replace(path.sep, '/'))
             .pipe(concat(name + '.gen.html'))
             .pipe(gap.prependText('\n'))
             .pipe(gap.appendText('\n'))
