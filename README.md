@@ -49,7 +49,7 @@ Powered by:
 * [Chart.js](https://www.chartjs.org)
 * [dna.js](https://dnajs.org)
 * [fetch-json](https://www.npmjs.com/package/fetch-json)
-* [gulp-rev-all](https://github.com/smysnk/gulp-rev-all)
+* [rev-web-assets](https://www.npmjs.com/package/rev-web-assets)
 * [Simple-DataTables](https://github.com/fiduswriter/Simple-DataTables)
 
 ---

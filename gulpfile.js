@@ -16,7 +16,6 @@ import mergeStream     from 'merge-stream';
 import order           from 'gulp-order';
 import path            from 'path';
 import replace         from 'gulp-replace';
-import RevAll          from 'gulp-rev-all';
 import size            from 'gulp-size';
 import touch           from 'gulp-touch-cmd';
 import { readFileSync } from 'fs';
@@ -30,7 +29,7 @@ const folder = {
    };
 
 // Setup
-const pkg =       JSON.parse(readFileSync('./package.json', 'utf8'));
+const pkg =       JSON.parse(readFileSync('package.json', 'utf-8'));
 const banner =    `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const bannerCss = '/*! ' + banner + ' */\n';
 const srcFiles = {
@@ -194,13 +193,6 @@ const task = {
          minifyLibJs(),
          minifyCss());
       },
-   hashWebApp() {
-      return gulp.src(folder.minified + '/**/*')
-         .pipe(RevAll.revision({ dontRenameFile: ['.html'] }))
-         .pipe(replace('./graphics/logo-card', pkg.homepage + '/graphics/logo-card'))  //og:image
-         .pipe(gulp.dest(folder.hashed))
-         .pipe(size({ showFiles: true }));
-      },
    compound: {
       build: () => gulp.series(
          task.packageLibraries.css,
@@ -225,5 +217,4 @@ const task = {
 // Gulp
 gulp.task('build',  task.compound.build());
 gulp.task('minify', task.minifyWebApp);
-gulp.task('hash',   task.hashWebApp);
 gulp.task('watch',  task.setupWatchers);
