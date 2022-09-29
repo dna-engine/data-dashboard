@@ -9,7 +9,7 @@ import { readFileSync } from 'fs';
 
 // Configuration
 const config = {
-   development: { web: 'build/step2-staging/web-app' },
+   development: { web: 'build/2-dev/web-app' },
    production:  { web: 'dist/web-app', port: 7531 },
    };
 
@@ -17,7 +17,7 @@ const config = {
 const mode =      process.env.NODE_ENV  ?? 'development';
 const webFolder = process.env.webFolder ?? config[mode].web;
 const webPort =   process.env.webPort   ?? config[mode].port ?? 0;
-const pkg =       JSON.parse(readFileSync('./package.json', 'utf8'));
+const pkg =       JSON.parse(readFileSync('package.json', 'utf-8'));
 const browser =   mode === 'development';
 
 // Start

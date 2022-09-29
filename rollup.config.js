@@ -18,18 +18,18 @@ const onWarn =    (warning, warn) => ignoreList.includes(warning.code) || warn(w
 
 const rollup = [
    {
-      input:    'build/step1-tsc/web-app/ts/app.js',
+      input:    'build/1-tsc/web-app/ts/app.js',
       external: libraryModules,
       onwarn:   onWarn,
       plugins:  [babel({ babelHelpers: 'bundled' })],
       output: [
          {
-            file:    'build/step2-staging/web-app/app.bundle.js',
+            file:    'build/2-dev/web-app/app.bundle.js',
             globals: globals,
             format:  'iife',
          },
          {
-            file:    'build/step3-minified/web-app/app.bundle.js',
+            file:    'build/3-min/web-app/app.bundle.js',
             globals: globals,
             format:  'iife',
             banner:  banner,

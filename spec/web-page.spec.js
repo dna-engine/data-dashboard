@@ -6,7 +6,7 @@ import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
 import { browserReady } from 'puppeteer-browser-ready';
 
 // Setup
-const webFolder = process.env.webFolder || 'build/step2-staging/web-app/';
+const webFolder = process.env.webFolder || 'build/2-dev/web-app/';
 let http;  //fields: server, terminator, folder, url, port, verbose
 let web;   //fields: browser, page, response, status, location, title, html, $
 before(async () => {
