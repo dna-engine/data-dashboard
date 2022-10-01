@@ -6,10 +6,11 @@ import { libX } from 'web-ignition';
 import { app, AppCallback, AppParams, AppParamValue } from './app';
 import { AppChartColor } from './config';
 
-export type AppOptionsNarrowScreenSaver = {
-   maxPoints?:   number,
-   screenWidth?: number,
+export type AppSettingsNarrowScreenSaver = {
+   maxPoints:   number,
+   screenWidth: number,
    };
+export type AppOptionsNarrowScreenSaver = Partial<AppSettingsNarrowScreenSaver>;
 
 const appUtil = {
    lookupChartColor(i: number): string {
