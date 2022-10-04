@@ -5,7 +5,7 @@
 // Imports
 import open             from 'open';
 import { browserReady } from 'puppeteer-browser-ready';
-import { readFileSync } from 'fs';
+import fs from 'fs';
 
 // Configuration
 const config = {
@@ -17,7 +17,7 @@ const config = {
 const mode =      process.env.NODE_ENV  ?? 'development';
 const webFolder = process.env.webFolder ?? config[mode].web;
 const webPort =   process.env.webPort   ?? config[mode].port ?? 0;
-const pkg =       JSON.parse(readFileSync('package.json', 'utf-8'));
+const pkg =       JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 const browser =   mode === 'development';
 
 // Start

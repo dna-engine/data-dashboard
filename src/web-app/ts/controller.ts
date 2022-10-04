@@ -9,7 +9,7 @@ import { AppWidget } from './config';
 
 const appController = {
    showPanel(panelElem: JQuery): JQuery {
-      window.scrollTo({ top: 0 });
+      globalThis.scrollTo({ top: 0 });
       const showWidget = (node: HTMLElement, i: number) => {
          const widgetElem = $(node);
          const widget = <AppWidget>dna.getModel(widgetElem);

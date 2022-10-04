@@ -18,7 +18,7 @@ import path            from 'path';
 import replace         from 'gulp-replace';
 import size            from 'gulp-size';
 import touch           from 'gulp-touch-cmd';
-import { readFileSync } from 'fs';
+import fs from 'fs';
 
 // Folders
 const folder = {
@@ -29,7 +29,7 @@ const folder = {
    };
 
 // Setup
-const pkg =       JSON.parse(readFileSync('package.json', 'utf-8'));
+const pkg =       JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 const banner =    `${pkg.name} v${pkg.version} ~~ ${pkg.homepage} ~~ ${pkg.license} License`;
 const bannerCss = '/*! ' + banner + ' */\n';
 const srcFiles = {
