@@ -12,7 +12,7 @@ const appConfig = {
       { code: 'network-endpoints',       header: 'REST endpoints' },
       { code: 'network-log',             header: 'Network log' },
       { code: 'network-rest-tool',       header: 'REST tool' },
-      { code: 'project-contributors',    header: 'dna.js contributors' },
+      { code: 'project-contributors',    header: 'dna-engine contributors' },
       { code: 'project-json-questions',  header: 'JSON questions' },
       { code: 'space-starships',         header: 'Starship data' },
       { code: 'space-vehicles',          header: 'Vehicle data' },

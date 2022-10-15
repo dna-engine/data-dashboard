@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Controller
 
-import { dna, DnaCallback } from 'dna.js';
+import { dna, DnaCallback } from 'dna-engine';
 import { fetchJson, FetchJsonLogger } from 'fetch-json';
 import { libX } from 'web-ignition';
 import { app } from './app';

@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { dna } from 'dna.js';
+import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 
@@ -40,7 +40,7 @@ type RawData = WidgetModel['contributors'];
 
 const appWidgetProjectContributors = {
    show(widgetElem: JQuery): void {
-      const url = 'https://api.github.com/repos/dnajs/dna.js/contributors';
+      const url = 'https://api.github.com/repos/dna-engine/dna-engine/contributors';
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          const model = <WidgetModel>dna.getModel(widgetElem);

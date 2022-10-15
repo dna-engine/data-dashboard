@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { dna } from 'dna.js';
+import { dna } from 'dna-engine';
 
 type WidgetModel = {
    endpoints: {

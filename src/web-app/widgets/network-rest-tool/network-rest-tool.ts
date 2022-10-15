@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { dna } from 'dna.js';
+import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
 import { prettyPrintJson } from 'pretty-print-json';
 import { app } from '../../ts/app';
@@ -39,7 +39,7 @@ const appWidgetNetworkRestTool = {
       fetchJson.get(model.url).then(handleData).catch(handleError);
       },
    show(widgetElem: JQuery): void {
-      const defaultRestUrl = 'https://dnajs.org/api/books/1/';
+      const defaultRestUrl = 'https://dna-engine.org/api/books/1/';
       const elem = {
          widget: widgetElem,
          input:  widgetElem.find('input'),

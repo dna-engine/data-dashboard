@@ -2,7 +2,7 @@
 // Application
 
 // Imports
-import { dna } from 'dna.js';
+import { dna } from 'dna-engine';
 import { AppChartColor, appConfig, AppPanel, AppWidget } from './config';
 import { appController } from './controller';
 import { appNetwork, appTransformer, appUtil } from './util';

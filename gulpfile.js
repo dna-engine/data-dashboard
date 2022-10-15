@@ -42,7 +42,7 @@ const srcFiles = {
 const libraryFiles = {
    css: [
       'node_modules/web-ignition/dist/reset.min.css',
-      'node_modules/dna.js/dist/dna.css',
+      'node_modules/dna-engine/dist/dna-engine.css',
       // 'node_modules/select2/dist/css/select2.min.css',
       'node_modules/simple-datatables/dist/style.css',
       'node_modules/pretty-print-json/dist/pretty-print-json.css',
@@ -55,7 +55,7 @@ const libraryFiles = {
       'node_modules/jquery/dist/jquery.min.js',
       // 'node_modules/select2/dist/js/select2.min.js',
       'node_modules/chart.js/dist/chart.min.js',
-      'node_modules/dna.js/dist/dna.min.js',
+      'node_modules/dna-engine/dist/dna-engine.min.js',
       'node_modules/simple-datatables/dist/umd/simple-datatables.js',
       'node_modules/web-ignition/dist/lib-x.min.js',
       'node_modules/pretty-print-json/dist/pretty-print-json.min.js',
