@@ -5,7 +5,7 @@
       "module": "ES2020",
       "moduleResolution": "node",
       "declaration": true,
-      "outDir": "build/1-tsc",
+      "outDir": "build/1-pre",
       "newLine": "lf",
       "strict": true,
       "alwaysStrict": true,

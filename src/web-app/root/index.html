@@ -1,9 +1,10 @@
-@@include("../html/doc-begin.html")
+{% assign webRoot = '.' %}
+{% render 'src/web-app/html/doc-begin.html', webRoot: webRoot %}
 
 <header>
    <div>
       <figure>
-         <img src=@@webRoot/graphics/logo.png alt=logo>
+         <img src={{webRoot}}/graphics/logo.png alt=logo>
       </figure>
       <h1>DataDashboard</h1>
    </div>
@@ -13,7 +14,7 @@
       </ul>
       <div class=external-site>
          <a href=https://github.com/dna-engine/data-dashboard#readme><i data-icon=book></i></a>
-         <a href="https://github.com/dna-engine/data-dashboard/actions/workflows/run-spec-on-push.yaml"><i data-icon=tachometer-alt></i></a>
+         <a href=https://github.com/dna-engine/data-dashboard/actions/workflows/run-spec-on-push.yaml><i data-icon=tachometer-alt></i></a>
       </div>
    </nav>
 </header>
@@ -44,7 +45,7 @@
 </footer>
 
 <app-widget-templates>
-   @@include("../html/generated/widgets.gen.html")
+   {% render 'src/web-app/html/generated/widgets.gen.html', webRoot: webRoot %}
 </app-widget-templates>
 
-@@include("../html/doc-end.html")
+{% render 'src/web-app/html/doc-end.html' %}
