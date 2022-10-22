@@ -5,6 +5,7 @@
 /package-lock.json
 /build/
 /dist/
+/src/web-app/html/generated/
 
 # Extraneous system files
 .DS_Store
