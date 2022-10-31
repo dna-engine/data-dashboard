@@ -31,9 +31,9 @@ import { app } from '../../ts/app';
 
 type WidgetModel = {
    contributors: {
-      html_url: string,
+      html_url:   string,
       avatar_url: string,
-      login: string,
+      login:      string,
       }[],
    };
 type RawData = WidgetModel['contributors'];

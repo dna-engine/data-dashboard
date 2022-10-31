@@ -3,9 +3,9 @@
 // Options: NODE_ENV, webFolder, webPort
 
 // Imports
-import open             from 'open';
 import { browserReady } from 'puppeteer-browser-ready';
-import fs from 'fs';
+import fs   from 'fs';
+import open from 'open';
 
 // Configuration
 const config = {
