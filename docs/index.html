@@ -1,5 +1,6 @@
+<!-- data-dashboard v0.3.0 ~~ https://data-dashboard.js.org ~~ MIT License -->
 <!doctype html>
-<!-- DataDashboard ~~ https://github.com/dnajs/data-dashboard ~~ MIT License -->
+<!-- DataDashboard ~~ https://github.com/dna-engine/data-dashboard ~~ MIT License -->
 <html lang=en>
 <head>
    <meta charset=utf-8>
@@ -10,16 +11,16 @@
    <meta property=og:title               content="DataDashboard">
    <meta property=og:description         content="A data-driven dashboard console for report widgets">
    <meta property=og:type                content="website">
-   <meta property=og:image               content="https://data-dashboard.js.org/graphics/logo-card.b91f39a4.png">
+   <meta property=og:image               content="https://data-dashboard.js.org/graphics/logo-card.3f313172.png">
    <meta property=og:image:alt           content="Logo">
    <title>DataDashboard</title>
-   <link rel=icon             href=./graphics/bookmark.2c089831.png>
-   <link rel=apple-touch-icon href=./graphics/mobile-home-screen.5ef8934e.png>
+   <link rel=icon             href=graphics/bookmark.354381af.png>
+   <link rel=apple-touch-icon href=graphics/mobile-home-screen.a821547e.png>
    <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2/css/all.min.css>
-   <link rel=stylesheet       href=./libraries.07f0d0f9.css>
-   <link rel=stylesheet       href=./app.bundle.1fa0601a.css>
-   <script defer src=./libraries.8433abf4.js></script>
-   <script defer src=./app.bundle.2e1cc8d5.js></script>
+   <link rel=stylesheet       href=libraries.22ab7680.css>
+   <link rel=stylesheet       href=app.bundle.71e7019e.css>
+   <script defer src=libraries.d55c159f.js></script>
+   <script defer src=app.bundle.11fca32d.js></script>
 </head>
 <body>
 
@@ -27,7 +28,7 @@
 <header>
    <div>
       <figure>
-         <img src=./graphics/logo.044c8a0a.png alt=logo>
+         <img src=graphics/logo.0fffcd1f.png alt=logo>
       </figure>
       <h1>DataDashboard</h1>
    </div>
@@ -36,8 +37,8 @@
          <li id=app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
-         <a href=https://github.com/dnajs/data-dashboard#readme><i data-icon=book></i></a>
-         <a href="https://github.com/dnajs/data-dashboard/actions/workflows/run-spec-on-push.yaml"><i data-icon=tachometer-alt></i></a>
+         <a href=https://github.com/dna-engine/data-dashboard#readme><i data-icon=book></i></a>
+         <a href=https://github.com/dna-engine/data-dashboard/actions/workflows/run-spec-on-push.yaml><i data-icon=tachometer-alt></i></a>
       </div>
    </nav>
 </header>
@@ -62,164 +63,147 @@
 <footer>
    <span>
       <a href=https://data-dashboard.js.org><i data-icon=home></i></a>
-      <a href=https://github.com/dnajs/data-dashboard/blob/main/LICENSE.txt><i data-icon=gavel></i></a>
-      <a href=https://github.com/dnajs/data-dashboard><i data-brand=github-alt></i></a>
+      <a href=https://github.com/dna-engine/data-dashboard/blob/main/LICENSE.txt><i data-icon=gavel></i></a>
+      <a href=https://github.com/dna-engine/data-dashboard><i data-brand=github-alt></i></a>
    </span>
 </footer>
 
 <app-widget-templates>
-   
    <app-widget-body id=fin-rate-intraday class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=fin-rate-moving-avg class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=network-endpoints class=dna-template>
-      <figure>
-         <table>
-            <thead>
-               <tr><th>Name</th><th>REST base</th><th>Documentation</th></tr>
-            </thead>
-            <tbody>
-               <tr data-array=~~endpoints~~>
-                  <td>~~name~~</td>
-                  <td><code>~~base~~</code></td>
-                  <td><a href=~~docs~~ class=external-site>~~docs~~</a></td>
-               </tr>
-            </tbody>
-         </table>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=network-log class=dna-template>
-      <figure>
-         <table></table>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=network-rest-tool class=dna-template data-class=~~restError,error-mode~~>
-      <label>
-         <span>URL:</span>
-         <input placeholder="Enter REST endpoint" data-enter-key=app.widget.networkRestTool.get>
-      </label>
-      <button data-click=app.widget.networkRestTool.get>GET</button>
-      <section>
-         <h2>HTTP Response</h2>
-         <code>~~url~~</code>
-         <pre>~~jsonHtml~~</pre>
-      </section>
-   </app-widget-body>
-
-   <app-widget-body id=project-contributors class=dna-template>
-      <contributor-list class=external-site>
-         <contributor-element data-array=~~contributors~~ data-href=~~html_url~~>
-            <figure>
-               <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~avatar_url~~ alt=avatar>
-               <figcaption>~~login~~</figcaption>
-            </figure>
-         </contributor-element>
-      </contributor-list>
-   </app-widget-body>
-
-   <app-widget-body id=project-json-questions class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-      <figure class=external-site>
-         <table></table>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=space-starships class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-      <figure>
-         <table></table>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=space-vehicles class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-      <figure>
-         <table></table>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=spacex-books class=dna-template>
-      <book-list class=external-site>
-         <book-element data-array=~~books~~>
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~volumeInfo.imageLinks.thumbnail~~
-               data-href=~~volumeInfo.previewLink~~ alt=cover>
-            <div>
-               <h2>~~volumeInfo.title~~</h2>
-               <cite>~~volumeInfo.publisher~~</cite>
-               <p>~~saleInfo.listPrice.amount~~</p>
-               <nav data-href=~~volumeInfo.previewLink~~>
-                  <img src=https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif alt=preview>
-               </nav>
-            </div>
-         </book-element>
-      </book-list>
-   </app-widget-body>
-
-   <app-widget-body id=spacex-pics class=dna-template>
-      <photo-list>
-         <photo-element data-array=~~photos~~>
-            <cite>~~date~~</cite>
-            <figure>
-               <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~media.m~~ data-href=~~link~~ class=external-site alt=photo>
-               <figcaption>~~title~~</figcaption>
-            </figure>
-         </photo-element>
-      </photo-list>
-   </app-widget-body>
-
-   <app-widget-body id=trans-bart-departures class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=trans-bart-stations class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-      <figure>
-         <table></table>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=trans-f1-top-countries class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-      <figure>
-         <canvas></canvas>
-      </figure>
-      <figure>
-         <canvas></canvas>
-      </figure>
-   </app-widget-body>
-
-   <app-widget-body id=trans-nyc-bike-stations class=dna-template>
-      <figure>
-         <canvas></canvas>
-      </figure>
-   </app-widget-body>
-
+   <figure>
+      <canvas></canvas>
+   </figure>
+</app-widget-body>
+<app-widget-body id=fin-rate-moving-avg class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+</app-widget-body>
+<app-widget-body id=network-endpoints class=dna-template>
+   <figure>
+      <table>
+         <thead>
+            <tr><th>Name</th><th>REST base</th><th>Documentation</th></tr>
+         </thead>
+         <tbody>
+            <tr data-array=~~endpoints~~>
+               <td>~~name~~</td>
+               <td><code>~~base~~</code></td>
+               <td><a href=~~docs~~ class=external-site>~~docs~~</a></td>
+            </tr>
+         </tbody>
+      </table>
+   </figure>
+</app-widget-body>
+<app-widget-body id=network-log class=dna-template>
+   <figure>
+      <table></table>
+   </figure>
+</app-widget-body>
+<app-widget-body id=network-rest-tool class=dna-template data-class=~~restError,error-mode~~>
+   <label>
+      <span>URL:</span>
+      <input placeholder="Enter REST endpoint" data-enter-key=app.widget.networkRestTool.get>
+   </label>
+   <button data-click=app.widget.networkRestTool.get>GET</button>
+   <section>
+      <h2>HTTP Response</h2>
+      <code>~~url~~</code>
+      <pre>~~jsonHtml~~</pre>
+   </section>
+</app-widget-body>
+<app-widget-body id=project-contributors class=dna-template>
+   <contributor-list class=external-site>
+      <contributor-element data-array=~~contributors~~ data-href=~~html_url~~>
+         <figure>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~avatar_url~~ alt=avatar>
+            <figcaption>~~login~~</figcaption>
+         </figure>
+      </contributor-element>
+   </contributor-list>
+</app-widget-body>
+<app-widget-body id=project-json-questions class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+   <figure class=external-site>
+      <table></table>
+   </figure>
+</app-widget-body>
+<app-widget-body id=space-starships class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+   <figure>
+      <table></table>
+   </figure>
+</app-widget-body>
+<app-widget-body id=space-vehicles class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+   <figure>
+      <table></table>
+   </figure>
+</app-widget-body>
+<app-widget-body id=spacex-books class=dna-template>
+   <book-list class=external-site>
+      <book-element data-array=~~books~~>
+         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~volumeInfo.imageLinks.thumbnail~~
+            data-href=~~volumeInfo.previewLink~~ alt=cover>
+         <div>
+            <h2>~~volumeInfo.title~~</h2>
+            <cite>~~volumeInfo.publisher~~</cite>
+            <p>~~saleInfo.listPrice.amount~~</p>
+            <nav data-href=~~volumeInfo.previewLink~~>
+               <img src=https://www.google.com/intl/en/googlebooks/images/gbs_preview_button1.gif alt=preview>
+            </nav>
+         </div>
+      </book-element>
+   </book-list>
+</app-widget-body>
+<app-widget-body id=spacex-pics class=dna-template>
+   <photo-list>
+      <photo-element data-array=~~photos~~>
+         <cite>~~date~~</cite>
+         <figure>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxIiBoZWlnaHQ9IjEiPjwvc3ZnPg==" data-attr-src=~~media.m~~ data-href=~~link~~ class=external-site alt=photo>
+            <figcaption>~~title~~</figcaption>
+         </figure>
+      </photo-element>
+   </photo-list>
+</app-widget-body>
+<app-widget-body id=trans-bart-departures class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+</app-widget-body>
+<app-widget-body id=trans-bart-stations class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+   <figure>
+      <table></table>
+   </figure>
+</app-widget-body>
+<app-widget-body id=trans-f1-top-countries class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+   <figure>
+      <canvas></canvas>
+   </figure>
+   <figure>
+      <canvas></canvas>
+   </figure>
+</app-widget-body>
+<app-widget-body id=trans-nyc-bike-stations class=dna-template>
+   <figure>
+      <canvas></canvas>
+   </figure>
+</app-widget-body>
 
 </app-widget-templates>
 
 </body>
 </html>
-
