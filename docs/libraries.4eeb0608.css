@@ -1,7 +1,7 @@
-/*! data-dashboard v0.3.0 ~~ https://data-dashboard.js.org ~~ MIT License */
+/*! data-dashboard v0.3.1 ~~ https://data-dashboard.js.org ~~ MIT License */
 
 /*! dna-engine.css */
-/*! dna-engine v2.2.1 ~~ https://dna-engine.org ~~ MIT License */
+/*! dna-engine v2.2.2 ~~ https://dna-engine.org ~~ MIT License */
 .dna-hide,.dna-panels>:not(.displayed),.dna-template,[data-placeholder]{display:none}.dna-menu .menu-item,[data-click],[data-href]{cursor:pointer}[data-format-currency100],[data-format-currency],[data-format-number],[data-format-percent]{text-align:right}
 
 /*! pretty-print-json.css */
