@@ -1,8 +1,7 @@
 // DataDashboard ~~ MIT License
 // External libraries -- Styling
 
-@import "library/constants";
-@import "library/utils";
+@import "static/utility-box";
 
 // Bubble help
 @bubbleHelp: crimson;
@@ -61,24 +60,23 @@
 .FixSortArrows() {
    a.dataTable-sorter {
       padding-right: 15px;  //space for sort arrows
-      transition: all 1400ms;
       &::before, &::after {
          right: 10px;
+         bottom: 10px;
          font-size: 0.6rem;
-         border: none;
-         opacity: 0.4;
-         transition: all 1400ms;
+         border: none;  //remove default triangle
+         color: black;
+         opacity: 0.3;
          }
       &::before {
-         content: "\25BC";
+         content: @symbolTriangleDown;
          }
       &::after {
-         content: "\25B2";
+         content: @symbolTriangleUp;
          }
       }
    &.asc a.dataTable-sorter::after,
    &.desc a.dataTable-sorter::before {
-      color: black;
       opacity: 1;
       }
    }
