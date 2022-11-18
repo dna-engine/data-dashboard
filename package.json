@@ -57,8 +57,8 @@
          "csso node_modules/simple-datatables/dist/style.css                 --output build/1-pre/libs/simple-datatables.css",
          "csso node_modules/pretty-print-json/dist/pretty-print-json.min.css --output build/1-pre/libs/pretty-print-json.css",
          "replacer build/1-pre/libs --ext=.css build/2-dev/web-app --concat=libraries.css --header=/*{{bang}}{{space}}{{file.base}}{{space}}*/",
+         "replacer  node_modules/chart.js/dist/chart.umd.js --no-source-map      build/1-pre/libs",
          "copy-file node_modules/jquery/dist/jquery.min.js                       build/1-pre/libs/1@jquery.min.js",
-         "copy-file node_modules/chart.js/dist/chart.umd.js                      --folder build/1-pre/libs",
          "copy-file node_modules/dna-engine/dist/dna-engine.min.js               --folder build/1-pre/libs",
          "copy-file node_modules/fetch-json/dist/fetch-json.min.js               --folder build/1-pre/libs",
          "copy-file node_modules/pretty-print-json/dist/pretty-print-json.min.js --folder build/1-pre/libs",
@@ -147,7 +147,7 @@
       "rollup": "~3.3",
       "run-scripts-util": "~0.1",
       "simple-datatables": "~4.0",
-      "typescript": "~4.8",
+      "typescript": "~4.9",
       "uglify-js": "~3.17",
       "w3c-html-validator": "~1.2",
       "web-ignition": "~1.6"
