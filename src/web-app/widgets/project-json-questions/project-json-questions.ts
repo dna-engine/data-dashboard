@@ -50,9 +50,9 @@ type RawData = { items: RawDataItem[] };
 
 const appWidgetProjectJsonQuestions = {
    displayDataChart(widgetElem: JQuery, data: RawDataItem[]): void {
-      const numItems = app.lookup.chartColors.length;
-      const title =    'Active JSON Questions';
-      const subtitle = 'Page views of ' + numItems + ' most recently active JSON questions';
+      const numItems =   app.lookup.chartColors.length;
+      const title =      'Active JSON Questions';
+      const subtitle =   'Page views of ' + numItems + ' most recently active JSON questions';
       const mostRecent = data.slice(0, numItems).sort((a, b) => b.view_count - a.view_count);
       const dataset: ChartDataset = {
          backgroundColor: app.lookup.chartColors.map(color => color.value),
@@ -102,7 +102,7 @@ const appWidgetProjectJsonQuestions = {
       widgetElem.data().table = dataTable;
       },
    show(widgetElem: JQuery): void {
-      const url = 'https://api.stackexchange.com/2.2/search';
+      const url =    'https://api.stackexchange.com/2.2/search';
       const params = { order: 'desc', sort: 'activity', intitle: 'json', site: 'stackoverflow' };
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);

@@ -123,7 +123,7 @@ const appWidgetSpaceStarships = {
          else
             displayData();
          };
-      const url = 'https://swapi.py4e.com/api/starships/';
+      const url =    'https://swapi.py4e.com/api/starships/';
       const params = { format: 'json' };
       app.util.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
