@@ -106,7 +106,7 @@ const appWidgetTransBartDepartures = {
          y: { stacked: true, scaleLabel: { display: true, labelString: yAxesLabel } },
          };
       const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
-         item.dataset['label'] + ': ' + item.dataset['labels'][item.dataIndex];
+         item.dataset['label'] + ': ' + item.dataset['labels'][item.dataIndex];  //suppressImplicitAnyIndexErrors
       const chartInfo = <ChartConfiguration>{
          type: 'bar',
          data: {

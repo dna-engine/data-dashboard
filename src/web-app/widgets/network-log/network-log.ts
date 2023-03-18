@@ -7,7 +7,7 @@ import { app } from '../../ts/app';
 const appWidgetNetworkLog = {
    show(widgetElem: JQuery): void {
       const tableElem = widgetElem.find('figure table');
-      const DataTable = globalThis['simpleDatatables'].DataTable;
+      const DataTable = globalThis['simpleDatatables'].DataTable;  //suppressImplicitAnyIndexErrors
       const dataTable = new DataTable(tableElem[0], { perPageSelect: [10, 25, 50, 100] });
       const headers =   fetchJson.getLogHeaders();
       const log =       app.network.getLog().reverse();

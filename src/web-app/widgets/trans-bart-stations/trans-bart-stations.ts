@@ -57,7 +57,7 @@ const appWidgetTransBartStations = {
          return `${Math.abs(lat)}°${lat > 0 ? 'N' : 'S'} ${Math.abs(long)}°${long > 0 ? 'E' : 'W'}`;
          };
       const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
-         (item.dataset['data'][item.dataIndex])!['label'] + ' ' + latLong(item);
+         (item.dataset['data'][item.dataIndex])!['label'] + ' ' + latLong(item);  //suppressImplicitAnyIndexErrors
       const chartInfo = <ChartConfiguration><unknown>{
          type: 'scatter',
          data: {
@@ -76,7 +76,7 @@ const appWidgetTransBartStations = {
       },
    displayDataTable(widgetElem: JQuery, stations: Station[]): void {
       const tableElem = widgetElem.find('figure table');
-      const DataTable = globalThis['simpleDatatables'].DataTable;
+      const DataTable = globalThis['simpleDatatables'].DataTable;  //suppressImplicitAnyIndexErrors
       const dataTable = new DataTable(tableElem[0]);
       const headers = [
          'Name',

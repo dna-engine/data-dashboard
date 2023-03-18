@@ -18,7 +18,7 @@ const appUtil = {
       },
    addChartColors(datasets: ChartDataset[], startIndex = 0): ChartDataset[] {
       const colorize = (dataset: ChartDataset, i: number) => {
-         dataset['fill'] =         false;   //TODO: property does not exist?
+         dataset['fill'] =         false;  //suppressImplicitAnyIndexErrors
          dataset.borderColor =     app.util.lookupChartColor(startIndex + i);
          dataset.backgroundColor = app.util.lookupChartColor(startIndex + i);
          };

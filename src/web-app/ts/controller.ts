@@ -21,7 +21,7 @@ const appController = {
             throw Error('[data-dashboard] ' + dna.util.printf(msg.missingWidget, i, panelElem.data().hash));
          widgetElem.find('>app-widget-body').remove();
          widgetElem.append(dna.clone(widget.code, {}));
-         const widgetController = app.widget[dna.util.toCamel(widget.code)];
+         const widgetController = app.widget[dna.util.toCamel(widget.code)];  //suppressImplicitAnyIndexErrors
          if (!widgetController)
             throw Error('[data-dashboard] ' + dna.util.printf(msg.missingController, widget.code));
          widgetController.show(widgetElem);

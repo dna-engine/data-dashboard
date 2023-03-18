@@ -71,7 +71,7 @@ const appWidgetFinRateMovingAvg = {
    show(widgetElem: JQuery): void {
       const handleData = (rawData: RawData) => {
          app.util.spinnerStop(widgetElem);
-         if (!rawData['Error Message'])
+         if (!rawData['Error Message'])  //suppressImplicitAnyIndexErrors
             app.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';

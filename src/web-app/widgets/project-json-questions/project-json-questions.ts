@@ -77,10 +77,10 @@ const appWidgetProjectJsonQuestions = {
       },
    displayDataTable(widgetElem: JQuery, data: RawDataItem[]): void {
       const tableElem = widgetElem.find('figure table');
-      const DataTable = globalThis['simpleDatatables'].DataTable;
+      const DataTable = globalThis['simpleDatatables'].DataTable;  //suppressImplicitAnyIndexErrors
       const dataTable = new DataTable(tableElem[0]);
       data.forEach(item => item.timestamp = app.util.secsToStr(item.last_activity_date));
-      data.forEach(item => item.link = '<span data-href=' + item.link + '>' + item.title + '</span>');
+      data.forEach(item => item.link =      `<span data-href="${item.link}">${item.title}</span>`);
       const headers = [
          'Last activity',
          'Owner',

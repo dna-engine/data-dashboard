@@ -86,7 +86,7 @@ const appWidgetSpaceStarships = {
       },
    displayDataTable(widgetElem: JQuery, starships: Starship[]): void {
       const tableElem = widgetElem.find('figure table');
-      const DataTable = globalThis['simpleDatatables'].DataTable;
+      const DataTable = globalThis['simpleDatatables'].DataTable;  //suppressImplicitAnyIndexErrors
       const dataTable = new DataTable(tableElem[0]);
       const headers = [
          'Name',
