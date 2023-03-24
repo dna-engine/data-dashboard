@@ -1,9 +1,9 @@
 // DataDashboard ~~ MIT License
 // Configuration
 
-export type AppWidget =     typeof appConfig.widgets[0];
-export type AppPanel =      (typeof appConfig.panels[0]) & { widgetList?: AppWidget[] };
-export type AppChartColor = typeof appConfig.chartColors[0];
+export type AppWidget =     typeof appConfig.widgets[number];
+export type AppPanel =      (typeof appConfig.panels[number]) & { widgetList?: AppWidget[] };
+export type AppChartColor = typeof appConfig.chartColors[number];
 
 const appConfig = {
    widgets: [

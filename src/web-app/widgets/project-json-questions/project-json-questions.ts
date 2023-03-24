@@ -5,6 +5,9 @@ import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { libX } from 'web-ignition';
 import { app } from '../../ts/app';
+import { DataTable } from 'simple-datatables';
+class DT extends DataTable {}
+declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
 // {
 //    items: [
@@ -77,8 +80,7 @@ const appWidgetProjectJsonQuestions = {
       },
    displayDataTable(widgetElem: JQuery, data: RawDataItem[]): void {
       const tableElem = widgetElem.find('figure table');
-      const DataTable = globalThis['simpleDatatables'].DataTable;  //suppressImplicitAnyIndexErrors
-      const dataTable = new DataTable(tableElem[0]);
+      const dataTable = new simpleDatatables.DataTable(<HTMLTableElement>tableElem[0]);
       data.forEach(item => item.timestamp = app.util.secsToStr(item.last_activity_date));
       data.forEach(item => item.link =      `<span data-href="${item.link}">${item.title}</span>`);
       const headers = [
@@ -90,7 +92,7 @@ const appWidgetProjectJsonQuestions = {
          'Title',
          ];
       const rows = data.map(item => [
-         item.timestamp,
+         item.timestamp ?? '',
          item.owner.display_name,
          item.is_answered,
          item.view_count,

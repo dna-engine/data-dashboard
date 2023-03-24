@@ -4,6 +4,9 @@
 import { Chart, ChartConfiguration, ChartItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
+import { DataTable } from 'simple-datatables';
+class DT extends DataTable {}
+declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
 // {
 //    count: 39,
@@ -83,8 +86,7 @@ const appWidgetSpaceVehicles = {
       },
    displayDataTable(widgetElem: JQuery, vehicles: Vehicle[]): void {
       const tableElem = widgetElem.find('figure table');
-      const DataTable = globalThis['simpleDatatables'].DataTable;  //suppressImplicitAnyIndexErrors
-      const dataTable = new DataTable(tableElem[0]);
+      const dataTable = new simpleDatatables.DataTable(<HTMLTableElement>tableElem[0]);
       const headers = [
          'Name',
          'Model',

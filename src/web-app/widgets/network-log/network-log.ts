@@ -3,12 +3,15 @@
 
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
+import { DataTable } from 'simple-datatables';
+class DT extends DataTable {}
+declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
 const appWidgetNetworkLog = {
    show(widgetElem: JQuery): void {
       const tableElem = widgetElem.find('figure table');
-      const DataTable = globalThis['simpleDatatables'].DataTable;  //suppressImplicitAnyIndexErrors
-      const dataTable = new DataTable(tableElem[0], { perPageSelect: [10, 25, 50, 100] });
+      const options =   { perPageSelect: [10, 25, 50, 100] };
+      const dataTable = new simpleDatatables.DataTable(<HTMLTableElement>tableElem[0], options);
       const headers =   fetchJson.getLogHeaders();
       const log =       app.network.getLog().reverse();
       const delColumn = <number>fetchJson.getLogHeaderIndex().domain;

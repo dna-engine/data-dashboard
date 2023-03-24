@@ -17,10 +17,11 @@ const appUtil = {
       return (<AppChartColor>app.lookup.chartColors[i % app.lookup.chartColors.length]).value;
       },
    addChartColors(datasets: ChartDataset[], startIndex = 0): ChartDataset[] {
+      type ChartDataset$ = ChartDataset & { fill: boolean };  //patch library type
       const colorize = (dataset: ChartDataset, i: number) => {
-         dataset['fill'] =         false;  //suppressImplicitAnyIndexErrors
-         dataset.borderColor =     app.util.lookupChartColor(startIndex + i);
-         dataset.backgroundColor = app.util.lookupChartColor(startIndex + i);
+         (<ChartDataset$>dataset).fill = false;
+         dataset.borderColor =           app.util.lookupChartColor(startIndex + i);
+         dataset.backgroundColor =       app.util.lookupChartColor(startIndex + i);
          };
       datasets.forEach(colorize);
       return datasets;

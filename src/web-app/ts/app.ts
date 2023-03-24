@@ -38,7 +38,7 @@ const app = {
    util:        appUtil,
    network:     appNetwork,
    transformer: appTransformer,
-   lookup: {
+   lookup: {  //maps keyed by code (kebab)
       widgets:     appConfig.widgets,
       panels:      <AppPanel[]>appConfig.panels,
       chartColors: appConfig.chartColors,

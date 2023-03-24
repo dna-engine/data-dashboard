@@ -115,14 +115,14 @@
    },
    "dependencies": {
       "fetch-json": "~3.1",
-      "open": "~8.4"
+      "open": "~9.0"
    },
    "devDependencies": {
       "@fortawesome/fontawesome-free": "~6.3",
       "@types/jquery": "~3.5",
       "@types/node": "~18.15",
-      "@typescript-eslint/eslint-plugin": "~5.55",
-      "@typescript-eslint/parser": "~5.55",
+      "@typescript-eslint/eslint-plugin": "~5.56",
+      "@typescript-eslint/parser": "~5.56",
       "add-dist-header": "~1.0",
       "assert-deep-strict-equal": "~1.0",
       "browser-sync": "~2.29",
@@ -140,12 +140,12 @@
       "make-dir-cli": "~3.0",
       "mocha": "~10.2",
       "pretty-print-json": "~1.4",
-      "puppeteer": "19.7",
+      "puppeteer": "~19.8",
       "puppeteer-browser-ready": "~1.0",
       "replacer-util": "~1.0",
       "rev-web-assets": "~1.0",
       "rimraf": "~4.4",
-      "rollup": "~3.19",
+      "rollup": "~3.20",
       "run-scripts-util": "~1.0",
       "simple-datatables": "~7.2",
       "typescript": "~5.0",
