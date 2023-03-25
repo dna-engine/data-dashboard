@@ -8,10 +8,10 @@ _A data-driven dashboard console for report widgets_
 [![Vulnerabilities](https://snyk.io/test/github/dna-engine/data-dashboard/badge.svg)](https://snyk.io/test/github/dna-engine/data-dashboard)
 [![Build](https://github.com/dna-engine/data-dashboard/workflows/build/badge.svg)](https://github.com/dna-engine/data-dashboard/actions/workflows/run-spec-on-push.yaml)
 
-## Try It Out
+## A) Try It Out
 https://data-dashboard.js.org
 
-## Reference Architecture
+## B) Reference Architecture
 **DataDashboard** provides examples of creating charts and tables from REST calls, and it aims to
 be a reference architecture for building data-driven dashboard consoles composed of report widgets.
 
@@ -23,7 +23,7 @@ Each widget has a folder under
 [`src/widgets`](https://github.com/dna-engine/data-dashboard/tree/main/src/widgets)
 that contains the widget's view and controller.
 
-## Run Locally
+## C) Run Locally
 Install:
 * **git** from https://git-scm.com
 * **Node.js** from https://nodejs.org
@@ -35,8 +35,9 @@ $ cd data-dashboard
 $ npm install
 $ npm start
 ```
+Alternatively, fork this project and then clone your forked version.
 
-## Development Mode
+## D) Development Mode
 Run the application in development mode with the command:
 ```
 $ npm run dev
@@ -44,7 +45,7 @@ $ npm run dev
 The web server will use the un-minified version of the application, and file watchers will
 automatically rebuild the appropriate parts of the application when source files change.
 
-## Libraries
+## E) Libraries
 Powered by:
 * [Chart.js](https://www.chartjs.org)
 * [dna-engine](https://dna-engine.org)
