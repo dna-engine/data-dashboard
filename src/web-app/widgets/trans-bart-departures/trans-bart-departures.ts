@@ -62,6 +62,7 @@ type DataPoint = {
    label:     string,
    delta?:    number,
    };
+type DataSet$ = TooltipItem<keyof ChartTypeRegistry>['dataset'] & { labels: string[]};  //patch library type
 
 const appWidgetTransBartDepartures = {
    displayDataChart(widgetElem: JQuery, timestamp: string, station: Station): void {
@@ -106,7 +107,7 @@ const appWidgetTransBartDepartures = {
          y: { stacked: true, scaleLabel: { display: true, labelString: yAxesLabel } },
          };
       const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
-         item.dataset['label'] + ': ' + item.dataset['labels'][item.dataIndex];  //suppressImplicitAnyIndexErrors
+         item.dataset.label + ': ' + (<DataSet$>item.dataset).labels[item.dataIndex];
       const chartInfo = <ChartConfiguration>{
          type: 'bar',
          data: {

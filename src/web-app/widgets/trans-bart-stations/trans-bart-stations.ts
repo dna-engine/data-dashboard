@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartDataset, ChartItem, ChartTypeRegistry, TooltipItem } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset, ChartItem, ChartTypeRegistry, Point, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 import { DataTable } from 'simple-datatables';
@@ -41,6 +41,7 @@ type DataPoint = {
    y:     number,
    label: string,
    };
+type Point$ = Point & { label: string };  //patch library type
 
 const appWidgetTransBartStations = {
    displayDataChart(widgetElem: JQuery, stations: Station[]): void {
@@ -54,14 +55,15 @@ const appWidgetTransBartStations = {
             })),
          };
       const latLong = (item: TooltipItem<keyof ChartTypeRegistry>): string => {
-         // Returns a string formatted like: "37.2°N 27.9°W"
-         const lat =  parseFloat(item.formattedValue);
-         const long = parseFloat(item.label);
-         return `${Math.abs(lat)}°${lat > 0 ? 'N' : 'S'} ${Math.abs(long)}°${long > 0 ? 'E' : 'W'}`;
+         // Returns a string formatted like: "37.77°N 122.42°W" (San Francisco)
+         const lat =   item.parsed.y;
+         const long =  item.parsed.x;
+         const fixed = (degrees: number) => Math.abs(degrees).toFixed(2);
+         return `${fixed(lat)}°${lat > 0 ? 'N' : 'S'} ${fixed(long)}°${long > 0 ? 'E' : 'W'}`;
          };
       const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
-         (item.dataset['data'][item.dataIndex])!['label'] + ' ' + latLong(item);  //suppressImplicitAnyIndexErrors
-      const chartInfo = <ChartConfiguration><unknown>{
+         `${(<Point$>item.dataset.data[item.dataIndex]).label} ${latLong(item)}`;
+      const chartInfo: ChartConfiguration = {
          type: 'scatter',
          data: {
             datasets: [dataset],
