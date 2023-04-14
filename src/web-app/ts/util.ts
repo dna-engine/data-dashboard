@@ -94,12 +94,9 @@ const appTransformer = {
       // Ensures the table rows are all equal length arrays of strings.
       const size = numColumns ? numColumns : rows.length ? (<unknown[]>rows[0]).length : 0;
       const normalize = (row: unknown[]) => {
-         const toStr = (value: unknown, i: number) => {
-            const type = typeof value;
-            if (type !== 'string')
-               row[i] = ['boolean', 'number'].includes(type) ? String(value) : '';
-            };
-         row.forEach(toStr);
+         const toStr = (value: unknown, i: number) =>
+            row[i] = ['boolean', 'number'].includes(typeof value) ? String(value) : '';
+         row.forEach((value: unknown, i: number) => typeof value !== 'string' && toStr(value, i));
          if (indexRemoveColumn !== undefined)
             row.splice(indexRemoveColumn, 1);
          while (row.length < size)

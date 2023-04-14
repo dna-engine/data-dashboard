@@ -111,18 +111,18 @@
       "prod": "NODE_ENV=production npm start"
    },
    "cdnVersion": {
-      "fontAwesome": "6.3"
+      "fontAwesome": "6.4"
    },
    "dependencies": {
       "fetch-json": "~3.1",
-      "open": "~9.0"
+      "open": "~9.1"
    },
    "devDependencies": {
-      "@fortawesome/fontawesome-free": "~6.3",
+      "@fortawesome/fontawesome-free": "~6.4",
       "@types/jquery": "~3.5",
       "@types/node": "~18.15",
-      "@typescript-eslint/eslint-plugin": "~5.56",
-      "@typescript-eslint/parser": "~5.56",
+      "@typescript-eslint/eslint-plugin": "~5.58",
+      "@typescript-eslint/parser": "~5.58",
       "add-dist-header": "~1.0",
       "assert-deep-strict-equal": "~1.0",
       "browser-sync": "~2.29",
@@ -132,21 +132,21 @@
       "copy-folder-util": "~1.0",
       "csso-cli": "~4.0",
       "dna-engine": "~2.3",
-      "eslint": "~8.36",
+      "eslint": "~8.38",
       "img-src-placeholder": "~1.0",
       "jquery": "~3.6",
       "jshint": "~2.13",
       "less": "~4.1",
       "make-dir-cli": "~3.0",
       "mocha": "~10.2",
-      "pretty-print-json": "~1.4",
-      "puppeteer": "~19.8",
+      "pretty-print-json": "~2.0",
+      "puppeteer": "~19.9",
       "puppeteer-browser-ready": "~1.0",
       "replacer-util": "~1.0",
       "rev-web-assets": "~1.0",
-      "rimraf": "~4.4",
+      "rimraf": "~5.0",
       "rollup": "~3.20",
-      "run-scripts-util": "~1.0",
+      "run-scripts-util": "~1.1",
       "simple-datatables": "~7.2",
       "typescript": "~5.0",
       "uglify-js": "~3.17",
