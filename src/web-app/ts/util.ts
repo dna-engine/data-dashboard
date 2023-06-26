@@ -3,7 +3,7 @@
 
 import { ChartConfiguration, ChartDataset } from 'chart.js';
 import { libX } from 'web-ignition';
-import { app, AppCallback, AppParams, AppParamValue } from './app';
+import { app } from './app';
 import { AppChartColor } from './config';
 
 export type AppSettingsNarrowScreenSaver = {
@@ -35,41 +35,39 @@ const appUtil = {
          chartInfo.data.labels = shrink(<number[]>chartInfo.data.labels);
          chartInfo.data.datasets.forEach((dataset: ChartDataset) => dataset.data = shrink(<number[]>dataset.data));
          };
-      if (shrinkRatio > 1 && <number>$(document.body).width() < settings.screenWidth)
+      if (shrinkRatio > 1 && globalThis.window.innerWidth < settings.screenWidth)
          shrinkNow();
       return chartInfo;
       },
    secsToStr(epocSeconds: number): string {  //example: "2019-01-02 05:34:15"
-      return new Date(epocSeconds * 1000).toISOString().replace('T', ' ').substring(0, 19);
+      return new Date(epocSeconds * 1000).toISOString().replace('T', '+').substring(0, 19);
       },
-   spinnerStart(widgetElem: JQuery): JQuery {
-      // DOM:
-      //    <app-widget>
-      //       <header><h2>Title</h2></header>
-      //       <app-widget-body>...</app-widget-body>
-      //       <app-widget-spinner><i data-icon=yin-yang></i></app-widget-spinner>
-      //    </app-widget>
-      widgetElem = widgetElem.closest('app-widget');
-      const spinnerHtml = '<app-widget-spinner><i data-icon=yin-yang class=fa-spin>';
-      const makeElem = () => $(spinnerHtml).css({ paddingTop: <number>widgetElem.height() / 2 - 50 });
-      const create = () => libX.ui.makeIcons(makeElem()).appendTo(widgetElem);
-      const current = widgetElem.addClass('waiting').find('>app-widget-spinner');
-      const spinnerElem = current.length ? current : create();
-      return spinnerElem.hide().fadeIn().parent();
+   spinnerStart(widgetElem: Element): Element {
+      // <app-widget>
+      //    <header><h2>Title</h2></header>
+      //    <app-widget-body>...</app-widget-body>
+      //    <app-widget-spinner><i data-icon=yin-yang></i></app-widget-spinner>
+      // </app-widget>
+      const elem = widgetElem.closest('app-widget')!;
+      const create = () => {
+         const options = { html: '<i data-icon=yin-yang class=fa-spin>' };
+         const spinner = dna.dom.create(<keyof HTMLElementTagNameMap>'app-widget-spinner', options);
+         spinner.style.paddingTop = String(elem.clientHeight / 2 - 50) + 'px';
+         elem.appendChild(libX.ui.makeIcons(spinner));
+         return spinner;
+         };
+      const spinnerElem = elem.querySelector('app-widget-spinner') || create();
+      elem.classList.add('waiting');
+      dna.ui.fadeIn(dna.ui.hide(spinnerElem));
+      return widgetElem;
       },
-   spinnerStop(widgetElem: JQuery): JQuery {
-      const elem = widgetElem.closest('app-widget').removeClass('waiting');
-      elem.find('>app-widget-spinner').fadeOut(1500);
+   spinnerStop(widgetElem: Element): Element {
+      const elem =    widgetElem.closest('app-widget')!;
+      const spinner = elem.querySelector('app-widget-spinner')!;
+      elem.classList.remove('waiting');
+      // dna.ui.fadeOut(spinner, { duration: 1500 }).then(dna.ui.hide);
+      dna.ui.fadeOut(spinner).then(elem => dna.ui.hide);
       return elem;
-      },
-   fetchJsonp(url: string, params?: AppParams, jsonpName?: string, callback?: AppCallback): JQueryXHR {
-      const urlObj = new URL(url);
-      const addParam = (param: [string, AppParamValue]) =>
-         urlObj.searchParams.append(param[0], String(param[1]));
-      if (params)
-         Object.entries(params).forEach(addParam);
-      const options = { url: urlObj.href, dataType: 'jsonp', jsonpCallback: jsonpName };
-      return $.ajax(options).done(<AppCallback>callback);
       },
    };
 

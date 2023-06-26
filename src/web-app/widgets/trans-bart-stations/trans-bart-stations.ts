@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartDataset, ChartItem, ChartTypeRegistry, Point, TooltipItem } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset, ChartTypeRegistry, Point, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 import { DataTable } from 'simple-datatables';
@@ -44,7 +44,7 @@ type DataPoint = {
 type Point$ = Point & { label: string };  //patch library type
 
 const appWidgetTransBartStations = {
-   displayDataChart(widgetElem: JQuery, stations: Station[]): void {
+   displayDataChart(widgetElem: Element, stations: Station[]): void {
       const dataset: ChartDataset = {
          label: 'Geolocation',
          backgroundColor: app.lookup.chartColor.green!.value,
@@ -76,12 +76,12 @@ const appWidgetTransBartStations = {
                },
             },
          };
-      const canvas: ChartItem = widgetElem.find('canvas');
-      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      const canvas = widgetElem.querySelector('canvas')!;
+      dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
-   displayDataTable(widgetElem: JQuery, stations: Station[]): void {
-      const tableElem = widgetElem.find('figure table');
-      const dataTable = new simpleDatatables.DataTable(<HTMLTableElement>tableElem[0]);
+   displayDataTable(widgetElem: Element, stations: Station[]): void {
+      const tableElem = <HTMLTableElement>widgetElem.querySelector('figure table');
+      const dataTable = new simpleDatatables.DataTable(tableElem);
       const headers = [
          'Name',
          'Code',
@@ -99,9 +99,9 @@ const appWidgetTransBartStations = {
          station.county,
          ]);
       dataTable.insert({ headings: headers, data: rows });
-      widgetElem.data().table = dataTable;
+      dna.dom.state(widgetElem).table = dataTable;
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          const stations = data.root.stations.station;

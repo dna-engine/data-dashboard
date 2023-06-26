@@ -8,25 +8,37 @@ import { app } from './app';
 import { AppWidget } from './config';
 
 const appController = {
-   showPanel(panelElem: JQuery): JQuery {
+   // <main>
+   //    <app-panels>
+   //       <app-panel data-hash=~~code~~>
+   //          <header>h2>~~header~~</h2></header>
+   //          <app-widgets>
+   //             <app-widget data-array=~~widgetList~~ data-class=~~code~~>
+   //                <header><h2>~~header~~</h2></header>
+   //             </app-widget>
+   //          </app-widgets>
+   //       </app-panel>
+   //    </app-panels>
+   // </main>
+   showPanel(panelElem: HTMLElement): Element {
       globalThis.scrollTo({ top: 0 });
-      const showWidget = (node: HTMLElement, i: number) => {
-         const widgetElem = $(node);
+      const appWidgetsElem = panelElem.querySelector('app-widgets')!;
+      const showWidget = (widgetElem: Element) => {
          const widget = <AppWidget>dna.getModel(widgetElem);
          const msg = {
-            missingWidget:     'DataDashboard - Missing widget, index: %s, panel: %s',
-            missingController: 'DataDashboard - Widget controller missing: %s',
+            missingWidget:     'Missing widget, index: %s, panel: %s',
+            missingController: 'Widget controller missing: %s',
             };
          if (!widget)
-            throw Error('[data-dashboard] ' + dna.util.printf(msg.missingWidget, i, panelElem.data().hash));
-         widgetElem.find('>app-widget-body').remove();
-         widgetElem.append(dna.clone(widget.code, {}));
+            throw Error('[data-dashboard] ' + dna.util.printf(msg.missingWidget, panelElem.dataset.hash));
+         widgetElem.querySelector('app-widget-body')?.remove();
+         widgetElem.appendChild(<Element>dna.clone(widget.code, {}));
          const widgetController = app.widget[<keyof typeof app.widget>dna.util.toCamel(widget.code)];
          if (!widgetController)
             throw Error('[data-dashboard] ' + dna.util.printf(msg.missingController, widget.code));
-         widgetController.show(widgetElem);
+         widgetController.show(<HTMLElement>widgetElem);
          };
-      panelElem.find('>app-widgets').children().toArray().forEach(showWidget);
+      dna.dom.forEach(appWidgetsElem.children, showWidget);
       return panelElem;
       },
    setup(): void {
@@ -40,7 +52,7 @@ const appController = {
          dna.clone('app-menu-item', displayedPanels);
          dna.clone('app-panel',     displayedPanels);
          };
-      $(onLoadSetup);
+      dna.dom.onReady(onLoadSetup);
       },
    };
 

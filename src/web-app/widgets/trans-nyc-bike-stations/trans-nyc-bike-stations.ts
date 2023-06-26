@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartItem } from 'chart.js';
+import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 
@@ -41,7 +41,7 @@ type RawData = {
    };
 
 const appWidgetTransNycBikeStations = {
-   displayDataChart(widgetElem: JQuery, data: RawData): void {
+   displayDataChart(widgetElem: Element, data: RawData): void {
       const title =    'NYC Bike Stations';
       const subtitle = 'Capacity on ' + new Date(data.last_updated * 1000).toLocaleString();
       const stations = data.data.stations;
@@ -70,10 +70,10 @@ const appWidgetTransNycBikeStations = {
             },
          };
       app.util.narrowScreenSaver(chartInfo);
-      const canvas = <ChartItem>widgetElem.find('canvas');
-      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      const canvas = widgetElem.querySelector('canvas')!;
+      dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json';
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);

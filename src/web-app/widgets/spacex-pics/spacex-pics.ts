@@ -2,7 +2,8 @@
 // Widget controller
 
 import { dna } from 'dna-engine';
-import { app, AppCallback } from '../../ts/app';
+import { fetchJson } from 'fetch-json';
+import { app } from '../../ts/app';
 
 // {
 //    title: "Recent Uploads tagged spacex",
@@ -40,9 +41,9 @@ type RawData = {
    };
 
 const appWidgetSpacexPics = {
-   show(widgetElem: JQuery): void {
-      const url = 'https://api.flickr.com/services/feeds/photos_public.gne';
-      const params = { format: 'json', tags: 'spacex' };
+   show(widgetElem: Element): void {
+      const url =    'https://www.flickr.com/services/feeds/photos_public.gne';
+      const params = { format: 'json', nojsoncallback: '1', tags: 'spacex' };
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          data.items.forEach(item => item.date = item.date_taken.substring(0, 10));
@@ -51,7 +52,7 @@ const appWidgetSpacexPics = {
          dna.refresh(widgetElem);
          };
       app.util.spinnerStart(widgetElem);
-      app.util.fetchJsonp(url, params, 'jsonFlickrFeed', <AppCallback>handleData);
+      fetchJson.get(url, params).then(handleData);
       },
    };
 

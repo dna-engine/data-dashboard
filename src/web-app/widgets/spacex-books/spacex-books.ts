@@ -24,9 +24,9 @@ type Book = {
    };
 
 const appWidgetSpacexBooks = {
-   show(widgetElem: JQuery): void {
-      const url = 'https://www.googleapis.com/books/v1/volumes';
-      const params = { q: 'spacex' };
+   show(widgetElem: Element): void {
+      const url =      'https://www.googleapis.com/books/v1/volumes';
+      const params =   { q: 'spacex' };
       const hasCover = (book: Book) => !!book.volumeInfo.imageLinks;
       const fixHttpProtocol = (book: Book) => book.volumeInfo.imageLinks.thumbnail =
          book.volumeInfo.imageLinks.thumbnail.replace('http:', 'https:');

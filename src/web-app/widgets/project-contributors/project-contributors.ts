@@ -39,7 +39,7 @@ type WidgetModel = {
 type RawData = WidgetModel['contributors'];
 
 const appWidgetProjectContributors = {
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const url = 'https://api.github.com/repos/dna-engine/dna-engine/contributors';
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);

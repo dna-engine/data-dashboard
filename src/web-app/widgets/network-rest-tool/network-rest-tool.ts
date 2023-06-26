@@ -13,40 +13,40 @@ type WidgetModel = {
    };
 type RawData = unknown & { error?: boolean, name?: string, message?: string };
 type ElemLookup = {
-   widget: JQuery,
-   input:  JQuery,
-   button: JQuery,
+   widget: HTMLElement,
+   input:  HTMLInputElement,
+   button: HTMLButtonElement,
    };
 
 const appWidgetNetworkRestTool = {
-   elem: <ElemLookup><unknown>null,
-   get(button?: JQuery): void {
-      const elem = app.widget.networkRestTool.elem;
+   elem: <ElemLookup | null>null,
+   get(button?: Element): void {
+      const elem =  app.widget.networkRestTool.elem!;
       const model = <WidgetModel>dna.getModel(elem.widget);
       const handleData = (data: RawData) => {
          model.restError = !!data.error;
          model.jsonHtml = prettyPrintJson.toHtml(data);
          dna.refresh(elem.widget, { html: true });
          app.util.spinnerStop(elem.widget);
-         elem.button.enable();
+         elem.button.disabled = false;
          if (button)
-            elem.input.trigger('focus');
+            elem.input.focus();
          };
       const handleError = (error: RawData) =>
          handleData({ error: true, name: error.name!, message: error.message! });
       app.util.spinnerStart(elem.widget);
-      model.url = <string>elem.input.val();
+      model.url = <string>elem.input.value;
       fetchJson.get(model.url).then(handleData).catch(handleError);
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: HTMLElement): void {
       const defaultRestUrl = 'https://dna-engine.org/api/books/1/';
       const elem = {
          widget: widgetElem,
-         input:  widgetElem.find('input'),
-         button: widgetElem.find('button'),
+         input:  widgetElem.querySelector('input')!,
+         button: widgetElem.querySelector('button')!,
          };
       app.widget.networkRestTool.elem = elem;
-      elem.input.val(defaultRestUrl);
+      elem.input.value = defaultRestUrl;
       app.widget.networkRestTool.get();
       },
    };

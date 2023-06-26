@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartItem } from 'chart.js';
+import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 import { DataTable } from 'simple-datatables';
@@ -55,10 +55,10 @@ type RawData = {
    };
 
 const appWidgetSpaceVehicles = {
-   displayDataChart(widgetElem: JQuery, vehicles: Vehicle[]): void {
+   displayDataChart(widgetElem: Element, vehicles: Vehicle[]): void {
       vehicles.forEach(item => item.chart = {
-         passengers: parseInt(item.passengers) || 0,
-         crew:       parseInt(item.crew) || 0,
+         passengers: Number(item.passengers) || 0,
+         crew:       Number(item.crew) || 0,
          });
       vehicles.forEach(item => item.chart.total = item.chart.passengers + item.chart.crew);
       vehicles.sort((itemA, itemB) => <number>itemA.chart.total - <number>itemB.chart.total);
@@ -81,12 +81,12 @@ const appWidgetSpaceVehicles = {
                },
             },
          };
-      const canvas: ChartItem = widgetElem.find('canvas');
-      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      const canvas = widgetElem.querySelector('canvas')!;
+      dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
-   displayDataTable(widgetElem: JQuery, vehicles: Vehicle[]): void {
-      const tableElem = widgetElem.find('figure table');
-      const dataTable = new simpleDatatables.DataTable(<HTMLTableElement>tableElem[0]);
+   displayDataTable(widgetElem: Element, vehicles: Vehicle[]): void {
+      const tableElem = <HTMLTableElement>widgetElem.querySelector('figure table');
+      const dataTable = new simpleDatatables.DataTable(tableElem);
       const headers = [
          'Name',
          'Model',
@@ -104,9 +104,9 @@ const appWidgetSpaceVehicles = {
          vehicle.vehicle_class,
          ]);
       dataTable.insert({ headings: headers, data: tableVehicles });
-      widgetElem.data().table = dataTable;
+      dna.dom.state(widgetElem).table = dataTable;
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const vehicles: Vehicle[] = [];
       const displayData = () => {
          app.util.spinnerStop(widgetElem);

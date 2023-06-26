@@ -105,7 +105,18 @@ type TotalsMap = {
    };
 
 const appWidgetTransF1TopCountries = {
-   displayDataChart(widgetElem: JQuery, race: Race): void {
+   displayDataChart(widgetElem: Element, race: Race): void {
+      // <app-widget-body class=trans-f1-top-countries>
+      //    <figure>
+      //       <canvas></canvas>
+      //    </figure>
+      //    <figure>
+      //       <canvas></canvas>
+      //    </figure>
+      //    <figure>
+      //       <canvas></canvas>
+      //    </figure>
+      // </app-widget-body>
       const topFinishes = 10;
       const title =    'Nationalities of Top F1 Drivers and Constructors';
       const subtitle = race.season + ' ' + race.raceName + ' top ' + topFinishes + ' finishes';
@@ -146,10 +157,10 @@ const appWidgetTransF1TopCountries = {
                },
             },
          };
-      const canvas = widgetElem.find('canvas').eq(round - 1);
-      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      const canvas = widgetElem.querySelectorAll('canvas')[round - 1]!;
+      dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const raceYear = new Date().getFullYear() - 1;
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
@@ -157,11 +168,12 @@ const appWidgetTransF1TopCountries = {
          app.widget.transF1TopCountries.displayDataChart(widgetElem, race);
          };
       app.util.spinnerStart(widgetElem);
-      const display = (round: number) => {
+      const display = (canvas: Element, index: number) => {
+         const round = index + 1;
          const url = 'https://ergast.com/api/f1/' + raceYear + '/' + round + '/results.json';
          fetchJson.get(url).then(handleData);
          };
-      widgetElem.find('app-widget-body >figure >canvas').each(i => display(i + 1));
+      widgetElem.querySelectorAll('app-widget-body >figure >canvas').forEach(display);
       },
    };
 

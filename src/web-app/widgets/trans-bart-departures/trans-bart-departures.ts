@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartDataset, ChartItem, ChartTypeRegistry, TooltipItem } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset, ChartTypeRegistry, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 
@@ -65,7 +65,7 @@ type DataPoint = {
 type DataSet$ = TooltipItem<keyof ChartTypeRegistry>['dataset'] & { labels: string[]};  //patch library type
 
 const appWidgetTransBartDepartures = {
-   displayDataChart(widgetElem: JQuery, timestamp: string, station: Station): void {
+   displayDataChart(widgetElem: Element, timestamp: string, station: Station): void {
       const title =      station.abbr + ' -- Upcoming departures from ' + station.name;
       const subtitle =   timestamp;
       const yAxesLabel = 'Direction';
@@ -75,7 +75,7 @@ const appWidgetTransBartDepartures = {
       // const flatten = (a, b) => a.concat(b);
       const toChartData = (item: Estimate): DataPoint => ({
          direction: item.direction,
-         minutes:   parseInt(item.minutes) || 0,
+         minutes:   Number(item.minutes) || 0,
          label:     'Platform #' + item.platform + ' to ' + item.destination,
          });
       const compareMinutes = (a: DataPoint, b: DataPoint): number => a.minutes - b.minutes;
@@ -124,10 +124,10 @@ const appWidgetTransBartDepartures = {
                },
             },
          };
-      const canvas: ChartItem = widgetElem.find('canvas');
-      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      const canvas = widgetElem.querySelector('canvas')!;
+      dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const handleData = (data: RawData) => {
          app.util.spinnerStop(widgetElem);
          const timestamp = data.root.date + ' ' + data.root.time;

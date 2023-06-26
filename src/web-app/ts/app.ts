@@ -30,7 +30,6 @@ export type AppChartColorMap = { [code: string]: AppChartColor };
 export type AppParamValue =    string | number | boolean | null;
 export type AppParams =        { [param: string]: AppParamValue };
 export type AppDataObject =    Record<string, unknown>;
-export type AppCallback =      (...args: unknown[]) => unknown;
 
 const app = {
    config:      appConfig,

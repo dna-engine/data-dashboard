@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { libX } from 'web-ignition';
 import { app } from '../../ts/app';
@@ -52,7 +52,7 @@ type RawDataItem = {
 type RawData = { items: RawDataItem[] };
 
 const appWidgetProjectJsonQuestions = {
-   displayDataChart(widgetElem: JQuery, data: RawDataItem[]): void {
+   displayDataChart(widgetElem: Element, data: RawDataItem[]): void {
       const numItems =   app.lookup.chartColors.length;
       const title =      'Active JSON Questions';
       const subtitle =   'Page views of ' + numItems + ' most recently active JSON questions';
@@ -74,13 +74,13 @@ const appWidgetProjectJsonQuestions = {
                },
             },
          };
-      const canvas: ChartItem = widgetElem.find('canvas');
-      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      const canvas = widgetElem.querySelector('canvas')!;
+      dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       libX.ui.normalize(widgetElem);
       },
-   displayDataTable(widgetElem: JQuery, data: RawDataItem[]): void {
-      const tableElem = widgetElem.find('figure table');
-      const dataTable = new simpleDatatables.DataTable(<HTMLTableElement>tableElem[0]);
+   displayDataTable(widgetElem: Element, data: RawDataItem[]): void {
+      const tableElem = <HTMLTableElement>widgetElem.querySelector('figure table');
+      const dataTable = new simpleDatatables.DataTable(tableElem);
       data.forEach(item => item.timestamp = app.util.secsToStr(item.last_activity_date));
       data.forEach(item => item.link =      `<span data-href="${item.link}">${item.title}</span>`);
       const headers = [
@@ -101,9 +101,9 @@ const appWidgetProjectJsonQuestions = {
          ]);
       app.transformer.dataTablesNormalizer(rows);
       dataTable.insert({ headings: headers, data: rows });
-      widgetElem.data().table = dataTable;
+      dna.dom.state(widgetElem).table = dataTable;
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const url =    'https://api.stackexchange.com/2.2/search';
       const params = { order: 'desc', sort: 'activity', intitle: 'json', site: 'stackoverflow' };
       const handleData = (data: RawData) => {

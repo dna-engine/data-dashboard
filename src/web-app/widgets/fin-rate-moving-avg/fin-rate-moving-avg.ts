@@ -1,7 +1,7 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
-import { Chart, ChartConfiguration, ChartDataset, ChartItem } from 'chart.js';
+import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { app } from '../../ts/app';
 import { AppChartColor } from '../../ts/config';
@@ -32,7 +32,7 @@ type RawData = {
    };
 
 const appWidgetFinRateMovingAvg = {
-   displayDataChart(widgetElem: JQuery, rawData: RawData): void {
+   displayDataChart(widgetElem: Element, rawData: RawData): void {
       const transform = (rawData: RawData) => {
          const metadata =   rawData['Meta Data'];
          const timeSeries = rawData['Technical Analysis: SMA'];
@@ -65,10 +65,10 @@ const appWidgetFinRateMovingAvg = {
                },
             },
          };
-      const canvas: ChartItem = widgetElem.find('canvas');
-      widgetElem.data().chart = new Chart(canvas, chartInfo);
+      const canvas = widgetElem.querySelector('canvas')!;
+      dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
-   show(widgetElem: JQuery): void {
+   show(widgetElem: Element): void {
       const handleData = (rawData: RawData) => {
          app.util.spinnerStop(widgetElem);
          if (!rawData[<keyof RawData>'Error Message'])

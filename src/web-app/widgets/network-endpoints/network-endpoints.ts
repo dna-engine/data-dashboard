@@ -12,7 +12,7 @@ type WidgetModel = {
    };
 
 const appWidgetNetworkEndpoints = {
-   show(widgetElem: JQuery): JQuery {
+   show(widgetElem: Element): Element {
       const model = <WidgetModel>dna.getModel(widgetElem);
       model.endpoints = [
          { name: 'Alpha Vantage API',    base: 'https://www.alphavantage.co/query', docs: 'https://www.alphavantage.co/documentation' },
