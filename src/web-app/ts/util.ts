@@ -66,7 +66,7 @@ const appUtil = {
       const spinner = elem.querySelector('app-widget-spinner')!;
       elem.classList.remove('waiting');
       // dna.ui.fadeOut(spinner, { duration: 1500 }).then(dna.ui.hide);
-      dna.ui.fadeOut(spinner).then(elem => dna.ui.hide);
+      dna.ui.fadeOut(spinner).then(dna.ui.hide);
       return elem;
       },
    };
