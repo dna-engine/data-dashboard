@@ -1,4 +1,4 @@
-<!-- data-dashboard v0.3.3 ~~ https://data-dashboard.js.org ~~ MIT License -->
+<!-- data-dashboard v0.4.0 ~~ https://data-dashboard.js.org ~~ MIT License -->
 <!doctype html>
 <!-- DataDashboard ~~ https://github.com/dna-engine/data-dashboard ~~ MIT License -->
 <html lang=en>
@@ -11,16 +11,16 @@
    <meta property=og:title               content="DataDashboard">
    <meta property=og:description         content="A data-driven dashboard console for report widgets">
    <meta property=og:type                content="website">
-   <meta property=og:image               content="https://data-dashboard.js.org/graphics/logo-card.3f313172.png">
+   <meta property=og:image               content="https://data-dashboard.js.org/graphics/logo-card.69748146.png">
    <meta property=og:image:alt           content="Logo">
    <title>DataDashboard</title>
-   <link rel=icon             href=graphics/bookmark.354381af.png>
-   <link rel=apple-touch-icon href=graphics/mobile-home-screen.a821547e.png>
-   <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.3/css/all.min.css>
-   <link rel=stylesheet       href=libraries.ecda464b.css>
-   <link rel=stylesheet       href=app.bundle.53fe6287.css>
-   <script defer src=libraries.41cfae03.js></script>
-   <script defer src=app.bundle.1ca7d9eb.js></script>
+   <link rel=icon             href=graphics/bookmark.28c5fc61.png>
+   <link rel=apple-touch-icon href=graphics/mobile-home-screen.37dfb8de.png>
+   <link rel=stylesheet       href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4/css/all.min.css>
+   <link rel=stylesheet       href=libraries.5cd44c20.css>
+   <link rel=stylesheet       href=app.bundle.ab0aa4dc.css>
+   <script defer src=libraries.7113af87.js></script>
+   <script defer src=app.bundle.a1f22a79.js></script>
 </head>
 <body>
 
@@ -28,12 +28,12 @@
 <header>
    <div>
       <figure>
-         <img src=graphics/logo.0fffcd1f.png alt=logo>
+         <img src=graphics/logo.c729e9de.png alt=logo>
       </figure>
       <h1>DataDashboard</h1>
    </div>
    <nav>
-      <ul class=dna-menu data-nav=main-app-panels data-callback=app.controller.showPanel>
+      <ul class=dna-menu data-menu-nav=main-app-panels data-callback=app.controller.showPanel>
          <li id=app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
@@ -44,7 +44,7 @@
 </header>
 
 <main>
-   <app-panels class=dna-panels data-nav=main-app-panels>
+   <app-panels class=dna-panels data-menu-nav=main-app-panels>
       <app-panel id=app-panel class=dna-template data-hash=~~code~~>
          <header>
             <h2>~~header~~</h2>
@@ -107,9 +107,9 @@
 <app-widget-body id=network-rest-tool class=dna-template data-class=~~restError,error-mode~~>
    <label>
       <span>URL:</span>
-      <input placeholder="Enter REST endpoint" data-enter-key=app.widget.networkRestTool.get>
+      <input placeholder="Enter REST endpoint" data-on-enter-key=app.widget.networkRestTool.get>
    </label>
-   <button data-click=app.widget.networkRestTool.get>GET</button>
+   <button data-on-click=app.widget.networkRestTool.get>GET</button>
    <section>
       <h2>HTTP Response</h2>
       <code>~~url~~</code>

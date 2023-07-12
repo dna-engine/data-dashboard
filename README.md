@@ -5,7 +5,6 @@ _A data-driven dashboard console for report widgets_
 
 [![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dna-engine/data-dashboard/blob/main/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/data-dashboard.svg)](https://www.npmjs.com/package/data-dashboard)
-[![Vulnerabilities](https://snyk.io/test/github/dna-engine/data-dashboard/badge.svg)](https://snyk.io/test/github/dna-engine/data-dashboard)
 [![Build](https://github.com/dna-engine/data-dashboard/workflows/build/badge.svg)](https://github.com/dna-engine/data-dashboard/actions/workflows/run-spec-on-push.yaml)
 
 ## A) Try It Out

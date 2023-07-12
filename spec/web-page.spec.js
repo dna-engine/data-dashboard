@@ -33,13 +33,9 @@ describe('The web page', () => {
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has exactly one header, main, and footer', () => {
-      const actual =   {
-         header: web.$('body >header').length,
-         main:   web.$('body >main').length,
-         footer: web.$('body >footer').length,
-         };
-      const expected = { header: 1, main: 1, footer: 1 };
+   it('body has exactly one header, main, and footer', () => {
+      const actual =   web.$('body >*').toArray().map(elem => elem.name);
+      const expected = ['header', 'main', 'footer', 'app-widget-templates'];
       assertDeepStrictEqual(actual, expected);
       });
 
