@@ -17,7 +17,6 @@ const appConfig = {
       { code: 'space-starships',         header: 'Starship data' },
       { code: 'space-vehicles',          header: 'Vehicle data' },
       { code: 'spacex-books',            header: 'SpaceX books' },
-      { code: 'spacex-pics',             header: 'SpaceX pictures' },
       { code: 'trans-bart-departures',   header: 'BART departures' },
       { code: 'trans-bart-stations',     header: 'BART stations' },
       { code: 'trans-f1-top-countries',  header: 'F1 top countries'},
@@ -25,7 +24,7 @@ const appConfig = {
       ],
    panels: [
       { code: 'starships', header: 'Starships',      display: true,  widgets: ['space-starships', 'space-vehicles'] },
-      { code: 'space',     header: 'Space',          display: true,  widgets: ['spacex-books', 'spacex-pics'] },
+      { code: 'space',     header: 'Space',          display: true,  widgets: ['spacex-books'] },
       { code: 'trans',     header: 'Transportation', display: true,  widgets: ['trans-nyc-bike-stations', 'trans-bart-stations', 'trans-bart-departures', 'trans-f1-top-countries'] },
       { code: 'finance',   header: 'Finance',        display: true,  widgets: ['fin-rate-moving-avg', 'fin-rate-intraday'] },
       { code: 'project',   header: 'Project',        display: true,  widgets: ['project-contributors', 'project-json-questions'] },
