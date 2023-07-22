@@ -12,7 +12,7 @@ const onWarn =    (warning, warn) => ignoreList.includes(warning.code) || warn(w
 
 const rollup = [
    {
-      input:    'build/1-pre/web-app/ts/app.js',
+      input:    'build/1-pre/web-app/app.js',
       external: libraryModules,
       onwarn:   onWarn,
       output: [

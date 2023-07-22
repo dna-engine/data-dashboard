@@ -3,7 +3,7 @@
 
 import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../ts/app';
+import { app } from '../../app';
 
 // {
 //    last_updated: 1546391115,

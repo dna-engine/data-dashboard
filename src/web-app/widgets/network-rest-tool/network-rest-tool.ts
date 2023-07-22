@@ -4,7 +4,7 @@
 import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
 import { prettyPrintJson } from 'pretty-print-json';
-import { app } from '../../ts/app';
+import { app } from '../../app';
 
 type WidgetModel = {
    restError: boolean,

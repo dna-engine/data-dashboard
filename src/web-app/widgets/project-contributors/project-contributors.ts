@@ -3,7 +3,7 @@
 
 import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../ts/app';
+import { app } from '../../app';
 
 // [
 //    {

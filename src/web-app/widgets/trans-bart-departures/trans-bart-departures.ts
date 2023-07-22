@@ -3,7 +3,7 @@
 
 import { Chart, ChartConfiguration, ChartDataset, ChartTypeRegistry, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../ts/app';
+import { app } from '../../app';
 
 // {
 //    root: {

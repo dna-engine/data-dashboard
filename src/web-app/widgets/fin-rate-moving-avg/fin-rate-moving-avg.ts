@@ -3,8 +3,8 @@
 
 import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../ts/app';
-import { AppChartColor } from '../../ts/config';
+import { app } from '../../app';
+import { AppChartColor } from '../../modules/config';
 
 // {
 //    'Meta Data': {

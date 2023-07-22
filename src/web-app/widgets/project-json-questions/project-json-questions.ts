@@ -4,7 +4,7 @@
 import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 import { libX } from 'web-ignition';
-import { app } from '../../ts/app';
+import { app } from '../../app';
 import { DataTable } from 'simple-datatables';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line

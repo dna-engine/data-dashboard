@@ -3,7 +3,7 @@
 
 import { ChartConfiguration, ChartDataset } from 'chart.js';
 import { libX } from 'web-ignition';
-import { app } from './app';
+import { app } from '../app';
 import { AppChartColor } from './config';
 
 export type AppSettingsNarrowScreenSaver = {

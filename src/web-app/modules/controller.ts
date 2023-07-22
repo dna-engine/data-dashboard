@@ -4,7 +4,7 @@
 import { dna, DnaCallback } from 'dna-engine';
 import { fetchJson, FetchJsonLogger } from 'fetch-json';
 import { libX } from 'web-ignition';
-import { app } from './app';
+import { app } from '../app';
 import { AppWidget } from './config';
 
 const appController = {

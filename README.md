@@ -15,9 +15,9 @@ https://data-dashboard.js.org
 be a reference architecture for building data-driven dashboard consoles composed of report widgets.
 
 The list of report widgets and dashboard panels is defined in
-[`src/ts/config.js`](https://github.com/dna-engine/data-dashboard/blob/main/src/web-app/ts/config.ts),
+[`src/modules/config.js`](https://github.com/dna-engine/data-dashboard/blob/main/src/web-app/modules/config.ts),
 and the routing is handled in
-[`src/ts/controller.js`](https://github.com/dna-engine/data-dashboard/blob/main/src/web-app/ts/controller.ts).
+[`src/modules/controller.js`](https://github.com/dna-engine/data-dashboard/blob/main/src/web-app/modules/controller.ts).
 Each widget has a folder under
 [`src/widgets`](https://github.com/dna-engine/data-dashboard/tree/main/src/widgets)
 that contains the widget's view and controller.

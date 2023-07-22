@@ -72,15 +72,16 @@
          "run-scripts libraries",
          "tsc",
          "replacer src/web-app/widgets --ext=.html src/web-app/html/generated --content=%render{{space}}{{quote}}{{file.path}}{{quote}},webRoot:webRoot%{{close-curly}} --find=%render --replacement={{open-curly}}%render --concat=widgets-generated.html",
-         "replacer src/web-app/root --ext=.html build/1-pre/web-app --pkg"
+         "replacer src/web-app/index.html build/1-pre/web-app --pkg"
       ],
       "build-2-dev": [
          "img-src-placeholder build/1-pre/web-app build/2-dev/web-app",
          "html-validator build/2-dev/web-app",
          "copy-folder src/web-app/assets/graphics --ext=.png build/2-dev/web-app/graphics",
          "replacer src/web-app/widgets --ext=.less --content=@import{{space}}{{quote}}../../../{{file.dir}}/{{file.name}}{{quote}}{{semi}} src/web-app/css --concat=widgets-generated.less",
-         "lessc src/web-app/root/app.bundle.less build/2-dev/web-app/app.bundle.css",
-         "rollup --config"
+         "lessc src/web-app/app.bundle.less build/2-dev/web-app/app.bundle.css",
+         "rollup --config",
+         "- rollup build/1-pre/web-app/app.js --file build/2-dev/web-app/app.bundle.js --name app --format iife --globals dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis"
       ],
       "build-3-min": [
          "copy-folder build/2-dev/web-app --ext=.html build/3-min/web-app",
@@ -116,8 +117,8 @@
    "devDependencies": {
       "@fortawesome/fontawesome-free": "~6.4",
       "@types/node": "~20.4",
-      "@typescript-eslint/eslint-plugin": "~6.0",
-      "@typescript-eslint/parser": "~6.0",
+      "@typescript-eslint/eslint-plugin": "~6.1",
+      "@typescript-eslint/parser": "~6.1",
       "add-dist-header": "~1.1",
       "assert-deep-strict-equal": "~1.1",
       "browser-sync": "~2.29",
@@ -127,14 +128,14 @@
       "copy-folder-util": "~1.1",
       "csso-cli": "~4.0",
       "dna-engine": "~3.0",
-      "eslint": "~8.44",
+      "eslint": "~8.45",
       "img-src-placeholder": "~1.1",
       "jshint": "~2.13",
       "less": "~4.1",
       "make-dir-cli": "~3.1",
       "mocha": "~10.2",
       "pretty-print-json": "~2.0",
-      "puppeteer": "~20.8",
+      "puppeteer": "~20.9",
       "puppeteer-browser-ready": "~1.2",
       "replacer-util": "~1.1",
       "rev-web-assets": "~1.2",

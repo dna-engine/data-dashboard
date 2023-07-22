@@ -3,7 +3,7 @@
 
 import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../ts/app';
+import { app } from '../../app';
 
 // {
 //    'Meta Data': {
