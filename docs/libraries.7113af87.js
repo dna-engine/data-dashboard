@@ -1,4 +1,4 @@
-//! data-dashboard v0.4.0 ~~ https://data-dashboard.js.org ~~ MIT License
+//! data-dashboard v0.4.1 ~~ https://data-dashboard.js.org ~~ MIT License
 
 //! chart.umd.js
 /*!
