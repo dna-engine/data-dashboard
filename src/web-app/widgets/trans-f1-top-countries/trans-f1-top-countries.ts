@@ -1,9 +1,12 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
+
+// Modules
+import { appUtil } from '../../modules/util';
 
 // {
 //    MRData: {
@@ -84,6 +87,7 @@ import { app } from '../../app';
 //    { Driver: { nationality: 'German' }, Constructor: { nationality: 'French' } },
 // ];
 
+// Types
 type Race = {
    season:   string,
    raceName: string,
@@ -147,7 +151,7 @@ const appWidgetTransF1TopCountries = {
          type: 'bar',
          data: {
             labels:   data.map(item => item.nationality),
-            datasets: app.util.addChartColors(datasets),
+            datasets: appUtil.addChartColors(datasets),
             },
          options: {
             maintainAspectRatio: false,
@@ -163,11 +167,11 @@ const appWidgetTransF1TopCountries = {
    show(widgetElem: Element): void {
       const raceYear = new Date().getFullYear() - 1;
       const handleData = (data: RawData) => {
-         app.util.spinnerStop(widgetElem);
+         appUtil.spinnerStop(widgetElem);
          const race = data.MRData.RaceTable.Races[0]!;
-         app.widget.transF1TopCountries.displayDataChart(widgetElem, race);
+         appWidgetTransF1TopCountries.displayDataChart(widgetElem, race);
          };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       const display = (canvas: Element, index: number) => {
          const round = index + 1;
          const url = 'https://ergast.com/api/f1/' + raceYear + '/' + round + '/results.json';

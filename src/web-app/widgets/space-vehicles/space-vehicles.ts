@@ -1,10 +1,13 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
 import { DataTable } from 'simple-datatables';
+
+// Modules
+import { appUtil } from '../../modules/util';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
@@ -36,6 +39,7 @@ declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-d
 //       },
 //       ...
 
+// Types
 type Vehicle = {
    name:          string,
    model:         string,
@@ -71,7 +75,7 @@ const appWidgetSpaceVehicles = {
          type: 'bar',
          data: {
             labels:   chartVehicles.map(item => item.name),
-            datasets: app.util.addChartColors(datasets, 1),
+            datasets: appUtil.addChartColors(datasets, 1),
             },
          options: {
             maintainAspectRatio: false,
@@ -109,9 +113,9 @@ const appWidgetSpaceVehicles = {
    show(widgetElem: Element): void {
       const vehicles: Vehicle[] = [];
       const displayData = () => {
-         app.util.spinnerStop(widgetElem);
-         app.widget.spaceVehicles.displayDataChart(widgetElem, vehicles);
-         app.widget.spaceVehicles.displayDataTable(widgetElem, vehicles);
+         appUtil.spinnerStop(widgetElem);
+         appWidgetSpaceVehicles.displayDataChart(widgetElem, vehicles);
+         appWidgetSpaceVehicles.displayDataTable(widgetElem, vehicles);
          };
       const handleData = (data: RawData) => {
          vehicles.push(...data.results);
@@ -122,7 +126,7 @@ const appWidgetSpaceVehicles = {
          };
       const url =    'https://swapi.py4e.com/api/vehicles/';
       const params = { format: 'json' };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };

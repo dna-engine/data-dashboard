@@ -1,10 +1,14 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { Chart, ChartConfiguration, ChartDataset, ChartTypeRegistry, Point, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
 import { DataTable } from 'simple-datatables';
+
+// Modules
+import { appLookup } from '../../modules/lookup';
+import { appUtil } from '../../modules/util';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
@@ -25,6 +29,7 @@ declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-d
 //             },
 //             ...
 
+// Types
 type Station = {
    name:           string,
    abbr:           string,
@@ -47,7 +52,7 @@ const appWidgetTransBartStations = {
    displayDataChart(widgetElem: Element, stations: Station[]): void {
       const dataset: ChartDataset = {
          label: 'Geolocation',
-         backgroundColor: app.lookup.chartColor.green!.value,
+         backgroundColor: appLookup.chartColor.green!.value,
          data: stations.map((item: Station): DataPoint => ({
             x:     parseFloat(item.gtfs_longitude),
             y:     parseFloat(item.gtfs_latitude),
@@ -103,14 +108,14 @@ const appWidgetTransBartStations = {
       },
    show(widgetElem: Element): void {
       const handleData = (data: RawData) => {
-         app.util.spinnerStop(widgetElem);
+         appUtil.spinnerStop(widgetElem);
          const stations = data.root.stations.station;
-         app.widget.transBartStations.displayDataChart(widgetElem, stations);
-         app.widget.transBartStations.displayDataTable(widgetElem, stations);
+         appWidgetTransBartStations.displayDataChart(widgetElem, stations);
+         appWidgetTransBartStations.displayDataTable(widgetElem, stations);
          };
       const url = 'https://api.bart.gov/api/stn.aspx';
       const params = { cmd: 'stns', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };

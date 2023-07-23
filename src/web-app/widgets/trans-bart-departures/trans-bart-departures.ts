@@ -1,9 +1,12 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { Chart, ChartConfiguration, ChartDataset, ChartTypeRegistry, TooltipItem } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
+
+// Modules
+import { appUtil } from '../../modules/util';
 
 // {
 //    root: {
@@ -34,6 +37,7 @@ import { app } from '../../app';
 //                },
 //                ...
 
+// Types
 type Estimate = {
    destination: string,
    direction:   string,
@@ -112,7 +116,7 @@ const appWidgetTransBartDepartures = {
          type: 'bar',
          data: {
             labels:   directions,
-            datasets: app.util.addChartColors(datasets),
+            datasets: appUtil.addChartColors(datasets),
             },
          options: {
             indexAxis:           'y',
@@ -129,16 +133,16 @@ const appWidgetTransBartDepartures = {
       },
    show(widgetElem: Element): void {
       const handleData = (data: RawData) => {
-         app.util.spinnerStop(widgetElem);
+         appUtil.spinnerStop(widgetElem);
          const timestamp = data.root.date + ' ' + data.root.time;
          const station = data.root.station[0]!;
          if (station.message?.error)
             console.log(url, station.message?.error);
-         app.widget.transBartDepartures.displayDataChart(widgetElem, timestamp, station);
+         appWidgetTransBartDepartures.displayDataChart(widgetElem, timestamp, station);
          };
       const url = 'https://api.bart.gov/api/etd.aspx';
       const params = { cmd: 'etd', orig: 'embr', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };

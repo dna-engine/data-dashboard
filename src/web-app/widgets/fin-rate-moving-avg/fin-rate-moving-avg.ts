@@ -3,7 +3,9 @@
 
 import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
+
+import { appUtil } from '../../modules/util';
+import { appLookup } from '../../modules/lookup';
 import { AppChartColor } from '../../modules/config';
 
 // {
@@ -49,8 +51,8 @@ const appWidgetFinRateMovingAvg = {
       const dataset: ChartDataset = {
          label:           data.set,
          data:            data.values,
-         borderColor:     (<AppChartColor>app.lookup.chartColor.purple).value,
-         backgroundColor: (<AppChartColor>app.lookup.chartColor.purple).value,
+         borderColor:     (<AppChartColor>appLookup.chartColor.purple).value,
+         backgroundColor: (<AppChartColor>appLookup.chartColor.purple).value,
          };
       const chartInfo = <ChartConfiguration>{
          type: 'line',
@@ -70,9 +72,9 @@ const appWidgetFinRateMovingAvg = {
       },
    show(widgetElem: Element): void {
       const handleData = (rawData: RawData) => {
-         app.util.spinnerStop(widgetElem);
+         appUtil.spinnerStop(widgetElem);
          if (!rawData[<keyof RawData>'Error Message'])
-            app.widget.finRateMovingAvg.displayDataChart(widgetElem, rawData);
+            appWidgetFinRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = {
@@ -83,7 +85,7 @@ const appWidgetFinRateMovingAvg = {
          series_type: 'open',
          apikey:      'demo' ,
          };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };

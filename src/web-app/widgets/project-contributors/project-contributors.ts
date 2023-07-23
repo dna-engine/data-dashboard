@@ -1,9 +1,12 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
+
+// Modules
+import { appUtil } from '../../modules/util';
 
 // [
 //    {
@@ -29,6 +32,7 @@ import { app } from '../../app';
 //    },
 //    ...
 
+// Types
 type WidgetModel = {
    contributors: {
       html_url:   string,
@@ -42,12 +46,12 @@ const appWidgetProjectContributors = {
    show(widgetElem: Element): void {
       const url = 'https://api.github.com/repos/dna-engine/dna-engine/contributors';
       const handleData = (data: RawData) => {
-         app.util.spinnerStop(widgetElem);
+         appUtil.spinnerStop(widgetElem);
          const model = <WidgetModel>dna.getModel(widgetElem);
          model.contributors = data;
          dna.refresh(widgetElem);
          };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
       },
    };

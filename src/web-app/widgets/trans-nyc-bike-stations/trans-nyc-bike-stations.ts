@@ -1,9 +1,12 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
+
+// Modules
+import { appUtil } from '../../modules/util';
 
 // {
 //    last_updated: 1546391115,
@@ -25,6 +28,7 @@ import { app } from '../../app';
 //          },
 //          ...
 
+// Types
 type Station = {
    capacity:            number,
    num_docks_available: number,
@@ -59,7 +63,7 @@ const appWidgetTransNycBikeStations = {
          type: 'bar',
          data: {
             labels:   Array.from({ length: stations.length }, (value, i) => i + 1),
-            datasets: app.util.addChartColors(datasets, 3)
+            datasets: appUtil.addChartColors(datasets, 3)
             },
          options: {
             maintainAspectRatio: false,
@@ -69,17 +73,17 @@ const appWidgetTransNycBikeStations = {
                },
             },
          };
-      app.util.narrowScreenSaver(chartInfo);
+      appUtil.narrowScreenSaver(chartInfo);
       const canvas = widgetElem.querySelector('canvas')!;
       dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
    show(widgetElem: Element): void {
       const url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json';
       const handleData = (data: RawData) => {
-         app.util.spinnerStop(widgetElem);
-         app.widget.transNycBikeStations.displayDataChart(widgetElem, data);
+         appUtil.spinnerStop(widgetElem);
+         appWidgetTransNycBikeStations.displayDataChart(widgetElem, data);
          };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
       },
    };

@@ -1,6 +1,7 @@
 // DataDashboard ~~ MIT License
 // Configuration
 
+// Types
 export type AppWidget =     typeof appConfig.widgets[number];
 export type AppPanel =      (typeof appConfig.panels[number]) & { widgetList?: AppWidget[] };
 export type AppChartColor = typeof appConfig.chartColors[number];

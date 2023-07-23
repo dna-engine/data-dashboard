@@ -1,10 +1,14 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
 
+// Modules
+import { appUtil } from '../../modules/util';
+
+// Types
 type RawData = {
    items: Book[],
    };
@@ -31,13 +35,13 @@ const appWidgetSpacexBooks = {
       const fixHttpProtocol = (book: Book) => book.volumeInfo.imageLinks.thumbnail =
          book.volumeInfo.imageLinks.thumbnail.replace('http:', 'https:');
       const handleData = (data: RawData) => {
-         app.util.spinnerStop(widgetElem);
+         appUtil.spinnerStop(widgetElem);
          const model = <WidgetModel>dna.getModel(widgetElem);
          model.books = data.items.filter(hasCover);
          model.books.forEach(fixHttpProtocol);
          dna.refresh(widgetElem);
          };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };

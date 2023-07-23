@@ -1,10 +1,13 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { Chart, ChartConfiguration } from 'chart.js';
-import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
 import { DataTable } from 'simple-datatables';
+import { fetchJson } from 'fetch-json';
+
+// Modules
+import { appUtil } from '../../modules/util';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
@@ -38,6 +41,7 @@ declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-d
 //       },
 //       ...
 
+// Types
 type Starship = {
    name:           string,
    model:          string,
@@ -74,7 +78,7 @@ const appWidgetSpaceStarships = {
          type: 'bar',
          data: {
             labels:   chartStarships.map(item => item.name),
-            datasets: app.util.addChartColors(datasets, 4),
+            datasets: appUtil.addChartColors(datasets, 4),
             },
          options: {
             maintainAspectRatio: false,
@@ -114,9 +118,9 @@ const appWidgetSpaceStarships = {
    show(widgetElem: Element): void {
       const starships: Starship[] = [];
       const displayData = () => {
-         app.util.spinnerStop(widgetElem);
-         app.widget.spaceStarships.displayDataChart(widgetElem, starships);
-         app.widget.spaceStarships.displayDataTable(widgetElem, starships);
+         appUtil.spinnerStop(widgetElem);
+         appWidgetSpaceStarships.displayDataChart(widgetElem, starships);
+         appWidgetSpaceStarships.displayDataTable(widgetElem, starships);
          };
       const handleData = (data: RawData) => {
          starships.push(...data.results);
@@ -127,7 +131,7 @@ const appWidgetSpaceStarships = {
          };
       const url =    'https://swapi.py4e.com/api/starships/';
       const params = { format: 'json' };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };

@@ -1,9 +1,12 @@
 // DataDashboard ~~ MIT License
 // Widget controller
 
+// Imports
 import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
-import { app } from '../../app';
+
+// Modules
+import { appUtil } from '../../modules/util';
 
 // {
 //    'Meta Data': {
@@ -75,7 +78,7 @@ const appWidgetFinRateIntraday = {
          type: 'line',
          data: {
             labels:   data.labels,
-            datasets: app.util.addChartColors(datasets),
+            datasets: appUtil.addChartColors(datasets),
             },
          options: {
             maintainAspectRatio: false,
@@ -89,11 +92,11 @@ const appWidgetFinRateIntraday = {
       },
    show(widgetElem: Element): void {
       const handleData = (rawData: RawData) => {
-         app.util.spinnerStop(widgetElem);
+         appUtil.spinnerStop(widgetElem);
          if (!rawData || rawData['Error Message'])
             console.error(url, rawData);
          else
-            app.widget.finRateIntraday.displayDataChart(widgetElem, rawData);
+            appWidgetFinRateIntraday.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = {
@@ -104,7 +107,7 @@ const appWidgetFinRateIntraday = {
          outputsize:  'full',
          apikey:      'demo',
          };
-      app.util.spinnerStart(widgetElem);
+      appUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };

@@ -1,11 +1,15 @@
 // DataDashboard ~~ MIT License
 // Utilities
 
+// Imports
 import { ChartConfiguration, ChartDataset } from 'chart.js';
 import { libX } from 'web-ignition';
-import { app } from '../app';
-import { AppChartColor } from './config';
 
+// Modules
+import { AppChartColor } from './config';
+import { appLookup } from './lookup';
+
+// Types
 export type AppSettingsNarrowScreenSaver = {
    maxPoints:   number,
    screenWidth: number,
@@ -14,14 +18,14 @@ export type AppOptionsNarrowScreenSaver = Partial<AppSettingsNarrowScreenSaver>;
 
 const appUtil = {
    lookupChartColor(i: number): string {
-      return (<AppChartColor>app.lookup.chartColors[i % app.lookup.chartColors.length]).value;
+      return (<AppChartColor>appLookup.chartColors[i % appLookup.chartColors.length]).value;
       },
    addChartColors(datasets: ChartDataset[], startIndex = 0): ChartDataset[] {
       type ChartDataset$ = ChartDataset & { fill: boolean };  //patch library type
       const colorize = (dataset: ChartDataset, i: number) => {
          (<ChartDataset$>dataset).fill = false;
-         dataset.borderColor =           app.util.lookupChartColor(startIndex + i);
-         dataset.backgroundColor =       app.util.lookupChartColor(startIndex + i);
+         dataset.borderColor =           appUtil.lookupChartColor(startIndex + i);
+         dataset.backgroundColor =       appUtil.lookupChartColor(startIndex + i);
          };
       datasets.forEach(colorize);
       return datasets;
@@ -76,14 +80,14 @@ const appNetwork = {
    logEvent(...eventItems: (string | number | boolean)[]): void {
       console.log(eventItems.join(' - '));
       const maxLogEvents = 250;
-      const log = app.network.getLog();
+      const log = appNetwork.getLog();
       log.push(eventItems);
       while (log.length > maxLogEvents)
          log.shift();
-      localStorage.setItem(app.network.logName, JSON.stringify(log));
+      localStorage.setItem(appNetwork.logName, JSON.stringify(log));
       },
    getLog(): (string | number | boolean)[][] {
-      return JSON.parse(<string>localStorage.getItem(app.network.logName)) || [];
+      return JSON.parse(<string>localStorage.getItem(appNetwork.logName)) || [];
       },
    };
 
