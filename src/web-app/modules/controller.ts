@@ -47,7 +47,6 @@ const appController = {
       return panelElem;
       },
    setup(): void {
-      console.log(Date.now(), appLookup.panels);  //////////////////
       libX.ui.autoDisableButtons();
       dna.registerInitializer(<DnaCallback>libX.bubbleHelp.setup);
       fetchJson.enableLogger(<FetchJsonLogger>appNetwork.logEvent);

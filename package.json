@@ -80,8 +80,7 @@
          "copy-folder src/web-app/assets/graphics --ext=.png build/2-dev/web-app/graphics",
          "replacer src/web-app/widgets --ext=.less --content=@import{{space}}{{quote}}../../../{{file.dir}}/{{file.name}}{{quote}}{{semi}} src/web-app/css --concat=widgets-generated.less",
          "lessc src/web-app/app.bundle.less build/2-dev/web-app/app.bundle.css",
-         "rollup --config",
-         "- rollup build/1-pre/web-app/app.js --file build/2-dev/web-app/app.bundle.js --name app --format iife --globals dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis"
+         "rollup build/1-pre/web-app/app.js --file build/2-dev/web-app/app.bundle.js --name app --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis"
       ],
       "build-3-min": [
          "copy-folder build/2-dev/web-app --ext=.html build/3-min/web-app",

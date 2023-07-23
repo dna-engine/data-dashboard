@@ -1,9 +1,6 @@
 // DataDashboard ~~ MIT License
 // Application
 
-// Imports
-import { dna } from 'dna-engine';
-
 // Modules
 import { appConfig, AppChartColor, AppPanel, AppWidget } from './modules/config';
 import { appController } from './modules/controller';
@@ -28,8 +25,8 @@ const app = {
    lookup:      appLookup,  //maps keyed by code (kebab)
    widgets:     appWidgets,
    setup(): void {
-      console.log('DataDashboard', appConfig.widgets.map(widget => widget.code));
-      dna.registerContext('app', app);  //enable dna to see app object even after module bundling
+      console.log('DataDashboard');
+      console.log('Widgets:', appConfig.widgets.map(widget => widget.code));
       app.controller.setup();
       },
    };
