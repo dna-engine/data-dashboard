@@ -2,7 +2,7 @@
 // Lookup
 
 // Modules
-import { AppChartColorMap, AppPanelMap, AppWidgetMap } from '../app';
+import { AppChartColorMap, AppPanelMap, AppWidgetMap } from '../../web-app';
 import { appConfig, AppPanel } from './config';
 
 const appLookup = {

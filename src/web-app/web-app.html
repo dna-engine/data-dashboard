@@ -1,5 +1,5 @@
 {% assign webRoot = '.' %}
-{% render 'src/web-app/html/doc-begin.html', webRoot: webRoot %}
+{% render 'src/web-app/context/html/doc-begin.html', webRoot: webRoot %}
 
 <header>
    <div>
@@ -9,7 +9,7 @@
       <h1>DataDashboard</h1>
    </div>
    <nav>
-      <ul class=dna-menu data-menu-nav=main-app-panels data-callback=app.controller.showPanel>
+      <ul class=dna-menu data-menu-nav=main-app-panels data-callback=webApp.controller.showPanel>
          <li id=app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
@@ -45,7 +45,7 @@
 </footer>
 
 <app-widget-templates>
-   {% render 'src/web-app/html/generated/widgets-generated.html', webRoot: webRoot %}
+   {% render 'src/web-app/context/html/generated/widgets-generated.html', webRoot: webRoot %}
 </app-widget-templates>
 
-{% render 'src/web-app/html/doc-end.html' %}
+{% render 'src/web-app/context/html/doc-end.html' %}

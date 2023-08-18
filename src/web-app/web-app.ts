@@ -2,11 +2,11 @@
 // Application
 
 // Modules
-import { appConfig, AppChartColor, AppPanel, AppWidget } from './modules/config';
-import { appController } from './modules/controller';
-import { appLookup } from './modules/lookup';
-import { appNetwork, appTransformer, appUtil } from './modules/util';
-import { appWidgets } from './modules/widgets';
+import { appConfig, AppChartColor, AppPanel, AppWidget } from './context/modules/config';
+import { appController } from './context/modules/controller';
+import { appLookup } from './context/modules/lookup';
+import { appNetwork, appTransformer, appUtil } from './context/modules/util';
+import { appWidgets } from './context/modules/widgets';
 
 // Types
 export type AppWidgetMap =     { [code: string]: AppWidget };
@@ -16,7 +16,7 @@ export type AppParamValue =    string | number | boolean | null;
 export type AppParams =        { [param: string]: AppParamValue };
 export type AppDataObject =    Record<string, unknown>;
 
-const app = {
+const webApp = {
    config:      appConfig,
    controller:  appController,
    util:        appUtil,
@@ -27,10 +27,10 @@ const app = {
    setup(): void {
       console.log('DataDashboard');
       console.log('Widgets:', appConfig.widgets.map(widget => widget.code));
-      app.controller.setup();
+      webApp.controller.setup();
       },
    };
 
-app.setup();
+webApp.setup();
 
-export default app;
+export default webApp;

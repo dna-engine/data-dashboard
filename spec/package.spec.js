@@ -13,12 +13,12 @@ describe('The "docs" folder', () => {
       const actual = fs.readdirSync('docs').map(removeHash).sort();
       const expected = [
          'CNAME',
-         'app.bundle.css',
-         'app.bundle.js',
          'graphics',
          'index.html',
          'libraries.css',
          'libraries.js',
+         'web-app.css',
+         'web-app.js',
          ];
       assertDeepStrictEqual(actual, expected);
       });
