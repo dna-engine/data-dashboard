@@ -96,7 +96,8 @@
          "copy-file build/2-dev/web-app/libraries.js --folder build/3-min/web-app"
       ],
       "build-4-rev": [
-         "rev-web-assets build/3-min/web-app build/4-rev/web-app --meta-content-base=https://data-dashboard.js.org",
+         "rev-web-assets build/3-min/web-app build/4-rev/web-app --manifest --meta-content-base=https://data-dashboard.js.org",
+         "copy-file build/4-rev/web-app/manifest.json --move build/4-rev --folder",
          "add-dist-header build/4-rev/web-app dist/web-app",
          "copy-folder build/4-rev/web-app/graphics --ext=.png dist/web-app/graphics",
          "copy-folder dist/web-app docs",
