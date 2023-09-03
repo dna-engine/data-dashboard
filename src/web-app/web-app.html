@@ -1,5 +1,5 @@
 {% assign webRoot = '.' %}
-{% render 'src/web-app/context/html/doc-begin.html', webRoot: webRoot %}
+{% render 'src/web-app/+context/html/doc-begin.html', webRoot: webRoot %}
 
 <header>
    <div>
@@ -45,7 +45,7 @@
 </footer>
 
 <app-widget-templates>
-   {% render 'src/web-app/context/html/generated/widgets-generated.html', webRoot: webRoot %}
+   {% render 'src/web-app/+context/html/generated/widgets-generated.html', webRoot: webRoot %}
 </app-widget-templates>
 
-{% render 'src/web-app/context/html/doc-end.html' %}
+{% render 'src/web-app/+context/html/doc-end.html' %}

@@ -50,7 +50,7 @@
    },
    "runScriptsConfig": {
       "clean": [
-         "rimraf build dist docs src/web-app/context/html/generated"
+         "rimraf build dist docs src/web-app/+context/html/generated"
       ],
       "libraries": [
          "make-dir build/1-pre/libs",
@@ -68,26 +68,26 @@
          "replacer build/1-pre/libs --ext=.js build/2-dev/web-app --concat=libraries.js --header=//{{bang}}{{space}}{{file.base}}"
       ],
       "generated": [
-         "replacer src/web-app/context/widgets --ext=.html src/web-app/context/html/generated --content=%render{{space}}{{quote}}{{file.path}}{{quote}},webRoot:webRoot%{{close-curly}} --find=%render --replacement={{open-curly}}%render --concat=widgets-generated.html",
-         "replacer src/web-app/context/widgets --ext=.less --content=@import{{space}}{{quote}}../../../../{{file.dir}}/{{file.name}}{{quote}}{{semi}} src/web-app/context/css --concat=widgets-generated.less"
+         "replacer src/web-app/+context/widgets --ext=.html src/web-app/+context/html/generated --content=%render{{space}}{{quote}}{{file.path}}{{quote}},webRoot:webRoot%{{close-curly}} --find=%render --replacement={{open-curly}}%render --concat=widgets-generated.html",
+         "replacer src/web-app/+context/widgets --ext=.less --content=@import{{space}}{{quote}}../../../../{{file.dir}}/{{file.name}}{{quote}}{{semi}} src/web-app/+context/css --concat=widgets-generated.less"
       ],
       "bundle-js": [
          "rollup build/1-pre/web-app/web-app.js --file build/2-dev/web-app/web-app.js --name webApp --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis"
       ],
-      "build-1-pre": [
+      "build1-pre": [
          "jshint . --exclude-path .gitignore",
          "eslint --max-warnings 0 . --ext .ts",
          "tsc",
          "replacer src/web-app/web-app.html build/1-pre/web-app --rename=index.html --pkg"
       ],
-      "build-2-dev": [
+      "build2-dev": [
          "img-src-placeholder build/1-pre/web-app build/2-dev/web-app",
          "html-validator build/2-dev/web-app",
-         "copy-folder src/web-app/context/assets/graphics --ext=.png build/2-dev/web-app/graphics",
+         "copy-folder src/web-app/+context/assets/graphics --ext=.png build/2-dev/web-app/graphics",
          "lessc src/web-app/web-app.less build/2-dev/web-app/web-app.css",
          "run-scripts bundle-js"
       ],
-      "build-3-min": [
+      "build3-min": [
          "copy-folder build/2-dev/web-app --ext=.html build/3-min/web-app",
          "copy-folder build/2-dev/web-app/graphics --ext=.png build/3-min/web-app/graphics",
          "copy-file build/2-dev/web-app/libraries.css --folder build/3-min/web-app",
@@ -95,7 +95,7 @@
          "uglifyjs build/2-dev/web-app/web-app.js --output build/3-min/web-app/web-app.js",
          "copy-file build/2-dev/web-app/libraries.js --folder build/3-min/web-app"
       ],
-      "build-4-rev": [
+      "build4-rev": [
          "rev-web-assets build/3-min/web-app build/4-rev/web-app --manifest --meta-content-base=https://data-dashboard.js.org",
          "copy-file build/4-rev/web-app/manifest.json --move build/4-rev --folder",
          "add-dist-header build/4-rev/web-app dist/web-app",
@@ -110,8 +110,8 @@
       ]
    },
    "scripts": {
-      "pretest": "run-scripts clean libraries generated build-1-pre build-2-dev build-3-min build-4-rev",
-      "test": "mocha spec/*.spec.js --timeout 5000",
+      "pretest": "run-scripts clean libraries generated build1-pre build2-dev build3-min build4-rev",
+      "test": "mocha spec/*.spec.js --timeout 7000",
       "dev": "npm test && run-scripts dev --parallel",
       "prod": "NODE_ENV=production npm start"
    },
@@ -122,18 +122,18 @@
    "devDependencies": {
       "@fortawesome/fontawesome-free": "~6.4",
       "@types/node": "~20.5",
-      "@typescript-eslint/eslint-plugin": "~6.4",
-      "@typescript-eslint/parser": "~6.4",
+      "@typescript-eslint/eslint-plugin": "~6.5",
+      "@typescript-eslint/parser": "~6.5",
       "add-dist-header": "~1.2",
       "assert-deep-strict-equal": "~1.1",
       "browser-sync": "~2.29",
-      "chart.js": "~4.3",
+      "chart.js": "~4.4",
       "chokidar-cli": "~3.0",
       "copy-file-util": "~1.1",
       "copy-folder-util": "~1.1",
       "csso-cli": "~4.0",
       "dna-engine": "~3.0",
-      "eslint": "~8.47",
+      "eslint": "~8.48",
       "img-src-placeholder": "~1.1",
       "jshint": "~2.13",
       "less": "~4.2",
@@ -147,8 +147,8 @@
       "rimraf": "~5.0",
       "rollup": "~3.28",
       "run-scripts-util": "~1.2",
-      "simple-datatables": "~7.3",
-      "typescript": "~5.1",
+      "simple-datatables": "~8.0",
+      "typescript": "~5.2",
       "uglify-js": "~3.17",
       "w3c-html-validator": "~1.4",
       "web-ignition": "~2.0"

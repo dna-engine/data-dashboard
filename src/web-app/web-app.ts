@@ -2,11 +2,11 @@
 // Application
 
 // Modules
-import { appConfig, AppChartColor, AppPanel, AppWidget } from './context/modules/config';
-import { appController } from './context/modules/controller';
-import { appLookup } from './context/modules/lookup';
-import { appNetwork, appTransformer, appUtil } from './context/modules/util';
-import { appWidgets } from './context/modules/widgets';
+import { appConfig, AppChartColor, AppPanel, AppWidget } from './+context/modules/config';
+import { appController } from './+context/modules/controller';
+import { appLookup } from './+context/modules/lookup';
+import { appNetwork, appTransformer, appUtil } from './+context/modules/util';
+import { appWidgets } from './+context/modules/widgets';
 
 // Types
 export type AppWidgetMap =     { [code: string]: AppWidget };
