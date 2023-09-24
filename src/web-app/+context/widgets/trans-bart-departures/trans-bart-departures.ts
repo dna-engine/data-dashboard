@@ -6,7 +6,7 @@ import { Chart, ChartConfiguration, ChartDataset, ChartTypeRegistry, TooltipItem
 import { fetchJson } from 'fetch-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 
 // {
 //    root: {
@@ -68,7 +68,7 @@ type DataPoint = {
    };
 type DataSet$ = TooltipItem<keyof ChartTypeRegistry>['dataset'] & { labels: string[]};  //patch library type
 
-const appWidgetTransBartDepartures = {
+const webAppWidgetTransBartDepartures = {
    displayDataChart(widgetElem: Element, timestamp: string, station: Station): void {
       const title =      station.abbr + ' -- Upcoming departures from ' + station.name;
       const subtitle =   timestamp;
@@ -116,7 +116,7 @@ const appWidgetTransBartDepartures = {
          type: 'bar',
          data: {
             labels:   directions,
-            datasets: appUtil.addChartColors(datasets),
+            datasets: webAppUtil.addChartColors(datasets),
             },
          options: {
             indexAxis:           'y',
@@ -133,18 +133,18 @@ const appWidgetTransBartDepartures = {
       },
    show(widgetElem: Element): void {
       const handleData = (data: RawData) => {
-         appUtil.spinnerStop(widgetElem);
+         webAppUtil.spinnerStop(widgetElem);
          const timestamp = data.root.date + ' ' + data.root.time;
          const station = data.root.station[0]!;
          if (station.message?.error)
             console.log(url, station.message?.error);
-         appWidgetTransBartDepartures.displayDataChart(widgetElem, timestamp, station);
+         webAppWidgetTransBartDepartures.displayDataChart(widgetElem, timestamp, station);
          };
       const url = 'https://api.bart.gov/api/etd.aspx';
       const params = { cmd: 'etd', orig: 'embr', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetTransBartDepartures };
+export { webAppWidgetTransBartDepartures };

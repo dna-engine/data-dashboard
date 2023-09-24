@@ -2,31 +2,31 @@
 // Application
 
 // Modules
-import { appConfig, AppChartColor, AppPanel, AppWidget } from './+context/modules/config';
-import { appController } from './+context/modules/controller';
-import { appLookup } from './+context/modules/lookup';
-import { appNetwork, appTransformer, appUtil } from './+context/modules/util';
-import { appWidgets } from './+context/modules/widgets';
+import { webAppConfig, WebAppChartColor, WebAppPanel, WebAppWidget } from './+context/modules/config';
+import { webAppController } from './+context/modules/controller';
+import { webAppLookup } from './+context/modules/lookup';
+import { webAppNetwork, webAppTransformer, webAppUtil } from './+context/modules/util';
+import { webAppWidgets } from './+context/modules/widgets';
 
 // Types
-export type AppWidgetMap =     { [code: string]: AppWidget };
-export type AppPanelMap =      { [code: string]: AppPanel };
-export type AppChartColorMap = { [code: string]: AppChartColor };
-export type AppParamValue =    string | number | boolean | null;
-export type AppParams =        { [param: string]: AppParamValue };
-export type AppDataObject =    Record<string, unknown>;
+export type WebAppWidgetMap =     { [code: string]: WebAppWidget };
+export type WebAppPanelMap =      { [code: string]: WebAppPanel };
+export type WebAppChartColorMap = { [code: string]: WebAppChartColor };
+export type WebAppParamValue =    string | number | boolean | null;
+export type WebAppParams =        { [param: string]: WebAppParamValue };
+export type WebAppDataObject =    Record<string, unknown>;
 
 const webApp = {
-   config:      appConfig,
-   controller:  appController,
-   util:        appUtil,
-   network:     appNetwork,
-   transformer: appTransformer,
-   lookup:      appLookup,  //maps keyed by code (kebab)
-   widgets:     appWidgets,
+   config:      webAppConfig,
+   controller:  webAppController,
+   util:        webAppUtil,
+   network:     webAppNetwork,
+   transformer: webAppTransformer,
+   lookup:      webAppLookup,  //maps keyed by code (kebab)
+   widgets:     webAppWidgets,
    setup(): void {
       console.log('DataDashboard');
-      console.log('Widgets:', appConfig.widgets.map(widget => widget.code));
+      console.log('Widgets:', webAppConfig.widgets.map(widget => widget.code));
       webApp.controller.setup();
       },
    };

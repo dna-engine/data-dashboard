@@ -1,19 +1,19 @@
-// Pretty Print JSON
+// data-dashboard
 // Mocha Specification Suite
 
 // Imports
 import { assertDeepStrictEqual } from 'assert-deep-strict-equal';
+import { revWebAssets } from 'rev-web-assets';
 import fs from 'fs';
 
 ////////////////////////////////////////////////////////////////////////////////
 describe('The "docs" folder', () => {
 
    it('contains the correct files', () => {
-      const removeHash = (filename) => filename.replace(/[.][0-9a-f]{8}[.]/, '.');
-      const actual = fs.readdirSync('docs').map(removeHash).sort();
+      const actual = fs.readdirSync('docs').map(revWebAssets.removeHash).sort();
       const expected = [
          'CNAME',
-         'graphics',
+         'assets',
          'index.html',
          'libraries.css',
          'libraries.js',

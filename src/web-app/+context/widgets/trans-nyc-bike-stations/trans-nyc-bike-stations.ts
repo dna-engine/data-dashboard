@@ -6,7 +6,7 @@ import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 
 // {
 //    last_updated: 1546391115,
@@ -44,7 +44,7 @@ type RawData = {
    data:         { stations: Station[] },
    };
 
-const appWidgetTransNycBikeStations = {
+const webAppWidgetTransNycBikeStations = {
    displayDataChart(widgetElem: Element, data: RawData): void {
       const title =    'NYC Bike Stations';
       const subtitle = 'Capacity on ' + new Date(data.last_updated * 1000).toLocaleString();
@@ -63,7 +63,7 @@ const appWidgetTransNycBikeStations = {
          type: 'bar',
          data: {
             labels:   Array.from({ length: stations.length }, (value, i) => i + 1),
-            datasets: appUtil.addChartColors(datasets, 3)
+            datasets: webAppUtil.addChartColors(datasets, 3)
             },
          options: {
             maintainAspectRatio: false,
@@ -73,19 +73,19 @@ const appWidgetTransNycBikeStations = {
                },
             },
          };
-      appUtil.narrowScreenSaver(chartInfo);
+      webAppUtil.narrowScreenSaver(chartInfo);
       const canvas = widgetElem.querySelector('canvas')!;
       dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
    show(widgetElem: Element): void {
       const url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json';
       const handleData = (data: RawData) => {
-         appUtil.spinnerStop(widgetElem);
-         appWidgetTransNycBikeStations.displayDataChart(widgetElem, data);
+         webAppUtil.spinnerStop(widgetElem);
+         webAppWidgetTransNycBikeStations.displayDataChart(widgetElem, data);
          };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
       },
    };
 
-export { appWidgetTransNycBikeStations };
+export { webAppWidgetTransNycBikeStations };

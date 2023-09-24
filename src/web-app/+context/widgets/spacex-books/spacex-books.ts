@@ -6,7 +6,7 @@ import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 
 // Types
 type RawData = {
@@ -27,7 +27,7 @@ type Book = {
       },
    };
 
-const appWidgetSpacexBooks = {
+const webAppWidgetSpacexBooks = {
    show(widgetElem: Element): void {
       const url =      'https://www.googleapis.com/books/v1/volumes';
       const params =   { q: 'spacex' };
@@ -35,15 +35,15 @@ const appWidgetSpacexBooks = {
       const fixHttpProtocol = (book: Book) => book.volumeInfo.imageLinks.thumbnail =
          book.volumeInfo.imageLinks.thumbnail.replace('http:', 'https:');
       const handleData = (data: RawData) => {
-         appUtil.spinnerStop(widgetElem);
+         webAppUtil.spinnerStop(widgetElem);
          const model = <WidgetModel>dna.getModel(widgetElem);
          model.books = data.items.filter(hasCover);
          model.books.forEach(fixHttpProtocol);
          dna.refresh(widgetElem);
          };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetSpacexBooks };
+export { webAppWidgetSpacexBooks };

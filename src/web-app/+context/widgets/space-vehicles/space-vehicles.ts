@@ -7,7 +7,7 @@ import { fetchJson } from 'fetch-json';
 import { DataTable } from 'simple-datatables';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
@@ -58,7 +58,7 @@ type RawData = {
    results: Vehicle[],
    };
 
-const appWidgetSpaceVehicles = {
+const webAppWidgetSpaceVehicles = {
    displayDataChart(widgetElem: Element, vehicles: Vehicle[]): void {
       vehicles.forEach(item => item.chart = {
          passengers: Number(item.passengers) || 0,
@@ -75,7 +75,7 @@ const appWidgetSpaceVehicles = {
          type: 'bar',
          data: {
             labels:   chartVehicles.map(item => item.name),
-            datasets: appUtil.addChartColors(datasets, 1),
+            datasets: webAppUtil.addChartColors(datasets, 1),
             },
          options: {
             maintainAspectRatio: false,
@@ -113,9 +113,9 @@ const appWidgetSpaceVehicles = {
    show(widgetElem: Element): void {
       const vehicles: Vehicle[] = [];
       const displayData = () => {
-         appUtil.spinnerStop(widgetElem);
-         appWidgetSpaceVehicles.displayDataChart(widgetElem, vehicles);
-         appWidgetSpaceVehicles.displayDataTable(widgetElem, vehicles);
+         webAppUtil.spinnerStop(widgetElem);
+         webAppWidgetSpaceVehicles.displayDataChart(widgetElem, vehicles);
+         webAppWidgetSpaceVehicles.displayDataTable(widgetElem, vehicles);
          };
       const handleData = (data: RawData) => {
          vehicles.push(...data.results);
@@ -126,9 +126,9 @@ const appWidgetSpaceVehicles = {
          };
       const url =    'https://swapi.py4e.com/api/vehicles/';
       const params = { format: 'json' };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetSpaceVehicles };
+export { webAppWidgetSpaceVehicles };

@@ -3,18 +3,18 @@
 
 // Structure:
 //    main
-//       app-panels
-//          app-panel
+//       web-app-panels
+//          web-app-panel
 //             header
 //                h2
-//             app-widgets
-//                app-widget
+//             web-app-widgets
+//                web-app-widget
 //                   header
 //                      h2
 
 @import "static/utility-box";
 
-app-panel {
+web-app-panel {
    display: block;
    >header {
       h2 {
@@ -23,9 +23,9 @@ app-panel {
          color: white;
          }
       }
-   >app-widgets {
+   >web-app-widgets {
       display: block;
-      app-widget {
+      web-app-widget {
          display: block;
          position: relative;
          text-align: left;
@@ -41,10 +41,10 @@ app-panel {
                margin: 0px;
                }
             }
-         >app-widget-body {
+         >web-app-widget-body {
             .WidgetBody();
             }
-         >app-widget-spinner {
+         >web-app-widget-spinner {
             position: absolute;
             top: 0px; left: 0px; bottom: 0px; right: 0px;
             text-align: center;
@@ -55,8 +55,8 @@ app-panel {
                }
             }
          }
-      app-widget.waiting {
-         app-widget-body {
+      web-app-widget.waiting {
+         web-app-widget-body {
             opacity: 0;
             transition: opacity 0s;
             }

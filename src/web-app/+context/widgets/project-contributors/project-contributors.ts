@@ -6,7 +6,7 @@ import { dna } from 'dna-engine';
 import { fetchJson } from 'fetch-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 
 // [
 //    {
@@ -42,18 +42,18 @@ type WidgetModel = {
    };
 type RawData = WidgetModel['contributors'];
 
-const appWidgetProjectContributors = {
+const webAppWidgetProjectContributors = {
    show(widgetElem: Element): void {
       const url = 'https://api.github.com/repos/dna-engine/dna-engine/contributors';
       const handleData = (data: RawData) => {
-         appUtil.spinnerStop(widgetElem);
+         webAppUtil.spinnerStop(widgetElem);
          const model = <WidgetModel>dna.getModel(widgetElem);
          model.contributors = data;
          dna.refresh(widgetElem);
          };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url).then(handleData);
       },
    };
 
-export { appWidgetProjectContributors };
+export { webAppWidgetProjectContributors };

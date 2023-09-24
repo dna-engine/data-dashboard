@@ -4,9 +4,9 @@
 import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 
-import { appUtil } from '../../modules/util';
-import { appLookup } from '../../modules/lookup';
-import { AppChartColor } from '../../modules/config';
+import { webAppUtil } from '../../modules/util';
+import { webAppLookup } from '../../modules/lookup';
+import { WebAppChartColor } from '../../modules/config';
 
 // {
 //    'Meta Data': {
@@ -33,7 +33,7 @@ type RawData = {
    'Technical Analysis: SMA': { [date: string]: RawDataSma },
    };
 
-const appWidgetFinRateMovingAvg = {
+const webAppWidgetFinRateMovingAvg = {
    displayDataChart(widgetElem: Element, rawData: RawData): void {
       const transform = (rawData: RawData) => {
          const metadata =   rawData['Meta Data'];
@@ -51,8 +51,8 @@ const appWidgetFinRateMovingAvg = {
       const dataset: ChartDataset = {
          label:           data.set,
          data:            data.values,
-         borderColor:     (<AppChartColor>appLookup.chartColor.purple).value,
-         backgroundColor: (<AppChartColor>appLookup.chartColor.purple).value,
+         borderColor:     (<WebAppChartColor>webAppLookup.chartColor.purple).value,
+         backgroundColor: (<WebAppChartColor>webAppLookup.chartColor.purple).value,
          };
       const chartInfo = <ChartConfiguration>{
          type: 'line',
@@ -72,9 +72,9 @@ const appWidgetFinRateMovingAvg = {
       },
    show(widgetElem: Element): void {
       const handleData = (rawData: RawData) => {
-         appUtil.spinnerStop(widgetElem);
+         webAppUtil.spinnerStop(widgetElem);
          if (!rawData[<keyof RawData>'Error Message'])
-            appWidgetFinRateMovingAvg.displayDataChart(widgetElem, rawData);
+            webAppWidgetFinRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = {
@@ -85,9 +85,9 @@ const appWidgetFinRateMovingAvg = {
          series_type: 'open',
          apikey:      'demo' ,
          };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetFinRateMovingAvg };
+export { webAppWidgetFinRateMovingAvg };

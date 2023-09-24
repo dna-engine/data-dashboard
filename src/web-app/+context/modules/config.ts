@@ -2,11 +2,11 @@
 // Configuration
 
 // Types
-export type AppWidget =     typeof appConfig.widgets[number];
-export type AppPanel =      (typeof appConfig.panels[number]) & { widgetList?: AppWidget[] };
-export type AppChartColor = typeof appConfig.chartColors[number];
+export type WebAppWidget =     typeof webAppConfig.widgets[number];
+export type WebAppPanel =      (typeof webAppConfig.panels[number]) & { widgetList?: WebAppWidget[] };
+export type WebAppChartColor = typeof webAppConfig.chartColors[number];
 
-const appConfig = {
+const webAppConfig = {
    widgets: [
       { code: 'fin-rate-intraday',       header: 'Exchange rate intraday' },
       { code: 'fin-rate-moving-avg',     header: 'Exchange rate moving average' },
@@ -43,4 +43,4 @@ const appConfig = {
       ],
    };
 
-export { appConfig };
+export { webAppConfig };

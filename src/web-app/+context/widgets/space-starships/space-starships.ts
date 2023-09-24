@@ -7,7 +7,7 @@ import { DataTable } from 'simple-datatables';
 import { fetchJson } from 'fetch-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
@@ -61,7 +61,7 @@ type RawData = {
    results: Starship[],
    };
 
-const appWidgetSpaceStarships = {
+const webAppWidgetSpaceStarships = {
    displayDataChart(widgetElem: Element, starships: Starship[]): void {
       starships.forEach(item => item.chart = {
          passengers: Number(item.passengers) || 0,
@@ -78,7 +78,7 @@ const appWidgetSpaceStarships = {
          type: 'bar',
          data: {
             labels:   chartStarships.map(item => item.name),
-            datasets: appUtil.addChartColors(datasets, 4),
+            datasets: webAppUtil.addChartColors(datasets, 4),
             },
          options: {
             maintainAspectRatio: false,
@@ -118,9 +118,9 @@ const appWidgetSpaceStarships = {
    show(widgetElem: Element): void {
       const starships: Starship[] = [];
       const displayData = () => {
-         appUtil.spinnerStop(widgetElem);
-         appWidgetSpaceStarships.displayDataChart(widgetElem, starships);
-         appWidgetSpaceStarships.displayDataTable(widgetElem, starships);
+         webAppUtil.spinnerStop(widgetElem);
+         webAppWidgetSpaceStarships.displayDataChart(widgetElem, starships);
+         webAppWidgetSpaceStarships.displayDataTable(widgetElem, starships);
          };
       const handleData = (data: RawData) => {
          starships.push(...data.results);
@@ -131,9 +131,9 @@ const appWidgetSpaceStarships = {
          };
       const url =    'https://swapi.py4e.com/api/starships/';
       const params = { format: 'json' };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetSpaceStarships };
+export { webAppWidgetSpaceStarships };

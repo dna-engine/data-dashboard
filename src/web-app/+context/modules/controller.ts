@@ -7,58 +7,58 @@ import { fetchJson, FetchJsonLogger } from 'fetch-json';
 import { libX } from 'web-ignition';
 
 // Modules
-import { AppWidget } from './config';
-import { appLookup } from './lookup';
-import { appNetwork } from './util';
-import { appWidgets } from './widgets';
+import { WebAppWidget } from './config';
+import { webAppLookup } from './lookup';
+import { webAppNetwork } from './util';
+import { webAppWidgets } from './widgets';
 
-const appController = {
+const webAppController = {
    // <main>
-   //    <app-panels>
-   //       <app-panel data-hash=~~code~~>
+   //    <web-app-panels>
+   //       <web-app-panel data-hash=~~code~~>
    //          <header>h2>~~header~~</h2></header>
-   //          <app-widgets>
-   //             <app-widget data-array=~~widgetList~~ data-class=~~code~~>
+   //          <web-app-widgets>
+   //             <web-app-widget data-array=~~widgetList~~ data-class=~~code~~>
    //                <header><h2>~~header~~</h2></header>
-   //             </app-widget>
-   //          </app-widgets>
-   //       </app-panel>
-   //    </app-panels>
+   //             </web-app-widget>
+   //          </web-app-widgets>
+   //       </web-app-panel>
+   //    </web-app-panels>
    // </main>
    showPanel(panelElem: HTMLElement): Element {
       globalThis.window.scrollTo({ top: 0 });
-      const appWidgetsElem = panelElem.querySelector('app-widgets')!;
+      const webAppWidgetsElem = panelElem.querySelector('web-app-widgets')!;
       const showWidget = (widgetElem: Element) => {
-         const widget = <AppWidget>dna.getModel(widgetElem);
+         const widget = <WebAppWidget>dna.getModel(widgetElem);
          const msg = {
             missingWidget:     'Missing widget, index: %s, panel: %s',
             missingController: 'Widget controller missing: %s',
             };
          if (!widget)
             throw Error('[data-dashboard] ' + dna.util.printf(msg.missingWidget, panelElem.dataset.hash));
-         widgetElem.querySelector('app-widget-body')?.remove();
+         widgetElem.querySelector('web-app-widget-body')?.remove();
          widgetElem.appendChild(<Element>dna.clone(widget.code, {}));
-         const widgetController = appWidgets[<keyof typeof appWidgets>dna.util.toCamel(widget.code)];
+         const widgetController = webAppWidgets[<keyof typeof webAppWidgets>dna.util.toCamel(widget.code)];
          if (!widgetController)
             throw Error('[data-dashboard] ' + dna.util.printf(msg.missingController, widget.code));
          widgetController.show(<HTMLElement>widgetElem);
          };
-      dna.dom.forEach(appWidgetsElem.children, showWidget);
+      dna.dom.forEach(webAppWidgetsElem.children, showWidget);
       return panelElem;
       },
    setup(): void {
       libX.ui.autoDisableButtons();
       dna.registerInitializer(<DnaCallback>libX.bubbleHelp.setup);
-      fetchJson.enableLogger(<FetchJsonLogger>appNetwork.logEvent);
-      appLookup.panels.forEach(panel =>
-         panel.widgetList = panel.widgets.map(code => <AppWidget>(appLookup.widget[code])));
-      const displayedPanels = appLookup.panels.filter(panel => panel.display);
+      fetchJson.enableLogger(<FetchJsonLogger>webAppNetwork.logEvent);
+      webAppLookup.panels.forEach(panel =>
+         panel.widgetList = panel.widgets.map(code => <WebAppWidget>(webAppLookup.widget[code])));
+      const displayedPanels = webAppLookup.panels.filter(panel => panel.display);
       const onLoadSetup = () => {
-         dna.clone('app-menu-item', displayedPanels);
-         dna.clone('app-panel',     displayedPanels);
+         dna.clone('web-app-menu-item', displayedPanels);
+         dna.clone('web-app-panel',     displayedPanels);
          };
       dna.dom.onReady(onLoadSetup);
       },
    };
 
-export { appController };
+export { webAppController };

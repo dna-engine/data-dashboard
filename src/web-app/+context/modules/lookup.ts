@@ -2,16 +2,16 @@
 // Lookup
 
 // Modules
-import { AppChartColorMap, AppPanelMap, AppWidgetMap } from '../../web-app';
-import { appConfig, AppPanel } from './config';
+import { WebAppChartColorMap, WebAppPanelMap, WebAppWidgetMap } from '../../web-app';
+import { webAppConfig, WebAppPanel } from './config';
 
-const appLookup = {
-   widgets:     appConfig.widgets,
-   panels:      <AppPanel[]>appConfig.panels,
-   chartColors: appConfig.chartColors,
-   widget:      <AppWidgetMap>dna.array.toMap(appConfig.widgets),
-   panel:       <AppPanelMap>dna.array.toMap(appConfig.panels),
-   chartColor:  <AppChartColorMap>dna.array.toMap(appConfig.chartColors),
+const webAppLookup = {
+   widgets:     webAppConfig.widgets,
+   panels:      <WebAppPanel[]>webAppConfig.panels,
+   chartColors: webAppConfig.chartColors,
+   widget:      <WebAppWidgetMap>dna.array.toMap(webAppConfig.widgets),
+   panel:       <WebAppPanelMap>dna.array.toMap(webAppConfig.panels),
+   chartColor:  <WebAppChartColorMap>dna.array.toMap(webAppConfig.chartColors),
    };
 
-export { appLookup };
+export { webAppLookup };

@@ -6,7 +6,7 @@ import { Chart, ChartConfiguration } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 
 // {
 //    MRData: {
@@ -108,9 +108,9 @@ type TotalsMap = {
       },
    };
 
-const appWidgetTransF1TopCountries = {
+const webAppWidgetTransF1TopCountries = {
    displayDataChart(widgetElem: Element, race: Race): void {
-      // <app-widget-body class=trans-f1-top-countries>
+      // <web-app-widget-body class=trans-f1-top-countries>
       //    <figure>
       //       <canvas></canvas>
       //    </figure>
@@ -120,7 +120,7 @@ const appWidgetTransF1TopCountries = {
       //    <figure>
       //       <canvas></canvas>
       //    </figure>
-      // </app-widget-body>
+      // </web-app-widget-body>
       const topFinishes = 10;
       const title =    'Nationalities of Top F1 Drivers and Constructors';
       const subtitle = race.season + ' ' + race.raceName + ' top ' + topFinishes + ' finishes';
@@ -151,7 +151,7 @@ const appWidgetTransF1TopCountries = {
          type: 'bar',
          data: {
             labels:   data.map(item => item.nationality),
-            datasets: appUtil.addChartColors(datasets),
+            datasets: webAppUtil.addChartColors(datasets),
             },
          options: {
             maintainAspectRatio: false,
@@ -167,18 +167,18 @@ const appWidgetTransF1TopCountries = {
    show(widgetElem: Element): void {
       const raceYear = new Date().getFullYear() - 1;
       const handleData = (data: RawData) => {
-         appUtil.spinnerStop(widgetElem);
+         webAppUtil.spinnerStop(widgetElem);
          const race = data.MRData.RaceTable.Races[0]!;
-         appWidgetTransF1TopCountries.displayDataChart(widgetElem, race);
+         webAppWidgetTransF1TopCountries.displayDataChart(widgetElem, race);
          };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       const display = (canvas: Element, index: number) => {
          const round = index + 1;
          const url = 'https://ergast.com/api/f1/' + raceYear + '/' + round + '/results.json';
          fetchJson.get(url).then(handleData);
          };
-      widgetElem.querySelectorAll('app-widget-body >figure >canvas').forEach(display);
+      widgetElem.querySelectorAll('web-app-widget-body >figure >canvas').forEach(display);
       },
    };
 
-export { appWidgetTransF1TopCountries };
+export { webAppWidgetTransF1TopCountries };

@@ -8,7 +8,7 @@ import { browserReady } from 'puppeteer-browser-ready';
 // Setup
 const webFolder = process.env.webFolder || 'build/2-dev/web-app/';
 let http;  //fields: server, terminator, folder, url, port, verbose
-let web;   //fields: browser, page, response, status, location, title, html, $
+let web;   //fields: browser, page, response, status, location, title, html, root
 before(async () => {
    http = await browserReady.startWebServer();
    web =  await puppeteer.launch().then(browserReady.goto(http.url + webFolder));
@@ -27,15 +27,24 @@ describe('The web page', () => {
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('has the correct title -> "DataDashboard"', () => {
+   it('title is "DataDashboard"', () => {
       const actual =   { title: web.title };
       const expected = { title: 'DataDashboard' };
       assertDeepStrictEqual(actual, expected);
       });
 
-   it('body has exactly one header, main, and footer', () => {
-      const actual =   web.$('body >*').toArray().map(elem => elem.name);
-      const expected = ['header', 'main', 'footer', 'app-widget-templates'];
+   it('body has exactly one header, main, and footer -- web.root', () => {
+      const getTag =   (elem) => elem.tagName.toLowerCase();
+      const getTags =  (selector) => [...web.root.querySelectorAll(selector)].map(getTag);
+      const actual =   getTags('body >*');
+      const expected = ['header', 'main', 'footer', 'web-app-widget-templates'];
+      assertDeepStrictEqual(actual, expected);
+      });
+
+   it('body has exactly one header, main, and footer -- page.$$eval()', async () => {
+      const getTags =  (elems) => elems.map(elem => elem.nodeName.toLowerCase());
+      const actual =   await web.page.$$eval('body >*', getTags);
+      const expected = ['header', 'main', 'footer', 'web-app-widget-templates'];
       assertDeepStrictEqual(actual, expected);
       });
 

@@ -13,7 +13,7 @@ type WidgetModel = {
       }[],
    };
 
-const appWidgetNetworkEndpoints = {
+const webAppWidgetNetworkEndpoints = {
    show(widgetElem: Element): Element {
       const model = <WidgetModel>dna.getModel(widgetElem);
       model.endpoints = [
@@ -31,4 +31,4 @@ const appWidgetNetworkEndpoints = {
       },
    };
 
-export { appWidgetNetworkEndpoints };
+export { webAppWidgetNetworkEndpoints };

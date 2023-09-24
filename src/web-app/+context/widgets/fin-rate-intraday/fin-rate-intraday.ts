@@ -6,7 +6,7 @@ import { Chart, ChartConfiguration, ChartDataset } from 'chart.js';
 import { fetchJson } from 'fetch-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 
 // {
 //    'Meta Data': {
@@ -54,7 +54,7 @@ type DisplayData = {
    highs:    number[],
    };
 
-const appWidgetFinRateIntraday = {
+const webAppWidgetFinRateIntraday = {
    displayDataChart(widgetElem: Element, rawData: RawData): void {
       const transform = (rawData: RawData): DisplayData => {
          const metadata =   rawData['Meta Data'];
@@ -78,7 +78,7 @@ const appWidgetFinRateIntraday = {
          type: 'line',
          data: {
             labels:   data.labels,
-            datasets: appUtil.addChartColors(datasets),
+            datasets: webAppUtil.addChartColors(datasets),
             },
          options: {
             maintainAspectRatio: false,
@@ -92,11 +92,11 @@ const appWidgetFinRateIntraday = {
       },
    show(widgetElem: Element): void {
       const handleData = (rawData: RawData) => {
-         appUtil.spinnerStop(widgetElem);
+         webAppUtil.spinnerStop(widgetElem);
          if (!rawData || rawData['Error Message'])
             console.error(url, rawData);
          else
-            appWidgetFinRateIntraday.displayDataChart(widgetElem, rawData);
+            webAppWidgetFinRateIntraday.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
       const params = {
@@ -107,9 +107,9 @@ const appWidgetFinRateIntraday = {
          outputsize:  'full',
          apikey:      'demo',
          };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetFinRateIntraday };
+export { webAppWidgetFinRateIntraday };

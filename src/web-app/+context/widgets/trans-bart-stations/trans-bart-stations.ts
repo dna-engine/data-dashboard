@@ -7,8 +7,8 @@ import { fetchJson } from 'fetch-json';
 import { DataTable } from 'simple-datatables';
 
 // Modules
-import { appLookup } from '../../modules/lookup';
-import { appUtil } from '../../modules/util';
+import { webAppLookup } from '../../modules/lookup';
+import { webAppUtil } from '../../modules/util';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
@@ -48,11 +48,11 @@ type DataPoint = {
    };
 type Point$ = Point & { label: string };  //patch library type
 
-const appWidgetTransBartStations = {
+const webAppWidgetTransBartStations = {
    displayDataChart(widgetElem: Element, stations: Station[]): void {
       const dataset: ChartDataset = {
          label: 'Geolocation',
-         backgroundColor: appLookup.chartColor.green!.value,
+         backgroundColor: webAppLookup.chartColor.green!.value,
          data: stations.map((item: Station): DataPoint => ({
             x:     parseFloat(item.gtfs_longitude),
             y:     parseFloat(item.gtfs_latitude),
@@ -108,16 +108,16 @@ const appWidgetTransBartStations = {
       },
    show(widgetElem: Element): void {
       const handleData = (data: RawData) => {
-         appUtil.spinnerStop(widgetElem);
+         webAppUtil.spinnerStop(widgetElem);
          const stations = data.root.stations.station;
-         appWidgetTransBartStations.displayDataChart(widgetElem, stations);
-         appWidgetTransBartStations.displayDataTable(widgetElem, stations);
+         webAppWidgetTransBartStations.displayDataChart(widgetElem, stations);
+         webAppWidgetTransBartStations.displayDataTable(widgetElem, stations);
          };
       const url = 'https://api.bart.gov/api/stn.aspx';
       const params = { cmd: 'stns', key: 'MW9S-E7SL-26DU-VV8V', json: 'y' };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetTransBartStations };
+export { webAppWidgetTransBartStations };

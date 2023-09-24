@@ -6,7 +6,10 @@
    "type": "module",
    "module": "server.js",
    "browser": "docs/index.html",
-   "repository": "github:dna-engine/data-dashboard",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/dna-engine/data-dashboard.git"
+   },
    "homepage": "https://data-dashboard.js.org",
    "bugs": "https://github.com/dna-engine/data-dashboard/issues",
    "keywords": [
@@ -72,7 +75,7 @@
          "replacer src/web-app/+context/widgets --ext=.less --content=@import{{space}}{{quote}}../../../../{{file.dir}}/{{file.name}}{{quote}}{{semi}} src/web-app/+context/css --concat=widgets-generated.less"
       ],
       "bundle-js": [
-         "rollup build/1-pre/web-app/web-app.js --file build/2-dev/web-app/web-app.js --name webApp --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis"
+         "recursive-exec build/1-pre/web-app --ext=.js --exclude=+ 'rollup {{file}} --file build/2-dev/web-app/{{filename}} --name {{nameCamelCase}} --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis'"
       ],
       "build1-pre": [
          "jshint . --exclude-path .gitignore",
@@ -81,25 +84,25 @@
          "replacer src/web-app/web-app.html build/1-pre/web-app --rename=index.html --pkg"
       ],
       "build2-dev": [
-         "img-src-placeholder build/1-pre/web-app build/2-dev/web-app",
-         "html-validator build/2-dev/web-app",
-         "copy-folder src/web-app/+context/assets/graphics --ext=.png build/2-dev/web-app/graphics",
-         "lessc src/web-app/web-app.less build/2-dev/web-app/web-app.css",
+         "img-src-placeholder build/1-pre/web-app         build/2-dev/web-app",
+         "html-validator                                  build/2-dev/web-app",
+         "copy-folder src/web-app/+common --ext=.jpg,.png build/2-dev/web-app",
+         "lessc src/web-app/web-app.less                  build/2-dev/web-app/web-app.css",
          "run-scripts bundle-js"
       ],
       "build3-min": [
-         "copy-folder build/2-dev/web-app --ext=.html build/3-min/web-app",
-         "copy-folder build/2-dev/web-app/graphics --ext=.png build/3-min/web-app/graphics",
-         "copy-file build/2-dev/web-app/libraries.css --folder build/3-min/web-app",
-         "csso build/2-dev/web-app/web-app.css --output build/3-min/web-app/web-app.css",
-         "uglifyjs build/2-dev/web-app/web-app.js --output build/3-min/web-app/web-app.js",
-         "copy-file build/2-dev/web-app/libraries.js --folder build/3-min/web-app"
+         "copy-folder build/2-dev/web-app --ext=.html,.jpg,.png build/3-min/web-app",
+         "copy-file build/2-dev/web-app/libraries.css --folder  build/3-min/web-app",
+         "csso build/2-dev/web-app/web-app.css --output         build/3-min/web-app/web-app.css",
+         "uglifyjs build/2-dev/web-app/web-app.js --output      build/3-min/web-app/web-app.js",
+         "copy-file build/2-dev/web-app/libraries.js --folder   build/3-min/web-app"
       ],
       "build4-rev": [
          "rev-web-assets build/3-min/web-app build/4-rev/web-app --manifest --meta-content-base=https://data-dashboard.js.org",
-         "copy-file build/4-rev/web-app/manifest.json --move build/4-rev --folder",
-         "add-dist-header build/4-rev/web-app dist/web-app",
-         "copy-folder build/4-rev/web-app/graphics --ext=.png dist/web-app/graphics",
+         "copy-file build/4-rev/web-app/manifest.json --move build/4-rev --folder"
+      ],
+      "dist": [
+         "add-dist-header build/4-rev/web-app dist/web-app --all-files --recursive",
          "copy-folder dist/web-app docs",
          "copy-file src/properties/cname.txt docs/CNAME"
       ],
@@ -110,7 +113,7 @@
       ]
    },
    "scripts": {
-      "pretest": "run-scripts clean libraries generated build1-pre build2-dev build3-min build4-rev",
+      "pretest": "run-scripts clean libraries generated build1-pre build2-dev build3-min build4-rev dist",
       "test": "mocha spec/*.spec.js --timeout 7000",
       "dev": "npm test && run-scripts dev --parallel",
       "prod": "NODE_ENV=production npm start"
@@ -121,10 +124,10 @@
    },
    "devDependencies": {
       "@fortawesome/fontawesome-free": "~6.4",
-      "@types/node": "~20.5",
-      "@typescript-eslint/eslint-plugin": "~6.5",
-      "@typescript-eslint/parser": "~6.5",
-      "add-dist-header": "~1.2",
+      "@types/node": "~20.6",
+      "@typescript-eslint/eslint-plugin": "~6.7",
+      "@typescript-eslint/parser": "~6.7",
+      "add-dist-header": "~1.3",
       "assert-deep-strict-equal": "~1.1",
       "browser-sync": "~2.29",
       "chart.js": "~4.4",
@@ -133,24 +136,25 @@
       "copy-folder-util": "~1.1",
       "csso-cli": "~4.0",
       "dna-engine": "~3.0",
-      "eslint": "~8.48",
+      "eslint": "~8.50",
       "img-src-placeholder": "~1.1",
       "jshint": "~2.13",
       "less": "~4.2",
       "make-dir-cli": "~3.1",
       "mocha": "~10.2",
       "pretty-print-json": "~2.0",
-      "puppeteer": "~21.1",
-      "puppeteer-browser-ready": "~1.2",
+      "puppeteer": "~21.3",
+      "puppeteer-browser-ready": "~1.3",
+      "recursive-exec": "~0.1",
       "replacer-util": "~1.2",
       "rev-web-assets": "~1.3",
       "rimraf": "~5.0",
-      "rollup": "~3.28",
+      "rollup": "~3.29",
       "run-scripts-util": "~1.2",
       "simple-datatables": "~8.0",
       "typescript": "~5.2",
       "uglify-js": "~3.17",
-      "w3c-html-validator": "~1.4",
+      "w3c-html-validator": "~1.5",
       "web-ignition": "~2.0"
    }
 }

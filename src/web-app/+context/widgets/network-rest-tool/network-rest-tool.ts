@@ -7,7 +7,7 @@ import { fetchJson } from 'fetch-json';
 import { prettyPrintJson } from 'pretty-print-json';
 
 // Modules
-import { appUtil } from '../../modules/util';
+import { webAppUtil } from '../../modules/util';
 
 // Types
 type WidgetModel = {
@@ -22,23 +22,23 @@ type ElemLookup = {
    button: HTMLButtonElement,
    };
 
-const appWidgetNetworkRestTool = {
+const webAppWidgetNetworkRestTool = {
    elem: <ElemLookup | null>null,
    get(button?: Element): void {
-      const elem =  appWidgetNetworkRestTool.elem!;
+      const elem =  webAppWidgetNetworkRestTool.elem!;
       const model = <WidgetModel>dna.getModel(elem.widget);
       const handleData = (data: RawData) => {
          model.restError = !!data.error;
          model.jsonHtml = prettyPrintJson.toHtml(data);
          dna.refresh(elem.widget, { html: true });
-         appUtil.spinnerStop(elem.widget);
+         webAppUtil.spinnerStop(elem.widget);
          elem.button.disabled = false;
          if (button)
             elem.input.focus();
          };
       const handleError = (error: RawData) =>
          handleData({ error: true, name: error.name!, message: error.message! });
-      appUtil.spinnerStart(elem.widget);
+      webAppUtil.spinnerStart(elem.widget);
       model.url = <string>elem.input.value;
       fetchJson.get(model.url).then(handleData).catch(handleError);
       },
@@ -49,10 +49,10 @@ const appWidgetNetworkRestTool = {
          input:  widgetElem.querySelector('input')!,
          button: widgetElem.querySelector('button')!,
          };
-      appWidgetNetworkRestTool.elem = elem;
+      webAppWidgetNetworkRestTool.elem = elem;
       elem.input.value = defaultRestUrl;
-      appWidgetNetworkRestTool.get();
+      webAppWidgetNetworkRestTool.get();
       },
    };
 
-export { appWidgetNetworkRestTool };
+export { webAppWidgetNetworkRestTool };

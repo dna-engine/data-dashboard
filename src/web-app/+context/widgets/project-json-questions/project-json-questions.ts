@@ -8,8 +8,8 @@ import { libX } from 'web-ignition';
 import { DataTable } from 'simple-datatables';
 
 // Modules
-import { appTransformer, appUtil } from '../../modules/util';
-import { appLookup } from '../../modules/lookup';
+import { webAppTransformer, webAppUtil } from '../../modules/util';
+import { webAppLookup } from '../../modules/lookup';
 class DT extends DataTable {}
 declare namespace simpleDatatables { class DataTable extends DT {} }  //eslint-disable-line
 
@@ -56,14 +56,14 @@ type RawDataItem = {
    };
 type RawData = { items: RawDataItem[] };
 
-const appWidgetProjectJsonQuestions = {
+const webAppWidgetProjectJsonQuestions = {
    displayDataChart(widgetElem: Element, data: RawDataItem[]): void {
-      const numItems =   appLookup.chartColors.length;
+      const numItems =   webAppLookup.chartColors.length;
       const title =      'Active JSON Questions';
       const subtitle =   'Page views of ' + numItems + ' most recently active JSON questions';
       const mostRecent = data.slice(0, numItems).sort((a, b) => b.view_count - a.view_count);
       const dataset: ChartDataset = {
-         backgroundColor: appLookup.chartColors.map(color => color.value),
+         backgroundColor: webAppLookup.chartColors.map(color => color.value),
          data:            mostRecent.map(item => item.view_count),
          };
       const chartInfo = <ChartConfiguration>{
@@ -86,7 +86,7 @@ const appWidgetProjectJsonQuestions = {
    displayDataTable(widgetElem: Element, data: RawDataItem[]): void {
       const tableElem = <HTMLTableElement>widgetElem.querySelector('figure table');
       const dataTable = new simpleDatatables.DataTable(tableElem);
-      data.forEach(item => item.timestamp = appUtil.secsToStr(item.last_activity_date));
+      data.forEach(item => item.timestamp = webAppUtil.secsToStr(item.last_activity_date));
       data.forEach(item => item.link =      `<span data-href="${item.link}">${item.title}</span>`);
       const headers = [
          'Last activity',
@@ -104,7 +104,7 @@ const appWidgetProjectJsonQuestions = {
          item.score || 0,
          item.link,
          ]);
-      appTransformer.dataTablesNormalizer(rows);
+      webAppTransformer.dataTablesNormalizer(rows);
       dataTable.insert({ headings: headers, data: rows });
       dna.dom.state(widgetElem).table = dataTable;
       },
@@ -112,13 +112,13 @@ const appWidgetProjectJsonQuestions = {
       const url =    'https://api.stackexchange.com/2.2/search';
       const params = { order: 'desc', sort: 'activity', intitle: 'json', site: 'stackoverflow' };
       const handleData = (data: RawData) => {
-         appUtil.spinnerStop(widgetElem);
-         appWidgetProjectJsonQuestions.displayDataChart(widgetElem, data.items);
-         appWidgetProjectJsonQuestions.displayDataTable(widgetElem, data.items);
+         webAppUtil.spinnerStop(widgetElem);
+         webAppWidgetProjectJsonQuestions.displayDataChart(widgetElem, data.items);
+         webAppWidgetProjectJsonQuestions.displayDataTable(widgetElem, data.items);
          };
-      appUtil.spinnerStart(widgetElem);
+      webAppUtil.spinnerStart(widgetElem);
       fetchJson.get(url, params).then(handleData);
       },
    };
 
-export { appWidgetProjectJsonQuestions };
+export { webAppWidgetProjectJsonQuestions };

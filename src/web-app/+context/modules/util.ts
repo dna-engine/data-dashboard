@@ -6,31 +6,31 @@ import { ChartConfiguration, ChartDataset } from 'chart.js';
 import { libX } from 'web-ignition';
 
 // Modules
-import { AppChartColor } from './config';
-import { appLookup } from './lookup';
+import { WebAppChartColor } from './config';
+import { webAppLookup } from './lookup';
 
 // Types
-export type AppSettingsNarrowScreenSaver = {
+export type WebAppSettingsNarrowScreenSaver = {
    maxPoints:   number,
    screenWidth: number,
    };
-export type AppOptionsNarrowScreenSaver = Partial<AppSettingsNarrowScreenSaver>;
+export type WebAppOptionsNarrowScreenSaver = Partial<WebAppSettingsNarrowScreenSaver>;
 
-const appUtil = {
+const webAppUtil = {
    lookupChartColor(i: number): string {
-      return (<AppChartColor>appLookup.chartColors[i % appLookup.chartColors.length]).value;
+      return (<WebAppChartColor>webAppLookup.chartColors[i % webAppLookup.chartColors.length]).value;
       },
    addChartColors(datasets: ChartDataset[], startIndex = 0): ChartDataset[] {
       type ChartDataset$ = ChartDataset & { fill: boolean };  //patch library type
       const colorize = (dataset: ChartDataset, i: number) => {
          (<ChartDataset$>dataset).fill = false;
-         dataset.borderColor =           appUtil.lookupChartColor(startIndex + i);
-         dataset.backgroundColor =       appUtil.lookupChartColor(startIndex + i);
+         dataset.borderColor =           webAppUtil.lookupChartColor(startIndex + i);
+         dataset.backgroundColor =       webAppUtil.lookupChartColor(startIndex + i);
          };
       datasets.forEach(colorize);
       return datasets;
       },
-   narrowScreenSaver(chartInfo: ChartConfiguration, options?: AppOptionsNarrowScreenSaver): ChartConfiguration {
+   narrowScreenSaver(chartInfo: ChartConfiguration, options?: WebAppOptionsNarrowScreenSaver): ChartConfiguration {
       const defaults = { maxPoints: 200, screenWidth: 700 };
       const settings = { ...defaults, ...options };
       const shrinkRatio = Math.ceil(chartInfo.data.labels!.length / settings.maxPoints);
@@ -47,27 +47,27 @@ const appUtil = {
       return new Date(epocSeconds * 1000).toISOString().replace('T', '+').substring(0, 19);
       },
    spinnerStart(widgetElem: Element): Element {
-      // <app-widget>
+      // <web-app-widget>
       //    <header><h2>Title</h2></header>
-      //    <app-widget-body>...</app-widget-body>
-      //    <app-widget-spinner><i data-icon=yin-yang></i></app-widget-spinner>
-      // </app-widget>
-      const elem = widgetElem.closest('app-widget')!;
+      //    <web-app-widget-body>...</web-app-widget-body>
+      //    <web-app-widget-spinner><i data-icon=yin-yang></i></web-app-widget-spinner>
+      // </web-app-widget>
+      const elem = widgetElem.closest('web-app-widget')!;
       const create = () => {
          const options = { html: '<i data-icon=yin-yang class=fa-spin>' };
-         const spinner = dna.dom.create(<keyof HTMLElementTagNameMap>'app-widget-spinner', options);
+         const spinner = dna.dom.create(<keyof HTMLElementTagNameMap>'web-app-widget-spinner', options);
          spinner.style.paddingTop = String(elem.clientHeight / 2 - 50) + 'px';
          elem.appendChild(libX.ui.makeIcons(spinner));
          return spinner;
          };
-      const spinnerElem = elem.querySelector('app-widget-spinner') || create();
+      const spinnerElem = elem.querySelector('web-app-widget-spinner') || create();
       elem.classList.add('waiting');
       dna.ui.fadeIn(dna.ui.hide(spinnerElem));
       return widgetElem;
       },
    spinnerStop(widgetElem: Element): Element {
-      const elem =    widgetElem.closest('app-widget')!;
-      const spinner = elem.querySelector('app-widget-spinner')!;
+      const elem =    widgetElem.closest('web-app-widget')!;
+      const spinner = elem.querySelector('web-app-widget-spinner')!;
       elem.classList.remove('waiting');
       // dna.ui.fadeOut(spinner, { duration: 1500 }).then(dna.ui.hide);
       dna.ui.fadeOut(spinner).then(dna.ui.hide);
@@ -75,23 +75,23 @@ const appUtil = {
       },
    };
 
-const appNetwork = {
+const webAppNetwork = {
    logName: 'network-log',
    logEvent(...eventItems: (string | number | boolean)[]): void {
       console.log(eventItems.join(' - '));
       const maxLogEvents = 250;
-      const log = appNetwork.getLog();
+      const log = webAppNetwork.getLog();
       log.push(eventItems);
       while (log.length > maxLogEvents)
          log.shift();
-      localStorage.setItem(appNetwork.logName, JSON.stringify(log));
+      localStorage.setItem(webAppNetwork.logName, JSON.stringify(log));
       },
    getLog(): (string | number | boolean)[][] {
-      return JSON.parse(<string>localStorage.getItem(appNetwork.logName)) || [];
+      return JSON.parse(<string>localStorage.getItem(webAppNetwork.logName)) || [];
       },
    };
 
-const appTransformer = {
+const webAppTransformer = {
    dataTablesNormalizer(rows: unknown[][], numColumns?: number, indexRemoveColumn?: number): string[][] {
       // Ensures the table rows are all equal length arrays of strings.
       const size = numColumns ? numColumns : rows.length ? (<unknown[]>rows[0]).length : 0;
@@ -111,4 +111,4 @@ const appTransformer = {
       },
    };
 
-export { appUtil, appNetwork, appTransformer };
+export { webAppUtil, webAppNetwork, webAppTransformer };

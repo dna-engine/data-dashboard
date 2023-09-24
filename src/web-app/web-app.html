@@ -4,13 +4,13 @@
 <header>
    <div>
       <figure>
-         <img src={{webRoot}}/graphics/logo.png alt=logo>
+         <img src={{webRoot}}/assets/graphics/logo.png alt=logo>
       </figure>
       <h1>DataDashboard</h1>
    </div>
    <nav>
-      <ul class=dna-menu data-menu-nav=main-app-panels data-callback=webApp.controller.showPanel>
-         <li id=app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
+      <ul class=dna-menu data-menu-nav=main-web-app-panels data-callback=webApp.controller.showPanel>
+         <li id=web-app-menu-item class=dna-template data-code=~~code~~>~~header~~</li>
       </ul>
       <div class=external-site>
          <a href=https://github.com/dna-engine/data-dashboard#readme><i data-icon=book></i></a>
@@ -20,20 +20,20 @@
 </header>
 
 <main>
-   <app-panels class=dna-panels data-menu-nav=main-app-panels>
-      <app-panel id=app-panel class=dna-template data-hash=~~code~~>
+   <web-app-panels class=dna-panels data-menu-nav=main-web-app-panels>
+      <web-app-panel id=web-app-panel class=dna-template data-hash=~~code~~>
          <header>
             <h2>~~header~~</h2>
          </header>
-         <app-widgets>
-            <app-widget data-array=~~widgetList~~ data-class=~~code~~>
+         <web-app-widgets>
+            <web-app-widget data-array=~~widgetList~~ data-class=~~code~~>
                <header>
                   <h2>~~header~~</h2>
                </header>
-            </app-widget>
-         </app-widgets>
-      </app-panel>
-   </app-panels>
+            </web-app-widget>
+         </web-app-widgets>
+      </web-app-panel>
+   </web-app-panels>
 </main>
 
 <footer>
@@ -44,8 +44,8 @@
    </span>
 </footer>
 
-<app-widget-templates>
+<web-app-widget-templates>
    {% render 'src/web-app/+context/html/generated/widgets-generated.html', webRoot: webRoot %}
-</app-widget-templates>
+</web-app-widget-templates>
 
 {% render 'src/web-app/+context/html/doc-end.html' %}
