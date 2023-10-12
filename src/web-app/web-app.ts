@@ -2,11 +2,11 @@
 // Application
 
 // Modules
-import { webAppConfig, WebAppChartColor, WebAppPanel, WebAppWidget } from './+context/modules/config';
-import { webAppController } from './+context/modules/controller';
-import { webAppLookup } from './+context/modules/lookup';
-import { webAppNetwork, webAppTransformer, webAppUtil } from './+context/modules/util';
-import { webAppWidgets } from './+context/modules/widgets';
+import { webAppConfig, WebAppChartColor, WebAppPanel, WebAppWidget } from './+page/modules/config';
+import { webAppController } from './+page/modules/controller';
+import { webAppLookup } from './+page/modules/lookup';
+import { webAppNetwork, webAppTransformer, webAppUtil } from './+page/modules/util';
+import { webAppWidgets } from './+page/modules/widgets';
 
 // Types
 export type WebAppWidgetMap =     { [code: string]: WebAppWidget };

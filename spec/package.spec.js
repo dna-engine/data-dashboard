@@ -13,10 +13,12 @@ describe('The "docs" folder', () => {
       const actual = fs.readdirSync('docs').map(revWebAssets.removeHash).sort();
       const expected = [
          'CNAME',
+         'about',
          'assets',
          'index.html',
          'libraries.css',
          'libraries.js',
+         'style.css',
          'web-app.css',
          'web-app.js',
          ];
