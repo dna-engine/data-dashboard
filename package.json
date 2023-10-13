@@ -53,7 +53,7 @@
    },
    "runScriptsConfig": {
       "clean": [
-         "rimraf build dist docs src/web-app/+page/html/generated"
+         "rimraf build docs src/web-app/+page/html/generated"
       ],
       "libraries": [
          "make-dir build/1-pre/libs",
@@ -102,23 +102,22 @@
          "rev-web-assets build/3-min/web-app build/4-rev/web-app --manifest --meta-content-base=https://data-dashboard.js.org",
          "copy-file build/4-rev/web-app/manifest.json --move build/4-rev --folder"
       ],
-      "dist": [
-         "add-dist-header build/4-rev/web-app dist/web-app --all-files --recursive",
-         "html-validator                      dist/web-app",
-         "copy-folder dist/web-app docs",
-         "copy-file src/properties/cname.txt docs/CNAME"
+      "docs": [
+         "add-dist-header build/4-rev/web-app docs --all-files --recursive",
+         "copy-file src/properties/cname.txt  docs/CNAME",
+         "html-validator                      docs"
       ],
       "dev": [
          "tsc --watch",
          "chokidar 'build/1-pre/web-app/**/*.js' --command 'run-scripts bundle-js'",
-         "browser-sync build/2-dev/web-app --watch"
+         "browser-sync . --startPath build/2-dev/web-app --files build/2-dev/web-app"
       ]
    },
    "scripts": {
-      "pretest": "run-scripts clean libraries generated build1-pre build2-dev build3-min build4-rev dist",
+      "pretest": "run-scripts clean libraries generated build1-pre build2-dev build3-min build4-rev docs",
       "test": "mocha spec/*.spec.js --timeout 7000",
       "dev": "npm test && run-scripts dev --parallel",
-      "prod": "NODE_ENV=production npm start"
+      "interactive": "openBrowser=true npm start"
    },
    "dependencies": {
       "fetch-json": "~3.2",
