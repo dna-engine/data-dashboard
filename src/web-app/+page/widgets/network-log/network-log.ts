@@ -17,7 +17,7 @@ const webAppWidgetNetworkLog = {
       const dataTable = new simpleDatatables.DataTable(tableElem, options);
       const headers =   fetchJson.getLogHeaders();
       const log =       webAppNetwork.getLog().reverse();
-      const delColumn = <number>fetchJson.getLogHeaderIndex().domain;
+      const delColumn = <number>fetchJson.getLogHeaderIndexMap().domain;
       headers.splice(delColumn, 1);
       webAppTransformer.dataTablesNormalizer(log, headers.length, delColumn);
       dataTable.insert({ headings: headers, data: log });

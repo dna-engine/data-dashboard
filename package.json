@@ -1,6 +1,6 @@
 {
    "name": "data-dashboard",
-   "version": "0.5.1",
+   "version": "0.5.2",
    "description": "A data-driven dashboard console for report widgets",
    "license": "MIT",
    "type": "module",
@@ -108,7 +108,7 @@
          "html-validator                      docs"
       ],
       "dev": [
-         "tsc --watch",
+         "tsc --watch --preserveWatchOutput",
          "chokidar 'build/1-pre/web-app/**/*.js' --command 'run-scripts bundle-js'",
          "browser-sync . --startPath build/2-dev/web-app --files build/2-dev/web-app"
       ]
@@ -124,10 +124,9 @@
       "open": "~10.1"
    },
    "devDependencies": {
+      "@eslint/js": "~9.6",
       "@fortawesome/fontawesome-free": "~6.5",
-      "@types/node": "~20.11",
-      "@typescript-eslint/eslint-plugin": "~7.3",
-      "@typescript-eslint/parser": "~7.3",
+      "@types/node": "~20.14",
       "add-dist-header": "~1.4",
       "assert-deep-strict-equal": "~1.2",
       "browser-sync": "~3.0",
@@ -136,26 +135,27 @@
       "copy-file-util": "~1.2",
       "copy-folder-util": "~1.1",
       "csso-cli": "~4.0",
-      "dna-engine": "~3.1",
-      "eslint": "~8.57",
+      "dna-engine": "~3.2",
+      "eslint": "8.57.0",
       "img-src-placeholder": "~1.1",
       "jshint": "~2.13",
       "less": "~4.2",
-      "make-dir-cli": "~3.1",
-      "mocha": "~10.3",
+      "make-dir-cli": "~4.0",
+      "mocha": "~10.5",
       "pretty-print-json": "~3.0",
-      "puppeteer": "~22.6",
+      "puppeteer": "~22.12",
       "puppeteer-browser-ready": "~1.3",
       "recursive-exec": "~1.0",
-      "replacer-util": "~1.2",
+      "replacer-util": "~1.3",
       "rev-web-assets": "~1.3",
       "rimraf": "~5.0",
-      "rollup": "~4.13",
+      "rollup": "~4.18",
       "run-scripts-util": "~1.2",
       "simple-datatables": "~9.0",
-      "typescript": "~5.4",
-      "uglify-js": "~3.17",
-      "w3c-html-validator": "~1.7",
-      "web-ignition": "~2.1"
+      "typescript": "~5.5",
+      "typescript-eslint": "~7.14",
+      "uglify-js": "~3.18",
+      "w3c-html-validator": "~1.8",
+      "web-ignition": "~2.2"
    }
 }
