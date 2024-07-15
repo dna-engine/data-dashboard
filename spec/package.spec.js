@@ -10,7 +10,7 @@ import fs from 'fs';
 describe('The "docs" folder', () => {
 
    it('contains the correct files', () => {
-      const actual = fs.readdirSync('docs').map(revWebAssets.removeHash).sort();
+      const actual = fs.readdirSync('docs').map(revWebAssets.stripHash).sort();
       const expected = [
          'CNAME',
          'about',
