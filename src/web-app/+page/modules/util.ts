@@ -15,6 +15,7 @@ export type WebAppSettingsNarrowScreenSaver = {
    screenWidth: number,
    };
 export type WebAppOptionsNarrowScreenSaver = Partial<WebAppSettingsNarrowScreenSaver>;
+export type EventItem = (string | number | boolean)[];
 
 const webAppUtil = {
    lookupChartColor(i: number): string {
@@ -77,17 +78,17 @@ const webAppUtil = {
 
 const webAppNetwork = {
    logName: 'network-log',
-   logEvent(...eventItems: (string | number | boolean)[]): void {
+   logEvent(...eventItems: EventItem): void {
       console.log(eventItems.join(' - '));
       const maxLogEvents = 250;
-      const log = webAppNetwork.getLog();
+      const log =          webAppNetwork.getLog();
       log.push(eventItems);
       while (log.length > maxLogEvents)
          log.shift();
       localStorage.setItem(webAppNetwork.logName, JSON.stringify(log));
       },
-   getLog(): (string | number | boolean)[][] {
-      return JSON.parse(<string>localStorage.getItem(webAppNetwork.logName)) || [];
+   getLog(): EventItem[] {
+      return <EventItem[]>JSON.parse(localStorage.getItem(webAppNetwork.logName) || '[]');
       },
    };
 

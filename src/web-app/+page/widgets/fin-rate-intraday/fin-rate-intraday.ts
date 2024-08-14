@@ -37,7 +37,8 @@ type RawDataTimeSeriesPoint = {
    '4. close': string,
    };
 type RawData = {
-   'Error Message': string,
+   'Error Message': string,  //for invalid requests
+   'Information':   string,  //for invalid requests
    'Meta Data': {
       '1. Information':    string,
       '2. From Symbol':    string,
@@ -91,9 +92,9 @@ const webAppWidgetFinRateIntraday = {
       dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
    show(widgetElem: Element): void {
-      const handleData = (rawData: RawData) => {
+      const handleData = (rawData: RawData | null) => {
          webAppUtil.spinnerStop(widgetElem);
-         if (!rawData || rawData['Error Message'])
+         if (!rawData || rawData['Error Message'] || rawData['Information'])
             console.error(url, rawData);
          else
             webAppWidgetFinRateIntraday.displayDataChart(widgetElem, rawData);

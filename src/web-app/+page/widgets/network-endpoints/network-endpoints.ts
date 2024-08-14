@@ -15,7 +15,7 @@ type WidgetModel = {
 
 const webAppWidgetNetworkEndpoints = {
    show(widgetElem: Element): Element {
-      const model = <WidgetModel>dna.getModel(widgetElem);
+      const model: WidgetModel = dna.getModel(widgetElem)!;
       model.endpoints = [
          { name: 'Alpha Vantage API',    base: 'https://www.alphavantage.co/query', docs: 'https://www.alphavantage.co/documentation' },
          { name: 'BART API',             base: 'https://api.bart.gov/api',          docs: 'https://api.bart.gov/docs/overview/examples.aspx' },

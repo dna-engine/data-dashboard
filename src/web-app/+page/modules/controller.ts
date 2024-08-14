@@ -10,7 +10,7 @@ import { libX } from 'web-ignition';
 import { WebAppWidget } from './config';
 import { webAppLookup } from './lookup';
 import { webAppNetwork } from './util';
-import { webAppWidgets } from './widgets';
+import { webAppWidgets, WebAppWidgetsKey, WebAppWidgetCode } from './widgets';
 
 const webAppController = {
    // <main>
@@ -29,18 +29,19 @@ const webAppController = {
       globalThis.window.scrollTo({ top: 0 });
       const webAppWidgetsElem = panelElem.querySelector('web-app-widgets')!;
       const showWidget = (widgetElem: Element) => {
-         const widget = <WebAppWidget>dna.getModel(widgetElem);
+         const widget: WebAppWidget | null = dna.getModel(widgetElem) ?? null;
          const msg = {
             missingWidget:     'Missing widget, index: %s, panel: %s',
             missingController: 'Widget controller missing: %s',
             };
          if (!widget)
-            throw Error('[data-dashboard] ' + dna.util.printf(msg.missingWidget, panelElem.dataset.hash));
+            throw new Error('[data-dashboard] ' + dna.util.printf(msg.missingWidget, panelElem.dataset.hash));
          widgetElem.querySelector('web-app-widget-body')?.remove();
          widgetElem.appendChild(<Element>dna.clone(widget.code, {}));
-         const widgetController = webAppWidgets[<keyof typeof webAppWidgets>dna.util.toCamel(widget.code)];
+         const webAppWidgetsKey = <WebAppWidgetsKey>dna.util.toCamel(widget.code);
+         const widgetController = <WebAppWidgetCode | undefined>webAppWidgets[webAppWidgetsKey];
          if (!widgetController)
-            throw Error('[data-dashboard] ' + dna.util.printf(msg.missingController, widget.code));
+            throw new Error('[data-dashboard] ' + dna.util.printf(msg.missingController, widget.code));
          widgetController.show(<HTMLElement>widgetElem);
          };
       dna.dom.forEach(webAppWidgetsElem.children, showWidget);

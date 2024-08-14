@@ -45,10 +45,10 @@ type Estimate = {
    platform:    string,
    };
 type Station = {
-   name:    string,
-   abbr:    string,
-   message: { error: string },
-   etd: {
+   name:     string,
+   abbr:     string,
+   message?: { error: string },
+   etd?: {
       destination: string,
       estimate:    Estimate[],
       }[],
@@ -70,11 +70,11 @@ type DataSet$ = TooltipItem<keyof ChartTypeRegistry>['dataset'] & { labels: stri
 
 const webAppWidgetTransBartDepartures = {
    displayDataChart(widgetElem: Element, timestamp: string, station: Station): void {
-      const title =      station.abbr + ' -- Upcoming departures from ' + station.name;
+      const title =      `${station.abbr} -- Upcoming departures from ${station.name}`;
       const subtitle =   timestamp;
       const yAxesLabel = 'Direction';
       const xAxesLabel = 'Estimated minutes until departure';
-      const etd = station.etd || [];
+      const etd =        station.etd ?? [];
       etd.forEach(dest => dest.estimate.forEach(est => est.destination = dest.destination));
       // const flatten = (a, b) => a.concat(b);
       const toChartData = (item: Estimate): DataPoint => ({
@@ -92,7 +92,7 @@ const webAppWidgetTransBartDepartures = {
          estimates.filter(item => item.direction === direction));
       const calcDelta = (estimate: DataPoint, i: number, estimates: DataPoint[]) =>
          estimate.delta = estimates[i]!.minutes - (i ? estimates[i - 1]!.minutes : 0) + 1;
-      directionEstimates.forEach(de => de.forEach(calcDelta));
+      directionEstimates.forEach(de => { de.forEach(calcDelta); });
       const maxEstimates = Math.max(...directionEstimates.map(estimate => estimate.length));
       const padEstimates = (estimates: DataPoint[]) => {
          while (estimates.length < maxEstimates)
@@ -102,7 +102,7 @@ const webAppWidgetTransBartDepartures = {
       const datasets: ChartDataset[] = [];
       while (datasets.length < maxEstimates)
          datasets.push(<ChartDataset>{
-            label:  'Train ' + (datasets.length + 1),
+            label:  'Train ' + String(datasets.length + 1),
             labels: directionEstimates.map(estimates => estimates[datasets.length]!.label),
             data:   directionEstimates.map(estimates => estimates[datasets.length]!.delta),
             });
@@ -111,7 +111,7 @@ const webAppWidgetTransBartDepartures = {
          y: { stacked: true, scaleLabel: { display: true, labelString: yAxesLabel } },
          };
       const makeTooltip = (item: TooltipItem<keyof ChartTypeRegistry>): string =>
-         item.dataset.label + ': ' + (<DataSet$>item.dataset).labels[item.dataIndex];
+         `${item.dataset.label!}: ${(<DataSet$>item.dataset).labels[item.dataIndex]!}`;
       const chartInfo = <ChartConfiguration>{
          type: 'bar',
          data: {
@@ -137,7 +137,7 @@ const webAppWidgetTransBartDepartures = {
          const timestamp = data.root.date + ' ' + data.root.time;
          const station = data.root.station[0]!;
          if (station.message?.error)
-            console.log(url, station.message?.error);
+            console.log(url, station.message.error);
          webAppWidgetTransBartDepartures.displayDataChart(widgetElem, timestamp, station);
          };
       const url = 'https://api.bart.gov/api/etd.aspx';

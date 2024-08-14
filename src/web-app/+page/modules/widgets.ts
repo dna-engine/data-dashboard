@@ -17,6 +17,10 @@ import { webAppWidgetTransBartStations } from '../widgets/trans-bart-stations/tr
 import { webAppWidgetTransF1TopCountries } from '../widgets/trans-f1-top-countries/trans-f1-top-countries';
 import { webAppWidgetTransNycBikeStations } from '../widgets/trans-nyc-bike-stations/trans-nyc-bike-stations';
 
+// Types
+export type WebAppWidgetsKey = keyof typeof webAppWidgets;
+export type WebAppWidgetCode = typeof webAppWidgets[WebAppWidgetsKey];
+
 const webAppWidgets = {
    finRateIntraday:      webAppWidgetFinRateIntraday,
    finRateMovingAvg:     webAppWidgetFinRateMovingAvg,

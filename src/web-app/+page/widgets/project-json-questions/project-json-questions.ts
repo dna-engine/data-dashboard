@@ -60,7 +60,7 @@ const webAppWidgetProjectJsonQuestions = {
    displayDataChart(widgetElem: Element, data: RawDataItem[]): void {
       const numItems =   webAppLookup.chartColors.length;
       const title =      'Active JSON Questions';
-      const subtitle =   'Page views of ' + numItems + ' most recently active JSON questions';
+      const subtitle =   `Page views of ${numItems} most recently active JSON questions`;
       const mostRecent = data.slice(0, numItems).sort((a, b) => b.view_count - a.view_count);
       const dataset: ChartDataset = {
          backgroundColor: webAppLookup.chartColors.map(color => color.value),

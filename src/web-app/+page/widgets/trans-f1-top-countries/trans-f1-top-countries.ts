@@ -122,9 +122,9 @@ const webAppWidgetTransF1TopCountries = {
       //    </figure>
       // </web-app-widget-body>
       const topFinishes = 10;
-      const title =    'Nationalities of Top F1 Drivers and Constructors';
-      const subtitle = race.season + ' ' + race.raceName + ' top ' + topFinishes + ' finishes';
-      const round =    Number(race.round);
+      const title =       'Nationalities of Top F1 Drivers and Constructors';
+      const subtitle =    `${race.season} ${race.raceName} top ${topFinishes} finishes`;
+      const round =       Number(race.round);
       const addResult = (totalsMap: TotalsMap, result: Race['Results'][0]) => {
          const setupNationality = (nationality: string) => {
             if (!totalsMap[nationality])
@@ -141,8 +141,8 @@ const webAppWidgetTransF1TopCountries = {
          };
       const totals = race.Results.slice(0, topFinishes).reduce(addResult, {});
       const data = Object.keys(totals).map(nationality => totals[nationality]!);
-      data.sort((a, b) => a!.numDrivers + a!.numConstructors - b!.numDrivers - b!.numConstructors ||
-         a!.nationality.localeCompare(b!.nationality));
+      data.sort((a, b) => a.numDrivers + a.numConstructors - b.numDrivers - b.numConstructors ||
+         a.nationality.localeCompare(b.nationality));
       const datasets = [
          { label: 'Driver',      data: data.map(item => item.numDrivers) },
          { label: 'Constructor', data: data.map(item => item.numConstructors) },
@@ -174,7 +174,7 @@ const webAppWidgetTransF1TopCountries = {
       webAppUtil.spinnerStart(widgetElem);
       const display = (canvas: Element, index: number) => {
          const round = index + 1;
-         const url = 'https://ergast.com/api/f1/' + raceYear + '/' + round + '/results.json';
+         const url =   `https://ergast.com/api/f1/${raceYear}/${round}/results.json`;
          fetchJson.get(url).then(handleData);
          };
       widgetElem.querySelectorAll('web-app-widget-body >figure >canvas').forEach(display);

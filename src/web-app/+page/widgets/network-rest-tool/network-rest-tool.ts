@@ -15,7 +15,7 @@ type WidgetModel = {
    url:       string,
    jsonHtml:  string,
    };
-type RawData = unknown & { error?: boolean, name?: string, message?: string };
+type RawData = { error?: boolean, name?: string, message?: string };
 type ElemLookup = {
    widget: HTMLElement,
    input:  HTMLInputElement,
@@ -35,11 +35,14 @@ const webAppWidgetNetworkRestTool = {
          elem.button.disabled = false;
          if (button)
             elem.input.focus();
+         return data;
          };
-      const handleError = (error: RawData) =>
-         handleData({ error: true, name: error.name!, message: error.message! });
+      const handleError = (error: unknown) => {
+         const rawData = <RawData>error;
+         handleData({ error: true, name: rawData.name!, message: rawData.message! });
+         };
       webAppUtil.spinnerStart(elem.widget);
-      model.url = <string>elem.input.value;
+      model.url = elem.input.value;
       fetchJson.get(model.url).then(handleData).catch(handleError);
       },
    show(widgetElem: HTMLElement): void {

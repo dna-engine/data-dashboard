@@ -25,6 +25,8 @@ import { WebAppChartColor } from '../../modules/config';
 
 type RawDataSma = { SMA: string };
 type RawData = {
+   'Error Message': string,  //for invalid requests
+   'Information':   string,  //for invalid requests
    'Meta Data': {
       '1: Symbol':         string,
       '2: Indicator':      string,
@@ -71,9 +73,11 @@ const webAppWidgetFinRateMovingAvg = {
       dna.dom.state(widgetElem).chart = new Chart(canvas, chartInfo);
       },
    show(widgetElem: Element): void {
-      const handleData = (rawData: RawData) => {
+      const handleData = (rawData: RawData | null) => {
          webAppUtil.spinnerStop(widgetElem);
-         if (!rawData[<keyof RawData>'Error Message'])
+         if (!rawData || rawData['Error Message'] || rawData['Information'])
+            console.error(url, rawData);
+         else
             webAppWidgetFinRateMovingAvg.displayDataChart(widgetElem, rawData);
          };
       const url = 'https://www.alphavantage.co/query';
