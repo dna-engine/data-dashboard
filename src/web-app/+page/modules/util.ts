@@ -79,7 +79,7 @@ const webAppUtil = {
 const webAppNetwork = {
    logName: 'network-log',
    logEvent(...eventItems: EventItem): void {
-      console.log(eventItems.join(' - '));
+      console.info(eventItems.join(' - '));
       const maxLogEvents = 250;
       const log =          webAppNetwork.getLog();
       log.push(eventItems);

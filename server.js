@@ -22,12 +22,12 @@ const openBrowser = process.env.openBrowser ? process.env.openBrowser === 'true'
 const pkg =         JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 
 // Start
-console.log(pkg.name);
-console.log(pkg.description);
-console.log('Web root:', path.resolve(webFolder));
+console.info(pkg.name);
+console.info(pkg.description);
+console.info('Web root:', path.resolve(webFolder));
 const startWebServer = async () => {
    const http = await browserReady.startWebServer({ folder: webFolder, port: webPort });
-   console.log('URL:', http.url);
+   console.info('URL:', http.url);
    if (openBrowser)
       open(http.url);
    };

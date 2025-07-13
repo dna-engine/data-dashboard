@@ -25,8 +25,8 @@ const webApp = {
    lookup:      webAppLookup,  //maps keyed by code (kebab)
    widgets:     webAppWidgets,
    setup(): void {
-      console.log('DataDashboard');
-      console.log('Widgets:', webAppConfig.widgets.map(widget => widget.code));
+      console.info('DataDashboard');
+      console.info('Widgets:', webAppConfig.widgets.map(widget => widget.code));
       webApp.controller.setup();
       },
    };

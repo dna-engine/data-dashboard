@@ -7,8 +7,8 @@
 
 const about = {
    setup(): void {
-      console.log('DataDashboard');
-      console.log('>>> About page');
+      console.info('DataDashboard');
+      console.info('>>> About page');
       },
    };
 

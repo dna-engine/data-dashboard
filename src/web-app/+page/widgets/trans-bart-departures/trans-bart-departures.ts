@@ -137,7 +137,7 @@ const webAppWidgetTransBartDepartures = {
          const timestamp = data.root.date + ' ' + data.root.time;
          const station = data.root.station[0]!;
          if (station.message?.error)
-            console.log(url, station.message.error);
+            console.info(url, station.message.error);
          webAppWidgetTransBartDepartures.displayDataChart(widgetElem, timestamp, station);
          };
       const url = 'https://api.bart.gov/api/etd.aspx';
