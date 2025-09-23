@@ -8,6 +8,8 @@ html {
    }
 body {
    max-width: none;
+   color: dimgray;
+   background-color: dimgray;
    padding: 0px;
    margin: 0px;
    >header {
@@ -54,8 +56,8 @@ body {
       >h1 {
          display: inline-block;
          vertical-align: top;
-         font-size: 1.8rem;
-         .MobileMode({ font-size: 1.4rem; });
+         font-size: 1.8rem; .MobileMode({ font-size: 1.4rem; });
+         margin-bottom: 5px;
          }
       }
    >nav {
@@ -64,7 +66,7 @@ body {
       max-width: @layoutW;
       padding: 0px @mobileGutter;
       margin: 0px auto;
-      >ul {
+      >menu {
          .PanelMenuItems();
          }
       >div {
@@ -81,6 +83,7 @@ body {
 
 .PanelMenuItems() {
    text-align: left;
+   margin: 0px;
    li {
       display: inline-block;
       font-size: 1.0rem;

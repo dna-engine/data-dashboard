@@ -10,25 +10,26 @@ import { webAppUtil } from '../../modules/util';
 
 // [
 //    {
-//       login:               "dpilafian",
+//       login:               "pilafmon",
 //       id:                  119555,
 //       node_id:             "MDQ6VXNlcjExOTU1NQ==",
-//       avatar_url:          "https://avatars1.githubusercontent.com/u/119555?v=4",
+//       avatar_url:          "https://avatars.githubusercontent.com/u/119555?v=4",
 //       gravatar_id:         "",
-//       url:                 "https://api.github.com/users/dpilafian",
-//       html_url:            "https://github.com/dpilafian",
-//       followers_url:       "https://api.github.com/users/dpilafian/followers",
-//       following_url:       "https://api.github.com/users/dpilafian/following{/other_user}",
-//       gists_url:           "https://api.github.com/users/dpilafian/gists{/gist_id}",
-//       starred_url:         "https://api.github.com/users/dpilafian/starred{/owner}{/repo}",
-//       subscriptions_url:   "https://api.github.com/users/dpilafian/subscriptions",
-//       organizations_url:   "https://api.github.com/users/dpilafian/orgs",
-//       repos_url:           "https://api.github.com/users/dpilafian/repos",
-//       events_url:          "https://api.github.com/users/dpilafian/events{/privacy}",
-//       received_events_url: "https://api.github.com/users/dpilafian/received_events",
+//       url:                 "https://api.github.com/users/pilafmon",
+//       html_url:            "https://github.com/pilafmon",
+//       followers_url:       "https://api.github.com/users/pilafmon/followers",
+//       following_url:       "https://api.github.com/users/pilafmon/following{/other_user}",
+//       gists_url:           "https://api.github.com/users/pilafmon/gists{/gist_id}",
+//       starred_url:         "https://api.github.com/users/pilafmon/starred{/owner}{/repo}",
+//       subscriptions_url:   "https://api.github.com/users/pilafmon/subscriptions",
+//       organizations_url:   "https://api.github.com/users/pilafmon/orgs",
+//       repos_url:           "https://api.github.com/users/pilafmon/repos",
+//       events_url:          "https://api.github.com/users/pilafmon/events{/privacy}",
+//       received_events_url: "https://api.github.com/users/pilafmon/received_events",
 //       type:                "User",
+//       user_view_type:      "public",
 //       site_admin:          false,
-//       contributions:       732
+//       contributions:       1191
 //    },
 //    ...
 

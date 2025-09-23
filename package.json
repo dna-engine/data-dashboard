@@ -1,6 +1,6 @@
 {
    "name": "data-dashboard",
-   "version": "0.5.3",
+   "version": "0.5.4",
    "description": "A data-driven dashboard console for report widgets",
    "license": "MIT",
    "type": "module",
@@ -85,8 +85,7 @@
       ],
       "docs": [
          "add-dist-header build/4-rev/web-app docs --all-files --recursive",
-         "copy-file src/properties/cname.txt  docs/CNAME",
-         "html-validator                      docs"
+         "copy-file src/properties/cname.txt  docs/CNAME"
       ],
       "dev": [
          "tsc --watch --preserveWatchOutput",
@@ -97,17 +96,18 @@
    "scripts": {
       "pretest": "run-scripts clean libraries generated build1-pre build2-dev build3-min build4-rev docs",
       "test": "mocha spec/*.spec.js --timeout 7000",
+      "posttest": "html-validator docs",
       "dev": "npm test && run-scripts dev --parallel",
       "interactive": "openBrowser=true npm start"
    },
    "dependencies": {
       "fetch-json": "~3.3",
-      "open": "~10.1"
+      "open": "~10.2"
    },
    "devDependencies": {
-      "@eslint/js": "~9.31",
-      "@fortawesome/fontawesome-free": "~6.7",
-      "@types/node": "~24.0",
+      "@eslint/js": "~9.36",
+      "@fortawesome/fontawesome-free": "~7.0",
+      "@types/node": "~24.5",
       "add-dist-header": "~1.5",
       "assert-deep-strict-equal": "~1.2",
       "browser-sync": "~3.0",
@@ -116,25 +116,25 @@
       "copy-file-util": "~1.3",
       "copy-folder-util": "~1.1",
       "csso-cli": "~4.0",
-      "dna-engine": "~3.2",
-      "eslint": "~9.31",
+      "dna-engine": "~3.3",
+      "eslint": "~9.36",
       "img-src-placeholder": "~1.1",
       "jshint": "~2.13",
-      "less": "~4.3",
+      "less": "~4.4",
       "make-dir-cli": "~4.0",
       "mocha": "~11.7",
       "pretty-print-json": "~3.0",
-      "puppeteer": "~24.12",
+      "puppeteer": "~24.22",
       "puppeteer-browser-ready": "~1.3",
       "recursive-exec": "~1.0",
       "replacer-util": "~1.4",
-      "rev-web-assets": "~1.4",
+      "rev-web-assets": "~1.5",
       "rimraf": "~6.0",
-      "rollup": "~4.45",
+      "rollup": "~4.52",
       "run-scripts-util": "~1.3",
       "simple-datatables": "~10.0",
-      "typescript": "~5.8",
-      "typescript-eslint": "~8.36",
+      "typescript": "~5.9",
+      "typescript-eslint": "~8.44",
       "uglify-js": "~3.19",
       "w3c-html-validator": "~1.9",
       "web-ignition": "~2.4"
