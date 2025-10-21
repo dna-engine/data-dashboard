@@ -9,7 +9,7 @@ jobs:
     # https://issues.chromium.org/issues/373753919
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4    #see: https://github.com/actions/checkout/releases
+      - uses: actions/checkout@v5    #see: https://github.com/actions/checkout/releases
       - uses: actions/setup-node@v4  #see: https://github.com/actions/setup-node/releases
       - run: npm install
       - run: npm test
