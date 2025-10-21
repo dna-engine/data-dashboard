@@ -61,8 +61,8 @@ const webAppWidgetTransBartStations = {
          };
       const latLong = (item: TooltipItem<keyof ChartTypeRegistry>): string => {
          // Returns a string formatted like: "37.77°N 122.42°W" (San Francisco)
-         const lat =   item.parsed.y;
-         const long =  item.parsed.x;
+         const lat =   item.parsed.y ?? 0;
+         const long =  item.parsed.x ?? 0;
          const fixed = (degrees: number) => Math.abs(degrees).toFixed(2);
          return `${fixed(lat)}°${lat > 0 ? 'N' : 'S'} ${fixed(long)}°${long > 0 ? 'E' : 'W'}`;
          };

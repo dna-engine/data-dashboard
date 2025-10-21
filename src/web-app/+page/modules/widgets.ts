@@ -14,7 +14,6 @@ import { webAppWidgetSpaceVehicles } from '../widgets/space-vehicles/space-vehic
 import { webAppWidgetSpacexBooks } from '../widgets/spacex-books/spacex-books';
 import { webAppWidgetTransBartDepartures } from '../widgets/trans-bart-departures/trans-bart-departures';
 import { webAppWidgetTransBartStations } from '../widgets/trans-bart-stations/trans-bart-stations';
-import { webAppWidgetTransF1TopCountries } from '../widgets/trans-f1-top-countries/trans-f1-top-countries';
 import { webAppWidgetTransNycBikeStations } from '../widgets/trans-nyc-bike-stations/trans-nyc-bike-stations';
 
 // Types
@@ -34,7 +33,6 @@ const webAppWidgets = {
    spacexBooks:          webAppWidgetSpacexBooks,
    transBartDepartures:  webAppWidgetTransBartDepartures,
    transBartStations:    webAppWidgetTransBartStations,
-   transF1TopCountries:  webAppWidgetTransF1TopCountries,
    transNycBikeStations: webAppWidgetTransNycBikeStations,
    };
 
