@@ -32,9 +32,17 @@
       "mocha": true,
       "node": true
    },
+   "replacerConfig": {
+      "macros": {
+         "css-header": "/*! {{file.base}} */",
+         "js-header": "//! {{file.base}}",
+         "insert-file": "{[p] render {{quote}}{{file.path}}{{quote}} %}",
+         "less-import": "@import {{quote}}../../../../{{file.dir}}/{{file.name}}{{quote}};"
+      }
+   },
    "runScriptsConfig": {
       "clean": [
-         "rimraf build docs src/web-app/+page/html/generated"
+         "rimraf build docs src/web-app/+page/generated"
       ],
       "libraries": [
          "make-dir build/1-pre/libs",
@@ -42,18 +50,18 @@
          "csso node_modules/dna-engine/dist/dna-engine.css                       --output build/1-pre/libs/dna-engine.css",
          "csso node_modules/simple-datatables/dist/style.css                     --output build/1-pre/libs/simple-datatables.css",
          "csso node_modules/pretty-print-json/dist/css/pretty-print-json.min.css --output build/1-pre/libs/pretty-print-json.css",
-         "replacer build/1-pre/libs --ext=.css build/2-dev/web-app --concat=libraries.css --header=/*{{bang}}{{space}}{{file.base}}{{space}}*/",
+         "replacer build/1-pre/libs --ext=.css build/2-dev/web-app --concat=libraries.css --header={{macro:css-header}}",
          "replacer  node_modules/chart.js/dist/chart.umd.js --no-source-map      build/1-pre/libs",
          "copy-file node_modules/dna-engine/dist/dna-engine.min.js               --folder build/1-pre/libs",
          "copy-file node_modules/fetch-json/dist/fetch-json.min.js               --folder build/1-pre/libs",
          "copy-file node_modules/pretty-print-json/dist/pretty-print-json.min.js --folder build/1-pre/libs",
          "copy-file node_modules/simple-datatables/dist/umd/simple-datatables.js --folder build/1-pre/libs",
          "copy-file node_modules/web-ignition/dist/lib-x.min.js                  --folder build/1-pre/libs",
-         "replacer build/1-pre/libs --ext=.js build/2-dev/web-app --concat=libraries.js --header=//{{bang}}{{space}}{{file.base}} --no-liquid"
+         "replacer build/1-pre/libs --ext=.js build/2-dev/web-app --concat=libraries.js --header={{macro:js-header}} --no-liquid"
       ],
       "generated": [
-         "replacer src/web-app/+page/widgets --ext=.html --content={{open-curly}}[p]render{{space}}{{quote}}{{file.path}}{{quote}}%{{close-curly}}  src/web-app/+page/html/generated --find=[p] --replacement=% --concat=widgets-generated.html",
-         "replacer src/web-app/+page/widgets --ext=.less --content=@import{{space}}{{quote}}../../../../{{file.dir}}/{{file.name}}{{quote}}{{semi}} src/web-app/+page/css --concat=widgets-generated.less"
+         "replacer src/web-app/+page/widgets --ext=.html --content={{macro:insert-file}} src/web-app/+page/generated --find=[p] --replacement=% --concat=widgets.html",
+         "replacer src/web-app/+page/widgets --ext=.less --content={{macro:less-import}} src/web-app/+page/generated --concat=widgets.less"
       ],
       "bundle-js": [
          "recursive-exec build/1-pre/web-app --ext=.js --exclude=+ 'rollup {{file}} --file build/2-dev/web-app/{{filename}} --name {{nameCamelCase}} --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis'"
@@ -105,7 +113,7 @@
       "open": "~10.2"
    },
    "devDependencies": {
-      "@eslint/js": "~9.38",
+      "@eslint/js": "~9.39",
       "@fortawesome/fontawesome-free": "~7.1",
       "@types/node": "~24.9",
       "add-dist-header": "~1.5",
@@ -117,26 +125,26 @@
       "copy-folder-util": "~1.1",
       "csso-cli": "~4.0",
       "dna-engine": "~3.3",
-      "eslint": "~9.38",
+      "eslint": "~9.39",
       "img-src-placeholder": "~1.1",
       "jshint": "~2.13",
       "less": "~4.4",
       "make-dir-cli": "~4.0",
       "mocha": "~11.7",
       "pretty-print-json": "~3.0",
-      "puppeteer": "~24.25",
-      "puppeteer-browser-ready": "~1.3",
+      "puppeteer": "~24.27",
+      "puppeteer-browser-ready": "~1.4",
       "recursive-exec": "~1.0",
       "replacer-util": "~1.4",
       "rev-web-assets": "~1.5",
-      "rimraf": "~6.0",
+      "rimraf": "~6.1",
       "rollup": "~4.52",
       "run-scripts-util": "~1.3",
       "simple-datatables": "~10.2",
       "typescript": "~5.9",
       "typescript-eslint": "~8.46",
       "uglify-js": "~3.19",
-      "w3c-html-validator": "~1.9",
+      "w3c-html-validator": "~2.0",
       "web-ignition": "~2.4"
    }
 }
