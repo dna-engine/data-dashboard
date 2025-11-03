@@ -35,7 +35,9 @@
    "recursiveExecConfig": {
       "commands": {
          "lessc": "lessc {{file}} build/2-dev/web-app/{{basename}}.css",
-         "rollup": "rollup {{file}} --file build/2-dev/web-app/{{filename}} --name {{nameCamelCase}} --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis"
+         "rollup": "rollup {{file}} --file build/2-dev/web-app/{{filename}} --name {{nameCamelCase}} --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis",
+         "csso": "csso {{file}} --output    build/3-min/web-app/{{filename}}",
+         "uglifyjs": "uglifyjs {{file}} --output build/3-min/web-app/{{filename}}"
       }
    },
    "replacerConfig": {
@@ -86,12 +88,12 @@
          "run-scripts bundle-js"
       ],
       "build3-min": [
-         "copy-folder    build/2-dev/web-app --ext=.html                           build/3-min/web-app",
-         "copy-folder    build/2-dev/web-app/assets                                build/3-min/web-app/assets",
-         "copy-file      build/2-dev/web-app/libraries.css --folder                build/3-min/web-app",
-         "copy-file      build/2-dev/web-app/libraries.js --folder                 build/3-min/web-app",
-         "recursive-exec build/2-dev/web-app --ext=.css 'csso {{file}} --output    build/3-min/web-app/{{filename}}'",
-         "recursive-exec build/2-dev/web-app --ext=.js 'uglifyjs {{file}} --output build/3-min/web-app/{{filename}}'"
+         "copy-folder    build/2-dev/web-app --ext=.html            build/3-min/web-app",
+         "copy-folder    build/2-dev/web-app/assets                 build/3-min/web-app/assets",
+         "copy-file      build/2-dev/web-app/libraries.css --folder build/3-min/web-app",
+         "copy-file      build/2-dev/web-app/libraries.js --folder  build/3-min/web-app",
+         "recursive-exec build/2-dev/web-app --ext=.css             {{command:csso}}",
+         "recursive-exec build/2-dev/web-app --ext=.js              {{command:uglifyjs}}"
       ],
       "build4-rev": [
          "rev-web-assets build/3-min/web-app build/4-rev/web-app --manifest --meta-content-base=https://data-dashboard.js.org",
