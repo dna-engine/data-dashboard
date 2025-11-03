@@ -32,6 +32,12 @@
       "mocha": true,
       "node": true
    },
+   "recursiveExecConfig": {
+      "commands": {
+         "lessc": "lessc {{file}} build/2-dev/web-app/{{basename}}.css",
+         "rollup": "rollup {{file}} --file build/2-dev/web-app/{{filename}} --name {{nameCamelCase}} --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis"
+      }
+   },
    "replacerConfig": {
       "macros": {
          "css-header": "/*! {{file.base}} */",
@@ -64,7 +70,7 @@
          "replacer src/web-app/+page/widgets --ext=.less --content={{macro:less-import}} src/web-app/+page/generated --concat=widgets.less"
       ],
       "bundle-js": [
-         "recursive-exec build/1-pre/web-app --ext=.js --exclude=+ 'rollup {{file}} --file build/2-dev/web-app/{{filename}} --name {{nameCamelCase}} --format iife --globals chart.js:globalThis,dna-engine:globalThis,fetch-json:globalThis,pretty-print-json:globalThis,simple-datatables:globalThis,web-ignition:globalThis'"
+         "recursive-exec build/1-pre/web-app --ext=.js --exclude=+ {{command:rollup}}"
       ],
       "build1-pre": [
          "jshint . --exclude-path .gitignore",
@@ -76,7 +82,7 @@
          "img-src-placeholder build/1-pre/web-app    build/2-dev/web-app",
          "copy-folder src/web-app/+common/assets     build/2-dev/web-app/assets",
          "lessc       src/web-app/+common/style.less build/2-dev/web-app/style.css",
-         "recursive-exec src/web-app --ext=.less --exclude=+ 'lessc {{file}} build/2-dev/web-app/{{basename}}.css'",
+         "recursive-exec src/web-app --ext=.less --exclude=+ {{command:lessc}}",
          "run-scripts bundle-js"
       ],
       "build3-min": [
@@ -115,7 +121,7 @@
    "devDependencies": {
       "@eslint/js": "~9.39",
       "@fortawesome/fontawesome-free": "~7.1",
-      "@types/node": "~24.9",
+      "@types/node": "~24.10",
       "add-dist-header": "~1.5",
       "assert-deep-strict-equal": "~1.2",
       "browser-sync": "~3.0",
@@ -132,9 +138,9 @@
       "make-dir-cli": "~4.0",
       "mocha": "~11.7",
       "pretty-print-json": "~3.0",
-      "puppeteer": "~24.27",
+      "puppeteer": "~24.28",
       "puppeteer-browser-ready": "~1.4",
-      "recursive-exec": "~1.0",
+      "recursive-exec": "~1.1",
       "replacer-util": "~1.4",
       "rev-web-assets": "~1.5",
       "rimraf": "~6.1",
