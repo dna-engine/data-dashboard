@@ -18,6 +18,7 @@ describe('The "docs" folder', () => {
          'index.html',
          'libraries.css',
          'libraries.js',
+         'robots.txt',
          'style.css',
          'web-app.css',
          'web-app.js',

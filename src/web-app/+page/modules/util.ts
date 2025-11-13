@@ -14,7 +14,6 @@ export type WebAppSettingsNarrowScreenSaver = {
    maxPoints:   number,
    screenWidth: number,
    };
-export type WebAppOptionsNarrowScreenSaver = Partial<WebAppSettingsNarrowScreenSaver>;
 export type EventItem = (string | number | boolean)[];
 
 const webAppUtil = {
@@ -31,14 +30,16 @@ const webAppUtil = {
       datasets.forEach(colorize);
       return datasets;
       },
-   narrowScreenSaver(chartInfo: ChartConfiguration, options?: WebAppOptionsNarrowScreenSaver): ChartConfiguration {
-      const defaults = { maxPoints: 200, screenWidth: 700 };
+   narrowScreenSaver(chartInfo: ChartConfiguration,
+         options?: Partial<WebAppSettingsNarrowScreenSaver>): ChartConfiguration {
+      const defaults: WebAppSettingsNarrowScreenSaver = { maxPoints: 200, screenWidth: 700 };
       const settings = { ...defaults, ...options };
       const shrinkRatio = Math.ceil(chartInfo.data.labels!.length / settings.maxPoints);
       const shrinkNow = () => {
          const shrink = (points: number[]) => points.filter((_point, i) => i % shrinkRatio === 0);
          chartInfo.data.labels = shrink(<number[]>chartInfo.data.labels);
-         chartInfo.data.datasets.forEach((dataset: ChartDataset) => dataset.data = shrink(<number[]>dataset.data));
+         const setData = (dataset: ChartDataset) => dataset.data = shrink(<number[]>dataset.data);
+         chartInfo.data.datasets.forEach(setData);
          };
       if (shrinkRatio > 1 && globalThis.window.innerWidth < settings.screenWidth)
          shrinkNow();
