@@ -25,10 +25,9 @@ const pkg =         JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 console.info(pkg.name);
 console.info(pkg.description);
 console.info('Web root:', path.resolve(webFolder));
-const startWebServer = async () => {
-   const http = await browserReady.startWebServer({ folder: webFolder, port: webPort });
+const handleHttp = (http) => {
    console.info('URL:', http.url);
    if (openBrowser)
       open(http.url);
    };
-startWebServer();
+browserReady.startWebServer({ folder: webFolder, port: webPort }).then(handleHttp);

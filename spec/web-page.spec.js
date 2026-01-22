@@ -9,14 +9,12 @@ import { browserReady } from 'puppeteer-browser-ready';
 const webFolder = process.env.webFolder || 'build/2-dev/web-app/';
 let http;  //fields: server, terminator, folder, url, port, verbose
 let web;   //fields: browser, page, response, status, location, title, html, root
-before(async () => {
-   http = await browserReady.startWebServer();
-   web =  await puppeteer.launch().then(browserReady.goto(http.url + webFolder));
-   });
-after(async () => {
-   await browserReady.close(web);
-   await browserReady.shutdownWebServer(http);
-   });
+before(() => browserReady.startWebServer()
+   .then(info => http = info)
+   .then(() => puppeteer.launch().then(browserReady.goto(http.url + webFolder)))
+   .then(info => web = info));
+after(() => browserReady.close(web)
+   .then(() => browserReady.shutdownWebServer(http)));
 
 ////////////////////////////////////////////////////////////////////////////////
 describe('The web page', () => {
