@@ -6,6 +6,7 @@ _A data-driven dashboard console for report widgets_
 [![License:MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/dna-engine/data-dashboard/blob/main/LICENSE.txt)
 [![npm](https://img.shields.io/npm/v/data-dashboard.svg)](https://www.npmjs.com/package/data-dashboard)
 [![Build](https://github.com/dna-engine/data-dashboard/actions/workflows/run-spec-on-push.yaml/badge.svg)](https://github.com/dna-engine/data-dashboard/actions/workflows/run-spec-on-push.yaml)
+[![Publish Website](https://github.com/dna-engine/data-dashboard/actions/workflows/publish-website.yaml/badge.svg)](https://github.com/dna-engine/data-dashboard/actions/workflows/publish-website.yaml)
 
 ## A) Try It Out
 https://data-dashboard.js.org

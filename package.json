@@ -1,6 +1,6 @@
 {
    "name": "data-dashboard",
-   "version": "0.5.6",
+   "version": "0.5.7",
    "description": "A data-driven dashboard console for report widgets",
    "license": "MIT",
    "type": "module",
